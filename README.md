@@ -464,4 +464,4 @@ await client.stopLiveStreamingWithTranscoding(streamID);
 
 ## 示例 demo
 
-[QNRTC-Uniapp-Demo](https://github.com/pili-engineering/QNRTC-Uniapp/demo)
+[QNRTC-Uniapp-Demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/demo)
