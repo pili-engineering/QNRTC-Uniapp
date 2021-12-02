@@ -1,0 +1,421 @@
+<template>
+	<view>
+		<view class="wrap">
+			<view class="setting">
+				<view>
+					<text @click="handleShowDrawer" style="margin-right:5px;">合流设置</text>
+					<uni-icons type="settings" size="20" @click="handleShowDrawer"></uni-icons>
+				</view>
+				<view>
+					<text @click="handleShowTrackDrawer" style="margin-right:5px;margin-left:15px">布局设置</text>
+					<uni-icons type="settings" size="20" @click="handleShowTrackDrawer"></uni-icons>
+				</view>
+			</view>
+			<uni-drawer ref="showRight" mode="right" :mask-click="true">
+				<view class="scroll-view">
+					<scroll-view class="scroll-view-box" scroll-y="true" >
+						<view class="scroll-view-wrap">
+							<view class="title margin-top-sm margin-bottom-sm">streamID</view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.streamID" placeholder="请输入streamID"></uni-easyinput>
+							</view>
+							<view class="title margin-top-sm margin-bottom-sm">url</view>
+							<view><uni-easyinput v-model="transcodingConfig.url" placeholder="请输入url"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">width</view>
+							<view><uni-easyinput v-model="transcodingConfig.width" placeholder="请输入width"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">height</view>
+							<view><uni-easyinput v-model="transcodingConfig.height" placeholder="请输入height"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">videoFrameRate</view>
+							<view><uni-easyinput v-model="transcodingConfig.videoFrameRate" placeholder="请输入videoFrameRate">
+							</uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">bitrate</view>
+							<view><uni-easyinput v-model="transcodingConfig.bitrate" placeholder="请输入bitrate"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">minBitrate</view>
+							<view><uni-easyinput v-model="transcodingConfig.minBitrate" placeholder="请输入minBitrate"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">maxBitrate</view>
+							<view><uni-easyinput v-model="transcodingConfig.maxBitrate" placeholder="请输入maxBitrate"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">renderMode</view>
+							<uni-data-checkbox :multiple="false" v-model="transcodingConfig.renderMode" :localdata="renderMode">
+							</uni-data-checkbox>
+							<view class="title margin-top-sm margin-bottom-sm">holdLastFrame</view>
+							<uni-data-checkbox :multiple="false" v-model="transcodingConfig.holdLastFrame"
+								:localdata="holdLastFrame"></uni-data-checkbox>
+							<view class="title margin-top-sm margin-bottom-sm">背景url</view>
+							<view><uni-easyinput v-model="background.url" placeholder="请输入背景url"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">背景x</view>
+							<view><uni-easyinput type="number" v-model="background.x" placeholder="请输入背景x"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">背景y</view>
+							<view><uni-easyinput type="number" v-model="background.y" placeholder="请输入背景y"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">背景w</view>
+							<view><uni-easyinput type="number" v-model="background.w" placeholder="请输入背景w"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">背景h</view>
+							<view><uni-easyinput type="number" v-model="background.h" placeholder="请输入背景h"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">水印url</view>
+							<view><uni-easyinput v-model="watermarks.url" placeholder="请输入水印url"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">水印x</view>
+							<view><uni-easyinput type="number" v-model="watermarks.x" placeholder="请输入水印x"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">水印y</view>
+							<view><uni-easyinput type="number" v-model="watermarks.y" placeholder="请输入水印y"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">水印w</view>
+							<view><uni-easyinput type="number" v-model="watermarks.w" placeholder="请输入水印w"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">水印h</view>
+							<view><uni-easyinput type="number" v-model="watermarks.h" placeholder="请输入水印h"></uni-easyinput></view>
+						</view>
+					</scroll-view>
+				</view>
+			</uni-drawer>
+			<view class="margin-top-sm">
+				<button type="primary" @click="handleStart">开始合流</button>
+			</view>
+			<view class="margin-top-sm">
+				<button type="warn" @click="handleEnd">停止合流</button>
+			</view>
+			<uni-drawer ref="showTrackLeft" mode="left" :mask-click="true">
+				<view class="scroll-view">
+					<scroll-view
+						class="scroll-view-box"
+						scroll-y="true">
+						<view class="scroll-view-wrap">
+							<view class="title margin-top-sm margin-bottom-sm">trackID</view>
+							<uni-data-picker v-model="trackConfig.trackID" placeholder="请选择"
+								:map="{text:'trackID',value:'trackID'}" :localdata="allPcTrack" popup-title="请选择track">
+							</uni-data-picker>
+							<view class="title margin-top-sm margin-bottom-sm">x</view>
+							<view><uni-easyinput type="number" v-model="trackConfig.x" placeholder="请输入x"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">y</view>
+							<view><uni-easyinput type="number" v-model="trackConfig.y" placeholder="请输入y"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">width</view>
+							<view><uni-easyinput type="number" v-model="trackConfig.width" placeholder="请输入width"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">height</view>
+							<view><uni-easyinput type="number" v-model="trackConfig.height" placeholder="请输入height"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">zOrder</view>
+							<view><uni-easyinput type="number" v-model="trackConfig.zOrder" placeholder="请输入zOrder"></uni-easyinput></view>
+							<view class="title margin-top-sm margin-bottom-sm">renderMode</view>
+							<uni-data-checkbox :multiple="false" v-model="trackConfig.renderMode" :localdata="renderMode">
+							</uni-data-checkbox>
+							<view class="title margin-top-sm margin-bottom-sm">SEIEnabled</view>
+							<uni-data-checkbox :multiple="false" v-model="trackConfig.SEIEnabled" :localdata="SEIEnabled">
+							</uni-data-checkbox>
+							<view class="margin-top-sm">
+								<button type="primary" @click="handleSetTrack">添加/替换合流布局</button>
+							</view>
+							<view class="margin-top-sm">
+								<button type="warn" @click="handleDeleteTrack">删除布局布局</button>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+			</uni-drawer>
+		</view>
+		<view class="margin-top:20px;">
+			<div class="track-item-wrap" v-for="(item,index) in localTracks" :key="index">
+			    <surfaceView class="track-video" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" :trackID="item.trackID"></surfaceView>
+				<view class="track-info-wrap">
+					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
+					<text class="track-info-item">用户ID：自己</text>
+					<text class="track-info-item">类型：{{item.kind}}</text>
+				</view>
+			</div>
+		    <div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID">
+		        <surfaceView class="track-video" v-if="item.kind === 'video'"  :local="1" :identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID"></surfaceView>
+				<view class="track-info-wrap">
+					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
+					<text class="track-info-item">用户ID：{{item.userID}}</text>
+					<text class="track-info-item">类型：{{item.kind}}</text>
+				</view>
+		    </div>
+		</view>
+	</view>
+</template>
+
+<script>
+	import QNRTC,{QNRTCLogLevel,QNSessionPresetType} from "../../uniapp-rtc.js"
+	import { mapState } from "vuex"
+	export default {
+		data() {
+			return {
+				selectedTrackList: [],
+				remoteTracks: [],
+				localTracks: [],
+				client: null,
+				renderMode: [{
+						text: "ASPECT_FILL",
+						value: "ASPECT_FILL",
+					},
+					{
+						text: "FILL",
+						value: "FILL",
+					},
+					{
+						text: "ASPECT_FIT",
+						value: "ASPECT_FIT",
+					}
+				],
+				holdLastFrame: [{
+						text: "保持",
+						value: 1,
+					},
+					{
+						text: "不保持",
+						value: 0,
+					}
+				],
+				SEIEnabled: [{
+						text: "开启SEI",
+						value: 1,
+					},
+					{
+						text: "关闭SEI",
+						value: 0,
+					}
+				],
+				background: {
+					url: "https://pili-playback.qnsdk.com/ivs_background_1280x720.png",
+					w: 1000,
+					h: 1000,
+					x: 1,
+					y: 1
+				},
+				watermarks: {
+					url: "https://pili-playback.qnsdk.com/ivs_background_1280x720.png",
+					w: 100,
+					h: 100,
+					x: 1,
+					y: 1
+				},
+				trackConfig: {
+					trackID: "",
+					x: 200,
+					y: 200,
+					width: 200,
+					height: 200,
+					zOrder: 1,
+					renderMode: "ASPECT_FILL",
+					SEIEnabled: 0,
+				},
+				transcodingTracks: [],
+				transcodingConfig: {
+					streamID: "test",
+					url: "rtmp://pili-publish.qnsdk.com/sdk-live/sdk-direct-livestreaming-demo",
+					width: 1080,
+					height: 720,
+					videoFrameRate: 24,
+					bitrate: 2024,
+					minBitrate: 2024,
+					maxBitrate: 2024,
+					renderMode: "ASPECT_FILL",
+					holdLastFrame: 1
+				}
+			}
+		},
+		onBackPress() {
+			this.client.leave()
+			QNRTC.deinit()
+		},
+		onUnload() {
+			this.client.leave()
+			QNRTC.deinit()
+			this.timer = null
+		},
+		onLoad() {
+			this.handleJoinRoom()
+		},
+		computed: {
+			...mapState(["captureHeight","captureWidth","encodeWidth","encodeHeight","platform","multiStreamEnable","token","policy","logLevel","stereo","bwePolicy","allowAudioMixWithOthers","hWCodecEnabled","maintainResolution","fieldTrials","encoderQualityMode","isAEC3Enabled"]),
+			allPcTrack() {
+				const result = []
+				return [...result, ...this.localTracks, ...this.remoteTracks]
+			}
+		},
+		methods: {
+			handleShowDrawer() {
+				this.$refs.showRight.open();
+			},
+			handleShowTrackDrawer() {
+				this.$refs.showTrackLeft.open();
+			},
+			// 开始合流 -- native接口
+			handleStart() {
+				this.client.startLiveStreamingWithTranscoding({
+					...this.transcodingConfig,
+					width: this.transcodingConfig.width * 1,
+					height: this.transcodingConfig.height * 1,
+					videoFrameRate: this.transcodingConfig.videoFrameRate * 1,
+					bitrate: this.transcodingConfig.bitrate * 1,
+					minBitrate: this.transcodingConfig.minBitrate * 1,
+					maxBitrate: this.transcodingConfig.maxBitrate * 1,
+					holdLastFrame: this.transcodingConfig.holdLastFrame === 1,
+					background: {
+						...this.background,
+						w: this.background.w * 1,
+						h: this.background.h * 1,
+						x: this.background.x * 1,
+						y: this.background.y * 1
+					},
+					watermarks: [{
+						...this.watermarks,
+						w: this.watermarks.w * 1,
+						h: this.watermarks.h * 1,
+						x: this.watermarks.x * 1,
+						y: this.watermarks.y * 1
+					}]
+				})
+			},
+			// 停止合流 -- native接口
+			handleEnd() {
+				this.client.stopLiveStreamingWithTranscoding({
+					...this.transcodingConfig,
+					holdLastFrame: this.transcodingConfig.holdLastFrame === 1
+				})
+			},
+			// 新增、更新合流转推布局配置 -- native接口
+			handleSetTrack() {
+				const index = this.transcodingTracks.findIndex(item => item.trackID === this.trackConfig.trackID)
+				if(index >= 0) {
+					this.transcodingTracks.splice(index,1,JSON.parse(JSON.stringify({
+						...this.trackConfig,
+						x: this.trackConfig.x * 1,
+						y: this.trackConfig.y * 1,
+						width: this.trackConfig.width * 1,
+						height: this.trackConfig.height * 1,
+						zOrder: this.trackConfig.zOrder * 1,
+						SEIEnabled: this.trackConfig.SEIEnabled === 1
+					})))
+				}else {
+					this.transcodingTracks.push(JSON.parse(JSON.stringify({
+						...this.trackConfig,
+						x: this.trackConfig.x * 1,
+						y: this.trackConfig.y * 1,
+						width: this.trackConfig.width * 1,
+						height: this.trackConfig.height * 1,
+						zOrder: this.trackConfig.zOrder * 1,
+						SEIEnabled: this.trackConfig.SEIEnabled === 1
+					})))
+				}
+				console.log(this.transcodingTracks)
+				this.client.setTranscodingLiveStreamingTracks(this.transcodingConfig.streamID, this.transcodingTracks)
+			},
+			// 移除合流转推配置 -- native接口
+			handleDeleteTrack() {
+				this.client.removeTranscodingLiveStreamingTracks(this.transcodingConfig.streamID, [this.trackConfig])
+			},
+			async handleJoinRoom() {
+				// 初始化配置项
+				QNRTC.configRTC({
+					policy: this.policy,
+					logLevel: this.logLevel,
+					stereo: this.stereo === 1,
+					bwePolicy: this.bwePolicy,
+					allowAudioMixWithOthers: this.allowAudioMixWithOthers === 1,
+					hWCodecEnabled: this.hWCodecEnabled === 1,
+					maintainResolution: this.maintainResolution === 1,
+					fieldTrials: this.fieldTrials,
+					encoderQualityMode: this.encoderQualityMode === 1,
+					isAEC3Enabled: this.isAEC3Enabled === 1
+				})
+				// 创建 client
+				this.client = QNRTC.createClient()
+				// 创建 camera track
+				const localTracks = []
+				const cameraVideoTrack = QNRTC.createCameraVideoTrack({
+					multiStreamEnable: this.multiStreamEnable === 1,
+					width: this.encodeWidth * 1,
+					height: this.encodeHeight * 1,
+					captureHeight: this.captureHeight * 1,
+					captureWidth: this.captureWidth * 1,
+					bitrate: 2000,
+					sessionPreset: QNSessionPresetType.AVCaptureSessionPreset1280x720
+				})
+				localTracks.push(cameraVideoTrack)
+				const microphoneAudioTrack = QNRTC.createMicrophoneAudioTrack()
+				localTracks.push(microphoneAudioTrack)
+				// 监听房间状态
+				this.client.on("onConnectionStateChanged", ({
+					state
+				}) => {
+					if (state === "CONNECTED") {
+						// 发布 track
+						this.client.publish(localTracks, ({
+							onPublished,
+							data,
+							info
+						}) => {
+							if (onPublished) {
+								uni.showModal({
+									content: "发布成功"
+								})
+							} else {
+								uni.showModal({
+									content: info.message
+								})
+							}
+							this.localTracks = localTracks
+						})
+					}
+				})
+				// 监听订阅成功
+				this.client.on("onVideoSubscribed", (params) => {
+					for (let i of params.trackList) {
+						this.remoteTracks.push(i)
+					}
+				})
+				// 监听订阅成功
+				this.client.on("onAudioSubscribed", (params) => {
+					for (let i of params.trackList) {
+						this.remoteTracks.push(i)
+					}
+				})
+				this.client.on("onUserUnpublished", (params) => {
+					console.log("用户取消发布", params)
+					for (let i of params.trackList) {
+						const index = this.remoteTracks.findIndex(item => item.trackID === i.trackID)
+						if (index >= 0) {
+							this.remoteTracks.splice(index, 1)
+						}
+					}
+				})
+				// 转推任务成功创建时触发此回调
+				this.client.on("onStartLiveStreaming", (params) => {
+					uni.showModal({
+						content: `转推任务${params.streamID}创建成功`
+					})
+				})
+				// 转推任务成功停止时触发此回调
+				this.client.on("onStoppedLiveStreaming", (params) => {
+					uni.showModal({
+						content: `转推任务${params.streamID}已停止`
+					})
+				})
+				// 转推任务出错时触发此回调
+				this.client.on("onErrorLiveStreaming", (params) => {
+					uni.showModal({
+						content: `转推任务${params.streamID}${params.info.message}`
+					})
+				})
+				// 合流布局更改回调
+				this.client.on("onUpdatedLiveStreaming",(params) => {
+					uni.showModal({
+						content: `转推任务${params.streamID}布局已更改`
+					})
+				})
+				// 加入房间
+				this.client.join(this.token)
+			}
+		}
+	}
+</script>
+
+<style>
+	.wrap {
+		border-radius: 5px;
+		margin: 0 20px 20px;
+		padding: 10px 0;
+	}
+
+	.setting {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+</style>

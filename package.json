@@ -1,0 +1,46 @@
+{
+  "name": "qnrtc-uniapp-sdk",
+  "version": "1.0.0",
+  "description": "qnrtc sdk for uniapp",
+  "main": "lib/RTCIndex.native.js",
+  "types": "type/RTCIndex.native.d.ts",
+  "scripts": {
+    "build": "webpack",
+    "start": "tsc --watch",
+    "prepare": "npx husky install",
+    "eslint": "eslint 'src/**'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yydounai1234/uniapp-rtc.git"
+  },
+  "keywords": [
+    "rtc"
+  ],
+  "author": "yydounai@hotmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yydounai1234/uniapp-rtc/issues"
+  },
+  "homepage": "https://github.com/yydounai1234/uniapp-rtc#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "@microsoft/tsdoc": "^0.13.2",
+    "@types/node": "^14.14.31",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "babel-eslint": "^10.1.0",
+    "doctrine": "^3.0.0",
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "husky": "^7.0.4",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.4",
+    "webpack": "^5.63.0",
+    "webpack-cli": "^4.9.1"
+  }
+}

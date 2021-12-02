@@ -1,0 +1,309 @@
+<template>
+	<view>
+		<view class="wrap flex">
+			<view class="flex-row margin-bottom-sm">
+				<text class="title">房间状态：</text>
+				<uni-tag v-if="connectionState === 'CONNECTING'" text="连接中" type="error"></uni-tag>
+				<uni-tag v-if="connectionState === 'CONNECTED'" text="连接成功" type="success"></uni-tag>
+				<uni-tag v-if="connectionState !== 'CONNECTING' && connectionState !== 'CONNECTED' " text="未连接"
+					type="warning"></uni-tag>
+			</view>
+			<uni-easyinput class="margin-bottom-sm" v-model="message" placeholder="请输入自定义消息"></uni-easyinput>
+			<button type="primary" style="margin-bottom: 30upx" @click="handleSendMessage">发送自定义消息</button>
+			<text class="title">远端用户列表：</text>
+			<view class="table">
+				<view class="th">
+					<text class="tr">用户ID</text>
+					<text class="tr">上行</text>
+					<text class="tr">下行</text>
+				</view>
+				<view class="td" v-for="(item,index) in remoteUsers" :key="item.userID">
+					<text class="tr">{{item.userID}}</text>
+					<text class="tr">{{item.networkQuality.uplinkNetworkGrade}}</text>
+					<text class="tr">{{item.networkQuality.downlinkNetworkGrade}}</text>
+				</view>
+			</view>
+			<text class="title">订阅的track列表：</text>
+			<view class="table">
+				<view class="th">
+					<text class="tr">用户ID</text>
+					<text class="tr">轨道ID</text>
+					<text class="tr">类型</text>
+				</view>
+				<view class="td" v-for="(item,index) in subscribedTracks" :key="item.trackID">
+					<text class="tr">{{item.userID}}</text>
+					<text class="tr">{{item.trackID}}</text>
+					<text class="tr">{{item.kind === "audio" ? "音频" : "视频"}}</text>
+				</view>
+			</view>
+			<text class="title">发布的track列表：</text>
+			<view class="table">
+				<view class="th">
+					<text class="tr">轨道ID</text>
+					<text class="tr">类型</text>
+				</view>
+				<view class="td" v-for="(item,index) in publishedTracks" :key="item.trackID">
+					<text class="tr">{{item.trackID}}</text>
+					<text class="tr">{{item.kind === "audio" ? "音频" : "视频"}}</text>
+				</view>
+			</view>
+		</view>
+		<text class="title margin-left-sm" style="margin-bottom:20upx">本地track：</text>
+		<view class="track-item-wrap" v-for="(item,index) in localTracks" :key="index">
+		    <surfaceView class="track-video" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" :trackID="item.trackID"></surfaceView>
+			<view class="track-info-wrap">
+				<text class="track-info-item">轨道ID：{{item.trackID}}</text>
+				<text class="track-info-item">用户ID：自己</text>
+				<text class="track-info-item">类型：{{item.kind}}</text>
+				<view v-if="item.trackID">
+					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行帧率：{{localVideoTrackStats[item.trackID][0].uplinkFrameRate}}</text>
+					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行丢包率：{{localVideoTrackStats[item.trackID][0].uplinkLostRate.toFixed(5)}}</text>
+					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行码率：{{localVideoTrackStats[item.trackID][0].uplinkBitrate.toFixed(5)}}</text>
+					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">质量：{{localVideoTrackStats[item.trackID][0].profile}}</text>
+					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{localVideoTrackStats[item.trackID].uplinkRTT.toFixed(5)}}</text>
+					<text class="track-info-item" v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{localAudioTrackStats[item.trackID].uplinkRTT}}</text>
+					<text class="track-info-item" v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">上行丢包率：{{localAudioTrackStats[item.trackID].uplinkLostRate.toFixed(5)}}</text>
+					<text class="track-info-item" v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">下行码率：{{localAudioTrackStats[item.trackID].uplinkBitrate.toFixed(5)}}</text>
+				</view>
+			</view>
+		</view>
+		<text class="title margin-left-sm margin-top-sm margin-bottom-sm">远端track：</text>
+		<view class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="trackID">
+		    <surfaceView class="track-video" v-if="item.kind === 'video'"  :local="1" :identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID"></surfaceView>
+			<view class="track-info-wrap">
+				<text class="track-info-item">轨道ID：{{item.trackID}}</text>
+				<text class="track-info-item">用户ID：{{item.userID}}</text>
+				<text class="track-info-item">类型：{{item.kind}}</text>
+				<view v-if="item.trackID">
+					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">下行丢包率：{{remoteAudioTrackStats[item.trackID].downlinkLostRate.toFixed(5)}}</text>
+					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">下行码率：{{remoteAudioTrackStats[item.trackID].downlinkBitrate.toFixed(5)}}</text>
+					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{remoteAudioTrackStats[item.trackID].uplinkRTT}}</text>
+					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">上行丢包率：{{remoteAudioTrackStats[item.trackID].uplinkLostRate}}</text>
+					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">上行丢包率：{{remoteVideoTrackStats[item.trackID].uplinkLostRate}}</text>
+					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行丢包率：{{remoteVideoTrackStats[item.trackID].downlinkLostRate}}</text>
+					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行码率：{{remoteVideoTrackStats[item.trackID].downlinkBitrate.toFixed(5)}}</text>
+					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">上行RTT：{{remoteVideoTrackStats[item.trackID].uplinkRTT}}</text>
+					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">质量等级：{{remoteVideoTrackStats[item.trackID].profile}}</text>
+					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行帧率：{{remoteVideoTrackStats[item.trackID].downlinkFrameRate}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import QNRTC, {
+		QNRTCLogLevel
+	} from "../../uniapp-rtc.js"
+	import {
+		mapState
+	} from "vuex"
+	export default {
+		computed: {
+			...mapState(["captureHeight","captureWidth","encodeWidth","encodeHeight","platform","multiStreamEnable","token","policy","logLevel","stereo","bwePolicy","allowAudioMixWithOthers","hWCodecEnabled","maintainResolution","fieldTrials","encoderQualityMode","isAEC3Enabled","multiStreamEnable"])
+		},
+		data() {
+			return {
+				remoteTracks: [],
+				publishedTracks: [],
+				localVideoTrackStats: {},
+				localAudioTrackStats: {},
+				localTracks: [],
+				client: null,
+				connectionState: "",
+				message: "",
+				subscribedTracks: [],
+				remoteUsers: [],
+				remoteVideoTrackStats: [],
+				remoteAudioTrackStats: []
+			}
+		},
+		onBackPress() {
+			this.client.leave()
+			QNRTC.deinit()
+			console.log("执行onUnload")
+		},
+		onUnload() {
+			this.client.leave()
+			QNRTC.deinit()
+		},
+		onLoad() {
+			this.handleJoinRoom()
+			setInterval(() => {
+				if (this.client) {
+					this.connectionState = this.client.getConnectionState()
+					this.remoteUsers = this.client.getRemoteUsers()
+					this.subscribedTracks = []
+					for (let i of this.remoteUsers) {
+						this.subscribedTracks.push(...this.client.getSubscribedTracks(i.userID))
+						const networkQuality = this.client.getUserNetworkQuality(i.userID)
+						this.$set(i, "networkQuality", networkQuality)
+					}
+					this.remoteVideoTrackStats = this.client.getRemoteVideoTrackStats()
+					for (let i of this.remoteTracks) {
+						for (let key in this.remoteVideoTrackStats)
+							if (i.trackID === key) {
+								i.stats = this.remoteVideoTrackStats[key]
+							}
+					}
+					this.remoteAudioTrackStats = this.client.getRemoteAudioTrackStats()
+					for (let i of this.remoteTracks) {
+						for (let key in this.remoteAudioTrackStats)
+							if (i.trackID === key) {
+								i.stats = this.remoteAudioTrackStats[key]
+							}
+					}
+					this.publishedTracks = this.client.getPublishedTracks()
+					console.log(this.publishedTracks)
+					this.localAudioTrackStats = this.client.getLocalAudioTrackStats()
+					this.localVideoTrackStats = this.client.getLocalVideoTrackStats()
+				}
+			}, 1000)
+		},
+		methods: {
+			handleSendMessage() {
+				this.client.sendMessage(this.message, [], Math.random() + "messageID")
+			},
+			async handleJoinRoom() {
+				if (this.connectionState === "CONNECTED") {
+					uni.showModal({
+						content: "已经加入房间"
+					})
+					return false
+				}
+				QNRTC.configRTC({
+					policy: this.policy,
+					logLevel: this.logLevel,
+					stereo: this.stereo === 1,
+					bwePolicy: this.bwePolicy,
+					allowAudioMixWithOthers: this.allowAudioMixWithOthers === 1,
+					hWCodecEnabled: this.hWCodecEnabled === 1,
+					maintainResolution: this.maintainResolution === 1,
+					fieldTrials: this.fieldTrials,
+					encoderQualityMode: this.encoderQualityMode === 1,
+					isAEC3Enabled: this.isAEC3Enabled === 1
+				})
+				// QNRTC.enableFileLogging()
+				this.client = QNRTC.createClient()
+				this.client.setAutoSubscribe(false)
+				const cameraVideoTrack = QNRTC.createCameraVideoTrack({
+					multiStreamEnable: this.multiStreamEnable === 1,
+					width: this.encodeWidth * 1,
+					height: this.encodeHeight * 1,
+					captureHeight: this.captureHeight * 1,
+					captureWidth: this.captureWidth * 1
+				})
+				this.localTracks.push(cameraVideoTrack)
+				const microphoneAudioTrack = QNRTC.createMicrophoneAudioTrack()
+				this.localTracks.push(microphoneAudioTrack)
+				if(QNRTC.isScreenCaptureSupported()) {
+					if(this.platform === 'android') {
+						QNRTC.requestPermission((result) => {
+						if(result) {
+							const screenVideoTrack = QNRTC.createScreenVideoTrack()
+							this.localTracks.push(screenVideoTrack)
+							this.client.join(this.token)
+						}else {
+							uni.showModal({
+								content: "无法录屏"
+							})
+							this.client.join(this.token)
+						}
+					})
+					}else {
+						const screenVideoTrack = QNRTC.createScreenVideoTrack()
+						this.localTracks.push(screenVideoTrack)
+						this.client.join(this.token)
+					}
+				}else {
+					this.client.join(this.token)
+				}
+				this.client.on("onConnectionStateChanged", ({
+					state
+				}) => {
+					if (state === "CONNECTED") {
+						this.client.publish(this.localTracks, ({
+							onPublished,
+							data,
+							info
+						}) => {
+							if (onPublished) {
+								uni.showModal({
+									content: "发布成功"
+								})
+							} else {
+								uni.showModal({
+									content: info.message
+								})
+							}
+						})
+					}
+				})
+				this.client.on("onAudioSubscribed", (params) => {
+					console.log("用户订阅成功")
+					for (let i of params.trackList) {
+						this.remoteTracks.push(i)
+					}
+				})
+				this.client.on("onVideoSubscribed", (params) => {
+					console.log("用户订阅成功")
+					for (let i of params.trackList) {
+						this.remoteTracks.push(i)
+					}
+				})
+				this.client.on("onUserPublished", (params) => {
+					console.log("用户发布", params)
+					this.client.subscribe(params.trackList)
+				})
+				this.client.on("onUserUnpublished", (params) => {
+					console.log("用户取消发布", params)
+					for (let i of params.trackList) {
+						const index = this.remoteTracks.findIndex(item => item.trackID === i.trackID)
+						if (index >= 0) {
+							this.remoteTracks.splice(index, 1)
+						}
+					}
+				})
+				this.client.on("onMessageReceived", (params) => {
+					console.log("接收到消息", params)
+					uni.showModal({
+						content: `${params.userId}说：${params.content}`
+					})
+				})
+				this.client.on("onUserReconnecting", (params) => {
+					console.log("用户重连中", params)
+				})
+				this.client.on("onUserReconnected", (params) => {
+					console.log("用户重连成功", params)
+				})
+				this.client.on("onUserLeft", (params) => {
+					console.log("用户离开房间", params)
+				})
+			}
+		}
+	}
+</script>
+
+<style>
+	.wrap {
+		border-radius: 5px;
+		margin: 0 20px 20px;
+		padding: 10px 0;
+	}
+
+	.flex-row {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.title {
+		font-size: 28upx;
+		font-weight: bold;
+	}
+
+	.item {
+		position: relative;
+	}
+</style>
