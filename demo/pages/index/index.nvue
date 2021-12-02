@@ -1,0 +1,103 @@
+<template>
+<div class="wrap">
+	<uni-fab horizontal="right" :content="content" @trigger="handleChooseItem"></uni-fab>
+    <view class="margin-top-sm"><button type="primary" @click="routeGroupToGroup">多人通讯</button></view>
+    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeLiveStreamingDirect">单路转推配置</button></view>
+    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeLiveStreamingTranscoding">合流配置</button></view>
+    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeTrackSetting">track设置</button></view>
+</div>
+</template>
+
+<script>
+import QNRTC from "../../uniapp-rtc.js"
+import {
+    mapState
+} from "vuex"
+export default {
+    computed: {
+			...mapState(["platform"])
+		},
+	data() {
+		return {
+			content: [
+				{
+					iconPath: "/static/template.png",
+					selectedIconPath: "/static/template.png",
+					text: "设置"
+				}
+			]
+		}
+	},
+    methods: {
+        routeGroupToGroup() {
+            uni.navigateTo({
+                url: "/pages/group-to-group/index"
+            })
+        },
+        routeLiveStreamingDirect() {
+            uni.navigateTo({
+                url: "/pages/live-streaming-direct/index"
+            })
+        },
+        routeLiveStreamingTranscoding() {
+            uni.navigateTo({
+                url: "/pages/live-streaming-transcoding/index"
+            })
+        },
+        routeTrackSetting() {
+            uni.navigateTo({
+                url: "/pages/track-setting/index"
+            })
+        },
+		handleChooseItem(event) {
+			if(event.item.text === "设置") {
+				uni.navigateTo({
+					url: "/pages/setting/index"
+				})
+			}
+		},
+        requestPermission() {
+            const permission = ["android.permission.CAMERA", "android.permission.RECORD_AUDIO",
+                "android.permission.WRITE_EXTERNAL_STORAGE"
+            ]
+            if (plus.android) {
+                for (const i of permission) {
+                    plus.android.requestPermissions(
+                        [i],
+                        function (resultObj) {
+                            for (var i = 0; i < resultObj.granted.length; i++) {
+                                var grantedPermission = resultObj.granted[i];
+                                console.log('已获取的权限：' + grantedPermission);
+                            }
+                            for (var i = 0; i < resultObj.deniedPresent.length; i++) {
+                                var deniedPresentPermission = resultObj.deniedPresent[i];
+                                console.log('拒绝本次申请的权限：' + deniedPresentPermission);
+                            }
+                            for (var i = 0; i < resultObj.deniedAlways.length; i++) {
+                                var deniedAlwaysPermission = resultObj.deniedAlways[i];
+                                console.log('永久拒绝申请的权限：' + deniedAlwaysPermission);
+                            }
+                        },
+                        function (error) {
+                            console.log('申请权限错误：' + error.code + " = " + error.message);
+                        }
+                    );
+                }
+            }
+
+        }
+    },
+    created() {
+        if(this.platform = "android") {
+            this.requestPermission()
+        }
+    }
+}
+</script>
+<style>
+	.wrap {
+		border-radius: 5px;
+		margin: 0 20px 20px;
+		padding: 10px 0;
+	}
+</style>

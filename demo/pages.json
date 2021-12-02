@@ -1,0 +1,46 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "qn-uni-rtc 功能测试"
+			}
+		},
+		{
+			"path": "pages/group-to-group/index",
+			"style": {
+				"navigationBarTitleText": "多对多通讯"
+			}
+		},
+		{
+			"path": "pages/track-setting/index",
+			"style": {
+				"navigationBarTitleText": "track设置"
+			}
+		},
+		{
+			"path": "pages/live-streaming-direct/index",
+			"style": {
+				"navigationBarTitleText": "CDN推流"
+			}
+		},
+		{
+			"path": "pages/live-streaming-transcoding/index",
+			"style": {
+				"navigationBarTitleText":"合流配置"
+			}
+		},
+		{
+			"path": "pages/setting/index",
+			"style": {
+				"navigationBarTitleText": "配置"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
