@@ -80,7 +80,7 @@
 				"com.qiniu:happy-dns:0.2.18",
                 "com.google.code.gson:gson:2.8.8"
 			  ],
-            "minSdkVersion": "18",
+            "minSdkVersion": "21",
             "compileOptions": {
                 "sourceCompatibility": "1.8",
                 "targetCompatibility": "1.8"
