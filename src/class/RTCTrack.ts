@@ -11,7 +11,7 @@ interface QNTrackParams {
 }
 // @ts-ignore
 // eslint-disable-next-line no-undef
-const QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack')
+const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNEvent = uni.requireNativePlugin('globalEvent')

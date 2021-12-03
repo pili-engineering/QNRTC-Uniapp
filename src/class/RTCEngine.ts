@@ -8,19 +8,16 @@ import QNTrack from './RTCTrack'
 import { QNRTCEngineEvent } from '../RTCEvent'
 // @ts-ignore
 // eslint-disable-next-line no-undef
-const QNRtcEngine = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcEngine')
+const QNRtcEngine = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcEngine')
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNEvent = uni.requireNativePlugin('globalEvent')
 // @ts-ignore
 // eslint-disable-next-line no-undef
-const QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack')
+const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
 // @ts-ignore
 // eslint-disable-next-line no-undef
-const QNRtcAudioMixer = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcAudioMixer')
-// @ts-ignore
-// eslint-disable-next-line no-undef
-const QNRTCClientPlugin = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcClient')
+const QNRTCClientPlugin = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient')
 export default class RTCEngine {
   /**
    * on
@@ -78,7 +75,6 @@ export default class RTCEngine {
       ...config
     }
     QNRtcTrack.initDelegate()
-    QNRtcAudioMixer.initDelegate()
     QNRTCClientPlugin.initDelegate()
     return QNRtcEngine.configRTC(_config)
   }

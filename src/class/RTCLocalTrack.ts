@@ -2,7 +2,7 @@ import QNTrack from './RTCTrack'
 
 // @ts-ignore
 // eslint-disable-next-line no-undef
-const QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack')
+const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
 export default class QNLocalTrack extends QNTrack {
   /**
    * setMuted

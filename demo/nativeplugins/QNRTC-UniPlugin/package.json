@@ -1,6 +1,6 @@
 {
-    "name": "QNRtcUniPlugin",
-    "id": "QNRtcUniPlugin",
+    "name": "七牛云原生WebRTC插件",
+    "id": "QNRTC-UniPlugin",
     "version": "1.0.0",
     "description": "QNRTC原生插件",
     "_dp_type": "nativeplugin",
@@ -9,22 +9,22 @@
             "plugins": [
                 {
                     "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcEngine",
+                    "name": "QNRTC-UniPlugin-QNRtcEngine",
                     "class": "QNRtcEngine"
                 },
                 {
                     "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcClient",
+                    "name": "QNRTC-UniPlugin-QNRtcClient",
                     "class": "QNRtcClient"
                 },
                 {
                     "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcTrack",
+                    "name": "QNRTC-UniPlugin-QNRtcTrack",
                     "class": "QNRtcTrack"
                 },
                 {
                     "type": "component",
-                    "name": "surfaceView",
+                    "name": "QNRTC-UniPlugin-SurfaceView",
                     "class": "QNRtcSurfaceView"
                 }
             ],
@@ -47,39 +47,39 @@
             "plugins": [
                 {
                     "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcEngine",
+                    "name": "QNRTC-UniPlugin-QNRtcEngine",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCModule"
                 },
                 {
                     "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcClient",
+                    "name": "QNRTC-UniPlugin-QNRtcClient",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCClientModule"
                 },
                 {
                     "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcTrack",
+                    "name": "QNRTC-UniPlugin-QNRtcTrack",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCTrackModule"
                 },
                 {
                     "type": "component",
-                    "name": "surfaceView",
+                    "name": "QNRTC-UniPlugin-SurfaceView",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCSurfaceView"
                 },
-		{
-		    "type": "component",
-		    "name": "textureView",
-		    "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCTextureView"
-		}
+				{
+				    "type": "component",
+				    "name": "QNRTC-UniPlugin-TextureView",
+				    "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCTextureView"
+				}
             ],
             "abis": [
                 "armeabi-v7a",
                 "x86",
                 "arm64-v8a"
             ],
-	    "dependencies": [
-		"com.qiniu:happy-dns:0.2.18",
+			"dependencies": [
+				"com.qiniu:happy-dns:0.2.18",
                 "com.google.code.gson:gson:2.8.8"
-	    ],
+			  ],
             "minSdkVersion": "18",
             "compileOptions": {
                 "sourceCompatibility": "1.8",

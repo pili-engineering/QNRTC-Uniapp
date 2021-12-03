@@ -15,7 +15,7 @@
     </view>
     <view class="margin-top:20px;">
 		<div class="track-item-wrap" v-for="(item,index) in localTracks" :key="index">
-		    <surfaceView class="track-video" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" :trackID="item.trackID"></surfaceView>
+		    <QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 			<view class="track-info-wrap">
 				<text class="track-info-item">轨道ID：{{item.trackID}}</text>
 				<text class="track-info-item">用户ID：自己</text>
@@ -23,7 +23,7 @@
 			</view>
 		</div>
         <div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID">
-            <surfaceView class="track-video" v-if="item.kind === 'video'"  :local="1" :identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID"></surfaceView>
+            <QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'"  :local="1" :identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 			<view class="track-info-wrap">
 				<text class="track-info-item">轨道ID：{{item.trackID}}</text>
 				<text class="track-info-item">用户ID：{{item.userID}}</text>
