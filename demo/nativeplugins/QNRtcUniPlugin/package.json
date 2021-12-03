@@ -23,12 +23,6 @@
                     "class": "QNRtcTrack"
                 },
                 {
-
-                    "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcAudioMixer",
-                    "class": "QNRtcAudioMixer"
-                },
-                {
                     "type": "component",
                     "name": "surfaceView",
                     "class": "QNRtcSurfaceView"
@@ -63,11 +57,6 @@
                 },
                 {
                     "type": "module",
-                    "name": "QNRtcUniPlugin-QNRtcAudioMixer",
-                    "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMixerModule"
-                },
-                {
-                    "type": "module",
                     "name": "QNRtcUniPlugin-QNRtcTrack",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCTrackModule"
                 },
@@ -76,21 +65,21 @@
                     "name": "surfaceView",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCSurfaceView"
                 },
-				{
-				    "type": "component",
-				    "name": "textureView",
-				    "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCTextureView"
-				}
+		{
+		    "type": "component",
+		    "name": "textureView",
+		    "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCTextureView"
+		}
             ],
             "abis": [
                 "armeabi-v7a",
                 "x86",
                 "arm64-v8a"
             ],
-			"dependencies": [
-				"com.qiniu:happy-dns:0.2.18",
+	    "dependencies": [
+		"com.qiniu:happy-dns:0.2.18",
                 "com.google.code.gson:gson:2.8.8"
-			  ],
+	    ],
             "minSdkVersion": "18",
             "compileOptions": {
                 "sourceCompatibility": "1.8",
