@@ -36,7 +36,7 @@
             <key>class</key>
             <string>QNRtcEngine</string>
             <key>name</key>
-            <string>QNRtcUniPlugin-QNRtcEngine</string>
+            <string>QNRTC-UniPlugin-QNRtcEngine</string>
             <key>type</key>
             <string>module</string>
         </dict>
@@ -44,7 +44,7 @@
             <key>class</key>
             <string>QNRtcClient</string>
             <key>name</key>
-            <string>QNRtcUniPlugin-QNRtcClient</string>
+            <string>QNRTC-UniPlugin-QNRtcClient</string>
             <key>type</key>
             <string>module</string>
         </dict>
@@ -52,7 +52,7 @@
             <key>class</key>
             <string>QNRtcTrack</string>
             <key>name</key>
-            <string>QNRtcUniPlugin-QNRtcTrack</string>
+            <string>QNRTC-UniPlugin-QNRtcTrack</string>
             <key>type</key>
             <string>module</string>
         </dict>
@@ -60,7 +60,7 @@
             <key>class</key>
             <string>QNRtcAudio</string>
             <key>name</key>
-            <string>QNRtcUniPlugin-QNRtcAudio</string>
+            <string>QNRTC-UniPlugin-QNRtcAudio</string>
             <key>type</key>
             <string>module</string>
         </dict>
@@ -68,7 +68,7 @@
             <key>class</key>
             <string>QNRtcSurfaceView</string>
             <key>name</key>
-            <string>surfaceView</string>
+            <string>QNRTC-UniPlugin-SurfaceView</string>
             <key>type</key>
             <string>component</string>
         </dict>
@@ -103,7 +103,7 @@
             "plugins": [
                 {
                 "type": "module",
-                "name": "QNRtcUniPlugin-QNRtcEngine",
+                "name": "QNRTC-UniPlugin-QNRtcEngine",
                 "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCModule"
                 }
             ]
@@ -112,7 +112,7 @@
             "plugins": [
                 {
                 "type": "module",
-                "name": "QNRtcUniPlugin-QNRtcClient",
+                "name": "QNRTC-UniPlugin-QNRtcClient",
                 "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCClientModule"
                 }
             ]
@@ -121,7 +121,7 @@
             "plugins": [
                 {
                 "type": "module",
-                "name": "QNRtcUniPlugin-QNRtcTrack",
+                "name": "QNRTC-UniPlugin-QNRtcTrack",
                 "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCTrackModule"
                 }
             ]
@@ -130,7 +130,7 @@
             "plugins": [
                 {
                 "type": "component",
-                "name": "surfaceView",
+                "name": "QNRTC-UniPlugin-SurfaceView",
                 "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCSurfaceView"
                 }
             ]
@@ -139,7 +139,7 @@
             "plugins": [
                 {
                 "type": "component",
-                "name": "textureView",
+                "name": "QNRTC-UniPlugin-TextureView",
                 "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCTextureView"
                 }
             ]
@@ -172,8 +172,8 @@ QNRTC.configRTC()
 添加音视频通话需要的原生组件
 
 ```html
-<surfaceView class="track-video" v-for="(item,index) in localTracks" :key="item.identifyID" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" fillMode="QNVideoFillModePreserveAspectRatioAndFill" :trackID="item.trackID"></surfaceView>
-<surfaceView class="track-video" v-for="(item,index) in remoteTracks" :key="item.identifyID" v-if="item.kind === 'video'" :local="1" :identifyID="item.identifyID" :userID="item.userID" fillMode="QNVideoFillModePreserveAspectRatioAndFill" :trackID="item.trackID"></surfaceView>
+<QNRTC-UniPlugin-SurfaceView class="track-video" v-for="(item,index) in localTracks" :key="item.identifyID" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" fillMode="QNVideoFillModePreserveAspectRatioAndFill" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
+<QNRTC-UniPlugin-SurfaceView class="track-video" v-for="(item,index) in remoteTracks" :key="item.identifyID" v-if="item.kind === 'video'" :local="1" :identifyID="item.identifyID" :userID="item.userID" fillMode="QNVideoFillModePreserveAspectRatioAndFill" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 ```
 
 - local:  0 本地 track 视图，1 远端 track 视图

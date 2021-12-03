@@ -143,10 +143,10 @@
 						</view>
 				</uni-popup-dialog>
 			</uni-popup>
-			<surfaceView  :fillMode="localFillMode" :local="0" :class ="remoteVideoTracks ? 'local' :'local2'" v-if="cameraVideoTrack" 
-					:identifyID="cameraVideoTrack.identifyID" :trackID="cameraVideoTrack.trackID"></surfaceView>
-			<surfaceView :fillMode="remoteFillMode" :local="1" :class ="cameraVideoTrack ? 'local' :'local2'" v-if="remoteVideoTracks" :identifyID="remoteVideoTracks.identifyID"
-					:userID="remoteVideoTracks.userID" :trackID="remoteVideoTracks.trackID"></surfaceView>
+			<QNRTC-UniPlugin-SurfaceView  :fillMode="localFillMode" :local="0" :class ="remoteVideoTracks ? 'local' :'local2'" v-if="cameraVideoTrack" 
+					:identifyID="cameraVideoTrack.identifyID" :trackID="cameraVideoTrack.trackID"></QNRTC-UniPlugin-SurfaceView>
+			<QNRTC-UniPlugin-SurfaceView :fillMode="remoteFillMode" :local="1" :class ="cameraVideoTrack ? 'local' :'local2'" v-if="remoteVideoTracks" :identifyID="remoteVideoTracks.identifyID"
+					:userID="remoteVideoTracks.userID" :trackID="remoteVideoTracks.trackID"></QNRTC-UniPlugin-SurfaceView>
 			<view class="main-btn-wrap">
 				<view>
 					<uni-icons v-if="localAudioOn" type="mic-filled" size="40" @click="setMutedLocalAudio"></uni-icons>

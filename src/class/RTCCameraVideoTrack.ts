@@ -4,7 +4,7 @@ import QNLocalVideoTrack from './RTCLocalVideoTrack'
 
 // @ts-ignore
 // eslint-disable-next-line no-undef
-const QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack')
+const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
 export default class QNCameraVideoTrack extends QNLocalVideoTrack {
   /**
    * destroy

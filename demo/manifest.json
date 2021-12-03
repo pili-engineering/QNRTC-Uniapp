@@ -59,11 +59,11 @@
             }
         },
         "nativePlugins" : {
-            "QNRtcUniPlugin" : {
+            "QNRTC-UniPlugin" : {
                 "__plugin_info__" : {
-                    "name" : "qnrtcuniplugin",
+                    "name" : "七牛云原生WebRTC插件",
                     "description" : "QNRTC原生插件",
-                    "platforms" : "iOS",
+                    "platforms" : "Android,iOS",
                     "url" : "",
                     "android_package_name" : "",
                     "ios_bundle_id" : "",

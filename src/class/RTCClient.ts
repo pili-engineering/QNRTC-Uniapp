@@ -7,7 +7,7 @@ import QNRemoteAudioTrack from './RTCRemoteAudioTrack'
 import QNLocalTrack from './RTCLocalTrack'
 // @ts-ignore
 // eslint-disable-next-line no-undef
-const QNRTCClient = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcClient')
+const QNRTCClient = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient')
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNEvent = uni.requireNativePlugin('globalEvent')
