@@ -2,6 +2,16 @@
 
 **QNRTC-Uniapp** 是基于 **[UNIAPP](https://uniapp.dcloud.io/)**、 **[QNRTC-Android](https://developer.qiniu.com/rtc/8764/an-overview-of-the-android-sdk)** 以及 **[QNRTC-iOS](https://developer.qiniu.com/rtc/8830/an-overview-of-the-ios-sdk)** 三者所实现的。前端可通过 **QNRTC-Uniapp** 所提供的 JS 插件调用原生 Android 以及 iOS 的 RTC 接口来实现实时音视频通话。
 
+## 云打包
+
+
+> 需要在插件市场载入 JS 插件 以及 Native 插件。JS 插件主要负责处理加工原生返回的数据，便于使用者调用，Native 插件负责直接调用原生接口返回 JS 插件。
+
+[Native 插件地址](https://ext.dcloud.net.cn/plugin?id=6857)
+
+[JS 插件地址](https://ext.dcloud.net.cn/plugin?id=6859)
+
+
 ## 离线打包
 
 ```shell
