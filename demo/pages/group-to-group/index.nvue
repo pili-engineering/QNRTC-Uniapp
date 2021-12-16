@@ -94,7 +94,7 @@
 <script>
 	import QNRTC, {
 		QNRTCLogLevel
-	} from "../../uniapp-rtc.js"
+	} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
 	import {
 		mapState
 	} from "vuex"

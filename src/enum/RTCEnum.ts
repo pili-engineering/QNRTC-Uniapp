@@ -1,589 +1,422 @@
 /* eslint-disable no-unused-vars */
 /**
- * QNRTCCameraFacing
- * @description 摄像头类型
- * @namespace
+ * 摄像头类型
  */
 export enum QNRTCCameraFacing {
   /**
-   * back
-   * @description 后置摄像头
-   * @sign back = 'back'
+   * 后置摄像头
    */
   back = 'back',
   /**
-   * front
-   * @description 前置摄像头
-   * @sign front = 'front'
+   * 前置摄像头
    */
   front = 'front'
 }
 
 /**
- * QNRTCPolicy
- * @description 网络传输模式
- * @namespace
+ * 网络传输模式
  */
 export enum QNRTCPolicy {
   /**
-   * forceUDP
-   * @description 使用 UDP
-   * @sign forceUDP = 'forceUDP'
+   * 使用 UDP
    */
   forceUDP = 'forceUDP',
   /**
-   * forceTCP
-   * @description 使用 TCP
-   * @sign forceTCP = 'forceTCP'
+   * 使用 TCP
    */
   forceTCP = 'forceTCP',
   /**
-   * preferUDP
-   * @description 优先 UDP，不通的话自动改为 TCP
-   * @sign preferUDP = 'preferUDP'
+   * 优先 UDP
+   * @remarks 不通的话自动改为 TCP
    */
   preferUDP = 'preferUDP'
 }
 
 /**
- * QNRTCBwePolicy
- * @description BwePolicy
- * @namespace
+ * BwePolicy
  */
 export enum QNRTCBwePolicy {
   /**
-   * TCC
-   * @description 使用 TCC
-   * @sign TCC = 'TCC'
+   * 使用 TCC
    */
   TCC = 'TCC',
   /**
-   * GCC
-   * @description 使用 GCC
-   * @sign GCC = 'GCC'
+   * 使用 GCC
    */
   GCC = 'GCC'
 }
 
 /**
- * QNRTCTrackKind
- * @description 轨类型
- * @namespace
+ * 轨类型
  */
 export enum QNRTCTrackKind {
   /**
-   * audio
-   * @description 音频
-   * @sign audio = 'audio'
+   * 音频
    */
   audio = 'audio',
   /**
-   * video
-   * @description 视频
-   * @sign video = 'video'
+   * 视频
    */
   video = 'video'
 }
 
 /**
- * QNRTCLogLevel
- * @description 日志等级
- * @namespace
+ * 日志等级
  */
 export enum QNRTCLogLevel {
   /**
-   * verbose
-   * @description Verbose 日志输出
-   * @sign verbose = 'verbose'
+   * Verbose 日志输出
    */
   verbose = 'verbose',
   /**
-   * info
-   * @description Info 日志输出
-   * @sign info = 'info'
+   * Info 日志输出
    */
   info = 'info',
   /**
-   * warning
-   * @description Warning 日志输出
-   * @sign warning = 'warning'
+   * Warning 日志输出
    */
   warning = 'warning',
   /**
-   * error
-   * @description Error 日志输出
-   * @sign error = 'error'
+   * Error 日志输出
    */
   error = 'error',
   /**
-   * none
-   * @description None 不输出日志
-   * @sign none = 'none'
+   * None 不输出日志
    */
   none = 'none'
 }
 
 /**
- * QNConnectionState
- * @description 连接状态
- * @namespace
+ * 连接状态
  */
 export enum QNConnectionState {
   /**
-   * DISCONNECTED
-   * @description 未连接
-   * @sign DISCONNECTED = 'DISCONNECTED'
+   * 未连接
    */
   DISCONNECTED = 'DISCONNECTED',
   /**
-   * CONNECTING
-   * @description 连接中
-   * @sign CONNECTING = 'CONNECTING'
+   * 连接中
    */
   CONNECTING = 'CONNECTING',
   /**
-   * CONNECTED
-   * @description 连接成功
-   * @sign CONNECTED = 'CONNECTED'
+   * 连接成功
    */
   CONNECTED = 'CONNECTED',
   /**
-   * RECONNECTING
-   * @description 重连中
-   * @sign RECONNECTING = 'RECONNECTING'
+   * 重连中
    */
   RECONNECTING = 'RECONNECTING',
   /**
-   * RECONNECTED
-   * @description 已重连
-   * @sign RECONNECTED = 'RECONNECTED'
+   * 已重连
    */
   RECONNECTED = 'RECONNECTED'
 }
 
 /**
- * QNRenderMode
- * @description 渲染模式
- * @namespace
+ * 渲染模式
  */
 export enum QNRenderMode {
   /**
    * FILL
-   * @description 不保持长宽比,图片在容器内完整显示出来
-   * @sign FILL = 'FILL'
+   * @remarks 不保持长宽比,图片在容器内完整显示出来
    */
   FILL = 'FILL',
   /**
    * ASPECT_FILL
-   * @description 在保持长宽比的前提下，缩放图片，使图片充满容器
-   * @sign ASPECT_FILL = 'ASPECT_FILL'
+   * @remarks 在保持长宽比的前提下，缩放图片，使图片充满容器
    */
   ASPECT_FILL = 'ASPECT_FILL',
   /**
    * ASPECT_FIT
-   * @description 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
-   * @sign ASPECT_FIT = 'ASPECT_FIT'
+   * @remarks 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
    */
   ASPECT_FIT = 'ASPECT_FIT'
 }
 
 /**
- * QNTrackProfile
- * @description 轨质量
- * @namespace
+ * 轨质量
  */
 export enum QNTrackProfile {
   /**
-   * LOW
-   * @description 低分辨率
-   * @sign LOW = 'LOW'
+   * 低分辨率
    */
   LOW = 'LOW',
   /**
-   * MEDIUM
-   * @description 中分辨率
-   * @sign MEDIUM = 'MEDIUM'
+   * 中分辨率
    */
   MEDIUM = 'MEDIUM',
   /**
-   * HIGH
-   * @description 高分辨率
-   * @sign HIGH = 'HIGH'
+   * 高分辨率
    */
   HIGH = 'HIGH'
 }
 
 /**
- * QNNetworkGrade
- * @description 网络质量
- * @namespace
+ * 网络质量
  */
 export enum QNNetworkGrade {
   /**
-   * INVALID
-   * @description 网络未知
-   * @sign INVALID = 'INVALID'
+   * 网络未知
    */
   INVALID = 'INVALID',
   /**
-   * EXCELLENT
-   * @description 网络优
-   * @sign EXCELLENT = 'EXCELLENT'
+   * 网络优
    */
   EXCELLENT = 'EXCELLENT',
   /**
-   * GOOD
-   * @description 网络良
-   * @sign GOOD = 'GOOD'
+   * 网络良
    */
   GOOD = 'GOOD',
   /**
-   * FAIR
-   * @description 网络一般
-   * @sign FAIR = 'FAIR'
+   * 网络一般
    */
   FAIR = 'FAIR',
   /**
-   * POOR
-   * @description 网络差
-   * @sign POOR = 'POOR'
+   * 网络差
    */
   POOR = 'POOR'
 }
 
 /**
- * QNConnectionDisconnectedReason
- * @description 连接失败原因
- * @namespace
+ * 连接失败原因
  */
 export enum QNConnectionDisconnectedReason {
   /**
-   * LEAVE
-   * @description 主动退出
-   * @sign LEAVE = 'LEAVE'
+   * 主动退出
    */
   LEAVE = 'LEAVE',
   /**
-   * KICKED_OUT
-   * @description 被踢出房间
-   * @sign KICKED_OUT = 'KICKED_OUT'
+   * 被踢出房间
    */
   KICKED_OUT = 'KICKED_OUT',
   /**
-   * ROOM_CLOSED
-   * @description 房间被关
-   * @sign ROOM_CLOSED = 'ROOM_CLOSED'
+   * 房间被关
    */
   ROOM_CLOSED = 'ROOM_CLOSED',
   /**
-   * ROOM_FULL
-   * @description 房间人数已满
-   * @sign ROOM_FULL = 'ROOM_FULL'
+   * 房间人数已满
    */
   ROOM_FULL = 'ROOM_FULL',
   /**
-   * ERROR
-   * @description 发生错误异常断开
-   * @sign ERROR = 'ERROR'
+   * 发生错误异常断开
    */
   ERROR = 'ERROR'
 }
 
 /**
- * QNLiveStreamingErrorInfoType
- * @description 转推失败原因
- * @namespace
+ * 转推失败原因
  */
 export enum QNLiveStreamingErrorInfoType {
   /**
-   * START
-   * @description 开始转推操作异常，请检查房间状态、单路转推配置等信息
-   * @sign START = 'START'
+   * 开始转推操作异常
+   * @remarks 请检查房间状态、单路转推配置等信息
    */
   START = 'START',
   /**
-   * STOP
-   * @description 停止转推操作异常，请检查房间状态
-   * @sign STOP = 'STOP'
+   * 停止转推操作异常
+   * @remarks 请检查房间状态
    */
   STOP = 'STOP',
   /**
-   * UPDATE
-   * @description 更改合流布局配置操作异常，请检查房间状态、合流布局配置等信息
-   * @sign UPDATE = 'UPDATE'
+   * 更改合流布局配置操作异常
+   * @remarks 请检查房间状态、合流布局配置等信息
    */
   UPDATE = 'UPDATE'
 }
 
 /**
- * QNLiveStreamingErrorInfoCode
- * @description 合流失败原因
- * @namespace
+ * 合流失败原因
  */
 export enum QNLiveStreamingErrorInfoCode {
   /**
-   * ERROR_NO_PERMISSION
-   * @description 无操作权限，请检查用户的操作权限
-   * @sign ERROR_NO_PERMISSION = 'ERROR_NO_PERMISSION'
+   * 无操作权限
+   * @remarks 请检查用户的操作权限
    */
   ERROR_NO_PERMISSION = 'ERROR_NO_PERMISSION',
   /**
-   * ERROR_INVALID_STATE
-   * @description 状态异常，请检查房间状态，加入房间后才可以创建转推任务
-   * @sign ERROR_INVALID_STATE = 'ERROR_INVALID_STATE'
+   * 状态异常
+   * @remarks 请检查房间状态，加入房间后才可以创建转推任务
    */
   ERROR_INVALID_STATE = 'ERROR_INVALID_STATE',
   /**
-   * ERROR_INVALID_PARAMETER
-   * @description 参数错误，请检查参数是否合法
-   * @sign ERROR_INVALID_PARAMETER = 'ERROR_INVALID_PARAMETER'
+   * 参数错误
+   * @remarks 请检查参数是否合法
    */
   ERROR_INVALID_PARAMETER = 'ERROR_INVALID_PARAMETER',
   /**
-   * ERROR_SIGNAL_TIMEOUT
-   * @description 操作超时，请重新尝试操作
-   * @sign ERROR_SIGNAL_TIMEOUT = 'ERROR_SIGNAL_TIMEOUT'
+   * 操作超时
+   * @remarks 请重新尝试操作
    */
   ERROR_SIGNAL_TIMEOUT = 'ERROR_SIGNAL_TIMEOUT',
   /**
-   * SERVER_ERROR
-   * @description 服务端错误，请重新尝试操作
-   * @sign SERVER_ERROR = 'SERVER_ERROR'
+   * 服务端错误
+   * @remarks 请重新尝试操作
    */
   SERVER_ERROR = 'SERVER_ERROR'
 }
 
 /**
- * QNAudioDevice
- * @description 音频设备
- * @namespace
+ * 音频设备
  */
 export enum QNAudioDevice {
   /**
-   * SPEAKER_PHONE
-   * @description 扬声器
-   * @sign SPEAKER_PHONE = 'SPEAKER_PHONE'
+   * 扬声器
    */
   SPEAKER_PHONE = 'SPEAKER_PHONE',
   /**
-   * EARPIECE
-   * @description 听筒
-   * @sign EARPIECE = 'EARPIECE'
+   * 听筒
    */
   EARPIECE = 'EARPIECE',
   /**
-   * WIRED_HEADSET
-   * @description 有线耳机
-   * @sign WIRED_HEADSET = 'WIRED_HEADSET'
+   * 有线耳机
    */
   WIRED_HEADSET = 'WIRED_HEADSET',
   /**
-   * BLUETOOTH
-   * @description 蓝牙设备
-   * @sign BLUETOOTH = 'BLUETOOTH'
+   * 蓝牙设备
    */
   BLUETOOTH = 'BLUETOOTH',
   /**
-   * NONE
-   * @description 无
-   * @sign NONE = 'NONE'
+   * 无
    */
   NONE = 'NONE'
 }
 
 /**
- * QNVideoWaterMarkSize
- * @description 水印尺寸
- * @namespace
+ * 水印尺寸
  */
 export enum QNVideoWaterMarkSize {
   /**
-   * LARGE
-   * @description 水印尺寸大
-   * @sign LARGE = 'LARGE'
+   * 水印尺寸大
    */
   LARGE = 'LARGE',
   /**
-   * MEDIUM
-   * @description 正常水印尺寸
-   * @sign MEDIUM = 'MEDIUM'
+   * 正常水印尺寸
    */
   MEDIUM = 'MEDIUM',
   /**
-   * SMALL
-   * @description 水印尺寸小
-   * @sign SMALL = 'SMALL'
+   * 水印尺寸小
    */
   SMALL = 'SMALL'
 }
 
 /**
- * QNAVCaptureVideoOrientation
- * @description 视频方向
- * @namespace
+ * 视频方向
  */
 export enum QNAVCaptureVideoOrientation {
   /**
-   * AVCaptureVideoOrientationPortrait
-   * @description 视频垂直定向，顶部位于手机顶部
-   * @sign AVCaptureVideoOrientationPortrait = 'AVCaptureVideoOrientationPortrait'
+   * 视频垂直定向
+   * @remarks 顶部位于手机顶部
    */
   AVCaptureVideoOrientationPortrait = 'AVCaptureVideoOrientationPortrait',
   /**
-   * AVCaptureVideoOrientationLandscapeRight
-   * @description 视频水平定向，顶部位于手机右部
-   * @sign AVCaptureVideoOrientationLandscapeRight = 'AVCaptureVideoOrientationLandscapeRight'
+   * 视频水平定向
+   * @remarks 顶部位于手机右部
    */
   AVCaptureVideoOrientationLandscapeRight = 'AVCaptureVideoOrientationLandscapeRight',
   /**
-   * AVCaptureVideoOrientationLandscapeLeft
-   * @description 视频水平定向，顶部位于手机左部
-   * @sign AVCaptureVideoOrientationLandscapeLeft = 'AVCaptureVideoOrientationLandscapeLeft'
+   * 视频水平定向
+   * @remarks 顶部位于手机左部
    */
   AVCaptureVideoOrientationLandscapeLeft = 'AVCaptureVideoOrientationLandscapeLeft'
 }
 
 /**
- * QNVideoFillModeType
- * @description 填充模式
- * @namespace
+ * 填充模式
  */
 export enum QNVideoFillModeType {
   /**
-   * QNVideoFillModeNone
-   * @description 默认填充，QNVideoFillModePreserveAspectRatioAndFill
-   * @sign QNVideoFillModeNone = 'QNVideoFillModeNone'
+   * 默认填充
+   * @remarks 效果同 QNVideoFillModePreserveAspectRatioAndFill
    */
   QNVideoFillModeNone = 'QNVideoFillModeNone',
   /**
    * QNVideoFillModeStretch
-   * @description 不保持长宽比，图片在容器内完整显示出来，可能会变形
-   * @sign QNVideoFillModeStretch = 'QNVideoFillModeStretch'
+   * @remarks 不保持长宽比，图片在容器内完整显示出来，可能会变形
    */
   QNVideoFillModeStretch = 'QNVideoFillModeStretch',
   /**
    * QNVideoFillModePreserveAspectRatio
-   * @description 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
-   * @sign QNVideoFillModePreserveAspectRatio = 'QNVideoFillModePreserveAspectRatio'
+   * @remarks 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
    */
   QNVideoFillModePreserveAspectRatio = 'QNVideoFillModePreserveAspectRatio',
   /**
    * QNVideoFillModePreserveAspectRatioAndFill
-   * @description 在保持长宽比的前提下，缩放图片，使图片充满容器
-   * @sign QNVideoFillModePreserveAspectRatioAndFill = 'QNVideoFillModePreserveAspectRatioAndFill'
+   * @remarks 在保持长宽比的前提下，缩放图片，使图片充满容器
    */
   QNVideoFillModePreserveAspectRatioAndFill = 'QNVideoFillModePreserveAspectRatioAndFill'
 }
 
 /**
- * QNSessionPresetType
- * @description 采集分辨率
- * @namespace
+ * 采集分辨率
  */
 export enum QNSessionPresetType {
   /**
-   * AVCaptureSessionPreset352x288
-   * @description 采集分辨率 352x288
-   * @sign AVCaptureSessionPreset352x288 = 'AVCaptureSessionPreset352x288'
+   * 352x288
    */
   AVCaptureSessionPreset352x288 = 'AVCaptureSessionPreset352x288',
   /**
-   * AVCaptureSessionPreset640x480
-   * @description 采集分辨率 640x480
-   * @sign AVCaptureSessionPreset640x480 = 'AVCaptureSessionPreset640x480'
+   * 640x480
    */
   AVCaptureSessionPreset640x480 = 'AVCaptureSessionPreset640x480',
   /**
-   * AVCaptureSessionPreset1280x720
-   * @description 采集分辨率 1280x720
-   * @sign AVCaptureSessionPreset1280x720 = 'AVCaptureSessionPreset1280x720'
+   * 1280x720
    */
   AVCaptureSessionPreset1280x720 = 'AVCaptureSessionPreset1280x720',
   /**
-   * AVCaptureSessionPreset1920x1080
-   * @description 采集分辨率 1920x1080
-   * @sign AVCaptureSessionPreset1920x1080 = 'AVCaptureSessionPreset1920x1080'
+   * 1920x1080
    */
   AVCaptureSessionPreset1920x1080 = 'AVCaptureSessionPreset1920x1080',
   /**
-   * AVCaptureSessionPreset3840x2160
-   * @description 采集分辨率 3840x2160
-   * @sign AVCaptureSessionPreset3840x2160 = 'AVCaptureSessionPreset3840x2160'
+   * 3840x2160
    */
   AVCaptureSessionPreset3840x2160 = 'AVCaptureSessionPreset3840x2160',
   /**
-   * AVCaptureSessionPresetiFrame960x540
-   * @description 采集分辨率 960x540
-   * @sign AVCaptureSessionPresetiFrame960x540 = 'AVCaptureSessionPresetiFrame960x540'
+   * 960x540
    */
   AVCaptureSessionPresetiFrame960x540 = 'AVCaptureSessionPresetiFrame960x540',
   /**
-   * AVCaptureSessionPresetiFrame1280x720
-   * @description 采集分辨率 1280x720
-   * @sign AVCaptureSessionPresetiFrame1280x720 = 'AVCaptureSessionPresetiFrame1280x720'
+   * 1280x720
    */
   AVCaptureSessionPresetiFrame1280x720 = 'AVCaptureSessionPresetiFrame1280x720',
 }
 
 /**
- * QNAudioMixerState
- * @description 混音状态
- * @namespace
+ * 混音状态
  */
 export enum QNAudioMixerState {
   /**
-   * MIXING
-   * @description 混音操作进行中的状态
-   * @sign MIXING = 'MIXING'
+   * 混音操作进行中的状态
    */
   MIXING = 'MIXING',
   /**
-   * PAUSED
-   * @description 混音操作暂停时的状态
-   * @sign PAUSED = 'PAUSED'
+   * 混音操作暂停时的状态
    */
   PAUSED = 'PAUSED',
   /**
-   * STOPPED
-   * @description 混音操作停止时的状态
-   * @sign STOPPED = 'STOPPED'
+   * 混音操作停止时的状态
    */
   STOPPED = 'STOPPED',
   /**
-   * COMPLETED
-   * @description 混音操作完成时的状态
-   * @sign COMPLETED = 'COMPLETED'
+   * 混音操作完成时的状态
    */
   COMPLETED = 'COMPLETED'
 }
 
 /**
- * QNVideoFrameType
- * @ignore
- * @todo 数据帧暂时使用不到
- * @description 数据模式
- * @namespace
+ * 数据模式
+ * @internal
  */
 export enum QNVideoFrameType {
   /**
-   * YUV_NV21
-   * @ignore
-   * @description NV21 数据类型
-   * @sign YUV_NV21 = 'YUV_NV21'
+   * NV21 数据类型
    */
   YUV_NV21 = 'YUV_NV21',
   /**
-   * TEXTURE_RGB
-   * @ignore
-   * @description TEXTURE 2D RGB 数据类型
-   * @sign TEXTURE_RGB = 'TEXTURE_RGB'
+   * TEXTURE 2D RGB 数据类型
    */
   TEXTURE_RGB = 'TEXTURE_RGB',
   /**
-   * TEXTURE_OES
-   * @ignore
-   * @description TEXTURE OES RGB 数据类型量
-   * @sign TEXTURE_OES = 'TEXTURE_OES'
+   * TEXTURE OES RGB 数据类型量
    */
   TEXTURE_OES = 'TEXTURE_OES'
 }

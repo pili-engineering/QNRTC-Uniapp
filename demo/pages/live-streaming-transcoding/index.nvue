@@ -129,7 +129,7 @@
 </template>
 
 <script>
-	import QNRTC,{QNRTCLogLevel,QNSessionPresetType} from "../../uniapp-rtc.js"
+	import QNRTC,{QNRTCLogLevel,QNSessionPresetType} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
 	import { mapState } from "vuex"
 	export default {
 		data() {
@@ -297,7 +297,12 @@
 			},
 			// 移除合流转推配置 -- native接口
 			handleDeleteTrack() {
+				const index = this.transcodingTracks.findIndex(item => item.trackID === this.trackConfig.trackID) 
+				if(index >= 0) {
+					this.transcodingTracks.splice(index,1)
+				} 
 				this.client.removeTranscodingLiveStreamingTracks(this.transcodingConfig.streamID, [this.trackConfig])
+				
 			},
 			async handleJoinRoom() {
 				// 初始化配置项

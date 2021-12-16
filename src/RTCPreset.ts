@@ -63,15 +63,11 @@ export const QNCustomVideoTrackConfigPreset = {
 }
 
 /**
- * QNPublishResultCallback
- * @description 发布成功后回调
- * @namespace
+ * 发布成功后回调
  */
 export type QNPublishResultCallback = ((params: { onPublished: boolean, data: { [identifyID: string]: string }, error: { message: string, code: number } }) => void)
 
 /**
- * QNScreenPermissionResultCallback
- * @description 请求录屏权限后回调
- * @namespace
+ * 请求录屏权限后回调
  */
 export type QNScreenPermissionResultCallback = ((result: boolean) => void)

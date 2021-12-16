@@ -15,12 +15,34 @@ const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNEvent = uni.requireNativePlugin('globalEvent')
+/**
+ * 轨
+ * @remarks 所有的轨继承此类
+ */
 export default class QNTrack {
+  /**
+   * identifyID
+   */
   public identifyID: string
+  /**
+   * 媒体类型
+   */
   public kind: QNRTCTrackKind
+  /**
+   * 自定义 tag
+   */
   public tag: string
+  /**
+   * trackID
+   */
   public trackID: string
+  /**
+   * userID
+   */
   public userID: string
+  /**
+   * @internal
+   */
   public raw: QNUNILocalTrack | QNUNIRemoteTrack
   constructor ({ identifyID, kind, tag, trackID, raw, userID }: QNTrackParams) {
     this.identifyID = identifyID
@@ -32,11 +54,9 @@ export default class QNTrack {
   }
 
   /**
-   * on
-   * @description 监听对应的事件，支持多次调用同一事件
-   * @param { string } name 事件名
-   * @param { QNRTCTrackEvent } listener 事件句柄
-   * @returns { void }
+   * 监听对应的事件，支持多次调用同一事件
+   * @param name 事件名
+   * @param listener 事件句柄
    */
   on<event extends keyof QNRTCTrackEvent > (name: event, listener: QNRTCTrackEvent[event]): void {
     const _listener = (params: {[key: string]: string | number}) => {
@@ -49,20 +69,17 @@ export default class QNTrack {
   }
 
   /**
-   * off
-   * @description 取消监听对应的事件
-   * @param { string } name 事件名
-   * @param { QNRTCClinetEvent } listener 事件句柄
-   * @returns { void }
+   * 取消监听对应的事件
+   * @param name 事件名
+   * @param listener 事件句柄
    */
   off<event extends keyof QNRTCTrackEvent> (name: event, listener: QNRTCTrackEvent[event]): void {
     QNEvent.removeEventListener(name, listener)
   }
 
   /**
-   * getMuted
-   * @description 标识 Track 是否为 mute 状态
-   * @returns { number } 是否被 mute
+   * 标识 Track 是否为 mute 状态
+   * @returns 是否被 mute
    */
   getMuted (): number {
     return QNRtcTrack.getMuted(this.identifyID)

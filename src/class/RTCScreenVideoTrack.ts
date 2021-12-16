@@ -2,12 +2,15 @@ import QNLocalVideoTrack from './RTCLocalVideoTrack'
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
+
+/**
+ * 屏幕录制轨
+ */
 export default class QNScreenVideoTrack extends QNLocalVideoTrack {
   /**
-   * setScreenRecorderFrameRate
-   * @description 设置屏幕录制的帧率，默认值 20
-   * @param { number } screenRecorderFrameRate 帧率
-   * @returns { void }
+   * 设置屏幕录制的帧率
+   * @remarks 默认值 20
+   * @param screenRecorderFrameRate 帧率
    */
   setScreenRecorderFrameRate (screenRecorderFrameRate: number): void {
     return QNRtcTrack.setScreenRecorderFrameRate(this.identifyID, screenRecorderFrameRate)
