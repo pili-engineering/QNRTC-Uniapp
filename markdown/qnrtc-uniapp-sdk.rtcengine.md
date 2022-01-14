@@ -9,7 +9,7 @@ RTCEngine 是 SDK 的入口
 <b>Signature:</b>
 
 ```typescript
-export default class RTCEngine 
+export declare class RTCEngine 
 ```
 
 ## Remarks

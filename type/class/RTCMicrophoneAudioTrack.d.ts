@@ -1,8 +1,8 @@
-import QNLocalAudioTrack from './RTCLocalAudioTrack';
+import { QNLocalAudioTrack } from './RTCLocalAudioTrack';
 /**
  * 本地麦克风轨
  */
-export default class QNMicrophoneAudioTrack extends QNLocalAudioTrack {
+export declare class QNMicrophoneAudioTrack extends QNLocalAudioTrack {
     /**
      * 设置音量
      * @remarks 设置设备上当前音频输入设备采集后音量

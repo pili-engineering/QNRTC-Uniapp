@@ -12,7 +12,7 @@
 export interface QNRTCEngineEvent 
 ```
 
-## Properties
+## Events
 
 |  Property | Type | Description |
 |  --- | --- | --- |

@@ -1,8 +1,8 @@
-import QNTrack from './RTCTrack';
+import { QNTrack } from './RTCTrack';
 /**
  * 本地轨
  */
-export default class QNLocalTrack extends QNTrack {
+export declare class QNLocalTrack extends QNTrack {
     /**
      * 设置 mute
      * @remarks 更新当前 Track 的 mute 值

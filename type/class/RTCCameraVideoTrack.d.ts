@@ -1,10 +1,10 @@
 import { QNAVCaptureVideoOrientation, QNSessionPresetType } from '../enum/RTCEnum';
 import { QNBeautySetting, QNImage, QNVideoWaterMark } from '../interface/RTCInterface';
-import QNLocalVideoTrack from './RTCLocalVideoTrack';
+import { QNLocalVideoTrack } from './RTCLocalVideoTrack';
 /**
  * 本地摄像头轨
  */
-export default class QNCameraVideoTrack extends QNLocalVideoTrack {
+export declare class QNCameraVideoTrack extends QNLocalVideoTrack {
     /**
      * 销毁本地创建的 track
      */

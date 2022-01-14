@@ -6,46 +6,46 @@
 
 // Warning: (ae-internal-missing-underscore) The name "onAudioFrameAvailable" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @internal @eventProperty
+// @internal
 export type onAudioFrameAvailable = (params: {
     data: QNAudioFrame;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onAudioRouteChanged = (params: {
     device: QNAudioDevice;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onAudioSubscribed = (params: {
     remoteUserID: string;
     trackList: QNUNIRemoteTrack[];
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onConnectionStateChanged = (params: {
     state: QNConnectionState;
     info?: QNConnectionDisconnectedInfo;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onError = (params: {
     message: string;
     code: number;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onErrorLiveStreaming = (params: {
     streamID: string;
     info: QNLiveStreamingErrorInfo;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onMessageReceived = (params: QNCustomMessage) => void;
 
 // Warning: (ae-internal-missing-underscore) The name "onMicrophoneSourceDidGetAudioBuffer" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @internal @eventProperty
+// @internal
 export type onMicrophoneSourceDidGetAudioBuffer = (params: {
     audioBuffer: string;
     asbd: QNAudioStreamBasicDescription;
@@ -53,98 +53,98 @@ export type onMicrophoneSourceDidGetAudioBuffer = (params: {
 
 // Warning: (ae-internal-missing-underscore) The name "onMixedSourceDidGetAudioBuffer" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @internal @eventProperty
+// @internal
 export type onMixedSourceDidGetAudioBuffer = (params: {
     audioBuffer: string;
     asbd: QNAudioStreamBasicDescription;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onMixing = (params: {
     currentTimeUs: number;
 }) => void;
 
 // Warning: (ae-internal-missing-underscore) The name "onMusicSourceDidGetAudioBuffer" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @internal @eventProperty
+// @internal
 export type onMusicSourceDidGetAudioBuffer = (params: {
     audioBuffer: string;
     asbd: QNAudioStreamBasicDescription;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onMuteStateChanged = (params: {
     isMuted: boolean;
     trackID: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onStartLiveStreaming = (params: {
     streamID: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onStateChanged = (params: {
     state: QNAudioMixerState;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onStoppedLiveStreaming = (params: {
     streamID: string;
 }) => void;
 
 // Warning: (ae-internal-missing-underscore) The name "onTextureFrameAvailable" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @internal @eventProperty
+// @internal
 export type onTextureFrameAvailable = (params: {
     data: QNTextureFrame;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onUpdatedLiveStreaming = (params: {
     streamID: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onUserJoined = (params: {
     remoteUserID: string;
     userData: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onUserLeft = (params: {
     remoteUserID: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onUserPublished = (params: {
     remoteUserID: string;
     trackList: QNUNIRemoteTrack[];
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onUserReconnected = (params: {
     remoteUserID: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onUserReconnecting = (params: {
     remoteUserID: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onUserUnpublished = (params: {
     remoteUserID: string;
     trackList: QNUNIRemoteTrack[];
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onVideoProfileChanged = (params: {
     profile: QNTrackProfile;
     trackID: string;
 }) => void;
 
-// @public @eventProperty
+// @public
 export type onVideoSubscribed = (params: {
     remoteUserID: string;
     trackList: QNUNIRemoteTrack[];
@@ -152,7 +152,7 @@ export type onVideoSubscribed = (params: {
 
 // Warning: (ae-internal-missing-underscore) The name "onYUVFrameAvailable" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @internal @eventProperty
+// @internal
 export type onYUVFrameAvailable = (params: {
     data: QNYUVFrame;
 }) => void;
@@ -228,6 +228,34 @@ export interface QNBeautySetting {
     redden: number;
     smoothLevel: number;
     whiten: number;
+}
+
+// @public
+export class QNCameraVideoTrack extends QNLocalVideoTrack {
+    clearWaterMark(): void;
+    destroy(): void;
+    encodeMirrorFrontFacing(encodeMirrorFrontFacing: boolean): void;
+    encodeMirrorRearFacing(encodeMirrorRearFacing: boolean): void;
+    getMaxExposureCompensation(): number;
+    getMinExposureCompensation(): number;
+    getVideoOrientation(): QNAVCaptureVideoOrientation;
+    getZooms(): number[];
+    manualFocus(x: number, y: number): void;
+    previewMirrorFrontFacing(previewMirrorFrontFacing: boolean): void;
+    previewMirrorRearFacing(previewMirrorRearFacing: boolean): void;
+    pushImage(image: QNImage): void;
+    setBeauty(beautySetting: QNBeautySetting): void;
+    setExposureCompensation(value: number): void;
+    setPreviewEnabled(isEnabled: boolean): void;
+    setSessionPreset(sessionPreset: QNSessionPresetType): void;
+    setVideoOrientation(videoOrientation: QNAVCaptureVideoOrientation): void;
+    setWaterMark(waterMark: QNVideoWaterMark): void;
+    setZoom(zoom: number): void;
+    startCapture(): void;
+    stopCapture(): void;
+    switchCamera(): void;
+    turnLightOff(): void;
+    turnLightOn(): void;
 }
 
 // @public
@@ -340,10 +368,24 @@ export enum QNLiveStreamingErrorInfoType {
 }
 
 // @public
+export class QNLocalAudioTrack extends QNLocalTrack {
+}
+
+// @public
 export interface QNLocalAudioTrackStats {
     uplinkBitrate: number;
     uplinkLostRate: number;
     uplinkRTT: number;
+}
+
+// @public
+export class QNLocalTrack extends QNTrack {
+    setMuted(muted: boolean): void;
+}
+
+// @public
+export class QNLocalVideoTrack extends QNLocalTrack {
+    sendSEI(message: string, repeatCount: number, uuid?: string): void;
 }
 
 // @public
@@ -353,6 +395,11 @@ export interface QNLocalVideoTrackStats {
     uplinkFrameRate: number;
     uplinkLostRate: number;
     uplinkRTT: number;
+}
+
+// @public
+export class QNMicrophoneAudioTrack extends QNLocalAudioTrack {
+    setVolume(volume: number): void;
 }
 
 // @public
@@ -393,6 +440,12 @@ export type QNPublishResultCallback = ((params: {
 }) => void);
 
 // @public
+export class QNRemoteAudioTrack extends QNRemoteTrack {
+    getRemoteVolume(): number;
+    setRemoteVolume(volume: number): void;
+}
+
+// @public
 export interface QNRemoteAudioTrackStats {
     downlinkBitrate: number;
     downlinkLostRate: number;
@@ -401,13 +454,23 @@ export interface QNRemoteAudioTrackStats {
 }
 
 // @public
+export class QNRemoteTrack extends QNTrack {
+    isSubscribed(): number;
+}
+
+// @public
 export interface QNRemoteUser {
-    // Warning: (ae-forgotten-export) The symbol "QNRemoteAudioTrack" needs to be exported by the entry point RTCIndex.native.d.ts
     audioTracks: QNRemoteAudioTrack[];
     userData: string;
     userID: string;
-    // Warning: (ae-forgotten-export) The symbol "QNRemoteVideoTrack" needs to be exported by the entry point RTCIndex.native.d.ts
     videoTracks: QNRemoteVideoTrack[];
+}
+
+// @public
+export class QNRemoteVideoTrack extends QNRemoteTrack {
+    getProfile(): QNTrackProfile;
+    isMultiProfileEnabled(): number;
+    setProfile(profile: QNTrackProfile): void;
 }
 
 // @public
@@ -429,8 +492,11 @@ export enum QNRenderMode {
 
 // @public
 export interface QNRTCAudioMixerEvent {
+    // @eventProperty
     error: onError;
+    // @eventProperty
     mixing: onMixing;
+    // @eventProperty
     stateChanged: onStateChanged;
 }
 
@@ -448,19 +514,33 @@ export enum QNRTCCameraFacing {
 
 // @public
 export interface QNRTCClinetEvent {
+    // @eventProperty
     audioSubscribed: onAudioSubscribed;
+    // @eventProperty
     connectionStateChanged: onConnectionStateChanged;
+    // @eventProperty
     errorLiveStreaming: onErrorLiveStreaming;
+    // @eventProperty
     messageReceived: onMessageReceived;
+    // @eventProperty
     startLiveStreaming: onStartLiveStreaming;
+    // @eventProperty
     stoppedLiveStreaming: onStoppedLiveStreaming;
+    // @eventProperty
     updatedLiveStreaming: onUpdatedLiveStreaming;
+    // @eventProperty
     userJoined: onUserJoined;
+    // @eventProperty
     userLeft: onUserLeft;
+    // @eventProperty
     userPublished: onUserPublished;
+    // @eventProperty
     userReconnected: onUserReconnected;
+    // @eventProperty
     userReconnecting: onUserReconnecting;
+    // @eventProperty
     userUnpublished: onUserUnpublished;
+    // @eventProperty
     videoSubscribed: onVideoSubscribed;
 }
 
@@ -480,6 +560,7 @@ export interface QNRTCConfiguration {
 
 // @public
 export interface QNRTCEngineEvent {
+    // @eventProperty
     audioRouteChanged: onAudioRouteChanged;
 }
 
@@ -501,7 +582,9 @@ export enum QNRTCPolicy {
 
 // @public
 export interface QNRTCTrackEvent {
+    // @eventProperty
     muteStateChanged: onMuteStateChanged;
+    // @eventProperty
     videoProfileChanged: onVideoProfileChanged;
 }
 
@@ -513,6 +596,11 @@ export enum QNRTCTrackKind {
 
 // @public
 export type QNScreenPermissionResultCallback = ((result: boolean) => void);
+
+// @public
+export class QNScreenVideoTrack extends QNLocalVideoTrack {
+    setScreenRecorderFrameRate(screenRecorderFrameRate: number): void;
+}
 
 // @public
 export interface QNScreenVideoTrackConfig {
@@ -553,6 +641,22 @@ export interface QNTextureFrame {
     type: QNVideoFrameType;
     // (undocumented)
     width: number;
+}
+
+// @public (undocumented)
+export class QNTrack {
+    // Warning: (ae-forgotten-export) The symbol "QNTrackParams" needs to be exported by the entry point RTCIndex.native.d.ts
+    constructor({ identifyID, kind, tag, trackID, raw, userID }: QNTrackParams);
+    getMuted(): number;
+    identifyID: string;
+    kind: QNRTCTrackKind;
+    off<event extends keyof QNRTCTrackEvent>(name: event, listener: QNRTCTrackEvent[event]): void;
+    on<event extends keyof QNRTCTrackEvent>(name: event, listener: QNRTCTrackEvent[event]): void;
+    // @internal (undocumented)
+    raw: QNUNILocalTrack | QNUNIRemoteTrack;
+    tag: string;
+    trackID: string;
+    userID: string;
 }
 
 // @public
@@ -689,21 +793,50 @@ export interface QNYUVFrame {
 }
 
 // @public
-class RTCEngine {
+export class RTCClient {
+    getConnectionState(): QNConnectionState;
+    // Warning: (ae-incompatible-release-tags) The symbol "getLocalAudioTrackStats" is marked as @public, but its signature references "QNTrackStateList" which is marked as @internal
+    getLocalAudioTrackStats(): QNTrackStateList<QNLocalAudioTrackStats>;
+    // Warning: (ae-incompatible-release-tags) The symbol "getLocalVideoTrackStats" is marked as @public, but its signature references "QNTrackStateList" which is marked as @internal
+    getLocalVideoTrackStats(): QNTrackStateList<QNLocalVideoTrackStats[]>;
+    getPublishedTracks(): Array<QNRemoteAudioTrack | QNRemoteVideoTrack>;
+    // Warning: (ae-incompatible-release-tags) The symbol "getRemoteAudioTrackStats" is marked as @public, but its signature references "QNTrackStateList" which is marked as @internal
+    getRemoteAudioTrackStats(): QNTrackStateList<QNRemoteAudioTrackStats>;
+    getRemoteUsers(): QNRemoteUser[];
+    // Warning: (ae-incompatible-release-tags) The symbol "getRemoteVideoTrackStats" is marked as @public, but its signature references "QNTrackStateList" which is marked as @internal
+    getRemoteVideoTrackStats(): QNTrackStateList<QNRemoteVideoTrackStats>;
+    getSubscribedTracks(userID: string): Array<QNRemoteAudioTrack | QNRemoteVideoTrack>;
+    getUserNetworkQuality(userID: string): QNNetworkQuality;
+    join(token: string, userData: string): void;
+    leave(): void;
+    off<event extends keyof QNRTCClinetEvent>(name: event, listener: QNRTCClinetEvent[event]): void;
+    on<event extends keyof QNRTCClinetEvent>(name: event, listener: QNRTCClinetEvent[event]): void;
+    publish(tracks: QNLocalTrack[], callback: QNPublishResultCallback): void;
+    removeTranscodingLiveStreamingTracks(streamID: string, transcodingTracks: QNTranscodingLiveStreamingTrack[]): void;
+    sendMessage(message: string, users: string[], messageId: string): void;
+    setAutoSubscribe(autoSubscribe: boolean): void;
+    setTranscodingLiveStreamingTracks(streamID: string, transcodingTracks: QNTranscodingLiveStreamingTrack[]): void;
+    startLiveStreamingWithDirect(config: QNDirectLiveStreamingConfig): void;
+    startLiveStreamingWithTranscoding(config: QNTranscodingLiveStreamingConfig): void;
+    stopLiveStreamingWithDirect(config: QNDirectLiveStreamingConfig): void;
+    stopLiveStreamingWithTranscoding(config: QNTranscodingLiveStreamingConfig): void;
+    // Warning: (ae-incompatible-release-tags) The symbol "subscribe" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
+    subscribe(tracks: QNUNIRemoteTrack[]): void;
+    unpublish(tracks: QNLocalTrack[]): void;
+    // Warning: (ae-incompatible-release-tags) The symbol "unsubscribe" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
+    unsubscribe(tracks: QNUNIRemoteTrack[]): void;
+}
+
+// @public
+export class RTCEngine {
     static configRTC(config: QNRTCConfiguration): void;
-    // Warning: (ae-forgotten-export) The symbol "QNCameraVideoTrack" needs to be exported by the entry point RTCIndex.native.d.ts
     static createCameraVideoTrack(config: QNCameraVideoTrackConfig): QNCameraVideoTrack;
-    // Warning: (ae-forgotten-export) The symbol "RTCClient" needs to be exported by the entry point RTCIndex.native.d.ts
     static createClient(): RTCClient;
-    // Warning: (ae-forgotten-export) The symbol "QNTrack" needs to be exported by the entry point RTCIndex.native.d.ts
-    //
     // @internal
     static createCustomAudioTrack(config: QNCustomAudioTrackConfig): QNTrack;
     // @internal
     static createCustomVideoTrack(config: QNCustomVideoTrackConfig): QNTrack;
-    // Warning: (ae-forgotten-export) The symbol "QNMicrophoneAudioTrack" needs to be exported by the entry point RTCIndex.native.d.ts
     static createMicrophoneAudioTrack(config: QNMicrophoneAudioTrackConfig): QNMicrophoneAudioTrack;
-    // Warning: (ae-forgotten-export) The symbol "QNScreenVideoTrack" needs to be exported by the entry point RTCIndex.native.d.ts
     static createScreenVideoTrack(config: QNScreenVideoTrackConfig): QNScreenVideoTrack;
     static deinit(): void;
     static enableFileLogging(): void;
@@ -713,13 +846,12 @@ class RTCEngine {
     static requestPermission(callback: QNScreenPermissionResultCallback): void;
     static setAudioRouteToSpeakerphone(audioRouteToSpeakerphone: boolean): void;
 }
-export default RTCEngine;
 
 // Warnings were encountered during analysis:
 //
-// type/RTCEvent.d.ts:46:5 - (ae-incompatible-release-tags) The symbol "trackList" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
+// type/RTCEvent.d.ts:40:5 - (ae-incompatible-release-tags) The symbol "trackList" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
+// type/RTCEvent.d.ts:47:5 - (ae-incompatible-release-tags) The symbol "trackList" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
 // type/RTCEvent.d.ts:54:5 - (ae-incompatible-release-tags) The symbol "trackList" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
-// type/RTCEvent.d.ts:62:5 - (ae-incompatible-release-tags) The symbol "trackList" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
-// type/RTCEvent.d.ts:70:5 - (ae-incompatible-release-tags) The symbol "trackList" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
+// type/RTCEvent.d.ts:61:5 - (ae-incompatible-release-tags) The symbol "trackList" is marked as @public, but its signature references "QNUNIRemoteTrack" which is marked as @internal
 
 ```

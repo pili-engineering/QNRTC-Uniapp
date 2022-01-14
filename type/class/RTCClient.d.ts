@@ -2,14 +2,14 @@ import { QNUNIRemoteTrack, QNLocalAudioTrackStats, QNLocalVideoTrackStats, QNRem
 import { QNPublishResultCallback } from '../RTCPreset';
 import { QNConnectionState } from '../enum/RTCEnum';
 import { QNRTCClinetEvent } from '../RTCEvent';
-import QNRemoteVideoTrack from './RTCRemoteVideoTrack';
-import QNRemoteAudioTrack from './RTCRemoteAudioTrack';
-import QNLocalTrack from './RTCLocalTrack';
+import { QNRemoteVideoTrack } from './RTCRemoteVideoTrack';
+import { QNRemoteAudioTrack } from './RTCRemoteAudioTrack';
+import { QNLocalTrack } from './RTCLocalTrack';
 /**
  * RTCClient 核心类
  * @remarks 包含加入房间，离开房间，订阅、发布 Track，获取统计信息等功能
  */
-export default class RTCClient {
+export declare class RTCClient {
     private variationList;
     /**
      * Track 类型转换

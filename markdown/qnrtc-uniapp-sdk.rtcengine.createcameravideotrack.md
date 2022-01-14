@@ -20,7 +20,7 @@ static createCameraVideoTrack(config: QNCameraVideoTrackConfig): QNCameraVideoTr
 
 <b>Returns:</b>
 
-QNCameraVideoTrack
+[QNCameraVideoTrack](./qnrtc-uniapp-sdk.qncameravideotrack.md)
 
 QNCameraVideoTrack 实例
 

@@ -7,20 +7,19 @@
  *
  * @packageDocumentation
  */
-import QNRTC from './class/RTCEngine';
-export default QNRTC;
 export * from './enum/RTCEnum';
 export * from './interface/RTCInterface';
 export * from './RTCEvent';
 export { QNPublishResultCallback, QNScreenPermissionResultCallback } from './RTCPreset';
-export * from './class/RTCClient';
-export * from './class/RTCCameraVideoTrack';
-export * from './class/RTCLocalAudioTrack';
-export * from './class/RTCLocalTrack';
-export * from './class/RTCLocalVideoTrack';
-export * from './class/RTCMicrophoneAudioTrack';
-export * from './class/RTCRemoteAudioTrack';
-export * from './class/RTCRemoteTrack';
-export * from './class/RTCRemoteVideoTrack';
-export * from './class/RTCScreenVideoTrack';
-export * from './class/RTCTrack';
+export { RTCEngine } from './class/RTCEngine';
+export { RTCClient } from './class/RTCClient';
+export { QNCameraVideoTrack } from './class/RTCCameraVideoTrack';
+export { QNLocalAudioTrack } from './class/RTCLocalAudioTrack';
+export { QNLocalTrack } from './class/RTCLocalTrack';
+export { QNLocalVideoTrack } from './class/RTCLocalVideoTrack';
+export { QNMicrophoneAudioTrack } from './class/RTCMicrophoneAudioTrack';
+export { QNRemoteAudioTrack } from './class/RTCRemoteAudioTrack';
+export { QNRemoteTrack } from './class/RTCRemoteTrack';
+export { QNRemoteVideoTrack } from './class/RTCRemoteVideoTrack';
+export { QNScreenVideoTrack } from './class/RTCScreenVideoTrack';
+export { QNTrack } from './class/RTCTrack';

@@ -1,6 +1,6 @@
 import { QNRTCCameraFacing, QNRTCPolicy, QNRTCBwePolicy, QNRTCTrackKind, QNRenderMode, QNTrackProfile, QNNetworkGrade, QNConnectionDisconnectedReason, QNLiveStreamingErrorInfoCode, QNLiveStreamingErrorInfoType, QNRTCLogLevel, QNVideoWaterMarkSize, QNSessionPresetType, QNVideoFrameType } from '../enum/RTCEnum';
-import QNRemoteAudioTrack from '../class/RTCRemoteAudioTrack';
-import QNRemoteVideoTrack from '../class/RTCRemoteVideoTrack';
+import { QNRemoteAudioTrack } from '../class/RTCRemoteAudioTrack';
+import { QNRemoteVideoTrack } from '../class/RTCRemoteVideoTrack';
 export * from '../enum/RTCEnum';
 /**
  * QNRTC 初始化配置项

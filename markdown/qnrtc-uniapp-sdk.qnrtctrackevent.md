@@ -12,7 +12,7 @@
 export interface QNRTCTrackEvent 
 ```
 
-## Properties
+## Events
 
 |  Property | Type | Description |
 |  --- | --- | --- |

@@ -20,7 +20,7 @@ static createMicrophoneAudioTrack(config: QNMicrophoneAudioTrackConfig): QNMicro
 
 <b>Returns:</b>
 
-QNMicrophoneAudioTrack
+[QNMicrophoneAudioTrack](./qnrtc-uniapp-sdk.qnmicrophoneaudiotrack.md)
 
 Track 实例
 

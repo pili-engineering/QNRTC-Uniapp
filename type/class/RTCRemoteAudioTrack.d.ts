@@ -1,8 +1,8 @@
-import QNRemoteTrack from './RTCRemoteTrack';
+import { QNRemoteTrack } from './RTCRemoteTrack';
 /**
  * 远端音频轨
  */
-export default class QNRemoteAudioTrack extends QNRemoteTrack {
+export declare class QNRemoteAudioTrack extends QNRemoteTrack {
     /**
      * 设置音量
      * @remarks 设置当前 Track 播放音量大小

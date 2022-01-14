@@ -172,7 +172,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onAudioRouteChanged:type",
-          "docComment": "/**\n * 当本地音频播放设备改变时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当本地音频播放设备改变时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -206,7 +206,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onAudioSubscribed:type",
-          "docComment": "/**\n * 当订阅audio Track 成功时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当订阅audio Track 成功时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -240,7 +240,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onConnectionStateChanged:type",
-          "docComment": "/**\n * 当房间状态改变时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当房间状态改变时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -283,7 +283,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onError:type",
-          "docComment": "/**\n * 混音操作发生错误时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 混音操作发生错误时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -308,7 +308,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onErrorLiveStreaming:type",
-          "docComment": "/**\n * 转推任务出错时触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 转推任务出错时触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -342,7 +342,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onMessageReceived:type",
-          "docComment": "/**\n * 当收到自定义消息时发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当收到自定义消息时发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -376,7 +376,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onMixing:type",
-          "docComment": "/**\n * 混音操作进行过程中会不断触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 混音操作进行过程中会不断触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -401,7 +401,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onMuteStateChanged:type",
-          "docComment": "/**\n * 音视频 track 静默状态改变时回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 音视频 track 静默状态改变时回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -426,7 +426,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onStartLiveStreaming:type",
-          "docComment": "/**\n * 转推任务成功创建时触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 转推任务成功创建时触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -451,7 +451,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onStateChanged:type",
-          "docComment": "/**\n * 混音状态改变时触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 混音状态改变时触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -485,7 +485,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onStoppedLiveStreaming:type",
-          "docComment": "/**\n * 转推任务成功停止时触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 转推任务成功停止时触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -510,7 +510,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onUpdatedLiveStreaming:type",
-          "docComment": "/**\n * 转推任务合流布局更新时触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 转推任务合流布局更新时触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -535,7 +535,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onUserJoined:type",
-          "docComment": "/**\n * 当远端用户加入房间时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当远端用户加入房间时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -560,7 +560,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onUserLeft:type",
-          "docComment": "/**\n * 当远端用户离开房间时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当远端用户离开房间时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -585,7 +585,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onUserPublished:type",
-          "docComment": "/**\n * 当远端 Track 发布时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当远端 Track 发布时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -619,7 +619,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onUserReconnected:type",
-          "docComment": "/**\n * 当远端用户重连成功时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当远端用户重连成功时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -644,7 +644,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onUserReconnecting:type",
-          "docComment": "/**\n * 当远端用户进入重连时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当远端用户进入重连时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -669,7 +669,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onUserUnpublished:type",
-          "docComment": "/**\n * 当远端 Track 取消发布时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当远端 Track 取消发布时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -703,7 +703,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onVideoProfileChanged:type",
-          "docComment": "/**\n * 音视频 track 视频质量改变回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 音视频 track 视频质量改变回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -737,7 +737,7 @@
         {
           "kind": "TypeAlias",
           "canonicalReference": "qnrtc-uniapp-sdk!onVideoSubscribed:type",
-          "docComment": "/**\n * 当订阅video Track 成功时会触发此回调\n *\n * @eventProperty\n */\n",
+          "docComment": "/**\n * 当订阅video Track 成功时会触发此回调\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -1184,6 +1184,960 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack:class",
+          "docComment": "/**\n * 本地摄像头轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNCameraVideoTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNLocalVideoTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNLocalVideoTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNCameraVideoTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#clearWaterMark:member(1)",
+              "docComment": "/**\n * 清空水印配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "clearWaterMark(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "clearWaterMark"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#destroy:member(1)",
+              "docComment": "/**\n * 销毁本地创建的 track\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "destroy(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "destroy"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#encodeMirrorFrontFacing:member(1)",
+              "docComment": "/**\n * 前置摄像头编码以及预览是否开启镜像\n *\n * @remarks\n *\n * 默认 NO\n *\n * @param encodeMirrorFrontFacing - 是否开启镜像\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "encodeMirrorFrontFacing(encodeMirrorFrontFacing: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "encodeMirrorFrontFacing",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "encodeMirrorFrontFacing"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#encodeMirrorRearFacing:member(1)",
+              "docComment": "/**\n * 后置摄像头编码以及预览是否开启镜像\n *\n * @remarks\n *\n * 默认 NO\n *\n * @param encodeMirrorRearFacing - 是否开启镜像\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "encodeMirrorRearFacing(encodeMirrorRearFacing: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "encodeMirrorRearFacing",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "encodeMirrorRearFacing"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#getMaxExposureCompensation:member(1)",
+              "docComment": "/**\n * 获取最大曝光度\n *\n * @remarks\n *\n * 只支持安卓\n *\n * @returns 曝光度\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getMaxExposureCompensation(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getMaxExposureCompensation"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#getMinExposureCompensation:member(1)",
+              "docComment": "/**\n * 获取最小曝光度\n *\n * @remarks\n *\n * 只支持安卓\n *\n * @returns 曝光度\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getMinExposureCompensation(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getMinExposureCompensation"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#getVideoOrientation:member(1)",
+              "docComment": "/**\n * 获取camera 时的采集摄像头的旋转方向\n *\n * @remarks\n *\n * 只支持ios\n *\n * @returns 旋转方向\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getVideoOrientation(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNAVCaptureVideoOrientation",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNAVCaptureVideoOrientation:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getVideoOrientation"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#getZooms:member(1)",
+              "docComment": "/**\n * 获取支持的缩放大小列表\n *\n * @returns 缩放大小列表\n *\n * @example\n * ```\n * const result = caneraVideoTrack.getZooms()\n * console.log (result)\n * // [0.4,0.8]\n * ```\n *\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getZooms(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getZooms"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#manualFocus:member(1)",
+              "docComment": "/**\n * 手动聚焦\n *\n * @remarks\n *\n * 对于前置摄像头，大部分机型并不支持手动对焦，因此，请勿调用该接口，否则会抛异常\n *\n * @param x - 焦点 x 轴绝对位置，范围 0 - 1\n *\n * @param y - 焦点 y 轴绝对位置，范围 0 - 1\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "manualFocus(x: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", y: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "x",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "y",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "manualFocus"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#previewMirrorFrontFacing:member(1)",
+              "docComment": "/**\n * 前置摄像头预览是否开启镜像\n *\n * @remarks\n *\n * 默认 YES\n *\n * @param previewMirrorFrontFacing - 是否开启镜像\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "previewMirrorFrontFacing(previewMirrorFrontFacing: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "previewMirrorFrontFacing",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "previewMirrorFrontFacing"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#previewMirrorRearFacing:member(1)",
+              "docComment": "/**\n * 后置摄像头预览是否开启镜像\n *\n * @remarks\n *\n * 默认 NO\n *\n * @param previewMirrorRearFacing - 是否开启镜像\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "previewMirrorRearFacing(previewMirrorRearFacing: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "previewMirrorRearFacing",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "previewMirrorRearFacing"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#pushImage:member(1)",
+              "docComment": "/**\n * 使用图片替代相机画面\n *\n * @remarks\n *\n * 如需取消图片替代相机 resourcePath 传空字符串即可\n *\n * @param image - 图片配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "pushImage(image: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNImage",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNImage:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "image",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "pushImage"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#setBeauty:member(1)",
+              "docComment": "/**\n * 设置是否启用美颜\n *\n * @param beautySetting - 美颜配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setBeauty(beautySetting: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNBeautySetting",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNBeautySetting:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "beautySetting",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setBeauty"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#setExposureCompensation:member(1)",
+              "docComment": "/**\n * 设置曝光度\n *\n * @remarks\n *\n * 只支持安卓\n *\n * @param value - 曝光度\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setExposureCompensation(value: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "value",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setExposureCompensation"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#setPreviewEnabled:member(1)",
+              "docComment": "/**\n * 设置是否允许预览\n *\n * @param isEnabled - 是否允许预览\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setPreviewEnabled(isEnabled: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "isEnabled",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setPreviewEnabled"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#setSessionPreset:member(1)",
+              "docComment": "/**\n * 设置采集分辨率\n *\n * @remarks\n *\n * 只支持ios\n *\n * @param sessionPreset - 分辨率\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setSessionPreset(sessionPreset: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNSessionPresetType",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNSessionPresetType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "sessionPreset",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setSessionPreset"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#setVideoOrientation:member(1)",
+              "docComment": "/**\n * 设置 camera 时的采集摄像头的旋转方向\n *\n * @remarks\n *\n * 只支持ios，默认 AVCaptureVideoOrientationPortrait\n *\n * @param videoOrientation - 旋转方向\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setVideoOrientation(videoOrientation: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNAVCaptureVideoOrientation",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNAVCaptureVideoOrientation:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "videoOrientation",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setVideoOrientation"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#setWaterMark:member(1)",
+              "docComment": "/**\n * 设置水印\n *\n * @param waterMark - 水印配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setWaterMark(waterMark: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNVideoWaterMark",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNVideoWaterMark:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "waterMark",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setWaterMark"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#setZoom:member(1)",
+              "docComment": "/**\n * 设置缩放大小\n *\n * @param zoom - 缩放大小\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setZoom(zoom: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "zoom",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setZoom"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#startCapture:member(1)",
+              "docComment": "/**\n * 开启摄像头采集\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "startCapture(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "startCapture"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#stopCapture:member(1)",
+              "docComment": "/**\n * 关闭摄像头采集\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopCapture(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "stopCapture"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#switchCamera:member(1)",
+              "docComment": "/**\n * 切换相机前后置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "switchCamera(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "switchCamera"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#turnLightOff:member(1)",
+              "docComment": "/**\n * 关闭闪光灯\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "turnLightOff(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "turnLightOff"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack#turnLightOn:member(1)",
+              "docComment": "/**\n * 开启闪光灯\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "turnLightOn(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "turnLightOn"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -2453,6 +3407,34 @@
           ]
         },
         {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNLocalAudioTrack:class",
+          "docComment": "/**\n * 本地音频轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNLocalAudioTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNLocalTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNLocalTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNLocalAudioTrack",
+          "members": [],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "qnrtc-uniapp-sdk!QNLocalAudioTrackStats:interface",
           "docComment": "/**\n * 本地音频 track 的统计信息\n */\n",
@@ -2545,6 +3527,184 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNLocalTrack:class",
+          "docComment": "/**\n * 本地轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNLocalTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNLocalTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNLocalTrack#setMuted:member(1)",
+              "docComment": "/**\n * 设置 mute\n *\n * @remarks\n *\n * 更新当前 Track 的 mute 值\n *\n * @param muted - 是否 mute\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setMuted(muted: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "muted",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setMuted"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNLocalVideoTrack:class",
+          "docComment": "/**\n * 本地视频轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNLocalVideoTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNLocalTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNLocalTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNLocalVideoTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNLocalVideoTrack#sendSEI:member(1)",
+              "docComment": "/**\n * 发送 SEI\n *\n * @param message - 消息内容\n *\n * @param repeatCount - 重复次数，-1 为每一帧都发送\n *\n * @param uuid - 唯一 ID\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "sendSEI(message: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", repeatCount: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", uuid?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "repeatCount",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                },
+                {
+                  "parameterName": "uuid",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  }
+                }
+              ],
+              "name": "sendSEI"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -2692,6 +3852,80 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNMicrophoneAudioTrack:class",
+          "docComment": "/**\n * 本地麦克风轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNMicrophoneAudioTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNLocalAudioTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNLocalAudioTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNMicrophoneAudioTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNMicrophoneAudioTrack#setVolume:member(1)",
+              "docComment": "/**\n * 设置音量\n *\n * @remarks\n *\n * 设置设备上当前音频输入设备采集后音量\n *\n * @param volume - 音量值 默认 1 范围 [0,10]\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setVolume(volume: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "volume",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setVolume"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -3081,6 +4315,109 @@
           }
         },
         {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrack:class",
+          "docComment": "/**\n * 远端音频轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNRemoteAudioTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNRemoteTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNRemoteAudioTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrack#getRemoteVolume:member(1)",
+              "docComment": "/**\n * 获取音量\n *\n * @remarks\n *\n * 获取当前 Track 播放的音量大小，只支持安卓\n *\n * @returns 音量值\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getRemoteVolume(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getRemoteVolume"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrack#setRemoteVolume:member(1)",
+              "docComment": "/**\n * 设置音量\n *\n * @remarks\n *\n * 设置当前 Track 播放音量大小\n *\n * @param volume - 音量值 默认 1 范围 [0,10]\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setRemoteVolume(volume: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "volume",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setRemoteVolume"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrackStats:interface",
           "docComment": "/**\n * 远端音频 track 的统计信息\n */\n",
@@ -3201,6 +4538,64 @@
           "extendsTokenRanges": []
         },
         {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteTrack:class",
+          "docComment": "/**\n * 远端轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNRemoteTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNRemoteTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteTrack#isSubscribed:member(1)",
+              "docComment": "/**\n * 是否订阅\n *\n * @returns 1 订阅 2 未订阅\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isSubscribed(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "isSubscribed"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
+        },
+        {
           "kind": "Interface",
           "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteUser:interface",
           "docComment": "/**\n * 远端用户\n */\n",
@@ -3225,7 +4620,7 @@
                 {
                   "kind": "Reference",
                   "text": "QNRemoteAudioTrack",
-                  "canonicalReference": "qnrtc-uniapp-sdk!default:class"
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrack:class"
                 },
                 {
                   "kind": "Content",
@@ -3308,7 +4703,7 @@
                 {
                   "kind": "Reference",
                   "text": "QNRemoteVideoTrack",
-                  "canonicalReference": "qnrtc-uniapp-sdk!default:class"
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrack:class"
                 },
                 {
                   "kind": "Content",
@@ -3329,6 +4724,140 @@
             }
           ],
           "extendsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrack:class",
+          "docComment": "/**\n * 远端视频轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNRemoteVideoTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNRemoteTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNRemoteVideoTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrack#getProfile:member(1)",
+              "docComment": "/**\n * 获取当前视频轨道的分辨率等级\n *\n * @returns 分辨率等级\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getProfile(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTrackProfile",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTrackProfile:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getProfile"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrack#isMultiProfileEnabled:member(1)",
+              "docComment": "/**\n * 获取当前 track 是否开启了大小流发布\n *\n * @returns 1 开启 0 未开启\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isMultiProfileEnabled(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "isMultiProfileEnabled"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrack#setProfile:member(1)",
+              "docComment": "/**\n * 设置当前视频轨道质量等级\n *\n * @param profile - 质量等级\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setProfile(profile: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTrackProfile",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTrackProfile:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "profile",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setProfile"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -3597,7 +5126,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCAudioMixerEvent#error:member",
-              "docComment": "/**\n * 混音操作发生错误时会触发此回调\n */\n",
+              "docComment": "/**\n * 混音操作发生错误时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3624,7 +5153,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCAudioMixerEvent#mixing:member",
-              "docComment": "/**\n * 混音操作进行过程中会不断触发此回调\n */\n",
+              "docComment": "/**\n * 混音操作进行过程中会不断触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3651,7 +5180,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCAudioMixerEvent#stateChanged:member",
-              "docComment": "/**\n * 混音状态改变时触发此回调\n */\n",
+              "docComment": "/**\n * 混音状态改变时触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3808,7 +5337,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#audioSubscribed:member",
-              "docComment": "/**\n * 当订阅audio Track 成功时会触发此回调\n */\n",
+              "docComment": "/**\n * 当订阅audio Track 成功时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3835,7 +5364,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#connectionStateChanged:member",
-              "docComment": "/**\n * 当房间状态改变时会触发此回调\n */\n",
+              "docComment": "/**\n * 当房间状态改变时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3862,7 +5391,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#errorLiveStreaming:member",
-              "docComment": "/**\n * 转推任务出错时触发此回调\n */\n",
+              "docComment": "/**\n * 转推任务出错时触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3889,7 +5418,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#messageReceived:member",
-              "docComment": "/**\n * 当收到自定义消息时发此回调\n */\n",
+              "docComment": "/**\n * 当收到自定义消息时发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3916,7 +5445,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#startLiveStreaming:member",
-              "docComment": "/**\n * 转推任务成功创建时触发此回调\n */\n",
+              "docComment": "/**\n * 转推任务成功创建时触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3943,7 +5472,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#stoppedLiveStreaming:member",
-              "docComment": "/**\n * 转推任务成功停止时触发此回调\n */\n",
+              "docComment": "/**\n * 转推任务成功停止时触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3970,7 +5499,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#updatedLiveStreaming:member",
-              "docComment": "/**\n * 转推任务合流布局更新时触发此回调\n */\n",
+              "docComment": "/**\n * 转推任务合流布局更新时触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -3997,7 +5526,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#userJoined:member",
-              "docComment": "/**\n * 当远端用户加入房间时会触发此回调\n */\n",
+              "docComment": "/**\n * 当远端用户加入房间时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4024,7 +5553,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#userLeft:member",
-              "docComment": "/**\n * 当远端用户离开房间时会触发此回调\n */\n",
+              "docComment": "/**\n * 当远端用户离开房间时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4051,7 +5580,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#userPublished:member",
-              "docComment": "/**\n * 当远端 Track 发布时会触发此回调\n */\n",
+              "docComment": "/**\n * 当远端 Track 发布时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4078,7 +5607,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#userReconnected:member",
-              "docComment": "/**\n * 当远端用户重连成功时会触发此回调\n */\n",
+              "docComment": "/**\n * 当远端用户重连成功时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4105,7 +5634,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#userReconnecting:member",
-              "docComment": "/**\n * 当远端用户进入重连时会触发此回调\n */\n",
+              "docComment": "/**\n * 当远端用户进入重连时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4132,7 +5661,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#userUnpublished:member",
-              "docComment": "/**\n * 当远端 Track 取消发布时会触发此回调\n */\n",
+              "docComment": "/**\n * 当远端 Track 取消发布时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4159,7 +5688,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent#videoSubscribed:member",
-              "docComment": "/**\n * 当订阅video Track 成功时会触发此回调\n */\n",
+              "docComment": "/**\n * 当订阅video Track 成功时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4481,7 +6010,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCEngineEvent#audioRouteChanged:member",
-              "docComment": "/**\n * 当本地音频播放设备改变时会触发此回调\n */\n",
+              "docComment": "/**\n * 当本地音频播放设备改变时会触发此回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4722,7 +6251,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCTrackEvent#muteStateChanged:member",
-              "docComment": "/**\n * 音视频 track 静默状态改变时回调\n */\n",
+              "docComment": "/**\n * 音视频 track 静默状态改变时回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4749,7 +6278,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "qnrtc-uniapp-sdk!QNRTCTrackEvent#videoProfileChanged:member",
-              "docComment": "/**\n * 音视频 track 视频质量改变回调\n */\n",
+              "docComment": "/**\n * 音视频 track 视频质量改变回调\n *\n * @eventProperty\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
@@ -4857,6 +6386,80 @@
             "startIndex": 1,
             "endIndex": 2
           }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNScreenVideoTrack:class",
+          "docComment": "/**\n * 屏幕录制轨\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNScreenVideoTrack extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "QNLocalVideoTrack",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNLocalVideoTrack:class"
+            },
+            {
+              "kind": "Content",
+              "text": " "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNScreenVideoTrack",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNScreenVideoTrack#setScreenRecorderFrameRate:member(1)",
+              "docComment": "/**\n * 设置屏幕录制的帧率\n *\n * @remarks\n *\n * 默认值 20\n *\n * @param screenRecorderFrameRate - 帧率\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setScreenRecorderFrameRate(screenRecorderFrameRate: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "screenRecorderFrameRate",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setScreenRecorderFrameRate"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "implementsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -5191,6 +6794,400 @@
               }
             }
           ]
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!QNTrack:class",
+          "docComment": "/**\n * 轨\n *\n * @remarks\n *\n * 所有的轨继承此类\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class QNTrack "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "QNTrack",
+          "members": [
+            {
+              "kind": "Constructor",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack:constructor(1)",
+              "docComment": "/**\n * Constructs a new instance of the `QNTrack` class\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "constructor({ identifyID, kind, tag, trackID, raw, userID }: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTrackParams",
+                  "canonicalReference": "qnrtc-uniapp-sdk!~QNTrackParams:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ");"
+                }
+              ],
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "{ identifyID, kind, tag, trackID, raw, userID }",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#getMuted:member(1)",
+              "docComment": "/**\n * 标识 Track 是否为 mute 状态\n *\n * @returns 是否被 mute\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getMuted(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getMuted"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#identifyID:member",
+              "docComment": "/**\n * identifyID\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "identifyID: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "identifyID",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#kind:member",
+              "docComment": "/**\n * 媒体类型\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "kind: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCTrackKind",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCTrackKind:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "kind",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#off:member(1)",
+              "docComment": "/**\n * 取消监听对应的事件\n *\n * @param name - 事件名\n *\n * @param listener - 事件句柄\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "off<event extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCTrackEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCTrackEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "event"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCTrackEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCTrackEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[event]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "event",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "off"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#on:member(1)",
+              "docComment": "/**\n * 监听对应的事件，支持多次调用同一事件\n *\n * @param name - 事件名\n *\n * @param listener - 事件句柄\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "on<event extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCTrackEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCTrackEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "event"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCTrackEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCTrackEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[event]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "event",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "on"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#tag:member",
+              "docComment": "/**\n * 自定义 tag\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "tag: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "tag",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#trackID:member",
+              "docComment": "/**\n * trackID\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "trackID: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "trackID",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "qnrtc-uniapp-sdk!QNTrack#userID:member",
+              "docComment": "/**\n * userID\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "userID: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "userID",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            }
+          ],
+          "implementsTokenRanges": []
         },
         {
           "kind": "Enum",
@@ -6432,12 +8429,1351 @@
         },
         {
           "kind": "Class",
+          "canonicalReference": "qnrtc-uniapp-sdk!RTCClient:class",
+          "docComment": "/**\n * RTCClient 核心类\n *\n * @remarks\n *\n * 包含加入房间，离开房间，订阅、发布 Track，获取统计信息等功能\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class RTCClient "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "RTCClient",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getConnectionState:member(1)",
+              "docComment": "/**\n * RTC client 的房间状态\n *\n * @returns 房间状态\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getConnectionState(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNConnectionState",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNConnectionState:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getConnectionState"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getLocalAudioTrackStats:member(1)",
+              "docComment": "/**\n * 获取已发布的近端音频轨道统计信息\n *\n * @returns 统计信息\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getLocalAudioTrackStats(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTrackStateList",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTrackStateList:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNLocalAudioTrackStats",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNLocalAudioTrackStats:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getLocalAudioTrackStats"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getLocalVideoTrackStats:member(1)",
+              "docComment": "/**\n * 获取已发布的近端视频轨道统计信息\n *\n * @remarks\n *\n * 包括大小流数据信息\n *\n * @returns 统计信息\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getLocalVideoTrackStats(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTrackStateList",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTrackStateList:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNLocalVideoTrackStats",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNLocalVideoTrackStats:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getLocalVideoTrackStats"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getPublishedTracks:member(1)",
+              "docComment": "/**\n * 获取已发布 Track 列表\n *\n * @returns Track 列表\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getPublishedTracks(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Array",
+                  "canonicalReference": "!Array:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRemoteAudioTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrack:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRemoteVideoTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrack:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getPublishedTracks"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getRemoteAudioTrackStats:member(1)",
+              "docComment": "/**\n * 获取已订阅的远端音频轨道统计信息\n *\n * @returns 统计信息\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getRemoteAudioTrackStats(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTrackStateList",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTrackStateList:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRemoteAudioTrackStats",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrackStats:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getRemoteAudioTrackStats"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getRemoteUsers:member(1)",
+              "docComment": "/**\n * 获取房间内所有的远端用户\n *\n * @returns 远端用户列表\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getRemoteUsers(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRemoteUser",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteUser:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getRemoteUsers"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getRemoteVideoTrackStats:member(1)",
+              "docComment": "/**\n * 获取已订阅的远端视频轨道统计信息\n *\n * @returns 统计信息\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getRemoteVideoTrackStats(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTrackStateList",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTrackStateList:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRemoteVideoTrackStats",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrackStats:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "getRemoteVideoTrackStats"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getSubscribedTracks:member(1)",
+              "docComment": "/**\n * 获取指定用户已被自己订阅的 Tracks\n *\n * @param userID - 用户 ID\n *\n * @returns 订阅的 Track 列表\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getSubscribedTracks(userID: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Array",
+                  "canonicalReference": "!Array:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<"
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRemoteAudioTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteAudioTrack:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": " | "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRemoteVideoTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRemoteVideoTrack:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 9
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "userID",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "getSubscribedTracks"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#getUserNetworkQuality:member(1)",
+              "docComment": "/**\n * 获取当前订阅的远端用户网络质量\n *\n * @param userID - 用户 ID\n *\n * @returns 质量列表\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "getUserNetworkQuality(userID: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNNetworkQuality",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNNetworkQuality:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "userID",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "getUserNetworkQuality"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#join:member(1)",
+              "docComment": "/**\n * 加入房间\n *\n * @remarks\n *\n * 接口调用成功后，将会触发 onConnectionStateChanged 回调\n *\n * @param token - 房间 Token\n *\n * @param userData - 用户信息\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "join(token: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", userData: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 5,
+                "endIndex": 6
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "token",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "userData",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                }
+              ],
+              "name": "join"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#leave:member(1)",
+              "docComment": "/**\n * 离开房间\n *\n * @remarks\n *\n * 成功离开后，将会触发 onConnectionStateChanged 回调\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "leave(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "leave"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#off:member(1)",
+              "docComment": "/**\n * 取消监听对应的事件\n *\n * @param name - 事件名\n *\n * @param listener - 事件句柄\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "off<event extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCClinetEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "event"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCClinetEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[event]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "event",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "off"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#on:member(1)",
+              "docComment": "/**\n * 监听对应的事件\n *\n * @remarks\n *\n * 支持多次调用同一事件\n *\n * @param name - 事件名\n *\n * @param listener - 事件句柄\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "on<event extends "
+                },
+                {
+                  "kind": "Content",
+                  "text": "keyof "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCClinetEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ">(name: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "event"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", listener: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNRTCClinetEvent",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNRTCClinetEvent:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[event]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 9,
+                "endIndex": 10
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "name",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                },
+                {
+                  "parameterName": "listener",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 6,
+                    "endIndex": 8
+                  }
+                }
+              ],
+              "typeParameters": [
+                {
+                  "typeParameterName": "event",
+                  "constraintTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  },
+                  "defaultTypeTokenRange": {
+                    "startIndex": 0,
+                    "endIndex": 0
+                  }
+                }
+              ],
+              "name": "on"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#publish:member(1)",
+              "docComment": "/**\n * 发布本地 Track 列表\n *\n * @remarks\n *\n * 若想获取发布结果，可通过 QNPublishResultCallback 实现\n *\n * @param tracks - 要发布的本地 Track 列表\n *\n * @param callback - 发布结果回调\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "publish(tracks: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNLocalTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNLocalTrack:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", callback: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNPublishResultCallback",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNPublishResultCallback:type"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "tracks",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                },
+                {
+                  "parameterName": "callback",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 4,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "publish"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#removeTranscodingLiveStreamingTracks:member(1)",
+              "docComment": "/**\n * 移除合流转推布局配置\n *\n * @remarks\n *\n * 更新成功会触发 RTCClinetEvent.onUpdatedLiveStreaming 回调\n *\n * @param streamID - 合流 ID\n *\n * @param config - 待移除合流转推布局配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "removeTranscodingLiveStreamingTracks(streamID: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", transcodingTracks: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTranscodingLiveStreamingTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTranscodingLiveStreamingTrack:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "streamID",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "transcodingTracks",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "removeTranscodingLiveStreamingTracks"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#sendMessage:member(1)",
+              "docComment": "/**\n * 发送自定义消息到指定用户群\n *\n * @remarks\n *\n * 发送成功后，会触发远端用户的 RTCClinetEvent.onMessageReceived 回调接口\n *\n * @param message - 自定义消息内容\n *\n * @param users - 用户 ID 列表\n *\n * @param messageId - 自定义消息 ID\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "sendMessage(message: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", users: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", messageId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 7,
+                "endIndex": 8
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "message",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "users",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 4
+                  }
+                },
+                {
+                  "parameterName": "messageId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 5,
+                    "endIndex": 6
+                  }
+                }
+              ],
+              "name": "sendMessage"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#setAutoSubscribe:member(1)",
+              "docComment": "/**\n * 设置是否自动订阅\n *\n * @remarks\n *\n * 默认开启自动订阅\n *\n * @param autoSubscribe - 是否自动订阅\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setAutoSubscribe(autoSubscribe: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "autoSubscribe",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setAutoSubscribe"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#setTranscodingLiveStreamingTracks:member(1)",
+              "docComment": "/**\n * 新增、更新合流转推布局配置\n *\n * @remarks\n *\n * 更新成功会触发 RTCClinetEvent.onUpdatedLiveStreaming 回调。 新增 Track 布局以及对已有的 Track 的合流布局进行更新均可通过该接口实现，只需修改 transcodingTracks 对应的 Track 内容即可。\n *\n * @param streamID - 合流 ID\n *\n * @param config - 待新增、更新的合流转推布局配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setTranscodingLiveStreamingTracks(streamID: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ", transcodingTracks: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTranscodingLiveStreamingTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTranscodingLiveStreamingTrack:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 6,
+                "endIndex": 7
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "streamID",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                },
+                {
+                  "parameterName": "transcodingTracks",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 3,
+                    "endIndex": 5
+                  }
+                }
+              ],
+              "name": "setTranscodingLiveStreamingTracks"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#startLiveStreamingWithDirect:member(1)",
+              "docComment": "/**\n * 开始单路 CDN 转推\n *\n * @remarks\n *\n * 转推成功会触发 RTCClinetEvent.onStartLiveStreaming 回调\n *\n * @param config - 单路转推配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "startLiveStreamingWithDirect(config: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNDirectLiveStreamingConfig",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNDirectLiveStreamingConfig:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "config",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "startLiveStreamingWithDirect"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#startLiveStreamingWithTranscoding:member(1)",
+              "docComment": "/**\n * 开始合流转码 CDN 转推\n *\n * @remarks\n *\n * 转推成功会触发 RTCClinetEvent.onStartLiveStreaming 回调\n *\n * @param config - 合流转推配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "startLiveStreamingWithTranscoding(config: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTranscodingLiveStreamingConfig",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTranscodingLiveStreamingConfig:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "config",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "startLiveStreamingWithTranscoding"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#stopLiveStreamingWithDirect:member(1)",
+              "docComment": "/**\n * 停止单路 CDN 转推\n *\n * @remarks\n *\n * 停止成功会触发 RTCClinetEvent.onStoppedLiveStreaming 回调\n *\n * @param config - 单路转推配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopLiveStreamingWithDirect(config: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNDirectLiveStreamingConfig",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNDirectLiveStreamingConfig:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "config",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "stopLiveStreamingWithDirect"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#stopLiveStreamingWithTranscoding:member(1)",
+              "docComment": "/**\n * 停止合流转码 CDN 转推\n *\n * @remarks\n *\n * 停止成功会触发 RTCClinetEvent.onStoppedLiveStreaming 回调\n *\n * @param config - 合流转推配置\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "stopLiveStreamingWithTranscoding(config: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNTranscodingLiveStreamingConfig",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNTranscodingLiveStreamingConfig:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "config",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "stopLiveStreamingWithTranscoding"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#subscribe:member(1)",
+              "docComment": "/**\n * 订阅远端 Track\n *\n * @remarks\n *\n * 订阅成功后，根据订阅类型会触发 RTCClinetEvent.onAudioSubscribed 或 RTCClinetEvent.onVideoSubscribed\n *\n * @param tracks - 要订阅的远端 Track\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "subscribe(tracks: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNUNIRemoteTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNUNIRemoteTrack:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "tracks",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "subscribe"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#unpublish:member(1)",
+              "docComment": "/**\n * 取消发布本地 Track\n *\n * @param tracks - 要取消的本地 Track 列表\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unpublish(tracks: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNLocalTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNLocalTrack:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "tracks",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "unpublish"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "qnrtc-uniapp-sdk!RTCClient#unsubscribe:member(1)",
+              "docComment": "/**\n * 取消订阅远端 Track\n *\n * @param tracks - 要取消订阅的远端 Track\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "unsubscribe(tracks: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "QNUNIRemoteTrack",
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNUNIRemoteTrack:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 4,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "tracks",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 3
+                  }
+                }
+              ],
+              "name": "unsubscribe"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
           "canonicalReference": "qnrtc-uniapp-sdk!RTCEngine:class",
           "docComment": "/**\n * RTCEngine 是 SDK 的入口\n *\n * @remarks\n *\n * 提供了 SDK 配置，创建本地音视频轨道，创建房间对象等一系列方法\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export default class RTCEngine "
+              "text": "export declare class RTCEngine "
             }
           ],
           "releaseTag": "Public",
@@ -6510,7 +9846,7 @@
                 {
                   "kind": "Reference",
                   "text": "QNCameraVideoTrack",
-                  "canonicalReference": "qnrtc-uniapp-sdk!default:class"
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNCameraVideoTrack:class"
                 },
                 {
                   "kind": "Content",
@@ -6548,7 +9884,7 @@
                 {
                   "kind": "Reference",
                   "text": "QNRTCClient",
-                  "canonicalReference": "qnrtc-uniapp-sdk!default:class"
+                  "canonicalReference": "qnrtc-uniapp-sdk!RTCClient:class"
                 },
                 {
                   "kind": "Content",
@@ -6587,7 +9923,7 @@
                 {
                   "kind": "Reference",
                   "text": "QNMicrophoneAudioTrack",
-                  "canonicalReference": "qnrtc-uniapp-sdk!default:class"
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNMicrophoneAudioTrack:class"
                 },
                 {
                   "kind": "Content",
@@ -6634,7 +9970,7 @@
                 {
                   "kind": "Reference",
                   "text": "QNScreenVideoTrack",
-                  "canonicalReference": "qnrtc-uniapp-sdk!default:class"
+                  "canonicalReference": "qnrtc-uniapp-sdk!QNScreenVideoTrack:class"
                 },
                 {
                   "kind": "Content",
