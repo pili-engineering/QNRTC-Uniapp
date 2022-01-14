@@ -1,8 +1,8 @@
-import QNLocalTrack from './RTCLocalTrack';
+import { QNLocalTrack } from './RTCLocalTrack';
 /**
  * 本地视频轨
  */
-export default class QNLocalVideoTrack extends QNLocalTrack {
+export declare class QNLocalVideoTrack extends QNLocalTrack {
     /**
      * 发送 SEI
      * @param message 消息内容

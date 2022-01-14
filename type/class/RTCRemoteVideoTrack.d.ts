@@ -1,9 +1,9 @@
-import QNRemoteTrack from './RTCRemoteTrack';
+import { QNRemoteTrack } from './RTCRemoteTrack';
 import { QNTrackProfile } from '../interface/RTCInterface';
 /**
  * 远端视频轨
  */
-export default class QNRemoteVideoTrack extends QNRemoteTrack {
+export declare class QNRemoteVideoTrack extends QNRemoteTrack {
     /**
      * 设置当前视频轨道质量等级
      * @param profile 质量等级

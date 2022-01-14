@@ -13,7 +13,7 @@ static createClient(): QNRTCClient;
 ```
 <b>Returns:</b>
 
-QNRTCClient
+[QNRTCClient](./qnrtc-uniapp-sdk.rtcclient.md)
 
 RTC 管理对象
 

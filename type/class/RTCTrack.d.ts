@@ -13,7 +13,7 @@ interface QNTrackParams {
  * 轨
  * @remarks 所有的轨继承此类
  */
-export default class QNTrack {
+export declare class QNTrack {
     /**
      * identifyID
      */

@@ -12,7 +12,7 @@
 export interface QNRTCClinetEvent 
 ```
 
-## Properties
+## Events
 
 |  Property | Type | Description |
 |  --- | --- | --- |

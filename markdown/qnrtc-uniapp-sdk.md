@@ -16,6 +16,17 @@ QNRTC-Uniapp 是基于 [UNIAPP](https://uniapp.dcloud.io/)<!-- -->、 [QNRTC-And
 
 |  Class | Description |
 |  --- | --- |
+|  [QNCameraVideoTrack](./qnrtc-uniapp-sdk.qncameravideotrack.md) | 本地摄像头轨 |
+|  [QNLocalAudioTrack](./qnrtc-uniapp-sdk.qnlocalaudiotrack.md) | 本地音频轨 |
+|  [QNLocalTrack](./qnrtc-uniapp-sdk.qnlocaltrack.md) | 本地轨 |
+|  [QNLocalVideoTrack](./qnrtc-uniapp-sdk.qnlocalvideotrack.md) | 本地视频轨 |
+|  [QNMicrophoneAudioTrack](./qnrtc-uniapp-sdk.qnmicrophoneaudiotrack.md) | 本地麦克风轨 |
+|  [QNRemoteAudioTrack](./qnrtc-uniapp-sdk.qnremoteaudiotrack.md) | 远端音频轨 |
+|  [QNRemoteTrack](./qnrtc-uniapp-sdk.qnremotetrack.md) | 远端轨 |
+|  [QNRemoteVideoTrack](./qnrtc-uniapp-sdk.qnremotevideotrack.md) | 远端视频轨 |
+|  [QNScreenVideoTrack](./qnrtc-uniapp-sdk.qnscreenvideotrack.md) | 屏幕录制轨 |
+|  [QNTrack](./qnrtc-uniapp-sdk.qntrack.md) | 轨 |
+|  [RTCClient](./qnrtc-uniapp-sdk.rtcclient.md) | RTCClient 核心类 |
 |  [RTCEngine](./qnrtc-uniapp-sdk.rtcengine.md) | RTCEngine 是 SDK 的入口 |
 
 ## Enumerations

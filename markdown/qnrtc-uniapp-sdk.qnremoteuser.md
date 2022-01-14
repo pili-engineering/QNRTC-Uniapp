@@ -16,8 +16,8 @@ export interface QNRemoteUser
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [audioTracks](./qnrtc-uniapp-sdk.qnremoteuser.audiotracks.md) | QNRemoteAudioTrack\[\] | 用户所发布的音频 track 列表 |
+|  [audioTracks](./qnrtc-uniapp-sdk.qnremoteuser.audiotracks.md) | [QNRemoteAudioTrack](./qnrtc-uniapp-sdk.qnremoteaudiotrack.md)<!-- -->\[\] | 用户所发布的音频 track 列表 |
 |  [userData](./qnrtc-uniapp-sdk.qnremoteuser.userdata.md) | string | 自定义用户数据 |
 |  [userID](./qnrtc-uniapp-sdk.qnremoteuser.userid.md) | string | 用户 ID |
-|  [videoTracks](./qnrtc-uniapp-sdk.qnremoteuser.videotracks.md) | QNRemoteVideoTrack\[\] | 用户所发布的视频 track 列表 |
+|  [videoTracks](./qnrtc-uniapp-sdk.qnremoteuser.videotracks.md) | [QNRemoteVideoTrack](./qnrtc-uniapp-sdk.qnremotevideotrack.md)<!-- -->\[\] | 用户所发布的视频 track 列表 |
 

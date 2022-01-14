@@ -20,7 +20,7 @@ static createScreenVideoTrack(config: QNScreenVideoTrackConfig): QNScreenVideoTr
 
 <b>Returns:</b>
 
-QNScreenVideoTrack
+[QNScreenVideoTrack](./qnrtc-uniapp-sdk.qnscreenvideotrack.md)
 
 QNScreenVideoTrack 实例
 

@@ -12,7 +12,7 @@
 export interface QNRTCAudioMixerEvent 
 ```
 
-## Properties
+## Events
 
 |  Property | Type | Description |
 |  --- | --- | --- |

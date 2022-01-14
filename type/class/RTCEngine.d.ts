@@ -1,16 +1,16 @@
 import { QNScreenPermissionResultCallback } from '../RTCPreset';
 import { QNRTCConfiguration, QNMicrophoneAudioTrackConfig, QNCustomAudioTrackConfig, QNCameraVideoTrackConfig, QNScreenVideoTrackConfig, QNCustomVideoTrackConfig } from '../interface/RTCInterface';
-import QNRTCClient from './RTCClient';
-import QNCameraVideoTrack from './RTCCameraVideoTrack';
-import QNMicrophoneAudioTrack from './RTCMicrophoneAudioTrack';
-import QNScreenVideoTrack from './RTCScreenVideoTrack';
-import QNTrack from './RTCTrack';
+import { RTCClient as QNRTCClient } from './RTCClient';
+import { QNCameraVideoTrack } from './RTCCameraVideoTrack';
+import { QNMicrophoneAudioTrack } from './RTCMicrophoneAudioTrack';
+import { QNScreenVideoTrack } from './RTCScreenVideoTrack';
+import { QNTrack } from './RTCTrack';
 import { QNRTCEngineEvent } from '../RTCEvent';
 /**
  * RTCEngine 是 SDK 的入口
  * @remarks 提供了 SDK 配置，创建本地音视频轨道，创建房间对象等一系列方法
  */
-export default class RTCEngine {
+export declare class RTCEngine {
     /**
      * 监听对应的事件，支持多次调用同一事件
      * @param name 事件名

@@ -2,9 +2,9 @@ import { QNUNIRemoteTrack, QNLocalAudioTrackStats, QNLocalVideoTrackStats, QNRem
 import { QNPublishResultCallback } from '../RTCPreset'
 import { QNConnectionState, QNRTCTrackKind } from '../enum/RTCEnum'
 import { QNRTCClinetEvent } from '../RTCEvent'
-import QNRemoteVideoTrack from './RTCRemoteVideoTrack'
-import QNRemoteAudioTrack from './RTCRemoteAudioTrack'
-import QNLocalTrack from './RTCLocalTrack'
+import { QNRemoteVideoTrack } from './RTCRemoteVideoTrack'
+import { QNRemoteAudioTrack } from './RTCRemoteAudioTrack'
+import { QNLocalTrack } from './RTCLocalTrack'
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNRTCClient = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient')
@@ -15,7 +15,7 @@ const QNEvent = uni.requireNativePlugin('globalEvent')
  * RTCClient 核心类
  * @remarks 包含加入房间，离开房间，订阅、发布 Track，获取统计信息等功能
  */
-export default class RTCClient {
+export class RTCClient {
   private variationList = ['onUserPublished', 'onUserUnpublished', 'onVideoSubscribed', 'onAudioSubscribed']
 
   /**
@@ -25,7 +25,7 @@ export default class RTCClient {
    * @param trackList QNUNIRemoteTrack 对象数组
    * @returns QNRemoteTrack 类对象
    */
-  private transformRTCTrack (trackList:QNUNIRemoteTrack[]):Array<QNRemoteAudioTrack | QNRemoteVideoTrack> {
+  private transformRTCTrack(trackList: QNUNIRemoteTrack[]): Array<QNRemoteAudioTrack | QNRemoteVideoTrack> {
     const result: Array<QNRemoteAudioTrack | QNRemoteVideoTrack> = []
     for (const i of trackList) {
       const config = {
@@ -49,7 +49,7 @@ export default class RTCClient {
    * @param listener 包装前的 callback
    * @returns 包装后的 callback
    */
-  private createRemoteTrackDataCallback<event extends keyof QNRTCClinetEvent > (listener:QNRTCClinetEvent[event]) {
+  private createRemoteTrackDataCallback<event extends keyof QNRTCClinetEvent>(listener: QNRTCClinetEvent[event]) {
     const variationCallback = (params: { remoteUserID: string, trackList: QNUNIRemoteTrack[] }) => {
       const result = this.transformRTCTrack(params.trackList)
       const callbackData: any = {
@@ -68,7 +68,7 @@ export default class RTCClient {
    * @param name 事件名
    * @param listener 事件句柄
    */
-  on<event extends keyof QNRTCClinetEvent > (name: event, listener: QNRTCClinetEvent[event]): void {
+  on<event extends keyof QNRTCClinetEvent>(name: event, listener: QNRTCClinetEvent[event]): void {
     if (this.variationList.some(item => item === name)) {
       const callback = this.createRemoteTrackDataCallback(listener)
       QNEvent.addEventListener(name, callback)
@@ -82,7 +82,7 @@ export default class RTCClient {
    * @param name 事件名
    * @param listener 事件句柄
    */
-  off<event extends keyof QNRTCClinetEvent> (name: event, listener: QNRTCClinetEvent[event]): void {
+  off<event extends keyof QNRTCClinetEvent>(name: event, listener: QNRTCClinetEvent[event]): void {
     QNEvent.removeEventListener(name, listener)
   }
 
@@ -92,7 +92,7 @@ export default class RTCClient {
    * @param token 房间 Token
    * @param userData 用户信息
    */
-  join (token: string, userData: string): void {
+  join(token: string, userData: string): void {
     return QNRTCClient.join(token, userData)
   }
 
@@ -100,7 +100,7 @@ export default class RTCClient {
    * 离开房间
    * @remarks 成功离开后，将会触发 onConnectionStateChanged 回调
    */
-  leave (): void {
+  leave(): void {
     return QNRTCClient.leave()
   }
 
@@ -110,12 +110,12 @@ export default class RTCClient {
    * @param tracks 要发布的本地 Track 列表
    * @param callback - 发布结果回调
    */
-  publish (tracks: QNLocalTrack[], callback: QNPublishResultCallback): void {
+  publish(tracks: QNLocalTrack[], callback: QNPublishResultCallback): void {
     return QNRTCClient.publish(tracks, ({ onPublished, data, error }: {
-            onPublished: boolean,
-            data: { [identifyID: string]: string },
-            error: { message: string, code: number }
-        }) => {
+      onPublished: boolean,
+      data: { [identifyID: string]: string },
+      error: { message: string, code: number }
+    }) => {
       if (onPublished) {
         for (const key in data) {
           const index = tracks.findIndex(item => item.identifyID === key)
@@ -132,7 +132,7 @@ export default class RTCClient {
    * 取消发布本地 Track
    * @param tracks 要取消的本地 Track 列表
    */
-  unpublish (tracks: QNLocalTrack[]): void {
+  unpublish(tracks: QNLocalTrack[]): void {
     return QNRTCClient.unpublish(tracks)
   }
 
@@ -141,7 +141,7 @@ export default class RTCClient {
    * @remarks 订阅成功后，根据订阅类型会触发 RTCClinetEvent.onAudioSubscribed 或 RTCClinetEvent.onVideoSubscribed
    * @param tracks 要订阅的远端 Track
    */
-  subscribe (tracks: QNUNIRemoteTrack[]): void {
+  subscribe(tracks: QNUNIRemoteTrack[]): void {
     return QNRTCClient.subscribe(tracks)
   }
 
@@ -149,7 +149,7 @@ export default class RTCClient {
    * 取消订阅远端 Track
    * @param tracks 要取消订阅的远端 Track
    */
-  unsubscribe (tracks: QNUNIRemoteTrack[]): void {
+  unsubscribe(tracks: QNUNIRemoteTrack[]): void {
     return QNRTCClient.unsubscribe(tracks)
   }
 
@@ -158,7 +158,7 @@ export default class RTCClient {
    * @param userID 用户 ID
    * @returns 订阅的 Track 列表
    */
-  getSubscribedTracks (userID: string): Array<QNRemoteAudioTrack | QNRemoteVideoTrack> {
+  getSubscribedTracks(userID: string): Array<QNRemoteAudioTrack | QNRemoteVideoTrack> {
     const remoteTrack: QNUNIRemoteTrack[] = QNRTCClient.getSubscribedTracks(userID)
     return this.transformRTCTrack(remoteTrack)
   }
@@ -167,7 +167,7 @@ export default class RTCClient {
    * 获取已发布的近端音频轨道统计信息
    * @returns 统计信息
    */
-  getLocalAudioTrackStats (): QNTrackStateList<QNLocalAudioTrackStats> {
+  getLocalAudioTrackStats(): QNTrackStateList<QNLocalAudioTrackStats> {
     return QNRTCClient.getLocalAudioTrackStats()
   }
 
@@ -176,7 +176,7 @@ export default class RTCClient {
    * @remarks 包括大小流数据信息
    * @returns 统计信息
    */
-  getLocalVideoTrackStats (): QNTrackStateList<QNLocalVideoTrackStats[]> {
+  getLocalVideoTrackStats(): QNTrackStateList<QNLocalVideoTrackStats[]> {
     return QNRTCClient.getLocalVideoTrackStats()
   }
 
@@ -184,7 +184,7 @@ export default class RTCClient {
    * 获取已订阅的远端音频轨道统计信息
    * @returns 统计信息
    */
-  getRemoteAudioTrackStats (): QNTrackStateList<QNRemoteAudioTrackStats> {
+  getRemoteAudioTrackStats(): QNTrackStateList<QNRemoteAudioTrackStats> {
     return QNRTCClient.getRemoteAudioTrackStats()
   }
 
@@ -192,7 +192,7 @@ export default class RTCClient {
    * 获取已订阅的远端视频轨道统计信息
    * @returns 统计信息
    */
-  getRemoteVideoTrackStats (): QNTrackStateList<QNRemoteVideoTrackStats> {
+  getRemoteVideoTrackStats(): QNTrackStateList<QNRemoteVideoTrackStats> {
     return QNRTCClient.getRemoteVideoTrackStats()
   }
 
@@ -201,7 +201,7 @@ export default class RTCClient {
    * @param userID 用户 ID
    * @returns 质量列表
    */
-  getUserNetworkQuality (userID: string): QNNetworkQuality {
+  getUserNetworkQuality(userID: string): QNNetworkQuality {
     return QNRTCClient.getUserNetworkQuality(userID)
   }
 
@@ -209,7 +209,7 @@ export default class RTCClient {
    * 获取房间内所有的远端用户
    * @returns 远端用户列表
    */
-  getRemoteUsers (): QNRemoteUser[] {
+  getRemoteUsers(): QNRemoteUser[] {
     const remoteUser: QNUNIRemoteUser[] = QNRTCClient.getRemoteUsers()
     const result: QNRemoteUser[] = []
     for (const i of remoteUser) {
@@ -229,7 +229,7 @@ export default class RTCClient {
    * 获取已发布 Track 列表
    * @returns Track 列表
    */
-  getPublishedTracks (): Array<QNRemoteAudioTrack | QNRemoteVideoTrack> {
+  getPublishedTracks(): Array<QNRemoteAudioTrack | QNRemoteVideoTrack> {
     const remoteTrack: QNUNIRemoteTrack[] = QNRTCClient.getPublishedTracks()
     return this.transformRTCTrack(remoteTrack)
   }
@@ -241,7 +241,7 @@ export default class RTCClient {
    * @param users 用户 ID 列表
    * @param messageId 自定义消息 ID
    */
-  sendMessage (message: string, users: string[], messageId: string): void {
+  sendMessage(message: string, users: string[], messageId: string): void {
     return QNRTCClient.sendMessage(message, users, messageId)
   }
 
@@ -249,7 +249,7 @@ export default class RTCClient {
    * RTC client 的房间状态
    * @returns 房间状态
    */
-  getConnectionState (): QNConnectionState {
+  getConnectionState(): QNConnectionState {
     return QNRTCClient.getConnectionState()
   }
 
@@ -258,7 +258,7 @@ export default class RTCClient {
    * @remarks 默认开启自动订阅
    * @param autoSubscribe 是否自动订阅
    */
-  setAutoSubscribe (autoSubscribe: boolean): void {
+  setAutoSubscribe(autoSubscribe: boolean): void {
     return QNRTCClient.setAutoSubscribe(autoSubscribe)
   }
 
@@ -267,7 +267,7 @@ export default class RTCClient {
    * @remarks 转推成功会触发 RTCClinetEvent.onStartLiveStreaming 回调
    * @param config 单路转推配置
    */
-  startLiveStreamingWithDirect (config: QNDirectLiveStreamingConfig): void {
+  startLiveStreamingWithDirect(config: QNDirectLiveStreamingConfig): void {
     return QNRTCClient.startLiveStreamingWithDirect(config)
   }
 
@@ -276,7 +276,7 @@ export default class RTCClient {
    * @remarks 转推成功会触发 RTCClinetEvent.onStartLiveStreaming 回调
    * @param config 合流转推配置
    */
-  startLiveStreamingWithTranscoding (config: QNTranscodingLiveStreamingConfig): void {
+  startLiveStreamingWithTranscoding(config: QNTranscodingLiveStreamingConfig): void {
     return QNRTCClient.startLiveStreamingWithTranscoding(config)
   }
 
@@ -285,7 +285,7 @@ export default class RTCClient {
    * @remarks 停止成功会触发 RTCClinetEvent.onStoppedLiveStreaming 回调
    * @param config 单路转推配置
    */
-  stopLiveStreamingWithDirect (config: QNDirectLiveStreamingConfig): void {
+  stopLiveStreamingWithDirect(config: QNDirectLiveStreamingConfig): void {
     return QNRTCClient.stopLiveStreamingWithDirect(config)
   }
 
@@ -294,7 +294,7 @@ export default class RTCClient {
    * @remarks 停止成功会触发 RTCClinetEvent.onStoppedLiveStreaming 回调
    * @param config 合流转推配置
    */
-  stopLiveStreamingWithTranscoding (config: QNTranscodingLiveStreamingConfig): void {
+  stopLiveStreamingWithTranscoding(config: QNTranscodingLiveStreamingConfig): void {
     return QNRTCClient.stopLiveStreamingWithTranscoding(config)
   }
 
@@ -306,7 +306,7 @@ export default class RTCClient {
    * @param streamID 合流 ID
    * @param config 待新增、更新的合流转推布局配置
    */
-  setTranscodingLiveStreamingTracks (streamID: string, transcodingTracks: QNTranscodingLiveStreamingTrack[]): void {
+  setTranscodingLiveStreamingTracks(streamID: string, transcodingTracks: QNTranscodingLiveStreamingTrack[]): void {
     return QNRTCClient.setTranscodingLiveStreamingTracks(streamID, transcodingTracks)
   }
 
@@ -316,7 +316,7 @@ export default class RTCClient {
    * @param streamID 合流 ID
    * @param config 待移除合流转推布局配置
    */
-  removeTranscodingLiveStreamingTracks (streamID: string, transcodingTracks: QNTranscodingLiveStreamingTrack[]): void {
+  removeTranscodingLiveStreamingTracks(streamID: string, transcodingTracks: QNTranscodingLiveStreamingTrack[]): void {
     return QNRTCClient.removeTranscodingLiveStreamingTracks(streamID, transcodingTracks)
   }
 }
