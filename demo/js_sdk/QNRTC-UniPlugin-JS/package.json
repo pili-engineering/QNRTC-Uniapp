@@ -1,0 +1,19 @@
+{
+    "id": "QNRTC-UniPlugin-JS",
+    "name": "七牛云WebRTC JS插件",
+    "version": "1.0.2",
+    "description": "集成 QNDroidRTC 与 QNRTCKit SDK  ",
+    "keywords": [
+        "音视频",
+        "七牛云",
+        "音频通话",
+        "视频通话",
+        "webrtc"
+    ],
+    "dcloudext": {
+        "category": [
+            "JS SDK",
+            "通用 SDK"
+        ]
+    }
+}

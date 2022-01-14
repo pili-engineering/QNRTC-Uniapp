@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import QNRTC,{QNRTCLogLevel} from "../../uniapp-rtc.js"
+import QNRTC,{QNRTCLogLevel} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
+
 import { mapState } from "vuex"
 export default {
     data() {
