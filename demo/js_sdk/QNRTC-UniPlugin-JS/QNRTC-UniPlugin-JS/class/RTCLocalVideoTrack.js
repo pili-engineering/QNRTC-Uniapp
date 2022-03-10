@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var RTCLocalTrack_1 = require("./RTCLocalTrack");
-var QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack');
+var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNLocalVideoTrack = (function (_super) {
     __extends(QNLocalVideoTrack, _super);
     function QNLocalVideoTrack() {

@@ -16,18 +16,12 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var RTCLocalVideoTrack_1 = require("./RTCLocalVideoTrack");
-var QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack');
+var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNScreenVideoTrack = (function (_super) {
     __extends(QNScreenVideoTrack, _super);
     function QNScreenVideoTrack() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    QNScreenVideoTrack.prototype.requestPermission = function () {
-        return QNRtcTrack.requestPermission(this.identifyID);
-    };
-    QNScreenVideoTrack.prototype.isScreenCaptureSupported = function () {
-        return QNRtcTrack.isScreenCaptureSupported(this.identifyID);
-    };
     QNScreenVideoTrack.prototype.setScreenRecorderFrameRate = function (screenRecorderFrameRate) {
         return QNRtcTrack.setScreenRecorderFrameRate(this.identifyID, screenRecorderFrameRate);
     };

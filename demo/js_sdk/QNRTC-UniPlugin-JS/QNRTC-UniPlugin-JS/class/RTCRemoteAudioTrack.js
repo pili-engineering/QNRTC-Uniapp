@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var RTCRemoteTrack_1 = require("./RTCRemoteTrack");
-var QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack');
+var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRemoteAudioTrack = (function (_super) {
     __extends(QNRemoteAudioTrack, _super);
     function QNRemoteAudioTrack() {

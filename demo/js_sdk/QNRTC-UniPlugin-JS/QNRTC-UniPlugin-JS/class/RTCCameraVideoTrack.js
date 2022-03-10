@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var RTCLocalVideoTrack_1 = require("./RTCLocalVideoTrack");
-var QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack');
+var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNCameraVideoTrack = (function (_super) {
     __extends(QNCameraVideoTrack, _super);
     function QNCameraVideoTrack() {
@@ -43,8 +43,8 @@ var QNCameraVideoTrack = (function (_super) {
     QNCameraVideoTrack.prototype.turnLightOff = function () {
         return QNRtcTrack.turnLightOff(this.identifyID);
     };
-    QNCameraVideoTrack.prototype.manualFocus = function (x, y, viewWidth, viewHeight) {
-        return QNRtcTrack.manualFocus(this.identifyID, x, y, viewWidth, viewHeight);
+    QNCameraVideoTrack.prototype.manualFocus = function (x, y) {
+        return QNRtcTrack.manualFocus(this.identifyID, x, y);
     };
     QNCameraVideoTrack.prototype.setExposureCompensation = function (value) {
         return QNRtcTrack.setExposureCompensation(this.identifyID, value);
@@ -60,12 +60,6 @@ var QNCameraVideoTrack = (function (_super) {
     };
     QNCameraVideoTrack.prototype.getVideoOrientation = function () {
         return QNRtcTrack.getVideoOrientation(this.identifyID);
-    };
-    QNCameraVideoTrack.prototype.setFillMode = function (fillMode) {
-        return QNRtcTrack.setFillMode(this.identifyID, fillMode);
-    };
-    QNCameraVideoTrack.prototype.getFillMode = function () {
-        return QNRtcTrack.getFillMode(this.identifyID);
     };
     QNCameraVideoTrack.prototype.setZoom = function (zoom) {
         return QNRtcTrack.setZoom(this.identifyID, zoom);

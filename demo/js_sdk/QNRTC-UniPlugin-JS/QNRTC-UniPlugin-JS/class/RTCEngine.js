@@ -17,8 +17,10 @@ var RTCCameraVideoTrack_1 = require("./RTCCameraVideoTrack");
 var RTCMicrophoneAudioTrack_1 = require("./RTCMicrophoneAudioTrack");
 var RTCScreenVideoTrack_1 = require("./RTCScreenVideoTrack");
 var RTCTrack_1 = require("./RTCTrack");
-var QNRtcEngine = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcEngine');
+var QNRtcEngine = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcEngine');
 var QNEvent = uni.requireNativePlugin('globalEvent');
+var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
+var QNRTCClientPlugin = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
 var RTCEngine = (function () {
     function RTCEngine() {
     }
@@ -28,8 +30,16 @@ var RTCEngine = (function () {
     RTCEngine.off = function (name, listener) {
         QNEvent.removeEventListener(name, listener);
     };
+    RTCEngine.requestPermission = function (callback) {
+        return QNRtcTrack.requestPermission(callback);
+    };
+    RTCEngine.isScreenCaptureSupported = function () {
+        return QNRtcTrack.isScreenCaptureSupported();
+    };
     RTCEngine.configRTC = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNRTCConfigurationPreset), config);
+        QNRtcTrack.initDelegate();
+        QNRTCClientPlugin.initDelegate();
         return QNRtcEngine.configRTC(_config);
     };
     RTCEngine.deinit = function () {

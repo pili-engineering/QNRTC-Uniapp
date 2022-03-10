@@ -14,7 +14,7 @@ exports.__esModule = true;
 var RTCEnum_1 = require("../enum/RTCEnum");
 var RTCRemoteVideoTrack_1 = require("./RTCRemoteVideoTrack");
 var RTCRemoteAudioTrack_1 = require("./RTCRemoteAudioTrack");
-var QNRTCClient = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcClient');
+var QNRTCClient = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var RTCClient = (function () {
     function RTCClient() {
