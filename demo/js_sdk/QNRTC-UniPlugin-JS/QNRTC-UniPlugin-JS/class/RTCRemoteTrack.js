@@ -16,7 +16,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var RTCTrack_1 = require("./RTCTrack");
-var QNRtcTrack = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcTrack');
+var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRemoteTrack = (function (_super) {
     __extends(QNRemoteTrack, _super);
     function QNRemoteTrack() {
