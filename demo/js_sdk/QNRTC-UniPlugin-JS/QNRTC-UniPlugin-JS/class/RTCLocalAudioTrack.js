@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+exports.QNLocalAudioTrack = void 0;
 var RTCLocalTrack_1 = require("./RTCLocalTrack");
 var QNLocalAudioTrack = (function (_super) {
     __extends(QNLocalAudioTrack, _super);
@@ -22,5 +23,5 @@ var QNLocalAudioTrack = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     return QNLocalAudioTrack;
-}(RTCLocalTrack_1["default"]));
-exports["default"] = QNLocalAudioTrack;
+}(RTCLocalTrack_1.QNLocalTrack));
+exports.QNLocalAudioTrack = QNLocalAudioTrack;

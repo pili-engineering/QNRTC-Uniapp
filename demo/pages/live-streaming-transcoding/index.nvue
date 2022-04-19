@@ -340,18 +340,14 @@
 				}) => {
 					if (state === "CONNECTED") {
 						// 发布 track
-						this.client.publish(localTracks, ({
-							onPublished,
-							data,
-							info
-						}) => {
+						this.client.publish(localTracks, (onPublished, error) => {
 							if (onPublished) {
 								uni.showModal({
 									content: "发布成功"
 								})
 							} else {
 								uni.showModal({
-									content: info.message
+									content: error.message
 								})
 							}
 							this.localTracks = localTracks

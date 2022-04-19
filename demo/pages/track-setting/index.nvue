@@ -490,17 +490,13 @@
 					this.client.unpublish([this.cameraVideoTrack,this.microphoneAudioTrack])
 					this.isPublish = false
 				}else {
-					this.client.publish([this.cameraVideoTrack,this.microphoneAudioTrack],({
-						onPublished,
-						data,
-						error
-					}) => {
+					this.client.publish([this.cameraVideoTrack,this.microphoneAudioTrack],(onPublished, error) => {
 						if (onPublished) {
 							this.isPublish = true
 							this.$refs.popup.open()
 						} else {
 							uni.showModal({
-								content: "error"
+								content: error.message
 							})
 						}
 					})
@@ -684,17 +680,13 @@
 					state
 				}) => {
 					if (state === "CONNECTED") {
-						this.client.publish([this.microphoneAudioTrack, this.cameraVideoTrack], ({
-							onPublished,
-							data,
-							error
-						}) => {
+						this.client.publish([this.microphoneAudioTrack, this.cameraVideoTrack], (onPublished, error) => {
 							if (onPublished) {
 								this.isPublish = true
 								this.$refs.popup.open()
 							} else {
 								uni.showModal({
-									content: "error"
+									content: error.message
 								})
 							}
 						})

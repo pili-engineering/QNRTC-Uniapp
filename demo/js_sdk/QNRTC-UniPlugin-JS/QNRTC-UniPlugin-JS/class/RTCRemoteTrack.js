@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+exports.QNRemoteTrack = void 0;
 var RTCTrack_1 = require("./RTCTrack");
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRemoteTrack = (function (_super) {
@@ -26,5 +27,5 @@ var QNRemoteTrack = (function (_super) {
         return QNRtcTrack.isSubscribed(this.identifyID);
     };
     return QNRemoteTrack;
-}(RTCTrack_1["default"]));
-exports["default"] = QNRemoteTrack;
+}(RTCTrack_1.QNTrack));
+exports.QNRemoteTrack = QNRemoteTrack;

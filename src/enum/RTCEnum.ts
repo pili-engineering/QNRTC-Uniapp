@@ -26,8 +26,7 @@ export enum QNRTCPolicy {
    */
   forceTCP = 'forceTCP',
   /**
-   * 优先 UDP
-   * @remarks 不通的话自动改为 TCP
+   * 优先 UDP，不通的话自动改为 TCP
    */
   preferUDP = 'preferUDP'
 }
@@ -117,24 +116,21 @@ export enum QNConnectionState {
  */
 export enum QNRenderMode {
   /**
-   * FILL
-   * @remarks 不保持长宽比,图片在容器内完整显示出来
+   * 不保持长宽比,图片在容器内完整显示出来
    */
   FILL = 'FILL',
   /**
-   * ASPECT_FILL
-   * @remarks 在保持长宽比的前提下，缩放图片，使图片充满容器
+   * 在保持长宽比的前提下，缩放图片，使图片充满容器
    */
   ASPECT_FILL = 'ASPECT_FILL',
   /**
-   * ASPECT_FIT
-   * @remarks 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
+   * 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
    */
   ASPECT_FIT = 'ASPECT_FIT'
 }
 
 /**
- * 轨质量
+ * 大小流类型
  */
 export enum QNTrackProfile {
   /**
@@ -208,18 +204,15 @@ export enum QNConnectionDisconnectedReason {
  */
 export enum QNLiveStreamingErrorInfoType {
   /**
-   * 开始转推操作异常
-   * @remarks 请检查房间状态、单路转推配置等信息
+   * 开始转推操作异常，请检查房间状态、单路转推配置等信息
    */
   START = 'START',
   /**
-   * 停止转推操作异常
-   * @remarks 请检查房间状态
+   * 停止转推操作异常，请检查房间状态
    */
   STOP = 'STOP',
   /**
-   * 更改合流布局配置操作异常
-   * @remarks 请检查房间状态、合流布局配置等信息
+   * 更改合流布局配置操作异常，请检查房间状态、合流布局配置等信息
    */
   UPDATE = 'UPDATE'
 }
@@ -229,28 +222,23 @@ export enum QNLiveStreamingErrorInfoType {
  */
 export enum QNLiveStreamingErrorInfoCode {
   /**
-   * 无操作权限
-   * @remarks 请检查用户的操作权限
+   * 无操作权限，请检查用户的操作权限
    */
   ERROR_NO_PERMISSION = 'ERROR_NO_PERMISSION',
   /**
-   * 状态异常
-   * @remarks 请检查房间状态，加入房间后才可以创建转推任务
+   * 状态异常，请检查房间状态
    */
   ERROR_INVALID_STATE = 'ERROR_INVALID_STATE',
   /**
-   * 参数错误
-   * @remarks 请检查参数是否合法
+   * 参数错误，请检查参数是否合法
    */
   ERROR_INVALID_PARAMETER = 'ERROR_INVALID_PARAMETER',
   /**
-   * 操作超时
-   * @remarks 请重新尝试操作
+   * 操作超时，请重新尝试操作
    */
   ERROR_SIGNAL_TIMEOUT = 'ERROR_SIGNAL_TIMEOUT',
   /**
-   * 服务端错误
-   * @remarks 请重新尝试操作
+   * 服务端错误，请重新尝试操作
    */
   SERVER_ERROR = 'SERVER_ERROR'
 }
@@ -304,18 +292,15 @@ export enum QNVideoWaterMarkSize {
  */
 export enum QNAVCaptureVideoOrientation {
   /**
-   * 视频垂直定向
-   * @remarks 顶部位于手机顶部
+   * 视频垂直定向，顶部位于手机顶部
    */
   AVCaptureVideoOrientationPortrait = 'AVCaptureVideoOrientationPortrait',
   /**
-   * 视频水平定向
-   * @remarks 顶部位于手机右部
+   * 视频水平定向，顶部位于手机右部
    */
   AVCaptureVideoOrientationLandscapeRight = 'AVCaptureVideoOrientationLandscapeRight',
   /**
-   * 视频水平定向
-   * @remarks 顶部位于手机左部
+   * 视频水平定向，顶部位于手机左部
    */
   AVCaptureVideoOrientationLandscapeLeft = 'AVCaptureVideoOrientationLandscapeLeft'
 }
@@ -325,23 +310,19 @@ export enum QNAVCaptureVideoOrientation {
  */
 export enum QNVideoFillModeType {
   /**
-   * 默认填充
-   * @remarks 效果同 QNVideoFillModePreserveAspectRatioAndFill
+   * 默认填充，QNVideoFillModePreserveAspectRatioAndFill
    */
   QNVideoFillModeNone = 'QNVideoFillModeNone',
   /**
-   * QNVideoFillModeStretch
-   * @remarks 不保持长宽比，图片在容器内完整显示出来，可能会变形
+   * 不保持长宽比，图片在容器内完整显示出来，可能会变形
    */
   QNVideoFillModeStretch = 'QNVideoFillModeStretch',
   /**
-   * QNVideoFillModePreserveAspectRatio
-   * @remarks 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
+   * 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
    */
   QNVideoFillModePreserveAspectRatio = 'QNVideoFillModePreserveAspectRatio',
   /**
-   * QNVideoFillModePreserveAspectRatioAndFill
-   * @remarks 在保持长宽比的前提下，缩放图片，使图片充满容器
+   * 在保持长宽比的前提下，缩放图片，使图片充满容器
    */
   QNVideoFillModePreserveAspectRatioAndFill = 'QNVideoFillModePreserveAspectRatioAndFill'
 }
@@ -351,31 +332,31 @@ export enum QNVideoFillModeType {
  */
 export enum QNSessionPresetType {
   /**
-   * 352x288
+   * 采集分辨率 352x288
    */
   AVCaptureSessionPreset352x288 = 'AVCaptureSessionPreset352x288',
   /**
-   * 640x480
+   * 采集分辨率 640x480
    */
   AVCaptureSessionPreset640x480 = 'AVCaptureSessionPreset640x480',
   /**
-   * 1280x720
+   * 采集分辨率 1280x720
    */
   AVCaptureSessionPreset1280x720 = 'AVCaptureSessionPreset1280x720',
   /**
-   * 1920x1080
+   * 采集分辨率 1920x1080
    */
   AVCaptureSessionPreset1920x1080 = 'AVCaptureSessionPreset1920x1080',
   /**
-   * 3840x2160
+   * 采集分辨率 3840x2160
    */
   AVCaptureSessionPreset3840x2160 = 'AVCaptureSessionPreset3840x2160',
   /**
-   * 960x540
+   * 采集分辨率 960x540
    */
   AVCaptureSessionPresetiFrame960x540 = 'AVCaptureSessionPresetiFrame960x540',
   /**
-   * 1280x720
+   * 采集分辨率 1280x720
    */
   AVCaptureSessionPresetiFrame1280x720 = 'AVCaptureSessionPresetiFrame1280x720',
 }
@@ -404,11 +385,11 @@ export enum QNAudioMixerState {
 
 /**
  * 数据模式
- * @internal
+ * @internal 数据帧暂时使用不到
  */
 export enum QNVideoFrameType {
   /**
-   * NV21 数据类型
+   *  NV21 数据类型
    */
   YUV_NV21 = 'YUV_NV21',
   /**

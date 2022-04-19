@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+exports.QNLocalVideoTrack = void 0;
 var RTCLocalTrack_1 = require("./RTCLocalTrack");
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNLocalVideoTrack = (function (_super) {
@@ -26,5 +27,5 @@ var QNLocalVideoTrack = (function (_super) {
         return QNRtcTrack.sendSEI(this.identifyID, message, repeatCount, uuid);
     };
     return QNLocalVideoTrack;
-}(RTCLocalTrack_1["default"]));
-exports["default"] = QNLocalVideoTrack;
+}(RTCLocalTrack_1.QNLocalTrack));
+exports.QNLocalVideoTrack = QNLocalVideoTrack;

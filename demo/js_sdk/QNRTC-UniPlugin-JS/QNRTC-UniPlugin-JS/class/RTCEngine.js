@@ -21,65 +21,71 @@ var QNRtcEngine = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcEngine');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRTCClientPlugin = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
-var RTCEngine = (function () {
-    function RTCEngine() {
+var QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer');
+var QNRTC = (function () {
+    function QNRTC() {
     }
-    RTCEngine.on = function (name, listener) {
+    QNRTC.on = function (name, listener) {
         QNEvent.addEventListener(name, listener);
     };
-    RTCEngine.off = function (name, listener) {
+    QNRTC.off = function (name, listener) {
         QNEvent.removeEventListener(name, listener);
     };
-    RTCEngine.requestPermission = function (callback) {
+    QNRTC.requestPermission = function (callback) {
         return QNRtcTrack.requestPermission(callback);
     };
-    RTCEngine.isScreenCaptureSupported = function () {
+    QNRTC.isScreenCaptureSupported = function () {
         return QNRtcTrack.isScreenCaptureSupported();
     };
-    RTCEngine.configRTC = function (config) {
+    QNRTC.configRTC = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNRTCConfigurationPreset), config);
+		try{
+			QNRtcEngine.initDelegate();
+		}catch(e) {
+		}
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
+        QNRtcAudioMixer.initDelegate();
         return QNRtcEngine.configRTC(_config);
     };
-    RTCEngine.deinit = function () {
+    QNRTC.deinit = function () {
         return QNRtcEngine.deinit();
     };
-    RTCEngine.createClient = function () {
+    QNRTC.createClient = function () {
         QNRtcEngine.createRTCClient();
-        return new RTCClient_1["default"]();
+        return new RTCClient_1.QNRTCClient();
     };
-    RTCEngine.createMicrophoneAudioTrack = function (config) {
+    QNRTC.createMicrophoneAudioTrack = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNMicrophoneAudioTrackConfigPreset), config);
         var result = QNRtcEngine.createMicrophoneAudioTrack(_config);
-        return new RTCMicrophoneAudioTrack_1["default"](__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new RTCMicrophoneAudioTrack_1.QNMicrophoneAudioTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
-    RTCEngine.createCameraVideoTrack = function (config) {
+    QNRTC.createCameraVideoTrack = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNCameraVideoTrackConfigPreset), config);
         var result = QNRtcEngine.createCameraVideoTrack(_config);
-        return new RTCCameraVideoTrack_1["default"](__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new RTCCameraVideoTrack_1.QNCameraVideoTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
-    RTCEngine.createScreenVideoTrack = function (config) {
+    QNRTC.createScreenVideoTrack = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNScreenVideoTrackConfigPreset), config);
         var result = QNRtcEngine.createScreenVideoTrack(_config);
-        return new RTCScreenVideoTrack_1["default"](__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new RTCScreenVideoTrack_1.QNScreenVideoTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
-    RTCEngine.createCustomAudioTrack = function (config) {
+    QNRTC.createCustomAudioTrack = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNCustomAudioTrackConfigPreset), config);
         var result = QNRtcEngine.createCustomAudioTrack(_config);
-        return new RTCTrack_1["default"](__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new RTCTrack_1.QNTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
-    RTCEngine.createCustomVideoTrack = function (config) {
+    QNRTC.createCustomVideoTrack = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNCustomVideoTrackConfigPreset), config);
         var result = QNRtcEngine.createCustomVideoTrack(_config);
-        return new RTCTrack_1["default"](__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new RTCTrack_1.QNTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
-    RTCEngine.setAudioRouteToSpeakerphone = function (audioRouteToSpeakerphone) {
+    QNRTC.setAudioRouteToSpeakerphone = function (audioRouteToSpeakerphone) {
         return QNRtcEngine.setAudioRouteToSpeakerphone(audioRouteToSpeakerphone);
     };
-    RTCEngine.enableFileLogging = function () {
+    QNRTC.enableFileLogging = function () {
         return QNRtcEngine.enableFileLogging();
     };
-    return RTCEngine;
+    return QNRTC;
 }());
-exports["default"] = RTCEngine;
+exports["default"] = QNRTC;

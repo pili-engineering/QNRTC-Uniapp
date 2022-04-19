@@ -20,7 +20,7 @@ const store = new Vuex.Store({
 		token: "",
 		appID: "d8lk7l4ed",
 		userName: "1111",
-		roomID: "1111",
+		roomID: "uniapp",
 		policy: "forceUDP",
 		logLevel: "info",
 		stereo: 0,
@@ -106,6 +106,9 @@ const store = new Vuex.Store({
 					success(res) {
 						console.log(res.data)
 						state.token = res.data
+					},
+					fail(err) {
+						console.log(err)
 					}
 				})
 			}

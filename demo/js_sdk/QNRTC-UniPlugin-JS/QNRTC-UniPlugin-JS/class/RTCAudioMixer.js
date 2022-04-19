@@ -1,14 +1,31 @@
 "use strict";
 exports.__esModule = true;
-var QNRtcAudioMixer = uni.requireNativePlugin('QNRtcUniPlugin-QNRtcAudioMixer');
+var QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var RTCAudioMixer = (function () {
     function RTCAudioMixer(identifyID, url) {
+        this.variationList = ["onStateChanged"];
         this.identifyID = identifyID;
         this.url = url;
     }
+    RTCAudioMixer.prototype.createAudioMixerCallback = function (name, listener) {
+        if (name === "onStateChanged") {
+            var variationCallback = function (params) {
+                if (params.state) {
+                    listener(params);
+                }
+            };
+            return variationCallback;
+        }
+    };
     RTCAudioMixer.prototype.on = function (name, listener) {
-        QNEvent.addEventListener(name, listener);
+        if (this.variationList.some(function (item) { return item === name; })) {
+            var callback = this.createAudioMixerCallback(name, listener);
+            QNEvent.addEventListener(name, callback);
+        }
+        else {
+            QNEvent.addEventListener(name, listener);
+        }
     };
     RTCAudioMixer.prototype.off = function (name, listener) {
         QNEvent.removeEventListener(name, listener);

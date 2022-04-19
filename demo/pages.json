@@ -31,6 +31,12 @@
 			}
 		},
 		{
+			"path": "pages/audio-mixer/index",
+			"style": {
+				"navigationBarTitleText": "混音配置"
+			}
+		},
+		{
 			"path": "pages/setting/index",
 			"style": {
 				"navigationBarTitleText": "配置"
