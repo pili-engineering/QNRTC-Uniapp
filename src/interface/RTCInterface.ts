@@ -1,7 +1,22 @@
-import { QNRTCCameraFacing, QNRTCPolicy, QNRTCBwePolicy, QNRTCTrackKind, QNRenderMode, QNTrackProfile, QNNetworkGrade, QNConnectionDisconnectedReason, QNLiveStreamingErrorInfoCode, QNLiveStreamingErrorInfoType, QNRTCLogLevel, QNVideoWaterMarkSize, QNSessionPresetType, QNVideoFrameType } from '../enum/RTCEnum'
-import { QNRemoteAudioTrack } from '../class/RTCRemoteAudioTrack'
-import { QNRemoteVideoTrack } from '../class/RTCRemoteVideoTrack'
-export * from '../enum/RTCEnum'
+import {
+  QNRTCCameraFacing,
+  QNRTCPolicy,
+  QNRTCBwePolicy,
+  QNRTCTrackKind,
+  QNRenderMode,
+  QNTrackProfile,
+  QNNetworkGrade,
+  QNConnectionDisconnectedReason,
+  QNLiveStreamingErrorInfoCode,
+  QNLiveStreamingErrorInfoType,
+  QNRTCLogLevel,
+  QNVideoWaterMarkSize,
+  QNSessionPresetType,
+  QNVideoFrameType,
+} from "../enum/RTCEnum";
+import { QNRemoteAudioTrack } from "../class/RTCRemoteAudioTrack";
+import { QNRemoteVideoTrack } from "../class/RTCRemoteVideoTrack";
+export * from "../enum/RTCEnum";
 
 /**
  * QNRTC 初始化配置项
@@ -11,59 +26,58 @@ export interface QNRTCConfiguration {
    * 媒体流的连接方式
    * @defaultValue `QNRTCPolicy.forceUDP`
    */
-  policy: QNRTCPolicy,
+  policy: QNRTCPolicy;
   /**
    * 日志等级
    * @defaultValue `QNRTCLogLevel.info`
    */
-  logLevel: QNRTCLogLevel,
+  logLevel: QNRTCLogLevel;
   /**
    * 是否使用立体声
+   * @defaultValue false
    * @remarks 只支持ios
-   * @defaultValue `false`
    */
-  stereo?: boolean,
+  stereo?: boolean;
   /**
    * 带宽评估策略
-   * @remarks 只支持ios
    * @defaultValue `QNRTCBwePolicy.TCC`
-   */
-  bwePolicy?: QNRTCBwePolicy,
-  /**
-   * 是否允许和其它音频一起播放
    * @remarks 只支持ios
-   * @defaultValue `true`
    */
-  allowAudioMixWithOthers?: boolean,
+  bwePolicy?: QNRTCBwePolicy;
+  /**
+   *  是否允许和其它音频一起播放
+   * @defaultValue true
+   * @remarks 只支持ios
+   */
+  allowAudioMixWithOthers?: boolean;
   /**
    * 是否开启硬编
+   * @defaultValue true
    * @remarks 只支持安卓
-   * @defaultValue `true`
    */
-  hWCodecEnabled?: boolean,
+  hWCodecEnabled?: boolean;
   /**
    * 是否固定分辨率
+   * @defaultValue false
    * @remarks 只支持安卓
-   * @defaultValue `false`
    */
-  maintainResolution?: boolean,
+  maintainResolution?: boolean;
   /**
    * 扩展配置
    * @remarks 只支持安卓
    */
-  fieldTrials?: string,
+  fieldTrials?: string;
   /**
    * 是否开启质量模式
+   * @defaultValue false
    * @remarks 只支持安卓
-   * @defaultValue `false`
    */
-  encoderQualityMode?: boolean,
+  encoderQualityMode?: boolean;
   /**
    * 是否开启ACE3
+   * @defaultValue true
    * @remarks 只支持安卓
-   * @defaultValue `true`
    */
-  isAEC3Enabled?: boolean
 }
 
 /**
@@ -74,140 +88,139 @@ export interface QNMicrophoneAudioTrackConfig {
    * tag 标记
    * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
    */
-  tag: string,
+  tag?: string;
   /**
-   * 码率
-   * @remarks 单位 kbps
-   * @defaultValue `24`
+   * 码率 (单位 kbps)
+   * @defaultValue 24
    */
-  bitrate: number,
+  bitrate: number;
   /**
    * 位宽
-   * @remarks 单位 bit，只支持安卓
-   * @defaultValue `16`
+   * @defaultValue 16
+   * @remarks 只支持安卓
    */
-  bitsPerSample?: number,
+  bitsPerSample?: number;
   /**
    * 声道数
+   * @defaultValue 1
    * @remarks 只支持安卓
-   * @defaultValue `1`
    */
-  channelCount?: number,
+  channelCount?: number;
   /**
-   * 采样率，
-   * @remarks 单位 kHz，只支持安卓
-   * @defaultValue `48000`
+   * 采样率（单位 KHz）
+   * @defaultValue 48000
+   * @remarks 只支持安卓
    */
-  sampleRate?: number,
+  sampleRate?: number;
   /**
    * 是否开启通话模式
+   * @defaultValue true
    * @remarks 只支持安卓
-   * @defaultValue `true`
    */
-  communicationModeOn?: boolean
+  communicationModeOn?: boolean;
 }
 
 /**
  * 自定义音频采集配置
- * @internal
+ * @internal 暂不支持自定义 track
  */
 export interface QNCustomAudioTrackConfig {
   /**
-  * tag 标记
-  * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
-  */
-  tag: string,
-  /**
-   * 码率
-   * @remarks 单位 kbps
-   * @defaultValue `24`
+   * tag 标记
+   * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
    */
-  bitrate: number,
+  tag?: string;
+  /**
+   * 码率 (单位 kbps)
+   * @defaultValue 24
+   */
+  bitrate: number;
   /**
    * 位宽
-   * @remarks 单位 bit，只支持安卓
-   * @defaultValue `16`
+   * @defaultValue 16
+   * @remarks 只支持安卓
    */
-  bitsPerSample?: number,
+  bitsPerSample?: number;
   /**
    * 声道数
+   * @defaultValue 1
    * @remarks 只支持安卓
-   * @defaultValue `1`
    */
-  channelCount?: number,
+  channelCount?: number;
   /**
-   * 采样率，
-   * @remarks 单位 kHz，只支持安卓
-   * @defaultValue `48000`
+   * 采样率（单位 KHz）
+   * @defaultValue 48000
+   * @remarks 只支持安卓
    */
-  sampleRate?: number,
+  sampleRate?: number;
 }
 
 /**
- * 摄像头采集配置项
+ * QNCameraVideoTrackConfig
+ * @description 摄像头采集配置项
+ * @namespace
  */
 export interface QNCameraVideoTrackConfig {
   /**
    * tag 标记
    * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
    */
-  tag: string,
+  tag?: string;
   /**
-   * 码率
-   * @remarks 单位 kbps
-   * @defaultValue `24`
+   * 码率 (单位 kbps)
+   * @defaultValue 24
    */
-  bitrate: number,
+  bitrate: number;
   /**
    * 编码宽度
-   * @defaultValue `640`
+   * @defaultValue 640
    */
-  width: number,
+  width: number;
   /**
    * 编码高度
-   * @defaultValue `480`
+   * @defaultValue 480
    */
-  height: number,
+  height: number;
   /**
    * 是否开启大小流
-   * @defaultValue `false`
+   * @defaultValue false
    */
-  multiStreamEnable: boolean,
+  multiStreamEnable: boolean;
   /**
    * 选择前后置摄像头
    * @defaultValue `QNRTCCameraFacing.front`
    */
-  cameraFacing: QNRTCCameraFacing,
+  cameraFacing: QNRTCCameraFacing;
   /**
    * 帧率
+   * @defaultValue 20
    * @remarks 只支持安卓
-   * @defaultValue `20`
    */
-  frameRate?: number,
+  frameRate?: number;
   /**
    * 采集宽度
+   * @defaultValue 640
    * @remarks 只支持安卓
-   * @defaultValue `640`
    */
-  captureWidth?: number,
+  captureWidth?: number;
   /**
    * 采集高度
+   * @defaultValue 480
    * @remarks 只支持安卓
-   * @defaultValue `480`
    */
-  captureHeight?: number,
+  captureHeight?: number;
   /**
    * 采集帧率
+   * @defaultValue 20
    * @remarks 只支持安卓
-   * @defaultValue `20`
    */
-  captureFrameRate?: number,
+  captureFrameRate?: number;
   /**
    * 采集分辨率
-   * @remarks 只支持ios（ios只支持固定枚举值）
    * @defaultValue `QNSessionPresetType.AVCaptureSessionPreset640x480`
+   * @remarks 只支持ios（ios只支持固定枚举值）
    */
-  sessionPreset: QNSessionPresetType
+  sessionPreset: QNSessionPresetType;
 }
 
 /**
@@ -218,73 +231,71 @@ export interface QNScreenVideoTrackConfig {
    * tag 标记
    * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
    */
-  tag: string,
+  tag?: string;
   /**
-   * 码率
-   * @remarks 单位 kbps
-   * @defaultValue `24`
+   * 码率 (单位 kbps)
+   * @defaultValue 24
    */
-  bitrate: number,
+  bitrate: number;
   /**
    * 编码宽度
-   * @defaultValue `640`
+   * @defaultValue 640
    */
-  width: number,
+  width: number;
   /**
    * 编码高度
-   * @defaultValue `480`
+   * @defaultValue 480
    */
-  height: number,
+  height: number;
   /**
    * 是否开启大小流
-   * @defaultValue `false`
+   * @defaultValue false
    */
-  multiStreamEnable: boolean,
+  multiStreamEnable: boolean;
   /**
    * 帧率
+   * @defaultValue 20
    * @remarks 只支持安卓
-   * @defaultValue `20`
    */
-  frameRate?: number,
+  frameRate?: number;
 }
 
 /**
  * 自定义视频采集配置项
- * @internal
+ * @internal 暂不支持自定义 track
  */
 export interface QNCustomVideoTrackConfig {
   /**
    * tag 标记
    * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
    */
-  tag: string,
+  tag?: string;
   /**
-   * 码率
-   * @remarks 单位 kbps
-   * @defaultValue `24`
+   * 码率 (单位 kbps)
+   * @defaultValue 24
    */
-  bitrate: number,
+  bitrate: number;
   /**
    * 编码宽度
-   * @defaultValue `640`
+   * @defaultValue 640
    */
-  width: number,
+  width: number;
   /**
    * 编码高度
-   * @defaultValue `480`
+   * @defaultValue 480
    */
-  height: number,
+  height: number;
   /**
    * 是否开启大小流
-   * @defaultValue `false`
+   * @defaultValue false
    */
-  multiStreamEnable: boolean,
+  multiStreamEnable: boolean;
   /**
    * 帧率
+   * @defaultValue 20
    * @remarks 只支持安卓
-   * @defaultValue `20`
    */
-  frameRate?: number,
+  frameRate?: number;
 }
 
 /**
@@ -293,23 +304,24 @@ export interface QNCustomVideoTrackConfig {
  */
 export interface QNUNILocalTrack {
   /**
-   * 前端与原生端通讯调用接口的凭证，内部使用该id
+   * identifyID
+   * @remarks 前端与原生端通讯调用接口的凭证，内部使用该id
    */
-  identifyID: string,
+  identifyID: string;
   /**
-   * track ID
+   * trackID
    * @remarks 只有在发布成功后，才会有 trackID
    */
-  trackID: string,
+  trackID: string;
   /**
    * track 的类型
    */
-  kind: QNRTCTrackKind,
+  kind: QNRTCTrackKind;
   /**
    * tag 标记
    * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
    */
-  tag: string
+  tag: string;
 }
 
 /**
@@ -320,20 +332,20 @@ export interface QNUNIRemoteTrack {
   /**
    * 发布该 track 的 用户 ID
    */
-  userID: string,
+  userID: string;
   /**
-   * track ID
+   * trackID
    */
-  trackID: string,
+  trackID: string;
   /**
    * track 的类型
    */
-  kind: QNRTCTrackKind,
+  kind: QNRTCTrackKind;
   /**
    * tag 标记
    * @remarks SDK 会将其透传到远端，当发布多路 Track 时可用 tag 来作区分
    */
-  tag: string
+  tag: string;
 }
 
 /**
@@ -343,15 +355,15 @@ export interface QNLocalAudioTrackStats {
   /**
    * 上行音频码率
    */
-  uplinkBitrate: number,
+  uplinkBitrate: number;
   /**
    * 上行网络 rtt
    */
-  uplinkRTT: number,
+  uplinkRTT: number;
   /**
    * 上行网络丢包率
    */
-  uplinkLostRate: number
+  uplinkLostRate: number;
 }
 
 /**
@@ -359,25 +371,25 @@ export interface QNLocalAudioTrackStats {
  */
 export interface QNLocalVideoTrackStats {
   /**
-   * track 质量
+   * track 大小流类型
    */
-  profile: QNTrackProfile,
+  profile: QNTrackProfile;
   /**
    * 上行帧率
    */
-  uplinkFrameRate: number,
+  uplinkFrameRate: number;
   /**
    * 上行视频码率
    */
-  uplinkBitrate: number,
+  uplinkBitrate: number;
   /**
    * 上行网络 rtt
    */
-  uplinkRTT: number,
+  uplinkRTT: number;
   /**
    * 上行网络丢包率
    */
-  uplinkLostRate: number
+  uplinkLostRate: number;
 }
 
 /**
@@ -387,19 +399,19 @@ export interface QNRemoteAudioTrackStats {
   /**
    * 下行音频码率
    */
-  downlinkBitrate: number,
+  downlinkBitrate: number;
   /**
    * 下行网络丢包率
    */
-  downlinkLostRate: number,
+  downlinkLostRate: number;
   /**
    * 上行网络 rtt
    */
-  uplinkRTT: number,
+  uplinkRTT: number;
   /**
    * 上行网络丢包率
    */
-  uplinkLostRate: number
+  uplinkLostRate: number;
 }
 
 /**
@@ -409,27 +421,27 @@ export interface QNRemoteVideoTrackStats {
   /**
    * track 质量
    */
-  profile: QNTrackProfile,
+  profile: QNTrackProfile;
   /**
    * 下行帧率
    */
-  downlinkFrameRate: number,
+  downlinkFrameRate: number;
   /**
    * 下行视频码率
    */
-  downlinkBitrate: number,
+  downlinkBitrate: number;
   /**
    * 下行网络丢包率
    */
-  downlinkLostRate: number,
+  downlinkLostRate: number;
   /**
    * 上行网络 rtt
    */
-  uplinkRTT: number,
+  uplinkRTT: number;
   /**
    * 上行网络丢包率
    */
-  uplinkLostRate: number
+  uplinkLostRate: number;
 }
 
 /**
@@ -439,33 +451,34 @@ export interface QNNetworkQuality {
   /**
    * 上行网络质量
    */
-  uplinkNetworkGrade: QNNetworkGrade,
+  uplinkNetworkGrade: QNNetworkGrade;
   /**
    * 下行网络质量
    */
-  downlinkNetworkGrade: QNNetworkGrade
+  downlinkNetworkGrade: QNNetworkGrade;
 }
 
 /**
- * 用于原生与前端通讯的远端用户信息
+ *  用于原生与前端通讯的远端用户信息
+ * @internal
  */
 export interface QNUNIRemoteUser {
   /**
    * 用户 ID
    */
-  userID: string,
+  userID: string;
   /**
    * 用户所发布的视频 track 列表
    */
-  videoTracks: QNUNIRemoteTrack[],
+  videoTracks: QNUNIRemoteTrack[];
   /**
    * 用户所发布的音频 track 列表
    */
-  audioTracks: QNUNIRemoteTrack[],
+  audioTracks: QNUNIRemoteTrack[];
   /**
    * 自定义用户数据
    */
-  userData: string
+  userData: string;
 }
 
 /**
@@ -475,19 +488,19 @@ export interface QNRemoteUser {
   /**
    * 用户 ID
    */
-  userID: string,
+  userID: string;
   /**
    * 用户所发布的视频 track 列表
    */
-  videoTracks: QNRemoteVideoTrack[],
+  videoTracks: QNRemoteVideoTrack[];
   /**
    * 用户所发布的音频 track 列表
    */
-  audioTracks: QNRemoteAudioTrack[],
+  audioTracks: QNRemoteAudioTrack[];
   /**
    * 自定义用户数据
    */
-  userData: string
+  userData: string;
 }
 
 /**
@@ -497,19 +510,19 @@ export interface QNDirectLiveStreamingConfig {
   /**
    * 自定义 CDN 转推流 ID
    */
-  streamID: string,
+  streamID: string;
   /**
    * CDN 转推地址
    */
-  url: string,
+  url: string;
   /**
    * 需要转推的 audio trackID
    */
-  audioTracks: string,
+  audioTracks: string;
   /**
    * 需要转推的 video trackID
    */
-  videoTracks: string
+  videoTracks: string;
 }
 
 /**
@@ -519,23 +532,23 @@ export interface QNTranscodingLiveStreamingImage {
   /**
    * 合流图片或背景图片 url
    */
-  url: string,
+  url: string;
   /**
    * 合流画布中 x 轴位置
    */
-  x: number,
+  x: number;
   /**
    * 合流画布中 y 轴位置
    */
-  y: number,
+  y: number;
   /**
    * 图片宽度
    */
-  w: number,
+  w: number;
   /**
    * 图片高度
    */
-  h: number
+  h: number;
 }
 
 /**
@@ -545,51 +558,51 @@ export interface QNTranscodingLiveStreamingConfig {
   /**
    * 自定义合流 ID
    */
-  streamID: string,
+  streamID: string;
   /**
    * 合流的转推地址
    */
-  url: string,
+  url: string;
   /**
    * 图像的宽度
    */
-  width: number,
+  width: number;
   /**
    * 图像的高度
    */
-  height: number,
+  height: number;
   /**
    * 帧率
    */
-  videoFrameRate: number,
+  videoFrameRate: number;
   /**
    * 码率
    */
-  bitrate: number,
+  bitrate: number;
   /**
    * 最小码率
    */
-  minBitrate: number,
+  minBitrate: number;
   /**
    * 最大码率
    */
-  maxBitrate: number,
+  maxBitrate: number;
   /**
    * 图像的填充模式
    */
-  renderMode: QNRenderMode,
+  renderMode: QNRenderMode;
   /**
    * 水印设置信息
    */
-  watermarks: QNTranscodingLiveStreamingImage[],
+  watermarks: QNTranscodingLiveStreamingImage[];
   /**
    * 背景图片信息
    */
-  background: QNTranscodingLiveStreamingImage,
+  background: QNTranscodingLiveStreamingImage;
   /**
    * 是否在 Track 没有数据的情况下在合流画布中保持最后一帧
    */
-  holdLastFrame: boolean
+  holdLastFrame: boolean;
 }
 
 /**
@@ -599,42 +612,42 @@ export interface QNTranscodingLiveStreamingTrack {
   /**
    * 当前要操作的 Track 的 id
    */
-  trackID: string,
+  trackID: string;
   /**
-   * 该 Track 在合流画面中 x 轴位置
-   * @remarks 该属性仅对视频 Track 有效
+   * x 轴距离
+   * @remarks 该 Track 在合流画面中 x 轴位置，该属性仅对视频 Track 有效
    */
-  x: number,
+  x: number;
   /**
-   * 该 Track 在合流画面中 y 轴位置
-   * @remarks 该属性仅对视频 Track 有效
+   * y 轴距离
+   * @remarks 该 Track 在合流画面中 y 轴位置，该属性仅对视频 Track 有效
    */
-  y: number,
+  y: number;
   /**
-   * 该 Track 在合流画面中宽度
-   * @remarks 该属性仅对视频 Track 有效
+   * 宽度
+   * @remarks 该 Track 在合流画面中宽度，该属性仅对视频 Track 有效
    */
-  width: number,
+  width: number;
   /**
-   * 该 Track 在合流画面中高度
-   * @remarks 该属性仅对视频 Track 有效
+   * 高度
+   * @remakrs 该 Track 在合流画面中高度，该属性仅对视频 Track 有效
    */
-  height: number,
+  height: number;
   /**
-   * 该 Track 在合流画面中的层次，0 为最底层
-   * @remarks 该属性仅对视频 Track 有效
+   * 层级
+   * @remarks 该 Track 在合流画面中的层次，0 为最底层。该属性仅对视频 Track 有效。
    */
-  zOrder: number,
+  zOrder: number;
   /**
    * 图像的填充模式
    * @remarks 默认设置填充模式将继承 QNTranscodingLiveStreamingConfig 中数值
    */
-  renderMode: QNRenderMode,
+  renderMode: QNRenderMode;
   /**
-   * 是否在合流中添加视频 Track 的 SEI 内容
-   * @remarks 针对所有合流视频 Track，默认只能设置一路 SEI
+   * 开启 SEI
+   * @remarks 是否在合流中添加视频 Track 的 SEI 内容，针对所有合流视频 Track，默认只能设置一路 SEI
    */
-  SEIEnabled: boolean
+  SEIEnabled: boolean;
 }
 
 /**
@@ -644,15 +657,15 @@ export interface QNConnectionDisconnectedInfo {
   /**
    * 断开连接原因
    */
-  reason: QNConnectionDisconnectedReason,
+  reason: QNConnectionDisconnectedReason;
   /**
    * 错误信息
    */
-  errorMessage: string,
+  errorMessage: string;
   /**
    * 错误码
    */
-  errorCode: number
+  errorCode: number;
 }
 
 /**
@@ -662,19 +675,19 @@ export interface QNCustomMessage {
   /**
    * 消息 ID
    */
-  id: string,
+  id: string;
   /**
    * 发送消息的用户 ID
    */
-  userId: string,
+  userId: string;
   /**
    * 消息内容
    */
-  content: string,
+  content: string;
   /**
    * 时间戳
    */
-  timestamp: number
+  timestamp: number;
 }
 
 /**
@@ -684,15 +697,15 @@ export interface QNLiveStreamingErrorInfo {
   /**
    * 触发错误归属类型
    */
-  type: QNLiveStreamingErrorInfoType,
+  type: QNLiveStreamingErrorInfoType;
   /**
    * 触发错误归属 code 码
    */
-  code: QNLiveStreamingErrorInfoCode,
+  code: QNLiveStreamingErrorInfoCode;
   /**
    * 错误信息
    */
-  message?: string
+  message?: string;
 }
 
 /**
@@ -702,22 +715,22 @@ export interface QNBeautySetting {
   /**
    * 是否开启美颜
    */
-  enabled: boolean,
+  enabled: boolean;
   /**
    * 美颜程度
    * @remarks 范围从 0 - 1
    */
-  smoothLevel: number,
+  smoothLevel: number;
   /**
    * 美白程度
    * @remarks 范围从 0 - 1
    */
-  whiten: number,
+  whiten: number;
   /**
    * 红润程度
    * @remarks 范围从 0 - 1
    */
-  redden: number
+  redden: number;
 }
 
 /**
@@ -728,26 +741,26 @@ export interface QNVideoWaterMark {
    * 水印尺寸
    * @remarks 只支持安卓
    */
-  waterMarkRelativeSize: QNVideoWaterMarkSize,
+  waterMarkRelativeSize: QNVideoWaterMarkSize;
   /**
    * 本地图片地址
    */
-  resourcePath: string,
+  resourcePath: string;
   /**
-   * 水印在 track 中 x 轴的绝对距离
-   * @remarks 轴绝对位置，范围 0 - 1
+   * x 轴距离
+   * @remarks 水印在 track 中 x 轴的绝对距离，轴绝对位置，范围 0 - 1
    */
-  x: number,
+  x: number;
   /**
-   * 水印在 track 中 y 轴的绝对距离
-   * @remarks 轴绝对位置，范围 0 - 1
+   * y 轴距离
+   * @remarks 水印在 track 中 y 轴的绝对距离，轴绝对位置，范围 0 - 1
    */
-  y: number,
+  y: number;
   /**
    * 透明度
    * @remarks 只支持安卓
    */
-  alpha: number
+  alpha: number;
 }
 
 /**
@@ -757,76 +770,79 @@ export interface QNImage {
   /**
    * 本地图片地址
    */
-  resourcePath: string,
+  resourcePath: string;
   /**
    * 图片宽度
    */
-  width: number,
+  width: number;
   /**
    * 图片高度
    */
-  height: number
+  height: number;
 }
 
 /**
- * 混音音频帧数据，性能原因，暂不支持
- * @internal
+ * 音频数据描述
+ * @internal 混音音频帧数据，性能原因，暂不支持
  */
 export interface QNAudioStreamBasicDescription {
-  sampleRate: number,
-  formatID: number,
-  formatFlags: number,
-  bytesPerPacket: number,
-  framesPerPacket: number,
-  bytesPerFrame: number,
-  channelsPerFrame: number,
-  bitsPerChannel: number,
-  reserved: number
+  sampleRate: number;
+  formatID: number;
+  formatFlags: number;
+  bytesPerPacket: number;
+  framesPerPacket: number;
+  bytesPerFrame: number;
+  channelsPerFrame: number;
+  bitsPerChannel: number;
+  reserved: number;
 }
 
 /**
- * 纹理数据回调，暂不支持
- * @internal
+ * 纹理数据
+ * @internal 纹理数据回调，前端无法直接操作原生内存信息，暂不支持
  */
 export interface QNTextureFrame {
-  textureID: number,
-  type: QNVideoFrameType,
-  width: number,
-  height: number,
-  rotation: number,
-  timestampNs: number,
-  transformMatrix: number[]
+  textureID: number;
+  type: QNVideoFrameType;
+  width: number;
+  height: number;
+  rotation: number;
+  timestampNs: number;
+  transformMatrix: number[];
 }
 
 /**
- * YUV数据帧回调，暂不支持
- * @internal
+ * YUV 原数据
+ * @internal YUV数据帧回调，需要通过转 base64 再转 Uint8Array，会造成卡顿，暂不支持
  */
 export interface QNYUVFrame {
-  data: string,
-  type: QNVideoFrameType,
-  width: number,
-  height: number,
-  rotation: number,
-  timestampNs: number
+  data: string;
+  type: QNVideoFrameType;
+  width: number;
+  height: number;
+  rotation: number;
+  timestampNs: number;
 }
 
 /**
- * 音频数据帧回调，性能原因，暂不支持
- * @internal
+ * 音频帧数据
+ * @internal 音频数据帧回调，性能原因，暂不支持
  */
 export interface QNAudioFrame {
-  data: string,
-  size: number,
-  bitsPerSample: number,
-  sampleRate: number,
-  numberOfChannels: number
+  data: string;
+  size: number;
+  bitsPerSample: number;
+  sampleRate: number;
+  numberOfChannels: number;
 }
 
+
 /**
- * trackID 为 key ，TrackStateType 为 value 的 map 对象
- * @internal
+ * 发布失败信息
+ * @param message 失败原因
+ * @param code 失败错误码
  */
-export interface QNTrackStateList<TrackStateType> {
-  [trackID: string]: TrackStateType
+export interface QNPublishResultError {
+  message: string;
+  code: number
 }

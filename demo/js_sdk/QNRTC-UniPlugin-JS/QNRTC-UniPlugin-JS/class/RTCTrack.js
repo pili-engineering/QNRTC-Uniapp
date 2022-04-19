@@ -11,6 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 exports.__esModule = true;
+exports.QNTrack = void 0;
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNTrack = (function () {
@@ -41,4 +42,4 @@ var QNTrack = (function () {
     };
     return QNTrack;
 }());
-exports["default"] = QNTrack;
+exports.QNTrack = QNTrack;

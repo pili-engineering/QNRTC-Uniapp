@@ -1,6 +1,6 @@
 {
   "name": "qnrtc-uniapp-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "qnrtc sdk for uniapp",
   "main": "lib/RTCIndex.native.js",
   "types": "type/RTCIndex.native.d.ts",
@@ -8,8 +8,7 @@
     "build": "webpack",
     "start": "tsc --watch",
     "prepare": "npx husky install",
-    "eslint": "eslint 'src/**'",
-    "doc": "api-extractor run --local --verbose && api-documenter markdown"
+    "eslint": "eslint 'src/**'"
   },
   "repository": {
     "type": "git",

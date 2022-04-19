@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+exports.QNRemoteVideoTrack = void 0;
 var RTCRemoteTrack_1 = require("./RTCRemoteTrack");
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRemoteVideoTrack = (function (_super) {
@@ -32,5 +33,5 @@ var QNRemoteVideoTrack = (function (_super) {
         return QNRtcTrack.getProfile(this.identifyID);
     };
     return QNRemoteVideoTrack;
-}(RTCRemoteTrack_1["default"]));
-exports["default"] = QNRemoteVideoTrack;
+}(RTCRemoteTrack_1.QNRemoteTrack));
+exports.QNRemoteVideoTrack = QNRemoteVideoTrack;

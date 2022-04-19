@@ -1,6 +1,6 @@
 import { QNRTCConfigurationPreset, QNMicrophoneAudioTrackConfigPreset, QNCustomAudioTrackConfigPreset, QNCameraVideoTrackConfigPreset, QNScreenVideoTrackConfigPreset, QNCustomVideoTrackConfigPreset, QNScreenPermissionResultCallback } from '../RTCPreset'
 import { QNRTCConfiguration, QNMicrophoneAudioTrackConfig, QNUNILocalTrack, QNCustomAudioTrackConfig, QNCameraVideoTrackConfig, QNScreenVideoTrackConfig, QNCustomVideoTrackConfig } from '../interface/RTCInterface'
-import { RTCClient as QNRTCClient } from './RTCClient'
+import { QNRTCClient } from './RTCClient'
 import { QNCameraVideoTrack } from './RTCCameraVideoTrack'
 import { QNMicrophoneAudioTrack } from './RTCMicrophoneAudioTrack'
 import { QNScreenVideoTrack } from './RTCScreenVideoTrack'
@@ -18,17 +18,17 @@ const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNRTCClientPlugin = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient')
-/**
- * RTCEngine 是 SDK 的入口
- * @remarks 提供了 SDK 配置，创建本地音视频轨道，创建房间对象等一系列方法
- */
-export class RTCEngine {
+// @ts-ignore
+// eslint-disable-next-line no-undef
+const QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer')
+export default class QNRTC {
   /**
-   * 监听对应的事件，支持多次调用同一事件
+   * 监听对应的事件
+   * @remarks 支持多次调用同一事件
    * @param name 事件名
    * @param listener 事件句柄
    */
-  static on<event extends keyof QNRTCEngineEvent>(name: event, listener: QNRTCEngineEvent[event]): void {
+  static on<event extends keyof QNRTCEngineEvent> (name: event, listener: QNRTCEngineEvent[event]): void {
     QNEvent.addEventListener(name, listener)
   }
 
@@ -37,7 +37,7 @@ export class RTCEngine {
    * @param name 事件名
    * @param listener 事件句柄
    */
-  static off<event extends keyof QNRTCEngineEvent>(name: event, listener: QNRTCEngineEvent[event]): void {
+  static off<event extends keyof QNRTCEngineEvent> (name: event, listener: QNRTCEngineEvent[event]): void {
     QNEvent.removeEventListener(name, listener)
   }
 
@@ -46,16 +46,16 @@ export class RTCEngine {
    * @remarks 只支持安卓，创建 QNScreenVideoTrack 前安卓需要调用此接口获取对应权限
    * @param callback 请求录屏权限后回调
    */
-  static requestPermission(callback: QNScreenPermissionResultCallback): void {
+  static requestPermission (callback: QNScreenPermissionResultCallback): void {
     return QNRtcTrack.requestPermission(callback)
   }
 
   /**
-   * 请判断屏幕录制功能是否可用
+   * 判断屏幕录制功能是否可用
    * @remarks 建议创建 QNScreenVideoTrack 前先调用次接口确认是否支持录屏
    * @returns 可用 1 不可用 0
    */
-  static isScreenCaptureSupported(): number {
+  static isScreenCaptureSupported (): number {
     return QNRtcTrack.isScreenCaptureSupported()
   }
 
@@ -64,13 +64,18 @@ export class RTCEngine {
    * @remarks 必须在使用其它接口前调用
    * @param config 初始化配置项
    */
-  static configRTC(config: QNRTCConfiguration): void {
+  static configRTC (config: QNRTCConfiguration): void {
     const _config = {
       ...QNRTCConfigurationPreset,
       ...config
     }
+    // 安卓目前无该方法，可能造成crach
+    try{
+      QNRtcEngine.initDelegate()
+    }catch(e) {}
     QNRtcTrack.initDelegate()
     QNRTCClientPlugin.initDelegate()
+    QNRtcAudioMixer.initDelegate()
     return QNRtcEngine.configRTC(_config)
   }
 
@@ -78,7 +83,7 @@ export class RTCEngine {
    * 反初始化操作
    * @remarks 在确认不再使用实时音视频后调用此接口释放其占用的资源，此后如果再使用需要再次调用 configRTC 方法
    */
-  static deinit(): void {
+  static deinit (): void {
     return QNRtcEngine.deinit()
   }
 
@@ -87,7 +92,7 @@ export class RTCEngine {
    * @remarks 全局只可存在一个
    * @returns RTC 管理对象
    */
-  static createClient(): QNRTCClient {
+  static createClient (): QNRTCClient {
     QNRtcEngine.createRTCClient()
     return new QNRTCClient()
   }
@@ -98,7 +103,7 @@ export class RTCEngine {
    * @param config 采集音频的配置，可指定音频质量等级与开关通讯模式
    * @returns Track 实例
    */
-  static createMicrophoneAudioTrack(config: QNMicrophoneAudioTrackConfig): QNMicrophoneAudioTrack {
+  static createMicrophoneAudioTrack (config: QNMicrophoneAudioTrackConfig): QNMicrophoneAudioTrack {
     const _config = {
       ...QNMicrophoneAudioTrackConfigPreset,
       ...config
@@ -118,7 +123,7 @@ export class RTCEngine {
    * @param config 摄像头 Track 的配置，可设置视频的采集配置、编码配置等
    * @returns QNCameraVideoTrack 实例
    */
-  static createCameraVideoTrack(config: QNCameraVideoTrackConfig): QNCameraVideoTrack {
+  static createCameraVideoTrack (config: QNCameraVideoTrackConfig): QNCameraVideoTrack {
     const _config = {
       ...QNCameraVideoTrackConfigPreset,
       ...config
@@ -138,7 +143,7 @@ export class RTCEngine {
    * @param config 屏幕录制 Track 的配置，可设置视频的编码配置与开关大小流功能
    * @returns QNScreenVideoTrack 实例
    */
-  static createScreenVideoTrack(config: QNScreenVideoTrackConfig): QNScreenVideoTrack {
+  static createScreenVideoTrack (config: QNScreenVideoTrackConfig): QNScreenVideoTrack {
     const _config = {
       ...QNScreenVideoTrackConfigPreset,
       ...config
@@ -154,12 +159,12 @@ export class RTCEngine {
 
   /**
    * 创建自定义音频轨
-   * @remakrs 默认 tag 为 ""，暂不支持自定义轨
-   * @internal
+   * @internal 暂不支持自定义轨
+   * @remarks 默认 tag 为 ""
    * @param config 采集音频的配置，可指定音频质量等级
    * @returns Track 实例
    */
-  static createCustomAudioTrack(config: QNCustomAudioTrackConfig): QNTrack {
+  static createCustomAudioTrack (config: QNCustomAudioTrackConfig): QNTrack {
     const _config = {
       ...QNCustomAudioTrackConfigPreset,
       ...config
@@ -175,12 +180,12 @@ export class RTCEngine {
 
   /**
    * 创建自定义视频采集轨
-   * @remarks 默认 tag 为 ""，暂不支持自定义轨
-   * @internal
+   * @internal 暂不支持自定义轨
+   * @remarks 默认 tag 为 ""
    * @param config 自定义视频采集 Track 的配置，可设置视频的编码配置与开关大小流功能
    * @returns Track 实例
    */
-  static createCustomVideoTrack(config: QNCustomVideoTrackConfig): QNTrack {
+  static createCustomVideoTrack (config: QNCustomVideoTrackConfig): QNTrack {
     const _config = {
       ...QNCustomVideoTrackConfigPreset,
       ...config
@@ -199,14 +204,15 @@ export class RTCEngine {
    * @remarks 设置是否将音频路由切换到扬声器，默认音频路由为扬声器
    * @param audioRouteToSpeakerphone 初始化配置项
    */
-  static setAudioRouteToSpeakerphone(audioRouteToSpeakerphone: boolean): void {
+  static setAudioRouteToSpeakerphone (audioRouteToSpeakerphone: boolean): void {
     return QNRtcEngine.setAudioRouteToSpeakerphone(audioRouteToSpeakerphone)
   }
 
   /**
    * 设置是否开启本地日志保存
+   * @remarks 设置是否开启本地日志保存
    */
-  static enableFileLogging(): void {
+  static enableFileLogging (): void {
     return QNRtcEngine.enableFileLogging()
   }
 }

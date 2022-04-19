@@ -23,6 +23,11 @@
                     "class": "QNRtcTrack"
                 },
                 {
+                    "type": "module",
+                    "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
+                    "class": "QNRtcAudioMixer"
+                },
+                {
                     "type": "component",
                     "name": "QNRTC-UniPlugin-SurfaceView",
                     "class": "QNRtcSurfaceView"
@@ -59,6 +64,11 @@
                     "type": "module",
                     "name": "QNRTC-UniPlugin-QNRtcTrack",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCTrackModule"
+                },
+                {
+                    "type": "module",
+                    "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
+                    "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMixerModule"
                 },
                 {
                     "type": "component",

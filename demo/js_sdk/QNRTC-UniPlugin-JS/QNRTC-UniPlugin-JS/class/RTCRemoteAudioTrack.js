@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+exports.QNRemoteAudioTrack = void 0;
 var RTCRemoteTrack_1 = require("./RTCRemoteTrack");
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRemoteAudioTrack = (function (_super) {
@@ -29,5 +30,5 @@ var QNRemoteAudioTrack = (function (_super) {
         return QNRtcTrack.getRemoteVolume(this.identifyID);
     };
     return QNRemoteAudioTrack;
-}(RTCRemoteTrack_1["default"]));
-exports["default"] = QNRemoteAudioTrack;
+}(RTCRemoteTrack_1.QNRemoteTrack));
+exports.QNRemoteAudioTrack = QNRemoteAudioTrack;

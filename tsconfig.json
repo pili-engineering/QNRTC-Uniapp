@@ -2,17 +2,15 @@
 	"compileOnSave": true,
 	"compilerOptions": {
 	  "alwaysStrict": true,
-	  "declarationDir": "./type",
 	  "declaration": true,
-	  "outDir": "lib/",
 	  "declarationMap": false,
 	  "diagnostics": true,
 	  "module": "commonjs",
 	  "noImplicitAny": true,
+	  "removeComments": true,
 	  "preserveConstEnums": true,
 	  "sourceMap": false,
-	  "strict": false,
-	  "removeComments": false,
+	  "outDir": "QNRTC-UniPlugin-JS",
 	},
 	"exclude": ["test"]
   }

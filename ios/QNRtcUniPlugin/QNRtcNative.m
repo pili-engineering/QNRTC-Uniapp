@@ -714,6 +714,7 @@ typedef enum : NSUInteger {
     if (targetTrack && [targetTrack isKindOfClass:[QNMicrophoneAudioTrack class]]) {
         QNMicrophoneAudioTrack *microphoneAudioTrack = (QNMicrophoneAudioTrack *)targetTrack;
         microphoneAudioTrack.audioMixer.audioURL = [NSURL URLWithString:url];
+        microphoneAudioTrack.audioMixer.rateInterval = 1;
     }
 }
 
@@ -789,7 +790,7 @@ typedef enum : NSUInteger {
 - (NSNumber *)getDuration:(NSString *)identifyID {
     QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
     if (audioMixer) {
-        return @(audioMixer.duration);
+        return @(audioMixer.duration * 1000000);
     }
     return @0;
 }
@@ -797,7 +798,7 @@ typedef enum : NSUInteger {
 - (NSNumber *)getCurrentPosition:(NSString *)identifyID {
     QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
     if (audioMixer) {
-        return @(audioMixer.currentTime);
+        return @(audioMixer.currentTime * 1000000);
     }
     return @0;
 }

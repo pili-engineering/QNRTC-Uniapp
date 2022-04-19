@@ -144,18 +144,14 @@ export default {
             this.localTracks.push(microphoneAudioTrack)
             this.client.on("onConnectionStateChanged", ({state}) => {
                 if (state === "CONNECTED") {
-                    this.client.publish(this.localTracks, ({
-                        onPublished,
-                        data,
-                        info
-                    }) => {
+                    this.client.publish(this.localTracks, (onPublished, error) => {
                         if (onPublished) {
                             uni.showModal({
                                 content: "发布成功"
                             })
                         } else {
                             uni.showModal({
-                                content: info.message
+                                content: error.message
                             })
                         }
                     })

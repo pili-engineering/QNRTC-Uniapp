@@ -15,17 +15,13 @@ const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNEvent = uni.requireNativePlugin('globalEvent')
-/**
- * 轨
- * @remarks 所有的轨继承此类
- */
 export class QNTrack {
   /**
-   * identifyID
+   * 本地唯一标识符
    */
   public identifyID: string
   /**
-   * 媒体类型
+   * 类型
    */
   public kind: QNRTCTrackKind
   /**
@@ -37,7 +33,7 @@ export class QNTrack {
    */
   public trackID: string
   /**
-   * userID
+   * 用户 ID
    */
   public userID: string
   /**
@@ -54,7 +50,8 @@ export class QNTrack {
   }
 
   /**
-   * 监听对应的事件，支持多次调用同一事件
+   * 监听对应的事件
+   * @remarks 支持多次调用同一事件
    * @param name 事件名
    * @param listener 事件句柄
    */
@@ -62,6 +59,7 @@ export class QNTrack {
     const _listener = (params: {[key: string]: string | number}) => {
       const { trackID, ...arguv } = params
       if (trackID && trackID === this.trackID) {
+        // @ts-ignore
         listener(arguv as any)
       }
     }
@@ -70,6 +68,7 @@ export class QNTrack {
 
   /**
    * 取消监听对应的事件
+   * @remarks 取消监听对应的事件
    * @param name 事件名
    * @param listener 事件句柄
    */
