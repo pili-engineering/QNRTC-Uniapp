@@ -213,3 +213,29 @@ client.join(RoomToken)
 * 如果您还不知道如何生成 RoomToken，请先阅读 [RoomToken 签发服务](https://developer.qiniu.com/rtc/8813/roomToken)。
 * 具体使用方法可参考[官方文档](https://developer.qiniu.com/rtc/11847/an-overview-of-the-uniapp-sdk)。
 * 具体示例 demo 可参考[QNRTC-Uniapp-Demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/demo)。
+
+## FAQ
+
+#### 如何体验 Demo？
+
+您可以通过扫描下面的二维码，安装我们的 demo 应用『牛会议』，体验通话效果：
+
+iOS :
+
+![](http://pk0jd2tt5.bkt.clouddn.com/uniapp-ios.png)
+
+Android :
+
+![](http://pk0jd2tt5.bkt.clouddn.com/uniapp-android.png)
+
+#### 实时通话功能是否收费？
+
+客户端 SDK 不收费，服务端可按照带宽、流量或者时长收费，具体请联系七牛商务或者技术支持。
+
+#### 实时通话对讲延时多大？
+
+正常网络条件下，对讲延时在 200-300ms 左右。
+
+#### 是否有服务端的 SDK 或者 demo 代码可以参考？
+
+有的，请参考： [QNRTC-Server](https://doc.qnsdk.com/rtn/docs/server_sdk)

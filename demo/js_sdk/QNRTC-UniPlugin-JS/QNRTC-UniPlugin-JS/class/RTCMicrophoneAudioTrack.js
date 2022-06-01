@@ -29,7 +29,7 @@ var QNMicrophoneAudioTrack = (function (_super) {
     };
     QNMicrophoneAudioTrack.prototype.createAudioMixer = function (url) {
         QNRtcTrack.createAudioMixer(this.identifyID, url);
-        return new RTCAudioMixer_1["default"](this.identifyID, url);
+        return new RTCAudioMixer_1.QNAudioMixer(this.identifyID, url);
     };
     return QNMicrophoneAudioTrack;
 }(RTCLocalAudioTrack_1.QNLocalAudioTrack));
