@@ -26,3 +26,4 @@ __exportStar(require("./class/RTCRemoteTrack"), exports);
 __exportStar(require("./class/RTCRemoteVideoTrack"), exports);
 __exportStar(require("./class/RTCScreenVideoTrack"), exports);
 __exportStar(require("./class/RTCTrack"), exports);
+__exportStar(require("./class/RTCAudioMixer"), exports);

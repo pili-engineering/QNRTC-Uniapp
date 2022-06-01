@@ -1,14 +1,15 @@
 "use strict";
 exports.__esModule = true;
+exports.QNAudioMixer = void 0;
 var QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer');
 var QNEvent = uni.requireNativePlugin('globalEvent');
-var RTCAudioMixer = (function () {
-    function RTCAudioMixer(identifyID, url) {
+var QNAudioMixer = (function () {
+    function QNAudioMixer(identifyID, url) {
         this.variationList = ["onStateChanged"];
         this.identifyID = identifyID;
         this.url = url;
     }
-    RTCAudioMixer.prototype.createAudioMixerCallback = function (name, listener) {
+    QNAudioMixer.prototype.createAudioMixerCallback = function (name, listener) {
         if (name === "onStateChanged") {
             var variationCallback = function (params) {
                 if (params.state) {
@@ -18,7 +19,7 @@ var RTCAudioMixer = (function () {
             return variationCallback;
         }
     };
-    RTCAudioMixer.prototype.on = function (name, listener) {
+    QNAudioMixer.prototype.on = function (name, listener) {
         if (this.variationList.some(function (item) { return item === name; })) {
             var callback = this.createAudioMixerCallback(name, listener);
             QNEvent.addEventListener(name, callback);
@@ -27,39 +28,39 @@ var RTCAudioMixer = (function () {
             QNEvent.addEventListener(name, listener);
         }
     };
-    RTCAudioMixer.prototype.off = function (name, listener) {
+    QNAudioMixer.prototype.off = function (name, listener) {
         QNEvent.removeEventListener(name, listener);
     };
-    RTCAudioMixer.prototype.start = function (loopTimes) {
+    QNAudioMixer.prototype.start = function (loopTimes) {
         QNRtcAudioMixer.start(this.identifyID, loopTimes);
     };
-    RTCAudioMixer.prototype.stop = function () {
+    QNAudioMixer.prototype.stop = function () {
         QNRtcAudioMixer.stop(this.identifyID);
     };
-    RTCAudioMixer.prototype.resume = function () {
+    QNAudioMixer.prototype.resume = function () {
         QNRtcAudioMixer.resume(this.identifyID);
     };
-    RTCAudioMixer.prototype.pause = function () {
+    QNAudioMixer.prototype.pause = function () {
         QNRtcAudioMixer.pause(this.identifyID);
     };
-    RTCAudioMixer.prototype.seekTo = function (timeUs) {
+    QNAudioMixer.prototype.seekTo = function (timeUs) {
         QNRtcAudioMixer.seekTo(this.identifyID, timeUs);
     };
-    RTCAudioMixer.prototype.setMixingVolume = function (microphoneVolume, musicVolume) {
+    QNAudioMixer.prototype.setMixingVolume = function (microphoneVolume, musicVolume) {
         QNRtcAudioMixer.setMixingVolume(this.identifyID, microphoneVolume, musicVolume);
     };
-    RTCAudioMixer.prototype.setPlayingVolume = function (volume) {
+    QNAudioMixer.prototype.setPlayingVolume = function (volume) {
         QNRtcAudioMixer.setPlayingVolume(this.identifyID, volume);
     };
-    RTCAudioMixer.prototype.getDuration = function () {
+    QNAudioMixer.prototype.getDuration = function () {
         return QNRtcAudioMixer.getDuration(this.identifyID);
     };
-    RTCAudioMixer.prototype.getCurrentPosition = function () {
+    QNAudioMixer.prototype.getCurrentPosition = function () {
         return QNRtcAudioMixer.getCurrentPosition(this.identifyID);
     };
-    RTCAudioMixer.prototype.setPlayBack = function (playBack) {
+    QNAudioMixer.prototype.setPlayBack = function (playBack) {
         QNRtcAudioMixer.setPlayBack(this.identifyID, playBack);
     };
-    return RTCAudioMixer;
+    return QNAudioMixer;
 }());
-exports["default"] = RTCAudioMixer;
+exports.QNAudioMixer = QNAudioMixer;

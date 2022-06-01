@@ -39,10 +39,10 @@ var QNRTC = (function () {
     };
     QNRTC.configRTC = function (config) {
         var _config = __assign(__assign({}, RTCPreset_1.QNRTCConfigurationPreset), config);
-		try{
-			QNRtcEngine.initDelegate();
-		}catch(e) {
-		}
+        try {
+            QNRtcEngine.initDelegate();
+        }
+        catch (e) { }
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
         QNRtcAudioMixer.initDelegate();

@@ -144,6 +144,7 @@
 				</uni-popup-dialog>
 			</uni-popup>
 			<QNRTC-UniPlugin-SurfaceView  :fillMode="localFillMode" :local="0" :class ="remoteVideoTracks ? 'local' :'local2'" v-if="cameraVideoTrack" 
+			ref="local"
 					:identifyID="cameraVideoTrack.identifyID" :trackID="cameraVideoTrack.trackID"></QNRTC-UniPlugin-SurfaceView>
 			<QNRTC-UniPlugin-SurfaceView :fillMode="remoteFillMode" :local="1" :class ="cameraVideoTrack ? 'local' :'local2'" v-if="remoteVideoTracks" :identifyID="remoteVideoTracks.identifyID"
 					:userID="remoteVideoTracks.userID" :trackID="remoteVideoTracks.trackID"></QNRTC-UniPlugin-SurfaceView>
@@ -695,6 +696,9 @@
 				this.client.on("onVideoSubscribed", (params) => {
 					for (let i of params.trackList) {
 						this.remoteVideoTracks = i
+						setTimeout(() => {
+							this.$refs.local.reset()
+						}, 100)
 						this.remoteVideoTracks.on("onVideoProfileChanged",(params) => {
 							if(params.profile) {
 								uni.showModal({
@@ -740,6 +744,9 @@
 						if(this.remoteVideoTracks && i.trackID === this.remoteVideoTracks.trackID) {
 							console.log(this.remoteVideoTracks)
 							this.remoteVideoTracks = null
+							setTimeout(() => {
+								this.$refs.local.reset()
+							}, 100)
 						}
 					}
 				})

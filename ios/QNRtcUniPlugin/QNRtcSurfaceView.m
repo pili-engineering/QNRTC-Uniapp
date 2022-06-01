@@ -70,4 +70,20 @@
     [RtcNativePlugin play:self.view local:self.local userID:self.userID identityID:self.identifyID trackID:self.trackID];
 }
 
+// 重制样式
+- (void)updateStyles:(NSDictionary *)styles {
+    for (UIView *subview in self.view.subviews) {
+        subview.frame = self.view.bounds;
+    }
+}
+
+// 重置样式
+WX_EXPORT_METHOD(@selector(reset))
+- (void)reset {
+    for (UIView *subview in self.view.subviews) {
+        subview.frame = self.view.bounds;
+    }
+}
+
+
 @end
