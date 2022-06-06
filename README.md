@@ -215,6 +215,7 @@ client.join(RoomToken)
 * 具体示例 demo 可参考[QNRTC-Uniapp-Demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/demo)。
 * 牛会议 demo 可参考[QNRTC-Uniapp-multiple-track-demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/multiple-track-demo)。
 
+> 牛会议 demo 未集成 js 与 原生插件，需要自行应用商店下载。
 ## FAQ
 
 #### 如何体验 Demo？
