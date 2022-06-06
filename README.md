@@ -213,6 +213,7 @@ client.join(RoomToken)
 * 如果您还不知道如何生成 RoomToken，请先阅读 [RoomToken 签发服务](https://developer.qiniu.com/rtc/8813/roomToken)。
 * 具体使用方法可参考[官方文档](https://developer.qiniu.com/rtc/11847/an-overview-of-the-uniapp-sdk)。
 * 具体示例 demo 可参考[QNRTC-Uniapp-Demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/demo)。
+* 牛会议 demo 可参考[QNRTC-Uniapp-multiple-track-demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/multiple-track-demo)。
 
 ## FAQ
 
