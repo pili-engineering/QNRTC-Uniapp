@@ -1,0 +1,277 @@
+<template>
+	<view class="native-wrap" :style="{height: `${screenHeight * 2}upx`}">
+			<QNRTC-UniPlugin-SurfaceView fillMode="QNVideoFillModeNone" :local="0" :style="localView"
+			v-if="cameraVideoTrack" :identifyID="cameraVideoTrack.identifyID" :trackID="cameraVideoTrack.trackID">
+			</QNRTC-UniPlugin-SurfaceView>
+		<view class="track-wrap" :key="item.identifyID" :style="remotetView"
+				v-for="(item,index) in remoteVideoTracks.slice(0,3)">
+			<QNRTC-UniPlugin-SurfaceView fillMode="QNVideoFillModeNone" :local="1" :style="remotetView" :identifyID="item.identifyID" :userID="item.userID"
+				:trackID="item.trackID" ></QNRTC-UniPlugin-SurfaceView>
+			<text class="name-label">用户：{{item.userID}}</text>
+		</view>
+			<view class="control-wrap">
+				<view class="control-normal" @click="handleChangeBeauty"><uni-icons :type="onBeauty ? 'color-filled' : 'color'" size="30" style="color:white"></uni-icons></view>
+				<view class="control-normal" @click="handleChangeMic"><uni-icons :type="onMic ? 'mic' : 'micoff'" size="30" style="color:white"></uni-icons></view>
+				<view class="control-item" @click="handleRouteBack"><uni-icons type="phone-filled" size="25" style="color:white"></uni-icons></view>
+				<view class="control-normal" @click="handleChangeVideo"><uni-icons :type="onVideo ? 'videocam-filled' : 'videocam'" size="30" style="color:white"></uni-icons></view>
+				<view @click="handleSwitchCamera"><uni-icons type="camera" size="30"  style="color:white"></uni-icons></view>
+			</view>
+	</view>
+</template>
+
+<script>
+	import QNRTC from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
+	import {
+		mapState,
+		mapActions
+	} from "vuex"
+	export default {
+		data() {
+			return {
+				client: null,
+				cameraVideoTrack: {},
+				microphoneAudioTrack: {},
+				remoteVideoTracks: [],
+				remoteAudioTracks: [],
+				useToken: 0,
+				mediaType: "video",
+				onMic: true,
+				onVideo: true,
+				onBeauty: false
+			}
+		},
+		computed:{
+			...mapState(["token","screenHeight"]),
+			localView() {
+				if(this.remoteVideoTracks.length === 0) {
+					return {height: `${this.screenHeight * 2}upx`,width: "750upx"}
+				}else if(this.remoteVideoTracks.length <= 2){
+					return {height: `${this.screenHeight}upx`,width: "750upx"}
+				}else {
+					return {height: `${this.screenHeight}upx`,width: "375upx"}
+				}
+			},
+			remotetView() {
+				if(this.remoteVideoTracks.length === 1) {
+					return {height: `${this.screenHeight}upx`,width: "750upx"}
+				}else if(this.remoteVideoTracks.length <= 3){
+					return {height: `${this.screenHeight}upx`,width: "375upx"}
+				}
+			}
+		},
+		onUnload() {
+			this.handleClearStatus()
+		},
+		onBackPress() {
+			this.handleClearStatus()
+		},
+		onLoad(option) {
+			this.mediaType = option.type
+			this.useToken = option.useToken * 1
+			this.handleJoinRoom()
+		},
+		methods: {
+			...mapActions(["initToken"]),
+			handleChangeBeauty() {
+				if(this.onBeauty) {
+					this.cameraVideoTrack.setBeauty({
+						smoothLevel:1,
+						whiten: 1,
+						redden:1,
+						enabled: 0
+					})
+					this.onBeauty = false
+				}else {
+					this.cameraVideoTrack.setBeauty({
+						smoothLevel:1,
+						whiten: 1,
+						redden:1,
+						enabled: 1
+					})
+					this.onBeauty = true
+				}
+			},
+			async handleJoinRoom() {
+				uni.showLoading({
+					mask:true,
+					title: '连接中'
+				})
+				if(!this.useToken) {
+					await this.initToken()
+				}
+				QNRTC.configRTC()
+				this.client = QNRTC.createClient()
+				this.cameraVideoTrack = QNRTC.createCameraVideoTrack({
+					width: 720,
+					height: 1280,
+					captureHeight: 1280,
+					captureWidth: 720
+				})
+				this.microphoneAudioTrack = QNRTC.createMicrophoneAudioTrack()
+				this.client.on("onConnectionStateChanged", ({
+					state,
+					info
+				}) => {
+					if (state === "CONNECTED") {
+						this.client.publish([this.microphoneAudioTrack, this.cameraVideoTrack], (onPublished,
+							error) => {
+							if (onPublished) {
+								uni.hideLoading()
+								uni.showModal({
+									content: "发布成功"
+								})
+							} else {
+								uni.showModal({
+									content: error.message
+								})
+							}
+						})
+					}else if(state === "DISCONNECTED") {
+						if(info.reason === "KICKED_OUT") {
+							uni.showModal({
+								content: "被踢出房间",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						}else if(info.reason === "ROOM_CLOSED") {
+							uni.showModal({
+								content: "房间被关闭",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						}else if(info.reason === "ROOM_FULL") {
+							uni.showModal({
+								content: "房间人数已满",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						}
+					}else if(state === "RECONNECTING") {
+						uni.showLoading({
+							mask:true,
+							title: '重连中'
+						})
+					}else if(state === "RECONNECTED") {
+						uni.hideLoading()
+						uni.showModal({
+							content: "重连成功"
+						})
+					}
+				})
+				this.client.on("onVideoSubscribed", (params) => {
+					for (let i of params.trackList) {
+						this.remoteVideoTracks.push(i)
+					}
+				})
+				this.client.on("onAudioSubscribed", (params) => {
+					for (let i of params.trackList) {
+						this.remoteAudioTracks.push(i)
+					}
+				})
+				this.client.on("onUserUnpublished", (params) => {
+					for (let i of params.trackList) {
+						if(i.kind === "video") {
+							const index = this.remoteVideoTracks.findIndex(item => item.trackID === i.trackID)
+							if (index >= 0) {
+								this.remoteVideoTracks.splice(index, 1)
+							}
+						}else {
+							const index = this.remoteAudioTracks.findIndex(item => item.trackID === i.trackID)
+							if (index >= 0) {
+								this.remoteAudioTracks.splice(index, 1)
+							}
+						}
+					}
+				})
+				const result = this.client.join(this.token)
+			},
+			handleClearStatus() {
+				this.client.leave()
+				QNRTC.deinit()
+				this.timer = null
+			},
+			handleRouteBack() {
+				uni.navigateBack()
+			},
+			handleChangeMic() {
+				if(this.onMic) {
+					this.microphoneAudioTrack.setMuted(true)
+					this.onMic = false
+				}else {
+					this.microphoneAudioTrack.setMuted(false)
+					this.onMic = true
+				}
+			},
+			handleChangeVideo() {
+				if(this.onVideo) {
+					this.cameraVideoTrack.setMuted(true)
+					this.onVideo = false
+				}else {
+					this.cameraVideoTrack.setMuted(false)
+					this.onVideo = true
+				}
+			},
+			handleSwitchCamera() {
+				this.cameraVideoTrack.switchCamera()
+			}
+		}
+	}
+</script>
+
+<style>
+	.native-wrap {
+		flex-direction: row;
+		width: 750upx;
+		flex-wrap: wrap;
+	}
+	
+	.control-wrap{
+		position: fixed;
+		left: 0;
+		bottom: 60upx;
+		height: 100upx;
+		width: 750upx;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row;
+		align-items: center;
+		padding-left: 100upx;
+		padding-right: 100upx;
+	}
+
+	.control-item{
+		background:#ef5350;
+		border-radius: 50%;
+		height: 100upx;
+		width: 100upx;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+	}
+/* 	.control-normal{
+		padding-left: 30upx;
+		padding-right: 30upx;
+	} */
+	.control-image{
+		height: 40upx;
+		width: 40upx
+	}
+	
+	.track-wrap{
+		position: relative;
+		background-color: red;
+	}
+	
+	.name-label{
+		position: absolute;
+		top: 80upx;
+		right: 20upx;
+		color: white;
+		font-size: 26upx;
+		
+	}
+</style>
