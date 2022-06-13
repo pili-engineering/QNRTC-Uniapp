@@ -13,3 +13,6 @@ unpackage/
 Documents/docs/jsonhtml
 Documents/docs/jsonstyle
 types/
+multiple-track-demo/js_sdk
+multiple-track-demo/nativeplugins
+multiple-track-demo/uni_modules

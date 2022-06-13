@@ -60,7 +60,7 @@ WX_EXPORT_METHOD_SYNC(@selector(isMultiProfileEnabled:))
     return [RtcNativePlugin isMultiProfileEnabled:identifyID];
 }
 
-WX_EXPORT_METHOD_SYNC(@selector(getProfiles:))
+WX_EXPORT_METHOD_SYNC(@selector(getProfile:))
 // 获取当前订阅的远端视频 Track 的大小流 profile
 - (NSString *)getProfile:(NSString *)identifyID {
     return [RtcNativePlugin getProfile:identifyID];
@@ -77,6 +77,12 @@ WX_EXPORT_METHOD_SYNC(@selector(setRemoteVolume:volume:))
 // 设置远端音频 Track 的音量大小
 - (void)setRemoteVolume:(NSString *)identifyID volume:(NSNumber *)volume {
     [RtcNativePlugin setRemoteVolume:identifyID volume:volume];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(getRemoteVolume:))
+// 获取远端音频 Track 的音量大小
+- (NSNumber *)getRemoteVolume:(NSString *)identifyID  {
+    return [RtcNativePlugin getRemoteVolume:identifyID];
 }
 
 #pragma mark - QNCameraVideoTrack

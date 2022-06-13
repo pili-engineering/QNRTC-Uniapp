@@ -1,12 +1,13 @@
 <template>
 	<view class="native-wrap" :style="{height: `${screenHeight * 2}upx`}">
 			<QNRTC-UniPlugin-SurfaceView fillMode="QNVideoFillModeNone" :local="0" :style="localView"
+			ref='local'
 			v-if="cameraVideoTrack" :identifyID="cameraVideoTrack.identifyID" :trackID="cameraVideoTrack.trackID">
 			</QNRTC-UniPlugin-SurfaceView>
 		<view class="track-wrap" :key="item.identifyID" :style="remotetView"
 				v-for="(item,index) in remoteVideoTracks.slice(0,3)">
 			<QNRTC-UniPlugin-SurfaceView fillMode="QNVideoFillModeNone" :local="1" :style="remotetView" :identifyID="item.identifyID" :userID="item.userID"
-				:trackID="item.trackID" ></QNRTC-UniPlugin-SurfaceView>
+				:trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 			<text class="name-label">用户：{{item.userID}}</text>
 		</view>
 			<view class="control-wrap">
@@ -18,6 +19,7 @@
 			</view>
 	</view>
 </template>
+
 
 <script>
 	import QNRTC from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
@@ -128,6 +130,7 @@
 						})
 					}else if(state === "DISCONNECTED") {
 						if(info.reason === "KICKED_OUT") {
+							this.handleClearStatus()
 							uni.showModal({
 								content: "被踢出房间",
 								success: (res) => {

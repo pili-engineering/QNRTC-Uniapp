@@ -1,4 +1,5 @@
 <script>
+	import { mapMutations } from "vuex"
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
@@ -12,10 +13,14 @@
 				top: safeAreaInsets.top,
 				bottom: safeAreaInsets.bottom
 			})
+			this.getPlatform()
 			this.$store.commit("setScreenHeight", screenHeight)
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		methods:{
+			...mapMutations(["getPlatform"])
 		}
 	}
 </script>
@@ -41,6 +46,10 @@
 
 	.text-sm {
 		font-size: 14upx;
+	}
+	
+	.text-nm {
+		font-size: 18upx;
 	}
 
 	.input {

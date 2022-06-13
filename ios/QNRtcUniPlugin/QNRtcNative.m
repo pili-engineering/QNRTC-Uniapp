@@ -447,6 +447,15 @@ typedef enum : NSUInteger {
     }
 }
 
+- (NSNumber *)getRemoteVolume:(NSString *)identifyID {
+    QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeRemote];
+    if (targetTrack && [targetTrack isKindOfClass:[QNRemoteAudioTrack class]]) {
+        QNRemoteAudioTrack *remoteAudioTrack = (QNRemoteAudioTrack *)targetTrack;
+        return [NSNumber numberWithFloat: [remoteAudioTrack getVolumeLevel]];
+    }
+    return 0;
+}
+
 - (void)previewMirrorFrontFacing:(NSString *)identifyID previewMirrorFrontFacing:(BOOL)previewMirrorFrontFacing {
     [QNRtcTools dispatchSyncMainThreadSafe:^{
         QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];

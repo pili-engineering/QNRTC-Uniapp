@@ -696,9 +696,6 @@
 				this.client.on("onVideoSubscribed", (params) => {
 					for (let i of params.trackList) {
 						this.remoteVideoTracks = i
-						setTimeout(() => {
-							this.$refs.local.reset()
-						}, 100)
 						this.remoteVideoTracks.on("onVideoProfileChanged",(params) => {
 							if(params.profile) {
 								uni.showModal({
@@ -744,9 +741,6 @@
 						if(this.remoteVideoTracks && i.trackID === this.remoteVideoTracks.trackID) {
 							console.log(this.remoteVideoTracks)
 							this.remoteVideoTracks = null
-							setTimeout(() => {
-								this.$refs.local.reset()
-							}, 100)
 						}
 					}
 				})

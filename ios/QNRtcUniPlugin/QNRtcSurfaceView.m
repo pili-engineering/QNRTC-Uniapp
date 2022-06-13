@@ -8,6 +8,7 @@
 
 #import "QNRtcSurfaceView.h"
 #import "QNRtcNative.h"
+#import "QNCustomView.h"
 
 @interface QNRtcSurfaceView ()
 
@@ -65,24 +66,14 @@
     [self setupPreviewView];
 }
 
+// 渲染自定义 UIView
+- (UIView *)loadView {
+    return [[QNCustomView alloc] init];
+}
+
 // 创建渲染视图
 - (void)setupPreviewView {
     [RtcNativePlugin play:self.view local:self.local userID:self.userID identityID:self.identifyID trackID:self.trackID];
-}
-
-// 重制样式
-- (void)updateStyles:(NSDictionary *)styles {
-    for (UIView *subview in self.view.subviews) {
-        subview.frame = self.view.bounds;
-    }
-}
-
-// 重置样式
-WX_EXPORT_METHOD(@selector(reset))
-- (void)reset {
-    for (UIView *subview in self.view.subviews) {
-        subview.frame = self.view.bounds;
-    }
 }
 
 

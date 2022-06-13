@@ -401,6 +401,15 @@
 - (void)setRemoteVolume:(NSString *)identifyID volume:(NSNumber *)volume;
 
 /*!
+ * @abstract 获取远端 Track 的音量
+ *
+ * @param identifyID Track 标识
+ *
+ * @discussion QNRemoteAudioTrack 属性方法
+ */
+- (NSNumber *)getRemoteVolume:(NSString *)identifyID;
+
+/*!
  * @abstract 设置前置摄像头预览镜像
  *
  * @param identifyID Track 标识

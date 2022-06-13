@@ -862,7 +862,7 @@ export declare class QNRemoteAudioTrack extends QNRemoteTrack {
     setRemoteVolume(volume: number): void;
     /**
      * 获取音量
-     * @remarks 获取当前 Track 播放的音量大小，只支持安卓
+     * @remarks 获取当前 Track 播放的音量大小
      * @returns 音量值
      */
     getRemoteVolume(): number;
