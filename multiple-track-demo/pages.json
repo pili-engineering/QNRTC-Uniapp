@@ -4,7 +4,10 @@
 			"path": "pages/index/index"
 		},
 		{
-			"path": "pages/room/index"
+			"path": "pages/audioRoom/index"
+		},
+		{
+			"path": "pages/videoRoom/index"
 		},
 		{
 			"path": "pages/setting/index"

@@ -14,7 +14,13 @@
 			<view class="text text-center username">账户名称：{{userName}}</view>
 			<input v-if="!useRoomToken" class="input" v-model="roomName" placeholder="请输入房间名" />
 			<input v-if="useRoomToken" class="input" maxlength="-1"  v-model="roomToken" placeholder="请输入 roomToken" />
-			<view class="text text-sm margin-top text-center ">如果房间尚未创建，将会自动创建一个房间</view>
+			<view class="text text-nm margin-top text-center ">如果房间尚未创建，将会自动创建一个房间</view>
+			<view class="radio-group">
+				<radio-group @change="handleChangeType" >
+					<label class="radio"><radio value="video" checked  />音视频通话</label>
+					<label class="radio"><radio value="audio" />音频通话</label>
+				</radio-group>
+			</view>
 			<view>
 				<button @click="routeRoomPage">会议房间</button>
 			</view>
@@ -86,11 +92,15 @@
 		},
 		methods: {
 			...mapMutations(["setRoomName","setToken"]),
+			handleChangeType(event) {
+				this.type = event.detail.value
+			},
 			routeRoomPage() {
+				const path = this.type === "video" ? "/pages/videoRoom/index": "/pages/audioRoom/index"
 				if(this.useRoomToken) {
 					this.setToken(this.roomToken)
 					uni.navigateTo({
-						url: `/pages/room/index?useToken=1`
+						url: `${path}?useToken=1`
 					})
 				}else {
 					if (!/^[a-zA-Z0-9_-]{3,64}$/.test(this.roomName)) {
@@ -100,7 +110,7 @@
 					}else {
 						this.setRoomName(this.roomName)
 						uni.navigateTo({
-							url: `/pages/room/index?useToken=0`
+							url: `${path}?useToken=0`
 						})
 					}
 				}
@@ -157,6 +167,16 @@
 		margin-top: 40upx;
 		display: flex;
 		justify-content: space-between;
+	}
+	
+	.radio-group {
+		margin-top: 40upx;
+		color:rgba(255,255,255,0.61);
+		display:flex;
+		justify-content: center;
+	}
+	.radio {
+		margin-right: 30upx;
 	}
 	
 </style>

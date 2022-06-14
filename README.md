@@ -222,6 +222,10 @@ client.join(RoomToken)
 
 您可以通过扫描下面的二维码，安装我们的 demo 应用『牛会议』，体验通话效果：
 
+iOS :
+
+![](http://pk0jd2tt5.bkt.clouddn.com/uniapp-ios.png)
+
 Android :
 
 ![](http://pk0jd2tt5.bkt.clouddn.com/uniapp-android.png)
