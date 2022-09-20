@@ -7,6 +7,8 @@
 
 #import "QNRtcTrack.h"
 #import "QNRtcNative.h"
+#import "QNRtcTools.h"
+#import <QNRTCKit/QNUtil.h>
 
 @interface QNRtcTrack () <QNRtcTrackDelegate>
 
@@ -219,6 +221,12 @@ WX_EXPORT_METHOD_SYNC(@selector(destroy:))
     [RtcNativePlugin destroy:identifyID];
 }
 
+WX_EXPORT_METHOD_SYNC(@selector(takeVideoSnapshot:))
+// 截图 base64
+- (void)takeVideoSnapshot:(NSString *)identifyID {
+    [RtcNativePlugin takeVideoSnapshot:identifyID];
+}
+
 #pragma mark - QNScreenVideoTrack
 WX_EXPORT_METHOD_SYNC(@selector(isScreenCaptureSupported:))
 // 获取设备对录屏的支持情况
@@ -254,6 +262,29 @@ WX_EXPORT_METHOD_SYNC(@selector(createAudioMixer:url:))
 // 订阅的远端 Track 开关静默时的回调
 - (void)rtcNative:(QNRtcNative *)rtcNative onMuteStateChanged:(NSDictionary *)params {
     [self.weexInstance fireGlobalEvent:@"onMuteStateChanged" params:params];
+}
+
+// 实时远端视频数据回调
+- (void)rtcNative:(QNRtcNative *)rtcNative onRemoteVideoFrame:(CVPixelBufferRef)pixelBuffer trackID:(NSString *)trackID {
+    if(pixelBuffer != nil) {
+        UIImage *image = [QNRtcTools imageFromPixelBuffer:pixelBuffer];
+        NSString *data = [QNRtcTools image2DataURL: image];
+        [self.weexInstance fireGlobalEvent:@"onRemoteVideoFrame" params:@{
+            @"data": data,
+            @"trackID": trackID
+        }];
+    }
+}
+
+// 实时本地视频数据回调
+- (void)rtcNative:(QNRtcNative *)rtcNative onLocalVideoFrame:(CMSampleBufferRef)sampleBuffer {
+    if(sampleBuffer != nil) {
+        UIImage *image = [QNRtcTools imageFromSampleBuffer:sampleBuffer];
+        NSString *data = [QNRtcTools image2DataURL: image];
+        [self.weexInstance fireGlobalEvent:@"onLocalVideoFrame" params:@{
+            @"data": data
+        }];
+    }
 }
 
 @end

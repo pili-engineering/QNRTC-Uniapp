@@ -175,4 +175,12 @@ export interface QNRTCTrackEvent {
    * 音视频 track 静默状态改变时回调
    */
   onMuteStateChanged: (params: { isMuted: boolean; trackID: string }) => void;
+  /**
+   * base 64 数据实时回调
+   */
+  onLocalVideoFrame: (params: {data: string}) => void;
+  /**
+   * base 64 数据实时回调
+   */
+   onRemoteVideoFrame: (params: {data: string, trackID: string}) => void;
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.qiniu.droid.rtc.QNCameraFacing;
@@ -358,5 +357,10 @@ public class QNRTCTrackModule extends UniModule implements QNRTCGlobalListener {
     @Override
     public void onEvent(String method, Map<String, Object> params) {
         mUniSDKInstance.fireGlobalEventCallback(method, params);
+    }
+
+    @UniJSMethod(uiThread = false)
+    public void takeVideoSnapshot(String trackID,  UniJSCallback callback) {
+        getManager().takeVideoSnapshot(trackID, callback);
     }
 }
