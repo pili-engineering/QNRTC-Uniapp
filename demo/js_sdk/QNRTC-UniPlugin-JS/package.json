@@ -1,7 +1,7 @@
 {
     "id": "QNRTC-UniPlugin-JS",
     "name": "七牛云WebRTC JS插件",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "集成 QNDroidRTC 与 QNRTCKit SDK  ",
     "keywords": [
         "音视频",
