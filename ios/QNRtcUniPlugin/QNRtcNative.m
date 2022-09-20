@@ -16,7 +16,7 @@ typedef enum : NSUInteger {
     QNRtcTrackTypeRemote = 1 << 1
 } QNRtcTrackType;
 
-@interface QNRtcNative () <QNRTCDelegate, QNRTCClientDelegate, QNRemoteTrackDelegate, QNRemoteTrackVideoDataDelegate, QNAudioMixerDelegate>
+@interface QNRtcNative () <QNRTCDelegate, QNRTCClientDelegate, QNRemoteTrackDelegate, QNRemoteTrackVideoDataDelegate, QNCameraTrackVideoDataDelegate, QNAudioMixerDelegate>
 
 @property (nonatomic, strong) QNRTCClient *client;
 
@@ -25,6 +25,8 @@ typedef enum : NSUInteger {
 @property (atomic, strong) NSMutableDictionary *localRenderViews;
 
 @property (atomic, strong) NSMutableDictionary *remoteRenderViews;
+
+@property (atomic, strong) NSMutableDictionary *snapshotList;
 
 @property (nonatomic, weak) id<QNRtcEngineDelegate> rtcEngineDelegate;
 
@@ -45,6 +47,7 @@ typedef enum : NSUInteger {
         sharedInstance.localTracks = [NSMutableArray array];
         sharedInstance.localRenderViews = [NSMutableDictionary dictionary];
         sharedInstance.remoteRenderViews = [NSMutableDictionary dictionary];
+        sharedInstance.snapshotList = [NSMutableDictionary dictionary];
     });
     return sharedInstance;
 }
@@ -89,6 +92,9 @@ typedef enum : NSUInteger {
         
         // 移除 localTracks
         [self.localTracks removeAllObjects];
+        
+        // 移除截图列表
+        [self.snapshotList removeAllObjects];
         
         // 离开房间   清空 client 和 delegate
         [self.client leave];
@@ -145,6 +151,7 @@ typedef enum : NSUInteger {
     } else {
         cameraVideoTrack = [QNRTC createCameraVideoTrack];
     }
+    cameraVideoTrack.videoDelegate = self;
     
     // 解析 QNCameraVideoTrack 属性方法配置
     QNCameraVideoTrackSetting *cameraVideoTrackSetting = [QNRtcUniAdapter getNativeCameraVideoTrackSetting:trackConfig];
@@ -173,7 +180,7 @@ typedef enum : NSUInteger {
     } else {
         screenVideoTrack = [QNRTC createScreenVideoTrack];
     }
-    
+
     // 解析 QNScreenVideoTrack 属性方法配置
     QNScreenVideoTrackSetting *screenVideoTrackSetting = [QNRtcUniAdapter getNativeScreenVideoTrackSetting:trackConfig];
     if (screenVideoTrackSetting.screenRecorderFrameRate) [screenVideoTrack setScreenRecorderFrameRate:screenVideoTrackSetting.screenRecorderFrameRate.unsignedIntegerValue];
@@ -678,6 +685,13 @@ typedef enum : NSUInteger {
     }];
 }
 
+// 截图
+- (void)takeVideoSnapshot:(NSString *)identifyID {
+    [QNRtcTools dispatchSyncMainThreadSafe:^{
+        [self.snapshotList setObject:@YES forKey:identifyID];
+    }];
+}
+
 - (void)destroy:(NSString *)identifyID {
     [QNRtcTools dispatchSyncMainThreadSafe:^{
         if ([identifyID isEqualToString:LOCAL_CAMERA_VIDEO_IDENTIFY_ID]) {
@@ -1035,6 +1049,33 @@ typedef enum : NSUInteger {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcTrackDelegate rtcNative:self onVideoProfileChanged:[QNRtcUniAdapter getUniVideoProfileChangedCallBackWithTrackID:remoteVideoTrack.trackID profile:profile]];
         });
+    }
+}
+
+// 远端视频 Track 根据 TrackID 获取 key
+- (void)remoteVideoTrack:(QNRemoteVideoTrack *)remoteVideoTrack didGetPixelBuffer:(CVPixelBufferRef)pixelBuffer {
+    if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onRemoteVideoFrame:trackID:)]) {
+            if([self.snapshotList[remoteVideoTrack.trackID]  isEqual: @YES]) {
+                [self.rtcTrackDelegate rtcNative:self onRemoteVideoFrame:pixelBuffer trackID:remoteVideoTrack.trackID];
+                [self.snapshotList setObject:@NO forKey:remoteVideoTrack.trackID];
+            }
+    }
+}
+
+// 本地视频 Track 根据 identifyID 获取 key
+- (void)cameraVideoTrack:(QNCameraVideoTrack *)cameraVideoTrack didGetSampleBuffer:(CMSampleBufferRef)sampleBuffer {
+    if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onLocalVideoFrame:)]) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            for (QNRtcLocalTrack *localTrack in self.localTracks) {
+                if(localTrack.nativeTrack == cameraVideoTrack) {
+                    if([self.snapshotList[localTrack.identifyID]  isEqual: @YES]) {
+                        [self.rtcTrackDelegate rtcNative:self onLocalVideoFrame:sampleBuffer];
+                        [self.snapshotList setObject:@NO forKey:localTrack.identifyID];
+                    }
+                    break;
+                }
+            }
+//        });
     }
 }
 

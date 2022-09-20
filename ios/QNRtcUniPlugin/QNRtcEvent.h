@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <CoreMedia/CoreMedia.h>
 @class QNRtcNative;
 
 @protocol QNRtcEngineDelegate <NSObject>
@@ -150,6 +150,20 @@
  * @param params 静默信息
  */
 - (void)rtcNative:(QNRtcNative *)rtcNative onMuteStateChanged:(NSDictionary *)params;
+
+/*!
+ * @abstract CVPixelBuffer 回调
+ *
+ * @param pixelBuffer pixelBuffer 数据回调
+ */
+- (void)rtcNative:(QNRtcNative *)rtcNative onRemoteVideoFrame:(CVPixelBufferRef)pixelBuffer trackID:(NSString *)trackID;
+
+/*!
+ * @abstract CMSampleBuffer 回调
+ *
+ * @param sampleBuffer sampleBuffer 数据回调
+ */
+- (void)rtcNative:(QNRtcNative *)rtcNative onLocalVideoFrame:(CMSampleBufferRef)sampleBuffer;
 
 @end
 

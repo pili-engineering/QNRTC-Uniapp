@@ -336,6 +336,19 @@ export declare class QNCameraVideoTrack extends QNLocalVideoTrack {
      * 清空水印配置
      */
     clearWaterMark(): void;
+    /**
+     * 截图
+     */
+    takeVideoSnapshot(): Promise<{
+        base64: string;
+        rotate?: number;
+    }>;
+    /**
+     * 去除图片base64字符串中的\r \n 防止图片解析出错
+     * @param base64 需要去除\r \n的图片base64字符串
+     * @returns 去除\r \n后的base64字符串
+     */
+    private trimBase64;
 }
 
 /**
@@ -936,6 +949,19 @@ export declare class QNRemoteVideoTrack extends QNRemoteTrack {
      * 获取当前视频轨道的分辨率等级
      */
     getProfile(): QNTrackProfile;
+    /**
+     * 截图
+     */
+    takeVideoSnapshot(): Promise<{
+        base64: string;
+        rotate?: number;
+    }>;
+    /**
+     * 去除图片base64字符串中的\r \n 防止图片解析出错
+     * @param base64 需要去除\r \n的图片base64字符串
+     * @returns 去除\r \n后的base64字符串
+     */
+    private trimBase64;
 }
 
 /**
@@ -1527,6 +1553,19 @@ export declare interface QNRTCTrackEvent {
      */
     onMuteStateChanged: (params: {
         isMuted: boolean;
+        trackID: string;
+    }) => void;
+    /**
+     * base 64 数据实时回调
+     */
+    onLocalVideoFrame: (params: {
+        data: string;
+    }) => void;
+    /**
+     * base 64 数据实时回调
+     */
+    onRemoteVideoFrame: (params: {
+        data: string;
         trackID: string;
     }) => void;
 }

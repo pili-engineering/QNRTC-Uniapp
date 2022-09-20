@@ -1,4 +1,4 @@
-import { QNUNIRemoteTrack, QNLocalAudioTrackStats, QNLocalVideoTrackStats, QNRemoteAudioTrackStats, QNRemoteVideoTrackStats, QNNetworkQuality, QNRemoteUser, QNUNIRemoteUser, QNDirectLiveStreamingConfig, QNTranscodingLiveStreamingConfig, QNTranscodingLiveStreamingTrack, QNUNILocalTrack } from '../interface/RTCInterface'
+import { QNTranscodingLiveStreamingImage, QNUNIRemoteTrack, QNLocalAudioTrackStats, QNLocalVideoTrackStats, QNRemoteAudioTrackStats, QNRemoteVideoTrackStats, QNNetworkQuality, QNRemoteUser, QNUNIRemoteUser, QNDirectLiveStreamingConfig, QNTranscodingLiveStreamingConfig, QNTranscodingLiveStreamingTrack, QNUNILocalTrack } from '../interface/RTCInterface'
 import { QNPublishResultCallback } from '../RTCPreset'
 import { QNConnectionState, QNRTCTrackKind } from '../enum/RTCEnum'
 import { QNRTCClinetEvent } from '../RTCEvent'
@@ -305,6 +305,8 @@ export class QNRTCClient {
    * @param config 合流转推配置
    */
   startLiveStreamingWithTranscoding (config: QNTranscodingLiveStreamingConfig): void {
+    !config.watermarks && (config.watermarks = [])
+    !config.background && (config.background = {} as QNTranscodingLiveStreamingImage)
     return RTCClient.startLiveStreamingWithTranscoding(config)
   }
 

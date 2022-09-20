@@ -6,7 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "WeexSDK.h"
+#import <CoreMedia/CoreMedia.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QNRtcTools : NSObject
@@ -29,6 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)dispatchSyncMainThreadSafe:(void(^)(void))operation;
 
+/*!
+ * @abstract SampleBsampleBuffer
+ *
+ * @param sampleBuffer 引用
+ */
++ (UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+
++ (UIImage *)imageFromPixelBuffer:(CVPixelBufferRef)pixelBufferRef;
++ (void)convertI420PixelBuffer:(CVPixelBufferRef)srcPixelBuffer toNV12PixelBuffer:(CVPixelBufferRef)destPixelBuffer;
++ (NSString *) image2DataURL: (UIImage *) image;
 @end
 
 NS_ASSUME_NONNULL_END

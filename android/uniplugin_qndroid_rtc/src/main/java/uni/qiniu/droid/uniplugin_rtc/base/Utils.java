@@ -1,7 +1,12 @@
 package uni.qiniu.droid.uniplugin_rtc.base;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
+import android.util.Base64;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -27,6 +32,7 @@ import com.qiniu.droid.rtc.QNVideoEncoderConfig;
 import com.qiniu.droid.rtc.model.QNImage;
 import com.qiniu.droid.rtc.model.QNVideoWaterMark;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -301,5 +307,25 @@ public class Utils {
             watermark.setRelativeSize(QNVideoWaterMark.SIZE.SMALL);
         }
         return watermark;
+    }
+    public static String bitmapToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        String base64 = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+                .trim()
+                .replaceAll("\n", "")
+                .replaceAll("\r", "");
+        return base64;
+    }
+
+    public static Bitmap nv21ToBitmap (byte[] nv21, int width, int height) {
+        YuvImage yuvimage = new YuvImage(nv21, ImageFormat.NV21, width, height, null);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        yuvimage.compressToJpeg(new Rect(0, 0, width, height), 80, baos);
+        byte[] jdata = baos.toByteArray();
+        BitmapFactory.Options bitmapFatoryOptions = new BitmapFactory.Options();
+        bitmapFatoryOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+        Bitmap bmp = BitmapFactory.decodeByteArray(jdata, 0, jdata.length, bitmapFatoryOptions);
+        return bmp;
     }
 }

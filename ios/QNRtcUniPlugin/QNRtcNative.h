@@ -664,6 +664,14 @@
  * @discussion QNMicrophoneAudioTrack 属性方法
  */
 - (void)createAudioMixer:(NSString *)identifyID url:(NSString *)url;
+/*!
+ * @abstract 截图
+ *
+ * @param identifyID Track 标识
+ *
+ * @discussion QNLocalVideoTrack 与 QNRemoteVideoTrack 属性方法
+ */
+- (void)takeVideoSnapshot:(NSString *)identifyID;
 
 @end
 

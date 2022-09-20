@@ -1,6 +1,7 @@
 package uni.qiniu.droid.uniplugin_rtc.base;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -27,6 +28,7 @@ import com.qiniu.droid.rtc.QNLocalAudioTrackStats;
 import com.qiniu.droid.rtc.QNLocalTrack;
 import com.qiniu.droid.rtc.QNLocalVideoTrack;
 import com.qiniu.droid.rtc.QNLocalVideoTrackStats;
+import com.qiniu.droid.rtc.QNMediaRelayState;
 import com.qiniu.droid.rtc.QNMicrophoneAudioTrack;
 import com.qiniu.droid.rtc.QNMicrophoneAudioTrackConfig;
 import com.qiniu.droid.rtc.QNNetworkQuality;
@@ -49,6 +51,8 @@ import com.qiniu.droid.rtc.QNTrackInfoChangedListener;
 import com.qiniu.droid.rtc.QNTrackProfile;
 import com.qiniu.droid.rtc.QNTranscodingLiveStreamingConfig;
 import com.qiniu.droid.rtc.QNTranscodingLiveStreamingTrack;
+import com.qiniu.droid.rtc.QNVideoFrameListener;
+import com.qiniu.droid.rtc.QNVideoFrameType;
 import com.qiniu.droid.rtc.model.QNAudioDevice;
 
 import java.util.ArrayList;
@@ -57,6 +61,11 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.Nullable;
+
+import org.webrtc.Size;
+
+import io.dcloud.feature.uniapp.bridge.UniJSCallback;
+import uni.qiniu.droid.uniplugin_rtc.uni.UniCallback;
 import uni.qiniu.droid.uniplugin_rtc.uni.entity.UniRemoteTrack;
 
 public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, QNAudioMixerListener, QNLiveStreamingListener {
@@ -70,6 +79,7 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
     private QNScreenVideoTrack mScreenVideoTrack;
     private QNCameraFacing mCameraFacing;
     private final Map<String, QNLocalTrack> mLocalTracks = new HashMap<>();
+    private final List<QNLocalVideoTrack> mLocalVideoTracks = new ArrayList<>();
     private final Map<String, QNRenderView> mRenderViews = new HashMap<>();
     private final Map<String, QNLiveStreamingConfig> mLiveStreamingConfigs = new HashMap<>();
     private QNAudioMixer mAudioMixer = null;
@@ -79,10 +89,15 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
     private QNRTCGlobalListener mLiveStreamingListener;
     private QNRTCGlobalListener mAudioMixerListener;
     private QNRTCGlobalListener mRemoteTrackInfoListener;
+    private Context context;
+
+    private Map<String, Boolean> frameAvailableMap = new HashMap<>();
+    private Map<String, UniJSCallback> callbackMap = new HashMap<>();
 
     public void configRTC(Context context, QNRTCSetting setting, QNRTCGlobalListener listener) {
         mRTCEventListener = listener;
         QNRTC.init(context, setting, this);
+        this.context = context;
     }
 
     public void deinit() {
@@ -142,6 +157,7 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
         mCameraVideoTrack = QNRTC.createCameraVideoTrack(cameraVideoTrackConfig);
         if (mCameraVideoTrack != null) {
             mLocalTracks.put(Constants.ID_CAMERA_VIDEO_TRACK, mCameraVideoTrack);
+            mLocalVideoTracks.add(mCameraVideoTrack);
         }
         return mCameraVideoTrack;
     }
@@ -150,6 +166,7 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
         mCustomVideoTrack = QNRTC.createCustomVideoTrack(customVideoTrackConfig);
         if (mCustomVideoTrack != null) {
             mLocalTracks.put(Constants.ID_CUSTOM_VIDEO_TRACK, mCustomVideoTrack);
+            mLocalVideoTracks.add(mCustomVideoTrack);
         }
         return mCustomVideoTrack;
     }
@@ -158,6 +175,7 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
         mScreenVideoTrack = QNRTC.createScreenVideoTrack(screenVideoTrackConfig);
         if (mScreenVideoTrack != null) {
             mLocalTracks.put(Constants.ID_SCREEN_VIDEO_TRACK, mScreenVideoTrack);
+            mLocalVideoTracks.add(mScreenVideoTrack);
         }
         return mScreenVideoTrack;
     }
@@ -223,17 +241,32 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
                 JSONObject data = new JSONObject();
                 result.put(Constants.KEY_PUBLISH_RESULT, true);
                 for (QNLocalTrack localTrack : localTracks) {
+                    String trackID = localTrack.getTrackID();
                     if (localTrack instanceof QNCameraVideoTrack) {
-                        data.put(Constants.ID_CAMERA_VIDEO_TRACK, localTrack.getTrackID());
+                        data.put(Constants.ID_CAMERA_VIDEO_TRACK, trackID);
                     } else if (localTrack instanceof QNScreenVideoTrack) {
-                        data.put(Constants.ID_SCREEN_VIDEO_TRACK, localTrack.getTrackID());
+                        data.put(Constants.ID_SCREEN_VIDEO_TRACK, trackID);
                     } else if (localTrack instanceof QNCustomVideoTrack) {
-                        data.put(Constants.ID_CUSTOM_VIDEO_TRACK, localTrack.getTrackID());
+                        data.put(Constants.ID_CUSTOM_VIDEO_TRACK, trackID);
                     } else if (localTrack instanceof QNMicrophoneAudioTrack) {
-                        data.put(Constants.ID_MICROPHONE_AUDIO_TRACK, localTrack.getTrackID());
+                        data.put(Constants.ID_MICROPHONE_AUDIO_TRACK, trackID);
                     } else if (localTrack instanceof QNCustomAudioTrack) {
-                        data.put(Constants.ID_CUSTOM_AUDIO_TRACK, localTrack.getTrackID());
+                        data.put(Constants.ID_CUSTOM_AUDIO_TRACK, trackID);
                     }
+                }
+
+                for (QNLocalVideoTrack localVideoTrack : mLocalVideoTracks) {
+                    localVideoTrack.setVideoFrameListener(new QNVideoFrameListener() {
+                        String trackID = localVideoTrack.getTrackID();
+                        @Override
+                        public void onYUVFrameAvailable(byte[] bytes, QNVideoFrameType qnVideoFrameType, int i, int i1, int i2, long l) {
+                            snapshotBase64(bytes, i, i1, trackID);
+                        }
+                        @Override
+                        public int onTextureFrameAvailable(int i, QNVideoFrameType qnVideoFrameType, int i1, int i2, int i3, long l, float[] floats) {
+                            return i;
+                        }
+                    });
                 }
                 result.put(Constants.KEY_DATA, data);
                 callback.onResponse(result);
@@ -252,22 +285,74 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
         }, localTracks);
     }
 
+    private void snapshotBase64(byte[] nv21, int width, int height, String trackID) {
+        //如果手动触发截图api，根据trackID获取标志flag flag为true，进行nv21转换base64
+        if (frameAvailableMap.containsKey(trackID) && frameAvailableMap.get(trackID)) {
+            frameAvailableMap.put(trackID, false);
+            Bitmap bmpout = Utils.nv21ToBitmap(nv21, width, height);
+            String base64Str = Utils.bitmapToBase64(bmpout);
+            UniJSCallback uniJSCallback = callbackMap.get(trackID);
+            if (uniJSCallback != null) {
+                JSONObject base64JSON = new JSONObject();
+                base64JSON.put("base64", base64Str);
+                JSONObject result = new JSONObject();
+                result.put(Constants.KEY_DATA, base64JSON);
+                // 由于unicallback的invoke只能invoke一次，那么在每次需要回调的时候，
+                // 创建新的unicallback实例，用来执行结果回调
+                QNRTCCallback base64Callback = new UniCallback(uniJSCallback);
+                base64Callback.onResponse(base64JSON);
+            }
+        }
+    }
+
+
+    public void takeVideoSnapshot(String trackID, UniJSCallback callback) {
+        callbackMap.put(trackID, callback);
+        frameAvailableMap.put(trackID, true);
+    }
+
     public void unpublish(List<String> tracks) {
         if (mClient == null) {
             return;
         }
-        mClient.unpublish(getLocalTracks(tracks));
+        List<QNLocalTrack> localTracks = getLocalTracks(tracks);
+        for (QNLocalTrack localTrack : localTracks) {
+            String trackID = localTrack.getTrackID();
+            frameAvailableMap.remove(trackID);
+            callbackMap.remove(trackID);
+        }
+
+        mClient.unpublish(localTracks);
     }
 
     public void subscribe(List<UniRemoteTrack> tracks) {
         List<QNRemoteTrack> remoteTracks = new ArrayList<>();
+        List<QNRemoteVideoTrack> remoteVideoTracks = new ArrayList<>();
         for (UniRemoteTrack uniRemoteTrack : tracks) {
             QNRemoteTrack remoteTrack = getRemoteTrack(uniRemoteTrack.getUserID(), uniRemoteTrack.getTrackID());
+            QNRemoteVideoTrack remoteVideoTrack = getRemoteVideoTrack(uniRemoteTrack.getUserID(), uniRemoteTrack.getTrackID());
+            if(remoteVideoTrack != null) {
+                remoteVideoTracks.add(remoteVideoTrack);
+            }
             if (remoteTrack != null) {
                 remoteTracks.add(remoteTrack);
             }
         }
         mClient.subscribe(remoteTracks);
+        for (QNRemoteVideoTrack remoteVideoTrack : remoteVideoTracks) {
+            String trackID = remoteVideoTrack.getTrackID();
+            remoteVideoTrack.setVideoFrameListener(new QNVideoFrameListener() {
+                @Override
+                public void onYUVFrameAvailable(byte[] bytes, QNVideoFrameType qnVideoFrameType, int i, int i1, int i2, long l) {
+                    snapshotBase64(bytes, i, i1, trackID);
+                }
+
+                @Override
+                public int onTextureFrameAvailable(int i, QNVideoFrameType qnVideoFrameType, int i1, int i2, int i3, long l, float[] floats) {
+                    return i;
+                }
+            });
+        }
     }
 
     public void unsubscribe(List<UniRemoteTrack> tracks) {
@@ -276,6 +361,9 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
             QNRemoteTrack remoteTrack = getRemoteTrack(uniRemoteTrack.getUserID(), uniRemoteTrack.getTrackID());
             if (remoteTrack != null) {
                 remoteTracks.add(remoteTrack);
+                String trackID = remoteTrack.getTrackID();
+                callbackMap.remove(trackID);
+                frameAvailableMap.remove(trackID);
             }
         }
         mClient.unsubscribe(remoteTracks);
@@ -456,6 +544,16 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
         return null;
     }
 
+    private QNRemoteVideoTrack getRemoteVideoTrack(String userID, String trackID) {
+        QNRemoteUser remoteUser = mClient.getRemoteUser(userID);
+        for (QNRemoteVideoTrack remoteVideoTrack : remoteUser.getVideoTracks()) {
+            if (remoteVideoTrack.getTrackID().equals(trackID)) {
+                return remoteVideoTrack;
+            }
+        }
+        return null;
+    }
+
     public QNRenderView getRenderView(String trackID) {
         return mRenderViews.get(trackID);
     }
@@ -613,6 +711,11 @@ public class QNRTCManager implements QNRTCEventListener, QNClientEventListener, 
         params.put(Constants.KEY_CUSTOM_MESSAGE_CONTENT, message.getContent());
         params.put(Constants.KEY_CUSTOM_MESSAGE_TIMESTAMP, message.getTimestamp());
         mClientEventListener.onEvent(Constants.EVENT_MESSAGE_RECEIVED, params);
+    }
+
+    @Override
+    public void onMediaRelayStateChanged(String s, QNMediaRelayState qnMediaRelayState) {
+        return;
     }
 
     @Override

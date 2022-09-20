@@ -5,12 +5,15 @@ import { QNLocalVideoTrack } from './RTCLocalVideoTrack'
 // @ts-ignore
 // eslint-disable-next-line no-undef
 const QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack')
+// @ts-ignore
+// eslint-disable-next-line no-undef
+const QNEvent = uni.requireNativePlugin('globalEvent')
 export class QNCameraVideoTrack extends QNLocalVideoTrack {
   /**
    * 销毁本地创建的 track
    */
-  destroy (): void {
-    return QNRtcTrack.destroy(this.identifyID)
+  destroy(): void {
+    return QNRtcTrack.destroy(this.identifyID);
   }
 
   /**
@@ -18,43 +21,43 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 只支持ios
    * @param sessionPreset 分辨率
    */
-  setSessionPreset (sessionPreset: QNSessionPresetType): void {
-    return QNRtcTrack.setSessionPreset(this.identifyID, sessionPreset)
+  setSessionPreset(sessionPreset: QNSessionPresetType): void {
+    return QNRtcTrack.setSessionPreset(this.identifyID, sessionPreset);
   }
 
   /**
    * 开启摄像头采集
    */
-  startCapture (): void {
-    return QNRtcTrack.startCapture(this.identifyID)
+  startCapture(): void {
+    return QNRtcTrack.startCapture(this.identifyID);
   }
 
   /**
    * 关闭摄像头采集
    */
-  stopCapture (): void {
-    return QNRtcTrack.stopCapture(this.identifyID)
+  stopCapture(): void {
+    return QNRtcTrack.stopCapture(this.identifyID);
   }
 
   /**
    * 切换相机前后置
    */
-  switchCamera (): void {
-    return QNRtcTrack.switchCamera(this.identifyID)
+  switchCamera(): void {
+    return QNRtcTrack.switchCamera(this.identifyID);
   }
 
   /**
    * 开启闪光灯
    */
-  turnLightOn (): void {
-    return QNRtcTrack.turnLightOn(this.identifyID)
+  turnLightOn(): void {
+    return QNRtcTrack.turnLightOn(this.identifyID);
   }
 
   /**
    * 关闭闪光灯
    */
-  turnLightOff (): void {
-    return QNRtcTrack.turnLightOff(this.identifyID)
+  turnLightOff(): void {
+    return QNRtcTrack.turnLightOff(this.identifyID);
   }
 
   /**
@@ -63,8 +66,8 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @param x 焦点 x 轴绝对位置，范围 0 - 1
    * @param y 焦点 y 轴绝对位置，范围 0 - 1
    */
-  manualFocus (x: number, y: number): void {
-    return QNRtcTrack.manualFocus(this.identifyID, x, y)
+  manualFocus(x: number, y: number): void {
+    return QNRtcTrack.manualFocus(this.identifyID, x, y);
   }
 
   /**
@@ -72,8 +75,8 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 只支持安卓
    * @param value 曝光度
    */
-  setExposureCompensation (value: number): void {
-    return QNRtcTrack.setExposureCompensation(this.identifyID, value)
+  setExposureCompensation(value: number): void {
+    return QNRtcTrack.setExposureCompensation(this.identifyID, value);
   }
 
   /**
@@ -81,8 +84,8 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @description 只支持安卓
    * @returns 曝光度
    */
-  getMaxExposureCompensation (): number {
-    return QNRtcTrack.getMaxExposureCompensation(this.identifyID)
+  getMaxExposureCompensation(): number {
+    return QNRtcTrack.getMaxExposureCompensation(this.identifyID);
   }
 
   /**
@@ -90,8 +93,8 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @description 只支持安卓
    * @returns 曝光度
    */
-  getMinExposureCompensation (): number {
-    return QNRtcTrack.getMinExposureCompensation(this.identifyID)
+  getMinExposureCompensation(): number {
+    return QNRtcTrack.getMinExposureCompensation(this.identifyID);
   }
 
   /**
@@ -99,8 +102,8 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 只支持ios，默认 AVCaptureVideoOrientationPortrait
    * @param videoOrientation 旋转方向
    */
-  setVideoOrientation (videoOrientation: QNAVCaptureVideoOrientation): void {
-    return QNRtcTrack.setVideoOrientation(this.identifyID, videoOrientation)
+  setVideoOrientation(videoOrientation: QNAVCaptureVideoOrientation): void {
+    return QNRtcTrack.setVideoOrientation(this.identifyID, videoOrientation);
   }
 
   /**
@@ -108,16 +111,16 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 只支持ios
    * @returns 旋转方向
    */
-  getVideoOrientation (): QNAVCaptureVideoOrientation {
-    return QNRtcTrack.getVideoOrientation(this.identifyID)
+  getVideoOrientation(): QNAVCaptureVideoOrientation {
+    return QNRtcTrack.getVideoOrientation(this.identifyID);
   }
 
   /**
    * 设置缩放大小
    * @param zoom 缩放大小
    */
-  setZoom (zoom: number): void {
-    return QNRtcTrack.setZoom(this.identifyID, zoom)
+  setZoom(zoom: number): void {
+    return QNRtcTrack.setZoom(this.identifyID, zoom);
   }
 
   /**
@@ -125,24 +128,24 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 缩放大小范围为 0.0 - 1.0
    * @returns 缩放大小列表
    */
-  getZooms (): number[] {
-    return QNRtcTrack.getZooms(this.identifyID)
+  getZooms(): number[] {
+    return QNRtcTrack.getZooms(this.identifyID);
   }
 
   /**
    * 设置是否允许预览
    * @param isEnabled 是否允许预览
    */
-  setPreviewEnabled (isEnabled: boolean): void {
-    return QNRtcTrack.setPreviewEnabled(this.identifyID, isEnabled)
+  setPreviewEnabled(isEnabled: boolean): void {
+    return QNRtcTrack.setPreviewEnabled(this.identifyID, isEnabled);
   }
 
   /**
    * 设置是否启用美颜
    * @param  beautySetting 美颜配置
    */
-  setBeauty (beautySetting: QNBeautySetting): void {
-    return QNRtcTrack.setBeauty(this.identifyID, beautySetting)
+  setBeauty(beautySetting: QNBeautySetting): void {
+    return QNRtcTrack.setBeauty(this.identifyID, beautySetting);
   }
 
   /**
@@ -150,8 +153,11 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 默认 YES
    * @param previewMirrorFrontFacing 是否开启镜像
    */
-  previewMirrorFrontFacing (previewMirrorFrontFacing: boolean): void {
-    return QNRtcTrack.previewMirrorFrontFacing(this.identifyID, previewMirrorFrontFacing)
+  previewMirrorFrontFacing(previewMirrorFrontFacing: boolean): void {
+    return QNRtcTrack.previewMirrorFrontFacing(
+      this.identifyID,
+      previewMirrorFrontFacing
+    );
   }
 
   /**
@@ -159,8 +165,11 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 默认 NO
    * @param previewMirrorRearFacing 是否开启镜像
    */
-  previewMirrorRearFacing (previewMirrorRearFacing: boolean): void {
-    return QNRtcTrack.previewMirrorRearFacing(this.identifyID, previewMirrorRearFacing)
+  previewMirrorRearFacing(previewMirrorRearFacing: boolean): void {
+    return QNRtcTrack.previewMirrorRearFacing(
+      this.identifyID,
+      previewMirrorRearFacing
+    );
   }
 
   /**
@@ -168,8 +177,11 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 默认 NO
    * @param encodeMirrorFrontFacing 是否开启镜像
    */
-  encodeMirrorFrontFacing (encodeMirrorFrontFacing: boolean): void {
-    return QNRtcTrack.encodeMirrorFrontFacing(this.identifyID, encodeMirrorFrontFacing)
+  encodeMirrorFrontFacing(encodeMirrorFrontFacing: boolean): void {
+    return QNRtcTrack.encodeMirrorFrontFacing(
+      this.identifyID,
+      encodeMirrorFrontFacing
+    );
   }
 
   /**
@@ -177,8 +189,11 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 默认 NO
    * @param encodeMirrorRearFacing 是否开启镜像
    */
-  encodeMirrorRearFacing (encodeMirrorRearFacing: boolean): void {
-    return QNRtcTrack.encodeMirrorRearFacing(this.identifyID, encodeMirrorRearFacing)
+  encodeMirrorRearFacing(encodeMirrorRearFacing: boolean): void {
+    return QNRtcTrack.encodeMirrorRearFacing(
+      this.identifyID,
+      encodeMirrorRearFacing
+    );
   }
 
   /**
@@ -186,22 +201,61 @@ export class QNCameraVideoTrack extends QNLocalVideoTrack {
    * @remarks 如需取消图片替代相机 resourcePath 传空字符串即可
    * @param image 图片配置
    */
-  pushImage (image: QNImage): void {
-    return QNRtcTrack.pushImage(this.identifyID, image)
+  pushImage(image: QNImage): void {
+    return QNRtcTrack.pushImage(this.identifyID, image);
   }
 
   /**
    * 设置水印
    * @param waterMark 水印配置
    */
-  setWaterMark (waterMark: QNVideoWaterMark): void {
-    return QNRtcTrack.setWaterMark(this.identifyID, waterMark)
+  setWaterMark(waterMark: QNVideoWaterMark): void {
+    return QNRtcTrack.setWaterMark(this.identifyID, waterMark);
   }
 
   /**
    * 清空水印配置
    */
-  clearWaterMark (): void {
-    return QNRtcTrack.clearWaterMark(this.identifyID)
+  clearWaterMark(): void {
+    return QNRtcTrack.clearWaterMark(this.identifyID);
+  }
+  /**
+   * 截图
+   */
+  async takeVideoSnapshot(): Promise<{ base64: string, rotate?: number }> {
+    //@ts-ignore
+    const { platform } = uni.getSystemInfoSync();
+    if (platform === "ios") {
+      return new Promise((resolve, reject) => {
+        QNRtcTrack.takeVideoSnapshot(this.identifyID);
+        const listener = (param: { data: string }) => {
+          QNEvent.removeEventListener("onLocalVideoFrame", listener);
+          resolve({ base64: this.trimBase64(param.data) });
+        };
+        QNEvent.addEventListener("onLocalVideoFrame", listener);
+        // 5秒未有数据范围则认为失败
+        setTimeout(() => {
+          QNEvent.removeEventListener("onLocalVideoFrame", listener);
+          reject();
+        }, 5000);
+      });
+    } else if (platform === "android") {
+      return new Promise((resolve, reject) => {
+        QNRtcTrack.takeVideoSnapshot(this.trackID, (data : { base64: string, rotate: number } )=> {
+          resolve(data);
+        });
+      })
+    }
+  }
+  /**
+   * 去除图片base64字符串中的\r \n 防止图片解析出错
+   * @param base64 需要去除\r \n的图片base64字符串
+   * @returns 去除\r \n后的base64字符串
+   */
+  private trimBase64(base64: string): string {
+    if (!base64) {
+      return "";
+    }
+    return base64.replace(/\r|\n/g, "");
   }
 }
