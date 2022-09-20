@@ -1,7 +1,7 @@
 {
     "name": "七牛云原生WebRTC插件",
     "id": "QNRTC-UniPlugin",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "QNRTC原生插件",
     "_dp_type": "nativeplugin",
     "_dp_nativeplugin": {
