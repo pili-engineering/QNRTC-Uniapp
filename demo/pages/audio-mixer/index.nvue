@@ -1,57 +1,69 @@
 <template>
-		<view class="wrap">
-			<uni-popup ref="popup" type="message" background-color="#fff">
-				<uni-popup-message type="success" :message="text" :duration="1000"></uni-popup-message>
-			</uni-popup>
-			<uni-popup ref="error" type="message" background-color="#fff">
-				<uni-popup-message type="error" :message="error" :duration="1000"></uni-popup-message>
-			</uni-popup>
-			<view>
-				<view class="flex-column">
-					<uni-row class="title margin-top-sm margin-bottom-sm" v-if="platform === 'ios'">
-						<view class="margin-right-sm">是否开启耳返</view>
-						<button size="mini" type="primary" @click="handleSetPlayBack">修改</button>
-					</uni-row>
-					<uni-data-checkbox v-if="platform === 'ios'"  :multiple="false" v-model="playBack" :localdata="playBackList">
-					</uni-data-checkbox>
-					<uni-row class="title margin-top-sm margin-bottom-sm">
-						<view class="margin-right-sm">设置本地音量(范围0-1)</view>
-					</uni-row>
-					<view><slider show-value max="100" step="1" :value="playingVolume" @changing="handleSetPlayingVolume"  /></view>
-					<uni-row class="title margin-top-sm margin-bottom-sm">
-						<view class="margin-right-sm">设置混音地址</view>
-					</uni-row>
-					<uni-easyinput v-model="audioUrl" placeholder="请输入混音地址"></uni-easyinput>
-					<uni-row class="title margin-top-sm margin-bottom-sm">
-						<view class="margin-right-sm">设置混音音量(范围0-1)</view>
-					</uni-row>
-					<view><slider show-value max="100" step="1" :value="microphoneVolume" @changing="handleSetMicrophone"  /></view>
-					<uni-row class="title margin-top-sm margin-bottom-sm">
-						<view class="margin-right-sm">设置音乐音量(范围0-1)</view>
-					</uni-row>
-					<view><slider show-value max="100" step="1" :value="musicVolume" @changing="handleSetMusic"  /></view>
-					<view class="title margin-top-sm margin-bottom-sm">视频总时长： {{duration}}秒，当前进度：{{currentPosition}}秒</view>
-					<slider block-size="16" show-value="false" :value="currentTime"  @changing="handleSliderChanging" @change="handleSliderChange" :max="duration" step="1" />
+	<view class="wrap">
+		<uni-popup ref="popup" type="message" background-color="#fff">
+			<uni-popup-message type="success" :message="text" :duration="1000"></uni-popup-message>
+		</uni-popup>
+		<uni-popup ref="error" type="message" background-color="#fff">
+			<uni-popup-message type="error" :message="error" :duration="1000"></uni-popup-message>
+		</uni-popup>
+		<view>
+			<view class="flex-column">
+				<uni-row class="title margin-top-sm margin-bottom-sm" v-if="platform === 'ios'">
+					<view class="margin-right-sm">是否开启耳返</view>
+					<button size="mini" type="primary" @click="handleSetPlayBack">修改</button>
+				</uni-row>
+				<uni-data-checkbox v-if="platform === 'ios'" :multiple="false" v-model="playBack"
+					:localdata="playBackList">
+				</uni-data-checkbox>
+				<uni-row class="title margin-top-sm margin-bottom-sm">
+					<view class="margin-right-sm">设置本地音量(范围0-1)</view>
+				</uni-row>
+				<view>
+					<slider show-value max="100" step="1" :value="playingVolume" @changing="handleSetPlayingVolume" />
 				</view>
-				<view class="flex-row">
-					<button style="flex:1;margin-right:10upx" type="primary" @click="handleCreateAudioMixer">创建混音</button>
-					<button style="flex:1;margin-left:10upx" type="primary" @click="handleStartAudioMixer">开启混音</button>
+				<uni-row class="title margin-top-sm margin-bottom-sm">
+					<view class="margin-right-sm">设置混音地址</view>
+				</uni-row>
+				<uni-easyinput v-model="audioUrl" placeholder="请输入混音地址"></uni-easyinput>
+				<uni-row class="title margin-top-sm margin-bottom-sm">
+					<view class="margin-right-sm">设置混音音量(范围0-1)</view>
+				</uni-row>
+				<view>
+					<slider show-value max="100" step="1" :value="microphoneVolume" @changing="handleSetMicrophone" />
 				</view>
-				<view class="margin-top-sm flex-row">
-					<button type="warn" @click="handleStoptAudioMixer">停止混音</button>
-					<button type="primary" @click="handleResumeAudioMixer">恢复混音</button>
-					<button type="warn" @click="handlePauseAudioMixer">暂停混音</button>
+				<uni-row class="title margin-top-sm margin-bottom-sm">
+					<view class="margin-right-sm">设置音乐音量(范围0-1)</view>
+				</uni-row>
+				<view>
+					<slider show-value max="100" step="1" :value="musicVolume" @changing="handleSetMusic" />
 				</view>
+				<view class="title margin-top-sm margin-bottom-sm">视频总时长： {{duration}}秒，当前进度：{{currentPosition}}秒</view>
+				<slider block-size="16" show-value="false" :value="currentTime" @changing="handleSliderChanging"
+					@change="handleSliderChange" :max="duration" step="1" />
+			</view>
+			<view class="flex-row">
+				<button style="flex:1;margin-right:10upx" type="primary" @click="handleCreateAudioMixer">创建混音</button>
+				<button style="flex:1;margin-left:10upx" type="primary" @click="handleStartAudioMixer">开启混音</button>
+			</view>
+			<view class="margin-top-sm flex-row">
+				<button type="warn" @click="handleStoptAudioMixer">停止混音</button>
+				<button type="primary" @click="handleResumeAudioMixer">恢复混音</button>
+				<button type="warn" @click="handlePauseAudioMixer">暂停混音</button>
 			</view>
 		</view>
+	</view>
 </template>
 
 <script>
 	import QNRTC from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
-	import { mapState } from "vuex"
+	import {
+		mapState
+	} from "vuex"
 	export default {
 		computed: {
-			...mapState(["platform","token","policy","logLevel","stereo","bwePolicy","allowAudioMixWithOthers","hWCodecEnabled","maintainResolution","fieldTrials","encoderQualityMode","isAEC3Enabled"])
+			...mapState(["platform", "token", "policy", "logLevel", "stereo", "bwePolicy", "allowAudioMixWithOthers",
+				"hWCodecEnabled", "maintainResolution", "fieldTrials", "encoderQualityMode", "isAEC3Enabled"
+			])
 		},
 		data() {
 			return {
@@ -72,8 +84,7 @@
 				timer: null,
 				text: "创建成功",
 				error: "",
-				playBackList: [
-					{
+				playBackList: [{
 						text: "是",
 						value: 1
 					},
@@ -99,9 +110,9 @@
 			handleDownLoad(callback) {
 				this.localAudioUrl = ""
 				uni.downloadFile({
-				    url:this.audioUrl,
-				    success: (res) => {
-				        if (res.statusCode === 200) {
+					url: this.audioUrl,
+					success: (res) => {
+						if (res.statusCode === 200) {
 							uni.saveFile({
 								tempFilePath: res.tempFilePath,
 								success: (res) => {
@@ -110,8 +121,8 @@
 									console.log(res.savedFilePath)
 								}
 							})
-				        }
-				    }
+						}
+					}
 				});
 			},
 			// 开始混音
@@ -140,8 +151,8 @@
 				this.audioMixer = this.microphoneAudioTrack.createAudioMixer(this.audioUrl)
 				this.audioMixer.on("onStateChanged", (params) => {
 					this.text = params.state
-					if(params.state === "MIXING") {
-						this.duration =  ~~this.audioMixer.getDuration() / 1000000
+					if (params.state === "MIXING") {
+						this.duration = ~~this.audioMixer.getDuration() / 1000000
 					}
 					this.$refs.popup.open()
 				})
@@ -163,12 +174,12 @@
 			// 修改混音麦克风音量
 			handleSetMicrophone(event) {
 				this.microphoneVolume = event.detail.value
-				this.audioMixer.setMixingVolume(this.microphoneVolume / 100,this.musicVolume / 100)
+				this.audioMixer.setMixingVolume(this.microphoneVolume / 100, this.musicVolume / 100)
 			},
 			// 修改混音音乐音量
 			handleSetMusic(event) {
 				this.musicVolume = event.detail.value
-				this.audioMixer.setMixingVolume(this.microphoneVolume / 100,this.musicVolume / 100)
+				this.audioMixer.setMixingVolume(this.microphoneVolume / 100, this.musicVolume / 100)
 			},
 			// 拖动进度
 			handleSliderChanging(event) {
@@ -209,6 +220,39 @@
 								})
 							}
 						})
+					} else if (state === "DISCONNECTED") {
+						if (info.reason === "KICKED_OUT") {
+							uni.showModal({
+								content: "被踢出房间",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_CLOSED") {
+							uni.showModal({
+								content: "房间被关闭",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_FULL") {
+							uni.showModal({
+								content: "房间人数已满",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						}
+					} else if (state === "RECONNECTING") {
+						uni.showLoading({
+							mask: true,
+							title: '重连中'
+						})
+					} else if (state === "RECONNECTED") {
+						uni.hideLoading()
+						uni.showModal({
+							content: "重连成功"
+						})
 					}
 				})
 				this.client.on("onAudioSubscribed", (params) => {
@@ -218,7 +262,7 @@
 				})
 				this.client.on("onUserUnpublished", (params) => {
 					for (let i of params.trackList) {
-						if(i.trackID === this.remoteAudioTracks.trackID) {
+						if (i.trackID === this.remoteAudioTracks.trackID) {
 							this.remoteAudioTracks = {}
 						}
 					}
@@ -234,16 +278,19 @@
 		margin: 0 20px 20px;
 		padding: 10px 0;
 	}
-	.local{
+
+	.local {
 		width: 750upx;
-		flex:0.5
+		flex: 0.5
 	}
+
 	.local2 {
 		width: 750upx;
-		flex:1;
+		flex: 1;
 	}
-	.remote{
+
+	.remote {
 		width: 750upx;
-		flex:0.5
+		flex: 0.5
 	}
 </style>

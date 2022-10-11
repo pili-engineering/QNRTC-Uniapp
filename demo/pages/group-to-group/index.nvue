@@ -4,9 +4,10 @@
 			<view class="flex-row margin-bottom-sm">
 				<text class="title">房间状态：</text>
 				<uni-tag v-if="connectionState === 'CONNECTING'" text="连接中" type="error"></uni-tag>
-				<uni-tag v-if="connectionState === 'CONNECTED'" text="连接成功" type="success"></uni-tag>
-				<uni-tag v-if="connectionState !== 'CONNECTING' && connectionState !== 'CONNECTED' " text="未连接"
-					type="warning"></uni-tag>
+				<uni-tag v-else-if="connectionState === 'RECONNECTING'" text="重连中" type="error"></uni-tag>
+				<uni-tag v-else-if="connectionState === 'CONNECTED' || connectionState === 'RECONNECTED' " text="连接成功" type="success"></uni-tag>
+				<uni-tag v-else text="未连接" type="warning"></uni-tag>
+				
 			</view>
 			<uni-easyinput class="margin-bottom-sm" v-model="message" placeholder="请输入自定义消息"></uni-easyinput>
 			<button type="primary" style="margin-bottom: 30upx" @click="handleSendMessage">发送自定义消息</button>
@@ -50,41 +51,64 @@
 		</view>
 		<text class="title margin-left-sm" style="margin-bottom:20upx">本地track：</text>
 		<view class="track-item-wrap" v-for="(item,index) in localTracks" :key="index">
-		    <QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
+			<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="0"
+				:identifyID="item.identifyID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 			<view class="track-info-wrap">
+				<button v-if="index === 0" style="width: 100upx;margin-top: 20upx;margin-bottom: 10upx;" size="mini" type="primary" @click="takeLocalVideoSnapshot(item)">截图 </button>
 				<text class="track-info-item">轨道ID：{{item.trackID}}</text>
 				<text class="track-info-item">用户ID：自己</text>
 				<text class="track-info-item">类型：{{item.kind}}</text>
 				<view v-if="item.trackID">
-					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行帧率：{{localVideoTrackStats[item.trackID][0].uplinkFrameRate}}</text>
-					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行丢包率：{{localVideoTrackStats[item.trackID][0].uplinkLostRate.toFixed(5)}}</text>
-					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行码率：{{localVideoTrackStats[item.trackID][0].uplinkBitrate.toFixed(5)}}</text>
-					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">质量：{{localVideoTrackStats[item.trackID][0].profile}}</text>
-					<text class="track-info-item" v-if="localVideoTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{localVideoTrackStats[item.trackID].uplinkRTT.toFixed(5)}}</text>
-					<text class="track-info-item" v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{localAudioTrackStats[item.trackID].uplinkRTT}}</text>
-					<text class="track-info-item" v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">上行丢包率：{{localAudioTrackStats[item.trackID].uplinkLostRate.toFixed(5)}}</text>
-					<text class="track-info-item" v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">下行码率：{{localAudioTrackStats[item.trackID].uplinkBitrate.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行帧率：{{localVideoTrackStats[item.trackID][0].uplinkFrameRate}}</text>
+					<text class="track-info-item"
+						v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行丢包率：{{localVideoTrackStats[item.trackID][0].uplinkLostRate.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">上行码率：{{localVideoTrackStats[item.trackID][0].uplinkBitrate.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="localVideoTrackStats[item.trackID] && item.kind === 'video' && localVideoTrackStats[item.trackID][0]">质量：{{localVideoTrackStats[item.trackID][0].profile}}</text>
+					<text class="track-info-item"
+						v-if="localVideoTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{localVideoTrackStats[item.trackID].uplinkRTT.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{localAudioTrackStats[item.trackID].uplinkRTT}}</text>
+					<text class="track-info-item"
+						v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">上行丢包率：{{localAudioTrackStats[item.trackID].uplinkLostRate.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="localAudioTrackStats[item.trackID] && item.kind === 'audio'">下行码率：{{localAudioTrackStats[item.trackID].uplinkBitrate.toFixed(5)}}</text>
 				</view>
 			</view>
 		</view>
 		<text class="title margin-left-sm margin-top-sm margin-bottom-sm">远端track：</text>
 		<view class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="trackID">
-		    <QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'"  :local="1" :identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
+			<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="1"
+				:identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID">
+			</QNRTC-UniPlugin-SurfaceView>
 			<view class="track-info-wrap">
+				<button v-if="item.kind === 'video'" style="width: 100upx;margin-top: 20upx;margin-bottom: 10upx;" size="mini" type="primary" @click="takeRemoteVideoSnapshot(item)">截图 </button>
 				<text class="track-info-item">轨道ID：{{item.trackID}}</text>
 				<text class="track-info-item">用户ID：{{item.userID}}</text>
 				<text class="track-info-item">类型：{{item.kind}}</text>
 				<view v-if="item.trackID">
-					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">下行丢包率：{{remoteAudioTrackStats[item.trackID].downlinkLostRate.toFixed(5)}}</text>
-					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">下行码率：{{remoteAudioTrackStats[item.trackID].downlinkBitrate.toFixed(5)}}</text>
-					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{remoteAudioTrackStats[item.trackID].uplinkRTT}}</text>
-					<text class="track-info-item" v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">上行丢包率：{{remoteAudioTrackStats[item.trackID].uplinkLostRate}}</text>
-					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">上行丢包率：{{remoteVideoTrackStats[item.trackID].uplinkLostRate}}</text>
-					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行丢包率：{{remoteVideoTrackStats[item.trackID].downlinkLostRate}}</text>
-					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行码率：{{remoteVideoTrackStats[item.trackID].downlinkBitrate.toFixed(5)}}</text>
-					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">上行RTT：{{remoteVideoTrackStats[item.trackID].uplinkRTT}}</text>
-					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">质量等级：{{remoteVideoTrackStats[item.trackID].profile}}</text>
-					<text class="track-info-item" v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行帧率：{{remoteVideoTrackStats[item.trackID].downlinkFrameRate}}</text>
+					<text class="track-info-item"
+						v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">下行丢包率：{{remoteAudioTrackStats[item.trackID].downlinkLostRate.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">下行码率：{{remoteAudioTrackStats[item.trackID].downlinkBitrate.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">上行RTT：{{remoteAudioTrackStats[item.trackID].uplinkRTT}}</text>
+					<text class="track-info-item"
+						v-if="remoteAudioTrackStats[item.trackID] && item.kind === 'audio'">上行丢包率：{{remoteAudioTrackStats[item.trackID].uplinkLostRate}}</text>
+					<text class="track-info-item"
+						v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">上行丢包率：{{remoteVideoTrackStats[item.trackID].uplinkLostRate}}</text>
+					<text class="track-info-item"
+						v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行丢包率：{{remoteVideoTrackStats[item.trackID].downlinkLostRate}}</text>
+					<text class="track-info-item"
+						v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行码率：{{remoteVideoTrackStats[item.trackID].downlinkBitrate.toFixed(5)}}</text>
+					<text class="track-info-item"
+						v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">上行RTT：{{remoteVideoTrackStats[item.trackID].uplinkRTT}}</text>
+					<text class="track-info-item"
+						v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">质量等级：{{remoteVideoTrackStats[item.trackID].profile}}</text>
+					<text class="track-info-item"
+						v-if="remoteVideoTrackStats[item.trackID] && item.kind === 'video'">下行帧率：{{remoteVideoTrackStats[item.trackID].downlinkFrameRate}}</text>
 				</view>
 			</view>
 		</view>
@@ -96,11 +120,15 @@
 		QNRTCLogLevel
 	} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
 	import {
-		mapState
+		mapState,
+		mapMutations
 	} from "vuex"
 	export default {
 		computed: {
-			...mapState(["captureHeight","captureWidth","encodeWidth","encodeHeight","platform","multiStreamEnable","token","policy","logLevel","stereo","bwePolicy","allowAudioMixWithOthers","hWCodecEnabled","maintainResolution","fieldTrials","encoderQualityMode","isAEC3Enabled","multiStreamEnable"])
+			...mapState(["captureHeight", "captureWidth", "encodeWidth", "encodeHeight", "platform", "multiStreamEnable",
+				"token", "policy", "logLevel", "stereo", "bwePolicy", "allowAudioMixWithOthers", "hWCodecEnabled",
+				"maintainResolution", "fieldTrials", "encoderQualityMode", "isAEC3Enabled", "multiStreamEnable"
+			])
 		},
 		data() {
 			return {
@@ -130,6 +158,7 @@
 		onLoad() {
 			this.handleJoinRoom()
 			setInterval(() => {
+				console.log(this.client.getConnectionState())
 				if (this.client) {
 					this.connectionState = this.client.getConnectionState()
 					this.remoteUsers = this.client.getRemoteUsers()
@@ -161,6 +190,51 @@
 			}, 1000)
 		},
 		methods: {
+			saveBaseImgFile(base64) {
+			    const bitmap = new plus.nativeObj.Bitmap("base64");
+			    bitmap.loadBase64Data(base64, function() {
+			        const url = "_doc/" + new Date().getTime() + ".png"; 
+			        console.log('saveHeadImgFile', url)
+			        bitmap.save(url, {
+			            overwrite: true,  // 是否覆盖
+			            // quality: 'quality'  // 图片清晰度
+			        }, (i) => {
+			            uni.saveImageToPhotosAlbum({
+			                filePath: url,
+			                success: function() {
+			                    uni.showToast({
+			                        title: '图片保存成功',
+			                        icon: 'none'
+			                    })
+			                    bitmap.clear()
+			                }
+			            });
+			        }, (e) => {
+			            uni.showToast({
+			                title: '图片保存失败',
+			                icon: 'none'
+			            })
+						console.log(e)
+			            bitmap.clear()
+			        });
+			    }, (e) => {
+			        uni.showToast({
+			            title: '图片保存失败',
+			            icon: 'none'
+			        })
+			        bitmap.clear()
+			    });
+			},
+			async takeLocalVideoSnapshot() {
+				const {base64, rotate} = await this.cameraVideoTrack.takeVideoSnapshot();
+				console.log(rotate);
+				this.saveBaseImgFile(base64)
+			},
+			async takeRemoteVideoSnapshot(item) {
+				const {base64, rotate} = await item.takeVideoSnapshot();
+				console.log(rotate);
+				this.saveBaseImgFile(base64)
+			},
 			handleSendMessage() {
 				this.client.sendMessage(this.message, [], Math.random() + "messageID")
 			},
@@ -183,7 +257,6 @@
 					encoderQualityMode: this.encoderQualityMode === 1,
 					isAEC3Enabled: this.isAEC3Enabled === 1
 				})
-				// QNRTC.enableFileLogging()
 				this.client = QNRTC.createClient()
 				this.client.setAutoSubscribe(false)
 				const cameraVideoTrack = QNRTC.createCameraVideoTrack({
@@ -194,28 +267,29 @@
 					captureWidth: this.captureWidth * 1
 				})
 				this.localTracks.push(cameraVideoTrack)
+				this.cameraVideoTrack = cameraVideoTrack
 				const microphoneAudioTrack = QNRTC.createMicrophoneAudioTrack()
 				this.localTracks.push(microphoneAudioTrack)
-				if(QNRTC.isScreenCaptureSupported()) {
-					if(this.platform === 'android') {
+				if (QNRTC.isScreenCaptureSupported()) {
+					if (this.platform === 'android') {
 						QNRTC.requestPermission((result) => {
-						if(result) {
-							const screenVideoTrack = QNRTC.createScreenVideoTrack()
-							this.localTracks.push(screenVideoTrack)
-							this.client.join(this.token)
-						}else {
-							uni.showModal({
-								content: "无法录屏"
-							})
-							this.client.join(this.token)
-						}
-					})
-					}else {
+							if (result) {
+								const screenVideoTrack = QNRTC.createScreenVideoTrack()
+								this.localTracks.push(screenVideoTrack)
+								this.client.join(this.token)
+							} else {
+								uni.showModal({
+									content: "无法录屏"
+								})
+								this.client.join(this.token)
+							}
+						})
+					} else {
 						const screenVideoTrack = QNRTC.createScreenVideoTrack()
 						this.localTracks.push(screenVideoTrack)
 						this.client.join(this.token)
 					}
-				}else {
+				} else {
 					this.client.join(this.token)
 				}
 				this.client.on("onConnectionStateChanged", ({
@@ -232,6 +306,39 @@
 									content: error.message
 								})
 							}
+						})
+					} else if (state === "DISCONNECTED") {
+						if (info.reason === "KICKED_OUT") {
+							uni.showModal({
+								content: "被踢出房间",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_CLOSED") {
+							uni.showModal({
+								content: "房间被关闭",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_FULL") {
+							uni.showModal({
+								content: "房间人数已满",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						}
+					} else if (state === "RECONNECTING") {
+						uni.showLoading({
+							mask: true,
+							title: '重连中'
+						})
+					} else if (state === "RECONNECTED") {
+						uni.hideLoading()
+						uni.showModal({
+							content: "重连成功"
 						})
 					}
 				})

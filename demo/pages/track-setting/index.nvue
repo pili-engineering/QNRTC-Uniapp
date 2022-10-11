@@ -1,256 +1,330 @@
 <template>
-		<view class="wrap">
-			<uni-popup ref="popup" type="message" background-color="#fff">
-				<uni-popup-message type="success" message="发布成功" :duration="2000"></uni-popup-message>
-			</uni-popup>
-			<view class="flex-top" v-if="platform === 'ios'">
-				<view class="flex-row margin-left-sm margin-right-sm" style="margin-top:10upx">
-					<text>采集</text>
-					<button @click="handleCapture('AVCaptureSessionPreset352x288')" size="mini" :type="capture === 'AVCaptureSessionPreset352x288' ? 'primary' : 'default'">288p</button>
-					<button @click="handleCapture('AVCaptureSessionPreset640x480')" size="mini" :type="capture === 'AVCaptureSessionPreset640x480' ? 'primary' : 'default'">480p</button>
-					<button @click="handleCapture('AVCaptureSessionPreset1280x720')" size="mini" :type="capture === 'AVCaptureSessionPreset1280x720' ? 'primary' : 'default'">720p</button>
-					<button @click="handleCapture('AVCaptureSessionPreset1920x1080')" size="mini" :type="capture === 'AVCaptureSessionPreset1920x1080' ? 'primary' : 'default'">1080p</button>
-				</view>
-			</view>
-			<uni-popup ref="muted" type="dialog">
-				<uni-popup-dialog mode="input" title="设置mute的值" :duration="2000" @confirm="setMuted">
-					<uni-data-checkbox :multiple="false" v-model="muted" :localdata="mutedList">
-					</uni-data-checkbox>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="sei" type="dialog">
-				<uni-popup-dialog mode="input" title="设置sei信息" :duration="2000" @confirm="sendSEI">
-					<view class="flex-column">
-						<view><uni-easyinput v-model="sei.message" placeholder="请输入信息"></uni-easyinput></view>
-						<view class="margin-top-sm"><uni-easyinput v-model="sei.repeatCount" placeholder="请输入重复次数"></uni-easyinput></view>
-						<view class="margin-top-sm"><uni-easyinput v-model="sei.uuid" placeholder="请输入uuid"></uni-easyinput></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="manualFocus" type="dialog">
-				<uni-popup-dialog mode="input" title="设置手动聚焦信息" :duration="2000" @confirm="manualFocus">
-					<view class="flex-column">
-						<view class="title">x轴（范围0-1）</view>
-						<view><slider show-value max="100" step="1" :value="manualFocusData.x" @change="manualFocusData.x = $event.detail.value"  /></view>
-						<view class="title">y轴（范围0-1）</view>
-						<view><slider show-value max="100" step="1" :value="manualFocusData.y" @change="manualFocusData.y = $event.detail.value"  /></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="exposureCompensation" type="dialog">
-				<uni-popup-dialog mode="input" title="设置曝光度" :duration="2000" @confirm="setExposureCompensation">
-					<view class="flex-column">
-						<view><uni-easyinput type="number" v-model="exposureCompensation" placeholder="请输入曝光度"></uni-easyinput></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="videoOrientation" type="dialog">
-				<uni-popup-dialog mode="input" title="采集摄像头的旋转方向" :duration="2000" @confirm="setVideoOrientation">
-					<view class="flex-column">
-						<uni-data-checkbox :multiple="false" v-model="videoOrientation" :localdata="videoOrientationList">
-						</uni-data-checkbox>
-					</view> 
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="localFillMode" type="dialog">
-				<uni-popup-dialog mode="input" title="设置本地渲染模式" :duration="2000">
-					<view class="flex-column">
-						<uni-data-checkbox :multiple="false" v-model="localFillMode" :localdata="fillModeList">
-						</uni-data-checkbox>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="remoteFillMode" type="dialog">
-				<uni-popup-dialog mode="input" title="设置远端渲染模式" :duration="2000">
-					<view class="flex-column">
-						<uni-data-checkbox :multiple="false" v-model="remoteFillMode" :localdata="fillModeList">
-						</uni-data-checkbox>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="zoom" type="dialog">
-				<uni-popup-dialog mode="input" :title="`设置缩放大小(范围:${zoomsList[0]}-${zoomsList[1]})`" :duration="2000" @confirm="setZoom">
-					<view class="flex-column">
-						<view><slider show-value :max="zoomsList[1]" step="1" :value="zoom"  @change="zoom = $event.detail.value" /></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="mirror" type="dialog">
-				<uni-popup-dialog mode="input" title="设置是否镜像" :duration="2000" @confirm="setMirror">
-					<uni-data-checkbox :multiple="false" v-model="mirror" :localdata="mirrorLIst">
-					</uni-data-checkbox>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="beauty" type="dialog">
-				<uni-popup-dialog mode="input" title="设置美颜参数" :duration="2000" @confirm="setBeauty">
-					<view class="flex-column">
-						<uni-data-checkbox :multiple="false" v-model="beautyData.enabled" :localdata="beautyDataLIst">
-						</uni-data-checkbox>
-						<view class="title">美颜程度(范围0-1)</view>
-						<view><slider show-value max="100" step="1" :value="beautyData.smoothLevel" @change="beautyData.smoothLevel = $event.detail.value"  /></view>
-						<view class="title">美白程度(范围0-1)</view>
-						<view><slider show-value max="100" step="1" :value="beautyData.whiten" @change="beautyData.whiten = $event.detail.value"  /></view>
-						<view class="title">红润程度(范围0-1)</view>
-						<view><slider show-value max="100" step="1" :value="beautyData.redden"  @change="beautyData.redden = $event.detail.value" /></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="waterMark" type="dialog">
-				<uni-popup-dialog mode="input" title="设置水印" :duration="2000" @confirm="setWaterMark">
-					<view class="flex-column">
-						<uni-data-checkbox v-if="platform === 'android'" :multiple="false" v-model="waterMark.waterMarkRelativeSize" :localdata="waterMarkRelativeSizeList">
-						</uni-data-checkbox>
-						<view class="margin-top-sm"><uni-easyinput :disabled="true" v-model="waterMark.resourcePath" placeholder="请输入resourcePath"></uni-easyinput></view>
-						<view class="margin-top-sm"><button size="mini" type="primary" @click="handleChooseLocalImage">选择图片</button></view>
-						<view class="title">x轴距离(范围0-1)</view>
-						<view><slider show-value max="100" step="1" :value="waterMark.x" @change="waterMark.x = $event.detail.value"  /></view>
-						<view class="title">y轴距离(范围0-1)</view>
-						<view><slider show-value max="100" step="1" :value="waterMark.y"  @change="waterMark.y = $event.detail.value" /></view>
-						<view class="title" v-if="platform === 'android'">透明度</view>
-						<view v-if="platform === 'android'"><slider  show-value max="255" step="1" :value="waterMark.alpha"  @change="waterMark.alpha = $event.detail.value" /></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="pushImage" type="dialog">
-				<uni-popup-dialog mode="input" title="图片替换画面" :duration="2000" @confirm="pushImage">
-					<view class="flex-column">
-						<view class="margin-top-sm"><uni-easyinput :disabled="true" v-model="pushImageData.resourcePath" placeholder="请输入resourcePath"></uni-easyinput></view>
-						<view class="margin-top-sm"><button size="mini" type="primary" @click="handleResourceImage">选择图片</button></view>
-						<view class="margin-top-sm"><uni-easyinput type="number" v-model="pushImageData.width" placeholder="请输入宽(像素)"></uni-easyinput></view>
-						<view class="margin-top-sm"><uni-easyinput type="number" v-model="pushImageData.height" placeholder="请输入高(像素)"></uni-easyinput></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="remoteVolume" type="dialog">
-				<uni-popup-dialog mode="input" title="远程音量设置(范围0-10)" :duration="2000" @confirm="setRemoteVolume">
-					<view class="margin-top-sm flex-column">
-						<view><slider show-value max="100" step="1" :value="remoteVolume" @change="remoteVolume = $event.detail.value"  /></view>
-					</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="volume" type="dialog">
-				<uni-popup-dialog mode="input" title="本地音量设置(范围0-10)" :duration="2000" @confirm="setVolume">
-						<view class="margin-top-sm flex-column">
-							<view><slider show-value max="100" step="1" :value="localVolume" @change="localVolume = $event.detail.value"  /></view>
-						</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<uni-popup ref="profile" type="dialog">
-				<uni-popup-dialog mode="input" title="设置远程质量" :duration="2000" @confirm="setProfile">
-						<view class="flex-column">
-							<uni-data-checkbox :multiple="false" v-model="profile" :localdata="profileList">
-							</uni-data-checkbox>
-						</view>
-				</uni-popup-dialog>
-			</uni-popup>
-			<QNRTC-UniPlugin-SurfaceView  :fillMode="localFillMode" :local="0" :class ="remoteVideoTracks ? 'local' :'local2'" v-if="cameraVideoTrack" 
-			ref="local"
-					:identifyID="cameraVideoTrack.identifyID" :trackID="cameraVideoTrack.trackID"></QNRTC-UniPlugin-SurfaceView>
-			<QNRTC-UniPlugin-SurfaceView :fillMode="remoteFillMode" :local="1" :class ="cameraVideoTrack ? 'local' :'local2'" v-if="remoteVideoTracks" :identifyID="remoteVideoTracks.identifyID"
-					:userID="remoteVideoTracks.userID" :trackID="remoteVideoTracks.trackID"></QNRTC-UniPlugin-SurfaceView>
-			<view class="main-btn-wrap">
-				<view>
-					<uni-icons v-if="localAudioOn" type="mic-filled" size="40" @click="setMutedLocalAudio"></uni-icons>
-					<uni-icons v-if="!localAudioOn" type="mic" size="40" @click="setMutedLocalAudio"></uni-icons>
-				</view>
-				<view class="margin-top-sm">
-					<uni-icons v-if="audioRouteToSpeakerphone" type="phone-filled" size="40" @click="setAudioRouteToSpeakerphone"></uni-icons>
-					<uni-icons v-if="!audioRouteToSpeakerphone" type="phone" size="40" @click="setAudioRouteToSpeakerphone"></uni-icons>
-				</view>
-				<view class="margin-top-sm">
-					<uni-icons v-if="localVideoOn" type="videocam-filled" size="40" @click="setMutedLocalVideo"></uni-icons>
-					<uni-icons v-if="!localVideoOn" type="videocam" size="40" @click="setMutedLocalVideo"></uni-icons>
-				</view>
-			</view>
-			<view class="btn-wrap">
-				<view class="scroll-view">
-					<scroll-view class="scroll-view-box" scroll-y="true" >
-						<view class="scroll-view-wrap">
-							<view class="margin-top-sm">
-								<button size="mini" :type="isPublish ? 'error': 'primary'" @click="publish">{{isPublish ? '取消发布': '发布'}}</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.sei.open()">发送 SEI </button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="startCapture">开启摄像头采集 </button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="stopCapture">关闭摄像头采集 </button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="switchCamera">切换摄像头</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="turnLightOn">打开闪光灯</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="turnLightOff">关闭闪光灯</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.manualFocus.open()">手动聚焦</button>
-							</view>
-							<view class="margin-top-sm" v-if="platform === 'ios'">
-								<button size="mini" type="primary" @click="$refs.videoOrientation.open()">设置旋转方向</button>
-							</view>
-							<view class="margin-top-sm" v-if="platform === 'ios'">
-								<button size="mini" type="primary" @click="$refs.localFillMode.open()">设置本地渲染模式</button>
-							</view>
-							<view class="margin-top-sm" v-if="platform === 'ios'">
-								<button size="mini" type="primary" @click="$refs.remoteFillMode.open()">设置远端渲染模式</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="handleZoomOpen">设置缩放大小</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.beauty.open()">设置美颜</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.pushImage.open()">图片替代画面</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="closePushImage">关闭替代画面</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.waterMark.open()">设置水印</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="clearWaterMark">清除水印</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.volume.open()" >设置本地音量</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.remoteVolume.open()" >设置远程音量</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="$refs.profile.open()" >设置远程质量</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="previewMirrorFrontFacing">前置镜像切换</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="previewMirrorRearFacing">后置镜像切换</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="encodeMirrorFrontFacing">前置预览编码切换</button>
-							</view>
-							<view class="margin-top-sm">
-								<button size="mini" type="primary" @click="encodeMirrorRearFacing">后置预览编码切换</button>
-							</view>
-						</view>
-					</scroll-view>
-				</view>
+	<view class="wrap">
+		<view class="flex-top" v-if="platform === 'ios'">
+			<view class="flex-row margin-left-sm margin-right-sm" style="margin-top:10upx">
+				<text>采集</text>
+				<button @click="handleCapture('AVCaptureSessionPreset352x288')" size="mini"
+					:type="capture === 'AVCaptureSessionPreset352x288' ? 'primary' : 'default'">288p</button>
+				<button @click="handleCapture('AVCaptureSessionPreset640x480')" size="mini"
+					:type="capture === 'AVCaptureSessionPreset640x480' ? 'primary' : 'default'">480p</button>
+				<button @click="handleCapture('AVCaptureSessionPreset1280x720')" size="mini"
+					:type="capture === 'AVCaptureSessionPreset1280x720' ? 'primary' : 'default'">720p</button>
+				<button @click="handleCapture('AVCaptureSessionPreset1920x1080')" size="mini"
+					:type="capture === 'AVCaptureSessionPreset1920x1080' ? 'primary' : 'default'">1080p</button>
 			</view>
 		</view>
+		<QNRTC-UniPlugin-SurfaceView :fillMode="localFillMode" :local="0" :class="remoteVideoTracks ? 'local' :'local2'"
+			v-if="cameraVideoTrack" ref="local" :identifyID="cameraVideoTrack.identifyID"
+			:trackID="cameraVideoTrack.trackID"></QNRTC-UniPlugin-SurfaceView>
+		<QNRTC-UniPlugin-SurfaceView :fillMode="remoteFillMode" :local="1" :class="cameraVideoTrack ? 'local' :'local2'"
+			v-if="remoteVideoTracks" :identifyID="remoteVideoTracks.identifyID" :userID="remoteVideoTracks.userID"
+			:trackID="remoteVideoTracks.trackID"></QNRTC-UniPlugin-SurfaceView>
+		<view class="main-btn-wrap">
+			<view>
+				<uni-icons v-if="localAudioOn" type="mic-filled" size="40" @click="setMutedLocalAudio"></uni-icons>
+				<uni-icons v-if="!localAudioOn" type="mic" size="40" @click="setMutedLocalAudio"></uni-icons>
+			</view>
+			<view class="margin-top-sm">
+				<uni-icons v-if="audioRouteToSpeakerphone" type="phone-filled" size="40"
+					@click="setAudioRouteToSpeakerphone"></uni-icons>
+				<uni-icons v-if="!audioRouteToSpeakerphone" type="phone" size="40" @click="setAudioRouteToSpeakerphone">
+				</uni-icons>
+			</view>
+			<view class="margin-top-sm">
+				<uni-icons v-if="localVideoOn" type="videocam-filled" size="40" @click="setMutedLocalVideo"></uni-icons>
+				<uni-icons v-if="!localVideoOn" type="videocam" size="40" @click="setMutedLocalVideo"></uni-icons>
+			</view>
+		</view>
+		<view class="btn-wrap">
+			<view class="scroll-view">
+				<scroll-view class="scroll-view-box" scroll-y="true">
+					<view class="scroll-view-wrap">
+						<view class="margin-top-sm">
+							<button size="mini" :type="isPublish ? 'error': 'primary'"
+								@click="publish">{{isPublish ? '取消发布': '发布'}}</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.sei.open()">发送 SEI </button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="startCapture">开启摄像头采集 </button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="stopCapture">关闭摄像头采集 </button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="switchCamera">切换摄像头</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="turnLightOn">打开闪光灯</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="turnLightOff">关闭闪光灯</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.manualFocus.open()">手动聚焦</button>
+						</view>
+						<view class="margin-top-sm" v-if="platform === 'ios'">
+							<button size="mini" type="primary" @click="$refs.videoOrientation.open()">设置旋转方向</button>
+						</view>
+						<view class="margin-top-sm" v-if="platform === 'ios'">
+							<button size="mini" type="primary" @click="$refs.localFillMode.open()">设置本地渲染模式</button>
+						</view>
+						<view class="margin-top-sm" v-if="platform === 'ios'">
+							<button size="mini" type="primary" @click="$refs.remoteFillMode.open()">设置远端渲染模式</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="handleZoomOpen">设置缩放大小</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.beauty.open()">设置美颜</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.pushImage.open()">图片替代画面</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="closePushImage">关闭替代画面</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.waterMark.open()">设置水印</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="clearWaterMark">清除水印</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.volume.open()">设置本地音量</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.remoteVolume.open()">设置远程音量</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="$refs.profile.open()">设置远程质量</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="previewMirrorFrontFacing">前置镜像切换</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="previewMirrorRearFacing">后置镜像切换</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="encodeMirrorFrontFacing">前置预览编码切换</button>
+						</view>
+						<view class="margin-top-sm">
+							<button size="mini" type="primary" @click="encodeMirrorRearFacing">后置预览编码切换</button>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+		<uni-popup ref="popup" type="dialog">
+			<uni-popup-dialog type="success" title="发布成功" :duration="2000">
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="muted" type="dialog">
+			<uni-popup-dialog mode="input" title="设置mute的值" :duration="2000" @confirm="setMuted">
+				<uni-data-checkbox :multiple="false" v-model="muted" :localdata="mutedList">
+				</uni-data-checkbox>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="sei" type="dialog">
+			<uni-popup-dialog mode="input" title="设置sei信息" :duration="2000" @confirm="sendSEI">
+				<view class="flex-column">
+					<view>
+						<uni-easyinput v-model="sei.message" placeholder="请输入信息"></uni-easyinput>
+					</view>
+					<view class="margin-top-sm">
+						<uni-easyinput v-model="sei.repeatCount" placeholder="请输入重复次数"></uni-easyinput>
+					</view>
+					<view class="margin-top-sm">
+						<uni-easyinput v-model="sei.uuid" placeholder="请输入uuid"></uni-easyinput>
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="manualFocus" type="dialog">
+			<uni-popup-dialog mode="input" title="设置手动聚焦信息" :duration="2000" @confirm="manualFocus">
+				<view class="flex-column">
+					<view class="title">x轴（范围0-1）</view>
+					<view>
+						<slider show-value max="100" step="1" :value="manualFocusData.x"
+							@change="manualFocusData.x = $event.detail.value" />
+					</view>
+					<view class="title">y轴（范围0-1）</view>
+					<view>
+						<slider show-value max="100" step="1" :value="manualFocusData.y"
+							@change="manualFocusData.y = $event.detail.value" />
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="exposureCompensation" type="dialog">
+			<uni-popup-dialog mode="input" title="设置曝光度" :duration="2000" @confirm="setExposureCompensation">
+				<view class="flex-column">
+					<view>
+						<uni-easyinput type="number" v-model="exposureCompensation" placeholder="请输入曝光度">
+						</uni-easyinput>
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="videoOrientation" type="dialog">
+			<uni-popup-dialog mode="input" title="采集摄像头的旋转方向" :duration="2000" @confirm="setVideoOrientation">
+				<view class="flex-column">
+					<uni-data-checkbox :multiple="false" v-model="videoOrientation" :localdata="videoOrientationList">
+					</uni-data-checkbox>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="localFillMode" type="dialog">
+			<uni-popup-dialog mode="input" title="设置本地渲染模式" :duration="2000">
+				<view class="flex-column">
+					<uni-data-checkbox :multiple="false" v-model="localFillMode" :localdata="fillModeList">
+					</uni-data-checkbox>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="remoteFillMode" type="dialog">
+			<uni-popup-dialog mode="input" title="设置远端渲染模式" :duration="2000">
+				<view class="flex-column">
+					<uni-data-checkbox :multiple="false" v-model="remoteFillMode" :localdata="fillModeList">
+					</uni-data-checkbox>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="zoom" type="dialog">
+			<uni-popup-dialog mode="input" :title="`设置缩放大小(范围:${zoomsList[0]}-${zoomsList[1]})`" :duration="2000"
+				@confirm="setZoom">
+				<view class="flex-column">
+					<view>
+						<slider show-value :max="zoomsList[1]" step="1" :value="zoom"
+							@change="zoom = $event.detail.value" />
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="mirror" type="dialog">
+			<uni-popup-dialog mode="input" title="设置是否镜像" :duration="2000" @confirm="setMirror">
+				<uni-data-checkbox :multiple="false" v-model="mirror" :localdata="mirrorLIst">
+				</uni-data-checkbox>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="beauty" type="dialog">
+			<uni-popup-dialog mode="input" title="设置美颜参数" :duration="2000" @confirm="setBeauty">
+				<view class="flex-column">
+					<uni-data-checkbox :multiple="false" v-model="beautyData.enabled" :localdata="beautyDataLIst">
+					</uni-data-checkbox>
+					<view class="title">美颜程度(范围0-1)</view>
+					<view>
+						<slider show-value max="100" step="1" :value="beautyData.smoothLevel"
+							@change="beautyData.smoothLevel = $event.detail.value" />
+					</view>
+					<view class="title">美白程度(范围0-1)</view>
+					<view>
+						<slider show-value max="100" step="1" :value="beautyData.whiten"
+							@change="beautyData.whiten = $event.detail.value" />
+					</view>
+					<view class="title">红润程度(范围0-1)</view>
+					<view>
+						<slider show-value max="100" step="1" :value="beautyData.redden"
+							@change="beautyData.redden = $event.detail.value" />
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="waterMark" type="dialog">
+			<uni-popup-dialog mode="input" title="设置水印" :duration="2000" @confirm="setWaterMark">
+				<view class="flex-column">
+					<uni-data-checkbox v-if="platform === 'android'" :multiple="false"
+						v-model="waterMark.waterMarkRelativeSize" :localdata="waterMarkRelativeSizeList">
+					</uni-data-checkbox>
+					<view class="margin-top-sm">
+						<uni-easyinput :disabled="true" v-model="waterMark.resourcePath" placeholder="请输入resourcePath">
+						</uni-easyinput>
+					</view>
+					<view class="margin-top-sm"><button size="mini" type="primary"
+							@click="handleChooseLocalImage">选择图片</button></view>
+					<view class="title">x轴距离(范围0-1)</view>
+					<view>
+						<slider show-value max="100" step="1" :value="waterMark.x"
+							@change="waterMark.x = $event.detail.value" />
+					</view>
+					<view class="title">y轴距离(范围0-1)</view>
+					<view>
+						<slider show-value max="100" step="1" :value="waterMark.y"
+							@change="waterMark.y = $event.detail.value" />
+					</view>
+					<view class="title" v-if="platform === 'android'">透明度</view>
+					<view v-if="platform === 'android'">
+						<slider show-value max="255" step="1" :value="waterMark.alpha"
+							@change="waterMark.alpha = $event.detail.value" />
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="pushImage" type="dialog">
+			<uni-popup-dialog mode="input" title="图片替换画面" :duration="2000" @confirm="pushImage">
+				<view class="flex-column">
+					<view class="margin-top-sm">
+						<uni-easyinput :disabled="true" v-model="pushImageData.resourcePath"
+							placeholder="请输入resourcePath"></uni-easyinput>
+					</view>
+					<view class="margin-top-sm"><button size="mini" type="primary"
+							@click="handleResourceImage">选择图片</button></view>
+					<view class="margin-top-sm">
+						<uni-easyinput type="number" v-model="pushImageData.width" placeholder="请输入宽(像素)">
+						</uni-easyinput>
+					</view>
+					<view class="margin-top-sm">
+						<uni-easyinput type="number" v-model="pushImageData.height" placeholder="请输入高(像素)">
+						</uni-easyinput>
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="remoteVolume" type="dialog">
+			<uni-popup-dialog mode="input" title="远程音量设置(范围0-10)" :duration="2000" @confirm="setRemoteVolume">
+				<view class="margin-top-sm flex-column">
+					<view>
+						<slider show-value max="100" step="1" :value="remoteVolume"
+							@change="remoteVolume = $event.detail.value" />
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="volume" type="dialog">
+			<uni-popup-dialog mode="input" title="本地音量设置(范围0-10)" :duration="2000" @confirm="setVolume">
+				<view class="margin-top-sm flex-column">
+					<view>
+						<slider show-value max="100" step="1" :value="localVolume"
+							@change="localVolume = $event.detail.value" />
+					</view>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="profile" type="dialog">
+			<uni-popup-dialog mode="input" title="设置远程质量" :duration="2000" @confirm="setProfile">
+				<view class="flex-column">
+					<uni-data-checkbox :multiple="false" v-model="profile" :localdata="profileList">
+					</uni-data-checkbox>
+				</view>
+			</uni-popup-dialog>
+		</uni-popup>
+	</view>
 </template>
 
 <script>
-	import QNRTC,{QNRTCLogLevel} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
-	import { mapState } from "vuex"
+	import QNRTC, {
+		QNRTCLogLevel
+	} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
+	import {
+		mapState
+	} from "vuex"
 	export default {
 		computed: {
-			...mapState(["captureHeight","captureWidth","encodeWidth","encodeHeight","platform","multiStreamEnable","token","policy","logLevel","stereo","bwePolicy","allowAudioMixWithOthers","hWCodecEnabled","maintainResolution","fieldTrials","encoderQualityMode","isAEC3Enabled"])
+			...mapState(["captureHeight", "captureWidth", "encodeWidth", "encodeHeight", "platform", "multiStreamEnable",
+				"token", "policy", "logLevel", "stereo", "bwePolicy", "allowAudioMixWithOthers", "hWCodecEnabled",
+				"maintainResolution", "fieldTrials", "encoderQualityMode", "isAEC3Enabled"
+			])
 		},
 		data() {
 			return {
@@ -284,8 +358,7 @@
 				zoom: 0,
 				mirror: 0,
 				previewEnabled: 1,
-				profileList: [
-					{
+				profileList: [{
 						text: "低质量",
 						value: "LOW",
 					},
@@ -298,8 +371,7 @@
 						value: "HIGH"
 					}
 				],
-				fillModeList: [
-					{
+				fillModeList: [{
 						text: "QNVideoFillModeNone",
 						value: "QNVideoFillModeNone",
 					},
@@ -316,12 +388,11 @@
 						value: "QNVideoFillModePreserveAspectRatioAndFill",
 					},
 				],
-				videoOrientationList: [
-					{
+				videoOrientationList: [{
 						text: "AVCaptureVideoOrientationPortrait",
 						value: "AVCaptureVideoOrientationPortrait",
 					},
-					
+
 					{
 						text: "AVCaptureVideoOrientationLandscapeRight",
 						value: "AVCaptureVideoOrientationLandscapeRight"
@@ -333,7 +404,7 @@
 				],
 				sei: {
 					message: "",
-					repeatCount:0,
+					repeatCount: 0,
 					uuid: ""
 				},
 				manualFocusData: {
@@ -360,8 +431,7 @@
 					y: 0,
 					alpha: 0
 				},
-				mutedList: [
-					{
+				mutedList: [{
 						text: "静音",
 						value: 1,
 					},
@@ -370,8 +440,7 @@
 						value: 0,
 					}
 				],
-				mirrorLIst: [
-					{
+				mirrorLIst: [{
 						text: "开启",
 						value: 1,
 					},
@@ -380,8 +449,7 @@
 						value: 0,
 					}
 				],
-				previewEnabledList: [
-					{
+				previewEnabledList: [{
 						text: "开启",
 						value: 1,
 					},
@@ -390,8 +458,7 @@
 						value: 0,
 					}
 				],
-				beautyDataLIst: [
-					{
+				beautyDataLIst: [{
 						text: "开启",
 						value: 1,
 					},
@@ -400,8 +467,7 @@
 						value: 0,
 					}
 				],
-				waterMarkRelativeSizeList: [
-					{
+				waterMarkRelativeSizeList: [{
 						text: "大尺寸",
 						value: "LARGE"
 					},
@@ -431,9 +497,44 @@
 			this.getAllData()
 		},
 		methods: {
+			saveBaseImgFile(base64) {
+			    const bitmap = new plus.nativeObj.Bitmap("base64");
+			    bitmap.loadBase64Data(base64, function() {
+			        const url = "_doc/" + new Date().getTime() + ".png"; 
+			        console.log('saveHeadImgFile', url)
+			        bitmap.save(url, {
+			            overwrite: true,  // 是否覆盖
+			            // quality: 'quality'  // 图片清晰度
+			        }, (i) => {
+			            uni.saveImageToPhotosAlbum({
+			                filePath: url,
+			                success: function() {
+			                    uni.showToast({
+			                        title: '图片保存成功',
+			                        icon: 'none'
+			                    })
+			                    bitmap.clear()
+			                }
+			            });
+			        }, (e) => {
+			            uni.showToast({
+			                title: '图片保存失败',
+			                icon: 'none'
+			            })
+						console.log(e)
+			            bitmap.clear()
+			        });
+			    }, (e) => {
+			        uni.showToast({
+			            title: '图片保存失败',
+			            icon: 'none'
+			        })
+			        bitmap.clear()
+			    });
+			},
 			handleZoomOpen() {
-				if(this.cameraVideoTrack) {
-					this.zoomsList  = this.cameraVideoTrack.getZooms()
+				if (this.cameraVideoTrack) {
+					this.zoomsList = this.cameraVideoTrack.getZooms()
 					console.log(this.zoomsList)
 					this.zoom = this.zoomsList[0]
 					this.$refs.zoom.open()
@@ -465,33 +566,33 @@
 			},
 			getAllData() {
 				this.timer = setInterval(() => {
-					if(this.cameraVideoTrack) {
+					if (this.cameraVideoTrack) {
 						const getVideoOrientation = this.cameraVideoTrack.getVideoOrientation()
-						console.log("web:getVideoOrientation",getVideoOrientation)
+						console.log("web:getVideoOrientation", getVideoOrientation)
 					}
-					if(this.remoteAudioTracks) {
+					if (this.remoteAudioTracks) {
 						const remoteAudioTracksSubscribed = this.remoteAudioTracks.isSubscribed()
-						console.log("web:remoteAudioTracksSubscribed",remoteAudioTracksSubscribed)
+						console.log("web:remoteAudioTracksSubscribed", remoteAudioTracksSubscribed)
 						// const getRemoteVolume = this.remoteAudioTracks.getRemoteVolume()
 						// console.log("web:getRemoteVolume",getRemoteVolume)
 					}
-					if(this.remoteVideoTracks) {
+					if (this.remoteVideoTracks) {
 						const remoteVideoTracksSubscribed = this.remoteVideoTracks.isSubscribed()
-						console.log("web:remoteVideoTracksSubscribed",remoteVideoTracksSubscribed)
+						console.log("web:remoteVideoTracksSubscribed", remoteVideoTracksSubscribed)
 						const isMultiProfileEnabled = this.remoteVideoTracks.isMultiProfileEnabled()
-						console.log("web:isMultiProfileEnabled",isMultiProfileEnabled)
+						console.log("web:isMultiProfileEnabled", isMultiProfileEnabled)
 						const getProfile = this.remoteVideoTracks.getProfile()
-						console.log("web:getProfiles",getProfile)
-						
+						console.log("web:getProfiles", getProfile)
+
 					}
-				},15000)
+				}, 15000)
 			},
 			publish() {
-				if(this.isPublish) {
-					this.client.unpublish([this.cameraVideoTrack,this.microphoneAudioTrack])
+				if (this.isPublish) {
+					this.client.unpublish([this.cameraVideoTrack, this.microphoneAudioTrack])
 					this.isPublish = false
-				}else {
-					this.client.publish([this.cameraVideoTrack,this.microphoneAudioTrack],(onPublished, error) => {
+				} else {
+					this.client.publish([this.cameraVideoTrack, this.microphoneAudioTrack], (onPublished, error) => {
 						if (onPublished) {
 							this.isPublish = true
 							this.$refs.popup.open()
@@ -505,7 +606,7 @@
 			},
 			// 获取最大曝光度
 			getMaxExposureCompensation() {
-				if( this.cameraVideoTrack) {
+				if (this.cameraVideoTrack) {
 					const result = this.cameraVideoTrack.getMaxExposureCompensation()
 					uni.showModal({
 						content: result
@@ -514,7 +615,7 @@
 			},
 			// 获取最小曝光度
 			getMinExposureCompensation() {
-				if( this.cameraVideoTrack) {
+				if (this.cameraVideoTrack) {
 					const result = this.cameraVideoTrack.getMinExposureCompensation()
 					uni.showModal({
 						content: result
@@ -534,7 +635,7 @@
 			destroy() {
 				this.cameraVideoTrack.destroy()
 			},
-			
+
 			// 本地音频静音
 			setMutedLocalAudio() {
 				this.microphoneAudioTrack && this.microphoneAudioTrack.setMuted(this.localAudioOn)
@@ -547,7 +648,8 @@
 			},
 			// 发送sei
 			sendSEI() {
-				this.cameraVideoTrack && this.cameraVideoTrack.sendSEI(this.sei.message,this.sei.repeatCount * 1,this.sei.uuid)
+				this.cameraVideoTrack && this.cameraVideoTrack.sendSEI(this.sei.message, this.sei.repeatCount * 1, this.sei
+					.uuid)
 			},
 			// 开启摄像头采集
 			startCapture() {
@@ -579,7 +681,8 @@
 			},
 			// 手动聚焦
 			manualFocus() {
-				this.cameraVideoTrack && this.cameraVideoTrack.manualFocus(this.manualFocusData.x / 100,this.manualFocusData.y / 100)
+				this.cameraVideoTrack && this.cameraVideoTrack.manualFocus(this.manualFocusData.x / 100, this
+					.manualFocusData.y / 100)
 			},
 			// 设置曝光度
 			setExposureCompensation() {
@@ -631,8 +734,8 @@
 				this.cameraVideoTrack && this.cameraVideoTrack.setWaterMark({
 					...this.waterMark,
 					x: this.waterMark.x / 100,
-					y: this.waterMark.y  / 100,
-					alpha: this.waterMark.alpha *1
+					y: this.waterMark.y / 100,
+					alpha: this.waterMark.alpha * 1
 				})
 			},
 			// 清除水印
@@ -681,33 +784,73 @@
 					state
 				}) => {
 					if (state === "CONNECTED") {
-						this.client.publish([this.microphoneAudioTrack, this.cameraVideoTrack], (onPublished, error) => {
+						this.client.publish([this.microphoneAudioTrack, this.cameraVideoTrack], (onPublished,
+							error) => {
 							if (onPublished) {
 								this.isPublish = true
 								this.$refs.popup.open()
+								this.cameraVideoTrack.on("onLocalVideoFrame", (params) => {
+									console.log(params, "fffffffffffffffffffffffffffffffffffffffff")
+								})
 							} else {
 								uni.showModal({
 									content: error.message
 								})
 							}
 						})
+					} else if (state === "DISCONNECTED") {
+						if (info.reason === "KICKED_OUT") {
+							uni.showModal({
+								content: "被踢出房间",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_CLOSED") {
+							uni.showModal({
+								content: "房间被关闭",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_FULL") {
+							uni.showModal({
+								content: "房间人数已满",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						}
+					} else if (state === "RECONNECTING") {
+						uni.showLoading({
+							mask: true,
+							title: '重连中'
+						})
+					} else if (state === "RECONNECTED") {
+						uni.hideLoading()
+						uni.showModal({
+							content: "重连成功"
+						})
 					}
 				})
 				this.client.on("onVideoSubscribed", (params) => {
 					for (let i of params.trackList) {
 						this.remoteVideoTracks = i
-						this.remoteVideoTracks.on("onVideoProfileChanged",(params) => {
-							if(params.profile) {
+						this.remoteVideoTracks.on("onVideoProfileChanged", (params) => {
+							if (params.profile) {
 								uni.showModal({
 									content: `当前的视频质量等级为：${params.profile}`
 								})
 							}
 						})
-						this.remoteVideoTracks.on("onMuteStateChanged",(params) => {
+						this.remoteVideoTracks.on("onRemoteVideoFrame", (params) => {
+							console.log(params, "111111111111111111")
+						})
+						this.remoteVideoTracks.on("onMuteStateChanged", (params) => {
 							let content = ""
-							if(params && params.isMuted) {
+							if (params && params.isMuted) {
 								content = `${this.remoteVideoTracks.trackID}被mute了`
-							}else {
+							} else {
 								content = `${this.remoteVideoTracks.trackID}取消mute了`
 							}
 							uni.showModal({
@@ -719,11 +862,11 @@
 				this.client.on("onAudioSubscribed", (params) => {
 					for (let i of params.trackList) {
 						this.remoteAudioTracks = i
-						this.remoteAudioTracks.on("onMuteStateChanged",(params) => {
+						this.remoteAudioTracks.on("onMuteStateChanged", (params) => {
 							let content = ""
-							if(params && params.isMuted) {
+							if (params && params.isMuted) {
 								content = `${this.remoteAudioTracks.trackID}被mute了`
-							}else {
+							} else {
 								content = `${this.remoteAudioTracks.trackID}取消mute了`
 							}
 							uni.showModal({
@@ -735,10 +878,10 @@
 				this.client.on("onUserUnpublished", (params) => {
 					console.log("用户取消发布", params)
 					for (let i of params.trackList) {
-						if(this.remoteAudioTracks && i.trackID === this.remoteAudioTracks.trackID) {
+						if (this.remoteAudioTracks && i.trackID === this.remoteAudioTracks.trackID) {
 							this.remoteAudioTracks = null
 						}
-						if(this.remoteVideoTracks && i.trackID === this.remoteVideoTracks.trackID) {
+						if (this.remoteVideoTracks && i.trackID === this.remoteVideoTracks.trackID) {
 							console.log(this.remoteVideoTracks)
 							this.remoteVideoTracks = null
 						}
@@ -751,38 +894,45 @@
 </script>
 <style>
 	.wrap {
-		flex:1;
-		height:100vh;
+		flex: 1;
+		height: 100vh;
 	}
-	.local{
+
+	.local {
 		width: 750upx;
-		flex:0.5
+		flex: 0.5
 	}
+
 	.local2 {
 		width: 750upx;
-		flex:1;
+		flex: 1;
 	}
-	.remote{
+
+	.remote {
 		width: 750upx;
-		flex:0.5
+		flex: 0.5
 	}
+
 	.btn-wrap {
 		position: fixed;
 		right: 20upx;
 		top: 200upx;
 	}
-	.main-btn-wrap{
+
+	.main-btn-wrap {
 		position: fixed;
 		left: 50upx;
 		top: 300upx
 	}
-	.scroll-view{
+
+	.scroll-view {
 		height: 800upx;
 		width: 300upx;
 		/* #ifndef APP-NVUE */
-		overflow-y:scroll;
+		overflow-y: scroll;
 		/* #endif */
 	}
+
 	.flex-column {
 		flex-direction: column;
 		flex: 1;
@@ -790,15 +940,17 @@
 		width: 100%;
 		/* #endif */
 	}
-	.flex-top{
+
+	.flex-top {
 		position: fixed;
 		top: 80upx;
 		left: 0;
 		width: 750upx;
 		height: 100upx;
 	}
-	.title{
-		color:#333333;
+
+	.title {
+		color: #333333;
 		font-size: 24upx;
 		margin-top: 20upx;
 		margin-bottom: 10upx;
