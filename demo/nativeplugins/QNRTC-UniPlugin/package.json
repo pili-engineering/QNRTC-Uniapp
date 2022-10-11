@@ -1,7 +1,7 @@
 {
     "name": "七牛云原生WebRTC插件",
     "id": "QNRTC-UniPlugin",
-    "version": "1.1.1",
+    "version": "1.1.0",
     "description": "QNRTC原生插件",
     "_dp_type": "nativeplugin",
     "_dp_nativeplugin": {
@@ -87,7 +87,7 @@
                 "arm64-v8a"
             ],
 			"dependencies": [
-                "com.qiniu:happy-dns:0.2.18",
+                "com.qiniu:happy-dns:1.0.1",
                 "com.google.code.gson:gson:2.8.8"
             ],
             "minSdkVersion": "21",

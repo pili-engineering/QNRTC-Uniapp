@@ -66,7 +66,7 @@ const store = new Vuex.Store({
 			state.logLevel = payload.detail.value
 		},
 		setStereo(state,payload){
-			state.token = payload.detail.value
+			state.stereo = payload.detail.value
 		},
 		setBwePolicy(state,payload){
 			state.bwePolicy = payload.detail.value

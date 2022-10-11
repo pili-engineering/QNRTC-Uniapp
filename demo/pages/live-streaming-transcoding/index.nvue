@@ -13,53 +13,102 @@
 			</view>
 			<uni-drawer ref="showRight" mode="right" :mask-click="true">
 				<view class="scroll-view">
-					<scroll-view class="scroll-view-box" scroll-y="true" >
+					<scroll-view class="scroll-view-box" scroll-y="true">
 						<view class="scroll-view-wrap">
 							<view class="title margin-top-sm margin-bottom-sm">streamID</view>
 							<view>
-								<uni-easyinput v-model="transcodingConfig.streamID" placeholder="请输入streamID"></uni-easyinput>
+								<uni-easyinput v-model="transcodingConfig.streamID" placeholder="请输入streamID">
+								</uni-easyinput>
 							</view>
 							<view class="title margin-top-sm margin-bottom-sm">url</view>
-							<view><uni-easyinput v-model="transcodingConfig.url" placeholder="请输入url"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.url" placeholder="请输入url"></uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">width</view>
-							<view><uni-easyinput v-model="transcodingConfig.width" placeholder="请输入width"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.width" placeholder="请输入width"></uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">height</view>
-							<view><uni-easyinput v-model="transcodingConfig.height" placeholder="请输入height"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.height" placeholder="请输入height">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">videoFrameRate</view>
-							<view><uni-easyinput v-model="transcodingConfig.videoFrameRate" placeholder="请输入videoFrameRate">
-							</uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.videoFrameRate"
+									placeholder="请输入videoFrameRate">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">bitrate</view>
-							<view><uni-easyinput v-model="transcodingConfig.bitrate" placeholder="请输入bitrate"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.bitrate" placeholder="请输入bitrate">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">minBitrate</view>
-							<view><uni-easyinput v-model="transcodingConfig.minBitrate" placeholder="请输入minBitrate"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.minBitrate" placeholder="请输入minBitrate">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">maxBitrate</view>
-							<view><uni-easyinput v-model="transcodingConfig.maxBitrate" placeholder="请输入maxBitrate"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="transcodingConfig.maxBitrate" placeholder="请输入maxBitrate">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">renderMode</view>
-							<uni-data-checkbox :multiple="false" v-model="transcodingConfig.renderMode" :localdata="renderMode">
+							<uni-data-checkbox :multiple="false" v-model="transcodingConfig.renderMode"
+								:localdata="renderMode">
 							</uni-data-checkbox>
 							<view class="title margin-top-sm margin-bottom-sm">holdLastFrame</view>
 							<uni-data-checkbox :multiple="false" v-model="transcodingConfig.holdLastFrame"
 								:localdata="holdLastFrame"></uni-data-checkbox>
 							<view class="title margin-top-sm margin-bottom-sm">背景url</view>
-							<view><uni-easyinput v-model="background.url" placeholder="请输入背景url"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="background.url" placeholder="请输入背景url"></uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">背景x</view>
-							<view><uni-easyinput type="number" v-model="background.x" placeholder="请输入背景x"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="background.x" placeholder="请输入背景x">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">背景y</view>
-							<view><uni-easyinput type="number" v-model="background.y" placeholder="请输入背景y"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="background.y" placeholder="请输入背景y">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">背景w</view>
-							<view><uni-easyinput type="number" v-model="background.w" placeholder="请输入背景w"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="background.w" placeholder="请输入背景w">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">背景h</view>
-							<view><uni-easyinput type="number" v-model="background.h" placeholder="请输入背景h"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="background.h" placeholder="请输入背景h">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">水印url</view>
-							<view><uni-easyinput v-model="watermarks.url" placeholder="请输入水印url"></uni-easyinput></view>
+							<view>
+								<uni-easyinput v-model="watermarks.url" placeholder="请输入水印url"></uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">水印x</view>
-							<view><uni-easyinput type="number" v-model="watermarks.x" placeholder="请输入水印x"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="watermarks.x" placeholder="请输入水印x">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">水印y</view>
-							<view><uni-easyinput type="number" v-model="watermarks.y" placeholder="请输入水印y"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="watermarks.y" placeholder="请输入水印y">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">水印w</view>
-							<view><uni-easyinput type="number" v-model="watermarks.w" placeholder="请输入水印w"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="watermarks.w" placeholder="请输入水印w">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">水印h</view>
-							<view><uni-easyinput type="number" v-model="watermarks.h" placeholder="请输入水印h"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="watermarks.h" placeholder="请输入水印h">
+								</uni-easyinput>
+							</view>
 						</view>
 					</scroll-view>
 				</view>
@@ -72,29 +121,42 @@
 			</view>
 			<uni-drawer ref="showTrackLeft" mode="left" :mask-click="true">
 				<view class="scroll-view">
-					<scroll-view
-						class="scroll-view-box"
-						scroll-y="true">
+					<scroll-view class="scroll-view-box" scroll-y="true">
 						<view class="scroll-view-wrap">
 							<view class="title margin-top-sm margin-bottom-sm">trackID</view>
 							<uni-data-picker v-model="trackConfig.trackID" placeholder="请选择"
 								:map="{text:'trackID',value:'trackID'}" :localdata="allPcTrack" popup-title="请选择track">
 							</uni-data-picker>
 							<view class="title margin-top-sm margin-bottom-sm">x</view>
-							<view><uni-easyinput type="number" v-model="trackConfig.x" placeholder="请输入x"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="trackConfig.x" placeholder="请输入x"></uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">y</view>
-							<view><uni-easyinput type="number" v-model="trackConfig.y" placeholder="请输入y"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="trackConfig.y" placeholder="请输入y"></uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">width</view>
-							<view><uni-easyinput type="number" v-model="trackConfig.width" placeholder="请输入width"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="trackConfig.width" placeholder="请输入width">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">height</view>
-							<view><uni-easyinput type="number" v-model="trackConfig.height" placeholder="请输入height"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="trackConfig.height" placeholder="请输入height">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">zOrder</view>
-							<view><uni-easyinput type="number" v-model="trackConfig.zOrder" placeholder="请输入zOrder"></uni-easyinput></view>
+							<view>
+								<uni-easyinput type="number" v-model="trackConfig.zOrder" placeholder="请输入zOrder">
+								</uni-easyinput>
+							</view>
 							<view class="title margin-top-sm margin-bottom-sm">renderMode</view>
-							<uni-data-checkbox :multiple="false" v-model="trackConfig.renderMode" :localdata="renderMode">
+							<uni-data-checkbox :multiple="false" v-model="trackConfig.renderMode"
+								:localdata="renderMode">
 							</uni-data-checkbox>
 							<view class="title margin-top-sm margin-bottom-sm">SEIEnabled</view>
-							<uni-data-checkbox :multiple="false" v-model="trackConfig.SEIEnabled" :localdata="SEIEnabled">
+							<uni-data-checkbox :multiple="false" v-model="trackConfig.SEIEnabled"
+								:localdata="SEIEnabled">
 							</uni-data-checkbox>
 							<view class="margin-top-sm">
 								<button type="primary" @click="handleSetTrack">添加/替换合流布局</button>
@@ -109,28 +171,36 @@
 		</view>
 		<view class="margin-top:20px;">
 			<div class="track-item-wrap" v-for="(item,index) in localTracks" :key="index">
-			    <QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="0" :identifyID="item.identifyID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
+				<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="0"
+					:identifyID="item.identifyID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 				<view class="track-info-wrap">
 					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
 					<text class="track-info-item">用户ID：自己</text>
 					<text class="track-info-item">类型：{{item.kind}}</text>
 				</view>
 			</div>
-		    <div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID">
-		        <QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'"  :local="1" :identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
+			<div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID">
+				<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="1"
+					:identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID">
+				</QNRTC-UniPlugin-SurfaceView>
 				<view class="track-info-wrap">
 					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
 					<text class="track-info-item">用户ID：{{item.userID}}</text>
 					<text class="track-info-item">类型：{{item.kind}}</text>
 				</view>
-		    </div>
+			</div>
 		</view>
 	</view>
 </template>
 
 <script>
-	import QNRTC,{QNRTCLogLevel,QNSessionPresetType} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
-	import { mapState } from "vuex"
+	import QNRTC, {
+		QNRTCLogLevel,
+		QNSessionPresetType
+	} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
+	import {
+		mapState
+	} from "vuex"
 	export default {
 		data() {
 			return {
@@ -221,7 +291,10 @@
 			this.handleJoinRoom()
 		},
 		computed: {
-			...mapState(["captureHeight","captureWidth","encodeWidth","encodeHeight","platform","multiStreamEnable","token","policy","logLevel","stereo","bwePolicy","allowAudioMixWithOthers","hWCodecEnabled","maintainResolution","fieldTrials","encoderQualityMode","isAEC3Enabled"]),
+			...mapState(["captureHeight", "captureWidth", "encodeWidth", "encodeHeight", "platform", "multiStreamEnable",
+				"token", "policy", "logLevel", "stereo", "bwePolicy", "allowAudioMixWithOthers", "hWCodecEnabled",
+				"maintainResolution", "fieldTrials", "encoderQualityMode", "isAEC3Enabled"
+			]),
 			allPcTrack() {
 				const result = []
 				return [...result, ...this.localTracks, ...this.remoteTracks]
@@ -271,8 +344,8 @@
 			// 新增、更新合流转推布局配置 -- native接口
 			handleSetTrack() {
 				const index = this.transcodingTracks.findIndex(item => item.trackID === this.trackConfig.trackID)
-				if(index >= 0) {
-					this.transcodingTracks.splice(index,1,JSON.parse(JSON.stringify({
+				if (index >= 0) {
+					this.transcodingTracks.splice(index, 1, JSON.parse(JSON.stringify({
 						...this.trackConfig,
 						x: this.trackConfig.x * 1,
 						y: this.trackConfig.y * 1,
@@ -281,7 +354,7 @@
 						zOrder: this.trackConfig.zOrder * 1,
 						SEIEnabled: this.trackConfig.SEIEnabled === 1
 					})))
-				}else {
+				} else {
 					this.transcodingTracks.push(JSON.parse(JSON.stringify({
 						...this.trackConfig,
 						x: this.trackConfig.x * 1,
@@ -297,12 +370,12 @@
 			},
 			// 移除合流转推配置 -- native接口
 			handleDeleteTrack() {
-				const index = this.transcodingTracks.findIndex(item => item.trackID === this.trackConfig.trackID) 
-				if(index >= 0) {
-					this.transcodingTracks.splice(index,1)
-				} 
+				const index = this.transcodingTracks.findIndex(item => item.trackID === this.trackConfig.trackID)
+				if (index >= 0) {
+					this.transcodingTracks.splice(index, 1)
+				}
 				this.client.removeTranscodingLiveStreamingTracks(this.transcodingConfig.streamID, [this.trackConfig])
-				
+
 			},
 			async handleJoinRoom() {
 				// 初始化配置项
@@ -352,6 +425,39 @@
 							}
 							this.localTracks = localTracks
 						})
+					} else if (state === "DISCONNECTED") {
+						if (info.reason === "KICKED_OUT") {
+							uni.showModal({
+								content: "被踢出房间",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_CLOSED") {
+							uni.showModal({
+								content: "房间被关闭",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						} else if (info.reason === "ROOM_FULL") {
+							uni.showModal({
+								content: "房间人数已满",
+								success: (res) => {
+									uni.navigateBack()
+								}
+							})
+						}
+					} else if (state === "RECONNECTING") {
+						uni.showLoading({
+							mask: true,
+							title: '重连中'
+						})
+					} else if (state === "RECONNECTED") {
+						uni.hideLoading()
+						uni.showModal({
+							content: "重连成功"
+						})
 					}
 				})
 				// 监听订阅成功
@@ -394,7 +500,7 @@
 					})
 				})
 				// 合流布局更改回调
-				this.client.on("onUpdatedLiveStreaming",(params) => {
+				this.client.on("onUpdatedLiveStreaming", (params) => {
 					uni.showModal({
 						content: `转推任务${params.streamID}布局已更改`
 					})
