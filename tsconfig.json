@@ -1,16 +1,16 @@
 {
-	"compileOnSave": true,
-	"compilerOptions": {
-	  "alwaysStrict": true,
-	  "declaration": false,
-	  "declarationMap": false,
-	  "diagnostics": true,
-	  "module": "commonjs",
-	  "noImplicitAny": true,
-	  "removeComments": false,
-	  "preserveConstEnums": true,
-	  "sourceMap": false,
-	  "outDir": "types",
-	  "rootDir": "src"
-	}
+  "compileOnSave": true,
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "declaration": false,
+    "declarationMap": false,
+    "diagnostics": true,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "outDir": "types",
+    "rootDir": "src"
   }
+}

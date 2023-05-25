@@ -69,7 +69,7 @@ export const QNCustomVideoTrackConfigPreset = {
  * @param data identifyID 与 trackID kv对应关系
  * @param error 发布失败信息
  */
- export type QNPublishResultCallback = ((onPublished: boolean, error: QNPublishResultError ) => void)
+export type QNPublishResultCallback = ((onPublished: boolean, error: QNPublishResultError ) => void)
 
 /**
  * 请求录屏权限后回调
