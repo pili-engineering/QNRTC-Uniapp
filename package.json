@@ -6,6 +6,7 @@
   "types": "type/RTCIndex.native.d.ts",
   "scripts": {
     "build": "webpack",
+    "build-esm": "tsc --module es6 --removeComments --outDir lib && npm run build-type",
     "lib": "tsc --removeComments --outDir lib && npm run build-type",
     "prepare": "npx husky install",
     "eslint": "eslint 'src/**'",
