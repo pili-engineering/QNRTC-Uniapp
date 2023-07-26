@@ -135,6 +135,15 @@
             {
             "plugins": [
                 {
+                "type": "module",
+                "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
+                "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMixerModule"
+                }
+            ]
+            },
+            {
+            "plugins": [
+                {
                 "type": "component",
                 "name": "QNRTC-UniPlugin-SurfaceView",
                 "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCSurfaceView"
