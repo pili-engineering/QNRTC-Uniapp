@@ -5,12 +5,13 @@
     <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeLiveStreamingDirect">单路转推配置</button></view>
     <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeLiveStreamingTranscoding">合流配置</button></view>
     <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeTrackSetting">track设置</button></view>
-    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeAudioMixer">混音设置</button></view>
+    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeAudioMixer">旧版混音设置</button></view>
+	 <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeAudioMixer">新版混音设置</button></view>
 </div>
 </template>
 
 <script>
-import QNRTC from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
+import { QNRTC } from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
 import {
     mapState
 } from "vuex"
@@ -52,7 +53,7 @@ export default {
         },
         routeAudioMixer() {
 			uni.navigateTo({
-				url: "/pages/audio-mixer/index"
+				url: "/pages/new-audio-mixer/index"
 			})
 		},
 		handleChooseItem(event) {
@@ -97,6 +98,83 @@ export default {
         if(this.platform = "android") {
             this.requestPermission()
         }
+		uni.request({
+			url:'https://www.shadertoy.com/img/themes/classic/screenshot.png',
+			method:'GET',
+			success: (res) => {
+					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+					let ip = reg.exec(res.data);
+					console.log("GGG")
+					console.log(res);
+					console.log(ip[0]);
+					}
+		})
+		uni.request({
+			url:'http://pv.sohu.com/cityjson?ie=utf-8',
+			method:'POST',
+			success: (res) => {
+					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+					let ip = reg.exec(res.data);
+					console.log("啦啦啦德玛西亚")
+					console.log(res);
+					console.log(ip[0]);
+					}
+		})
+		uni.request({
+			url:'http://pv.sohu.com/cityjson?ie=utf-8',
+			method:'POST',
+			success: (res) => {
+					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+					let ip = reg.exec(res.data);
+					console.log("啦啦啦德玛西亚")
+					console.log(res);
+					console.log(ip[0]);
+					}
+		})
+		uni.request({
+			url:'http://pv.sohu.com/cityjson?ie=utf-8',
+			method:'POST',
+			success: (res) => {
+					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+					let ip = reg.exec(res.data);
+					console.log("啦啦啦德玛西亚")
+					console.log(res);
+					console.log(ip[0]);
+					}
+		})
+		uni.request({
+			url:'http://pv.sohu.com/cityjson?ie=utf-8',
+			method:'POST',
+			success: (res) => {
+					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+					let ip = reg.exec(res.data);
+					console.log("啦啦啦德玛西亚")
+					console.log(res);
+					console.log(ip[0]);
+					}
+		})
+		uni.request({
+			url:'http://pv.sohu.com/cityjson?ie=utf-8',
+			method:'POST',
+			success: (res) => {
+					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+					let ip = reg.exec(res.data);
+					console.log("啦啦啦德玛西亚")
+					console.log(res);
+					console.log(ip[0]);
+					}
+		})
+		uni.request({
+			url:'http://pv.sohu.com/cityjson?ie=utf-8',
+			method:'POST',
+			success: (res) => {
+					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
+					let ip = reg.exec(res.data);
+					console.log("啦啦啦德玛西亚")
+					console.log(res);
+					console.log(ip[0]);
+					}
+		})
     }
 }
 </script>

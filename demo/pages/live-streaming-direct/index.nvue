@@ -42,7 +42,8 @@
 </template>
 
 <script>
-	import QNRTC, {
+	import {
+		QNRTC,
 		QNRTCLogLevel
 	} from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
 

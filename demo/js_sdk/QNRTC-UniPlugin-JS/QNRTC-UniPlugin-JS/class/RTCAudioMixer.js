@@ -5,12 +5,12 @@ var QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer')
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNAudioMixer = (function () {
     function QNAudioMixer(identifyID, url) {
-        this.variationList = ["onStateChanged"];
+        this.variationList = ['onStateChanged'];
         this.identifyID = identifyID;
         this.url = url;
     }
     QNAudioMixer.prototype.createAudioMixerCallback = function (name, listener) {
-        if (name === "onStateChanged") {
+        if (name === 'onStateChanged') {
             var variationCallback = function (params) {
                 if (params.state) {
                     listener(params);

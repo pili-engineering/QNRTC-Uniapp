@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.QNVideoFrameType = exports.QNAudioMixerState = exports.QNSessionPresetType = exports.QNVideoFillModeType = exports.QNAVCaptureVideoOrientation = exports.QNVideoWaterMarkSize = exports.QNAudioDevice = exports.QNLiveStreamingErrorInfoCode = exports.QNLiveStreamingErrorInfoType = exports.QNConnectionDisconnectedReason = exports.QNNetworkGrade = exports.QNTrackProfile = exports.QNRenderMode = exports.QNConnectionState = exports.QNRTCLogLevel = exports.QNRTCTrackKind = exports.QNRTCBwePolicy = exports.QNRTCPolicy = exports.QNRTCCameraFacing = void 0;
+exports.QNVideoFormatDefault = exports.QNDegradationPreference = exports.QNMediaRelayState = exports.QNClientMode = exports.QNClientRole = exports.QNAudioScene = exports.QNVideoFrameType = exports.QNAudioMusicMixerState = exports.QNAudioMixerState = exports.QNSessionPresetType = exports.QNVideoFillModeType = exports.QNAVCaptureVideoOrientation = exports.QNVideoWaterMarkSize = exports.QNAudioDevice = exports.QNLiveStreamingErrorInfoCode = exports.QNLiveStreamingErrorInfoType = exports.QNConnectionDisconnectedReason = exports.QNNetworkGrade = exports.QNTrackProfile = exports.QNRenderMode = exports.QNConnectionState = exports.QNRTCLogLevel = exports.QNRTCTrackKind = exports.QNRTCBwePolicy = exports.QNRTCPolicy = exports.QNRTCCameraFacing = void 0;
 var QNRTCCameraFacing;
 (function (QNRTCCameraFacing) {
     QNRTCCameraFacing["back"] = "back";
@@ -124,9 +124,66 @@ var QNAudioMixerState;
     QNAudioMixerState["STOPPED"] = "STOPPED";
     QNAudioMixerState["COMPLETED"] = "COMPLETED";
 })(QNAudioMixerState = exports.QNAudioMixerState || (exports.QNAudioMixerState = {}));
+var QNAudioMusicMixerState;
+(function (QNAudioMusicMixerState) {
+    QNAudioMusicMixerState["IDLE"] = "IDLE";
+    QNAudioMusicMixerState["MIXING"] = "MIXING";
+    QNAudioMusicMixerState["PAUSED"] = "PAUSED";
+    QNAudioMusicMixerState["STOPPED"] = "STOPPED";
+    QNAudioMusicMixerState["COMPLETED"] = "COMPLETED";
+})(QNAudioMusicMixerState = exports.QNAudioMusicMixerState || (exports.QNAudioMusicMixerState = {}));
 var QNVideoFrameType;
 (function (QNVideoFrameType) {
     QNVideoFrameType["YUV_NV21"] = "YUV_NV21";
     QNVideoFrameType["TEXTURE_RGB"] = "TEXTURE_RGB";
     QNVideoFrameType["TEXTURE_OES"] = "TEXTURE_OES";
 })(QNVideoFrameType = exports.QNVideoFrameType || (exports.QNVideoFrameType = {}));
+var QNAudioScene;
+(function (QNAudioScene) {
+    QNAudioScene["DEFAULT"] = "DEFAULT";
+    QNAudioScene["VOICE_CHAT"] = "VOICE_CHAT";
+    QNAudioScene["SOUND_EQUALIZE"] = "SOUND_EQUALIZE";
+})(QNAudioScene = exports.QNAudioScene || (exports.QNAudioScene = {}));
+var QNClientRole;
+(function (QNClientRole) {
+    QNClientRole["BROADCASTER"] = "BROADCASTER";
+    QNClientRole["AUDIENCE"] = "AUDIENCE";
+})(QNClientRole = exports.QNClientRole || (exports.QNClientRole = {}));
+var QNClientMode;
+(function (QNClientMode) {
+    QNClientMode["RTC"] = "RTC";
+    QNClientMode["LIVE"] = "LIVE";
+})(QNClientMode = exports.QNClientMode || (exports.QNClientMode = {}));
+var QNMediaRelayState;
+(function (QNMediaRelayState) {
+    QNMediaRelayState["UNKNOWN"] = "UNKNOWN";
+    QNMediaRelayState["SUCCESS"] = "SUCCESS";
+    QNMediaRelayState["STOPPED"] = "STOPPED";
+    QNMediaRelayState["INVALID_TOKEN"] = "INVALID_TOKEN";
+    QNMediaRelayState["NO_ROOM"] = "NO_ROOM";
+    QNMediaRelayState["ROOM_CLOSED"] = "ROOM_CLOSED";
+    QNMediaRelayState["PLAYER_EXISTED"] = "PLAYER_EXISTED";
+})(QNMediaRelayState = exports.QNMediaRelayState || (exports.QNMediaRelayState = {}));
+var QNDegradationPreference;
+(function (QNDegradationPreference) {
+    QNDegradationPreference["DEFAULT"] = "DEFAULT";
+    QNDegradationPreference["MAINTAIN_FRAMERATE"] = "MAINTAIN_FRAMERATE";
+    QNDegradationPreference["MAINTAIN_RESOLUTION"] = "MAINTAIN_RESOLUTION";
+    QNDegradationPreference["BALANCED"] = "BALANCED";
+    QNDegradationPreference["ADAPT_BITRATE_ONLY"] = "ADAPT_BITRATE_ONLY";
+})(QNDegradationPreference = exports.QNDegradationPreference || (exports.QNDegradationPreference = {}));
+var QNVideoFormatDefault;
+(function (QNVideoFormatDefault) {
+    QNVideoFormatDefault["VIDEO_320x180_15"] = "VIDEO_320x180_15";
+    QNVideoFormatDefault["VIDEO_320x240_15"] = "VIDEO_320x240_15";
+    QNVideoFormatDefault["VIDEO_640x360_15"] = "VIDEO_640x360_15";
+    QNVideoFormatDefault["VIDEO_640x360_30"] = "VIDEO_640x360_30";
+    QNVideoFormatDefault["VIDEO_640x480_15"] = "VIDEO_640x480_15";
+    QNVideoFormatDefault["VIDEO_640x480_30"] = "VIDEO_640x480_30";
+    QNVideoFormatDefault["VIDEO_960x540_15"] = "VIDEO_960x540_15";
+    QNVideoFormatDefault["VIDEO_960x540_30"] = "VIDEO_960x540_30";
+    QNVideoFormatDefault["VIDEO_960x720_15"] = "VIDEO_960x720_15";
+    QNVideoFormatDefault["VIDEO_960x720_30"] = "VIDEO_960x720_30";
+    QNVideoFormatDefault["VIDEO_1280x720_15"] = "VIDEO_1280x720_15";
+    QNVideoFormatDefault["VIDEO_1280x720_30"] = "VIDEO_1280x720_30";
+})(QNVideoFormatDefault = exports.QNVideoFormatDefault || (exports.QNVideoFormatDefault = {}));

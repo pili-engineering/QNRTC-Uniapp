@@ -17,11 +17,18 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.QNLocalAudioTrack = void 0;
 var RTCLocalTrack_1 = require("./RTCLocalTrack");
+var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNLocalAudioTrack = (function (_super) {
     __extends(QNLocalAudioTrack, _super);
     function QNLocalAudioTrack() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    QNLocalAudioTrack.prototype.setVolume = function (volume) {
+        return QNRtcTrack.setVolume(this.identifyID, volume);
+    };
+    QNLocalAudioTrack.prototype.getVolumeLevel = function () {
+        return QNRtcTrack.getVolumeLevel(this.identifyID);
+    };
     return QNLocalAudioTrack;
 }(RTCLocalTrack_1.QNLocalTrack));
 exports.QNLocalAudioTrack = QNLocalAudioTrack;

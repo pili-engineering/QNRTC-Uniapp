@@ -24,7 +24,10 @@ var QNLocalTrack = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     QNLocalTrack.prototype.setMuted = function (muted) {
-        return QNRtcTrack.setMuted(this.identifyID, muted);
+        QNRtcTrack.setMuted(this.identifyID, muted);
+    };
+    QNLocalTrack.prototype.destroy = function () {
+        QNRtcTrack.destroy(this.identifyID);
     };
     return QNLocalTrack;
 }(RTCTrack_1.QNTrack));

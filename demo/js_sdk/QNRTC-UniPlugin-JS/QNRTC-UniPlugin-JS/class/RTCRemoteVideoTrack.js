@@ -29,7 +29,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -75,21 +75,21 @@ var QNRemoteVideoTrack = (function (_super) {
             var _this = this;
             return __generator(this, function (_a) {
                 platform = uni.getSystemInfoSync().platform;
-                if (platform === "ios") {
+                if (platform === 'ios') {
                     return [2, new Promise(function (resolve, reject) {
                             QNRtcTrack.takeVideoSnapshot(_this.identifyID);
                             var listener = function (param) {
-                                QNEvent.removeEventListener("onLocalVideoFrame", listener);
+                                QNEvent.removeEventListener('onLocalVideoFrame', listener);
                                 resolve({ base64: _this.trimBase64(param.data) });
                             };
-                            QNEvent.addEventListener("onLocalVideoFrame", listener);
+                            QNEvent.addEventListener('onLocalVideoFrame', listener);
                             setTimeout(function () {
-                                QNEvent.removeEventListener("onLocalVideoFrame", listener);
+                                QNEvent.removeEventListener('onLocalVideoFrame', listener);
                                 reject();
                             }, 5000);
                         })];
                 }
-                else if (platform === "android") {
+                else if (platform === 'android') {
                     return [2, new Promise(function (resolve, reject) {
                             QNRtcTrack.takeVideoSnapshot(_this.trackID, function (data) {
                                 resolve(data);
@@ -102,9 +102,9 @@ var QNRemoteVideoTrack = (function (_super) {
     };
     QNRemoteVideoTrack.prototype.trimBase64 = function (base64) {
         if (!base64) {
-            return "";
+            return '';
         }
-        return base64.replace(/\r|\n/g, "");
+        return base64.replace(/\r|\n/g, '');
     };
     return QNRemoteVideoTrack;
 }(RTCRemoteTrack_1.QNRemoteTrack));
