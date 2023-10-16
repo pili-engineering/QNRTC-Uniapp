@@ -55,7 +55,7 @@
 </template>
 
 <script>
-	import QNRTC from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
+	import { QNRTC } from "@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js"
 	import {
 		mapState
 	} from "vuex"

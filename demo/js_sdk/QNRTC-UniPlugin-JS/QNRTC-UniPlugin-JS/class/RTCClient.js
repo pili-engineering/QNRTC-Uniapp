@@ -20,7 +20,12 @@ var RTCClient = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNRTCClient = (function () {
     function QNRTCClient() {
-        this.variationList = ['onUserPublished', 'onUserUnpublished', 'onVideoSubscribed', 'onAudioSubscribed'];
+        this.variationList = [
+            'onUserPublished',
+            'onUserUnpublished',
+            'onVideoSubscribed',
+            'onAudioSubscribed',
+        ];
     }
     QNRTCClient.prototype.transformRemoteRTCTrack = function (trackList) {
         var result = [];
@@ -76,13 +81,13 @@ var QNRTCClient = (function () {
         QNEvent.removeEventListener(name, listener);
     };
     QNRTCClient.prototype.join = function (token, userData) {
-        return RTCClient.join(token, userData);
+        RTCClient.join(token, userData !== null && userData !== void 0 ? userData : '');
     };
     QNRTCClient.prototype.leave = function () {
-        return RTCClient.leave();
+        RTCClient.leave();
     };
     QNRTCClient.prototype.publish = function (tracks, callback) {
-        return RTCClient.publish(tracks, function (_a) {
+        RTCClient.publish(tracks, function (_a) {
             var onPublished = _a.onPublished, data = _a.data, error = _a.error;
             if (onPublished) {
                 var _loop_1 = function (key) {
@@ -99,13 +104,13 @@ var QNRTCClient = (function () {
         });
     };
     QNRTCClient.prototype.unpublish = function (tracks) {
-        return RTCClient.unpublish(tracks);
+        RTCClient.unpublish(tracks);
     };
     QNRTCClient.prototype.subscribe = function (tracks) {
-        return RTCClient.subscribe(tracks);
+        RTCClient.subscribe(tracks);
     };
     QNRTCClient.prototype.unsubscribe = function (tracks) {
-        return RTCClient.unsubscribe(tracks);
+        RTCClient.unsubscribe(tracks);
     };
     QNRTCClient.prototype.getSubscribedTracks = function (userID) {
         var remoteTrack = RTCClient.getSubscribedTracks(userID);
@@ -147,33 +152,45 @@ var QNRTCClient = (function () {
         return this.transformLocalRTCTrack(locakTrack);
     };
     QNRTCClient.prototype.sendMessage = function (message, users, messageId) {
-        return RTCClient.sendMessage(message, users, messageId);
+        RTCClient.sendMessage(message, users, messageId);
     };
     QNRTCClient.prototype.getConnectionState = function () {
         return RTCClient.getConnectionState();
     };
     QNRTCClient.prototype.setAutoSubscribe = function (autoSubscribe) {
-        return RTCClient.setAutoSubscribe(autoSubscribe);
+        RTCClient.setAutoSubscribe(autoSubscribe);
     };
     QNRTCClient.prototype.startLiveStreamingWithDirect = function (config) {
-        return RTCClient.startLiveStreamingWithDirect(config);
+        RTCClient.startLiveStreamingWithDirect(config);
     };
     QNRTCClient.prototype.startLiveStreamingWithTranscoding = function (config) {
         !config.watermarks && (config.watermarks = []);
         !config.background && (config.background = {});
-        return RTCClient.startLiveStreamingWithTranscoding(config);
+        RTCClient.startLiveStreamingWithTranscoding(config);
     };
     QNRTCClient.prototype.stopLiveStreamingWithDirect = function (config) {
-        return RTCClient.stopLiveStreamingWithDirect(config);
+        RTCClient.stopLiveStreamingWithDirect(config);
     };
     QNRTCClient.prototype.stopLiveStreamingWithTranscoding = function (config) {
-        return RTCClient.stopLiveStreamingWithTranscoding(config);
+        RTCClient.stopLiveStreamingWithTranscoding(config);
     };
     QNRTCClient.prototype.setTranscodingLiveStreamingTracks = function (streamID, transcodingTracks) {
-        return RTCClient.setTranscodingLiveStreamingTracks(streamID, transcodingTracks);
+        RTCClient.setTranscodingLiveStreamingTracks(streamID, transcodingTracks);
     };
     QNRTCClient.prototype.removeTranscodingLiveStreamingTracks = function (streamID, transcodingTracks) {
-        return RTCClient.removeTranscodingLiveStreamingTracks(streamID, transcodingTracks);
+        RTCClient.removeTranscodingLiveStreamingTracks(streamID, transcodingTracks);
+    };
+    QNRTCClient.prototype.setClientRole = function (clientRole, callback) {
+        RTCClient.setClientRole(clientRole, callback);
+    };
+    QNRTCClient.prototype.startMediaRelay = function (configuration, callback) {
+        RTCClient.setClientRole(configuration, callback);
+    };
+    QNRTCClient.prototype.updateMediaRelay = function (configuration, callback) {
+        RTCClient.setClientRole(configuration, callback);
+    };
+    QNRTCClient.prototype.stopMediaRelay = function (callback) {
+        RTCClient.stopMediaRelay(callback);
     };
     return QNRTCClient;
 }());

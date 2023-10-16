@@ -1,135 +1,392 @@
 <template>
-	<view>
-		<view class="wrap">
-			<view class="title margin-top-sm margin-bottom-sm">token</view>
-			<view><uni-easyinput :value="token" placeholder="请输入token" @input="setToken" :maxlength="-1"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">用户名</view>
-			<view><uni-easyinput :value="userName" placeholder="请输入用户名" @input="setUserName" :maxlength="-1"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">房间号</view>
-			<view><uni-easyinput :value="roomID" placeholder="请输入房间号" @input="setRoomID" :maxlength="-1"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">请输入appID</view>
-			<view><uni-easyinput :value="appID" placeholder="请输入appID" @input="setAppID" :maxlength="-1"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">传输协议</view>
-			<uni-data-checkbox @change="setPolicy" :multiple="false" :value="policy" :localdata="policyList">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">日志等级</view>
-			<uni-data-checkbox @change="setLogLevel" :multiple="false" :value="logLevel" :localdata="logLevelList">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">开启立体声 - ios</view>
-			<uni-data-checkbox @change="setStereo" :multiple="false" :value="stereo" :localdata="list">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">带宽评估策略 - ios</view>
-			<uni-data-checkbox @change="setBwePolicy" :multiple="false" :value="bwePolicy" :localdata="bwePolicyList">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">是否允许和其它音频一起播放 - ios</view>
-			<uni-data-checkbox @change="setAllowAudioMixWithOthers" :multiple="false" :value="allowAudioMixWithOthers" :localdata="list">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">开启硬编 - Android</view>
-			<uni-data-checkbox @change="setHWCodecEnabled" :multiple="false" :value="hWCodecEnabled" :localdata="list">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">固定分辨率 - Android</view>
-			<uni-data-checkbox @change="setMaintainResolution" :multiple="false" :value="maintainResolution" :localdata="list">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">扩展配置 - Android</view>
-			<view><uni-easyinput @input="setFieldTrials" :value="fieldTrials" placeholder="请输入扩展配置"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">质量模式 - Android</view>
-			<uni-data-checkbox @change="setEncoderQualityMode" :multiple="false" :value="encoderQualityMode" :localdata="list">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">AEC3 - Android</view>
-			<uni-data-checkbox @change="setIsAEC3Enabled" :multiple="false" :value="isAEC3Enabled" :localdata="list">
-			</uni-data-checkbox>
-			<view style="font-size: 40upx;border-top:1upx solid black;padding-top: 20upx;" class="title margin-top-sm margin-bottom-sm">track 设置</view>
-			<view class="title margin-top-sm margin-bottom-sm">视频 track 是否开启大小流</view>
-			<uni-data-checkbox @change="setMultiStreamEnable" :multiple="false" :value="multiStreamEnable" :localdata="list">
-			</uni-data-checkbox>
-			<view class="title margin-top-sm margin-bottom-sm">编码宽度</view>
-			<view><uni-easyinput :value="encodeWidth" placeholder="请输入编码宽度" @input="setEncodeWidth" :maxlength="-1"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">编码高度</view>
-			<view><uni-easyinput :value="encodeHeight" placeholder="请输入编码高度" @input="setEncodeHeight" :maxlength="-1"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">采集宽度 - Android</view>
-			<view><uni-easyinput :value="captureWidth" placeholder="请输入采集宽度" @input="setCaptureWidth" :maxlength="-1"></uni-easyinput></view>
-			<view class="title margin-top-sm margin-bottom-sm">采集高度  - Android</view>
-			<view><uni-easyinput :value="captureHeight" placeholder="请输入采集高度" @input="setCaptureHeight" :maxlength="-1"></uni-easyinput></view>
-		</view>
-	</view>
+  <view>
+    <view class="wrap">
+      <view
+        style="font-size: 40upx; padding-top: 20upx"
+        class="title margin-top-sm margin-bottom-sm"
+        >全局设置</view
+      >
+      <view class="title margin-top-sm margin-bottom-sm">token</view>
+      <view
+        ><uni-easyinput
+          :value="token"
+          placeholder="请输入token"
+          @input="setToken"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">用户名</view>
+      <view
+        ><uni-easyinput
+          :value="userName"
+          placeholder="请输入用户名"
+          @input="setUserName"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">房间号</view>
+      <view
+        ><uni-easyinput
+          :value="roomID"
+          placeholder="请输入房间号"
+          @input="setRoomID"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">请输入appID</view>
+      <view
+        ><uni-easyinput
+          :value="appID"
+          placeholder="请输入appID"
+          @input="setAppID"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view
+        style="font-size: 40upx; padding-top: 20upx"
+        class="title margin-top-sm margin-bottom-sm"
+        >RTC 设置</view
+      >
+      <view class="title margin-top-sm margin-bottom-sm">重连超时时间（单位ms）</view>
+      <view
+        ><uni-easyinput
+          :value="reconnectionTimeout"
+          placeholder="请输入重连时间"
+          @input="setReconnectionTimeout"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">传输协议</view>
+      <uni-data-checkbox
+        @change="setPolicy"
+        :multiple="false"
+        :value="policy"
+        :localdata="policyList"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">日志等级</view>
+      <uni-data-checkbox
+        @change="setLogLevel"
+        :multiple="false"
+        :value="logLevel"
+        :localdata="logLevelList"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">开启立体声 - ios</view>
+      <uni-data-checkbox @change="setStereo" :multiple="false" :value="stereo" :localdata="list">
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">带宽评估策略 - ios</view>
+      <uni-data-checkbox
+        @change="setBwePolicy"
+        :multiple="false"
+        :value="bwePolicy"
+        :localdata="bwePolicyList"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">是否允许和其它音频一起播放 - ios</view>
+      <uni-data-checkbox
+        @change="setAllowAudioMixWithOthers"
+        :multiple="false"
+        :value="allowAudioMixWithOthers"
+        :localdata="list"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">开启硬编 - Android</view>
+      <uni-data-checkbox
+        @change="setHWCodecEnabled"
+        :multiple="false"
+        :value="hWCodecEnabled"
+        :localdata="list"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">固定分辨率 - Android</view>
+      <uni-data-checkbox
+        @change="setMaintainResolution"
+        :multiple="false"
+        :value="maintainResolution"
+        :localdata="list"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">扩展配置 - Android</view>
+      <view
+        ><uni-easyinput
+          @input="setFieldTrials"
+          :value="fieldTrials"
+          placeholder="请输入扩展配置"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">质量模式 - Android</view>
+      <uni-data-checkbox
+        @change="setEncoderQualityMode"
+        :multiple="false"
+        :value="encoderQualityMode"
+        :localdata="list"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">AEC3 - Android</view>
+      <uni-data-checkbox
+        @change="setIsAEC3Enabled"
+        :multiple="false"
+        :value="isAEC3Enabled"
+        :localdata="list"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">音频场景</view>
+      <uni-data-checkbox
+        @change="setAudioScene"
+        :multiple="false"
+        :value="audioScene"
+        :localdata="audioSceneList"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">默认音频路由</view>
+      <uni-data-checkbox
+        @change="setDefaultAudioRouteToSpeakerphone"
+        :multiple="false"
+        :value="defaultAudioRouteToSpeakerphone"
+        :localdata="defaultAudioRouteList"
+      >
+      </uni-data-checkbox>
+      <view
+        style="font-size: 40upx; padding-top: 20upx"
+        class="title margin-top-sm margin-bottom-sm"
+        >Client 设置</view
+      >
+      <view class="title margin-top-sm margin-bottom-sm">使用场景</view>
+      <uni-data-checkbox
+        @change="setClientMode"
+        :multiple="false"
+        :value="clientMode"
+        :localdata="modeList"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">角色类型</view>
+      <uni-data-checkbox
+        @change="setClientRole"
+        :multiple="false"
+        :value="clientRole"
+        :localdata="roleList"
+      >
+      </uni-data-checkbox>
+      <view
+        style="font-size: 40upx; padding-top: 20upx"
+        class="title margin-top-sm margin-bottom-sm"
+        >Track 设置</view
+      >
+      <view class="title margin-top-sm margin-bottom-sm">视频 track 是否开启大小流</view>
+      <uni-data-checkbox
+        @change="setMultiStreamEnable"
+        :multiple="false"
+        :value="multiStreamEnable"
+        :localdata="list"
+      >
+      </uni-data-checkbox>
+      <view class="title margin-top-sm margin-bottom-sm">编码宽度</view>
+      <view
+        ><uni-easyinput
+          :value="encodeWidth"
+          placeholder="请输入编码宽度"
+          @input="setEncodeWidth"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">编码高度</view>
+      <view
+        ><uni-easyinput
+          :value="encodeHeight"
+          placeholder="请输入编码高度"
+          @input="setEncodeHeight"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">采集宽度 - Android</view>
+      <view
+        ><uni-easyinput
+          :value="captureWidth"
+          placeholder="请输入采集宽度"
+          @input="setCaptureWidth"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+      <view class="title margin-top-sm margin-bottom-sm">采集高度 - Android</view>
+      <view
+        ><uni-easyinput
+          :value="captureHeight"
+          placeholder="请输入采集高度"
+          @input="setCaptureHeight"
+          :maxlength="-1"
+        ></uni-easyinput
+      ></view>
+    </view>
+  </view>
 </template>
 <script>
-	import { mapState,mapMutations,mapActions } from "vuex"
-	export default {
-		data() {
-			return {
-				policyList: [
-					{
-						text: "forceUDP",
-						value: "forceUDP"
-					},
-					{
-						text: "forceTCP",
-						value: "forceTCP"
-					},
-					{
-						text: "preferUDP",
-						value: "preferUDP"
-					}
-				],
-				logLevelList: [
-					{
-						text: "verbose",
-						value: "verbose"
-					},
-					{
-						text: "info",
-						value: "info"
-					},
-					{
-						text: "warning",
-						value: "warning"
-					},
-					{
-						text: "error",
-						value: "error"
-					},
-					{
-						text: "none",
-						value: "none"
-					}
-				],
-				list: [
-					{
-						text: "是",
-						value: 1
-					},
-					{
-						text: "否",
-						value: 0
-					}
-				],
-				bwePolicyList: [
-					{
-						text: "TCC",
-						value: "TCC"
-					},
-					{
-						text: "GCC",
-						value: "GCC"
-					}
-				]
-			}
-		},
-		computed:{
-			...mapState(["captureHeight","captureWidth","encodeWidth","encodeHeight","token","policy","logLevel","stereo","bwePolicy","allowAudioMixWithOthers","hWCodecEnabled","maintainResolution","fieldTrials","encoderQualityMode","isAEC3Enabled","appID","roomID","userName","multiStreamEnable"])
-		},
-		methods:{
-			...mapMutations(["setCaptureHeight","setCaptureWidth","setEncodeWidth","setEncodeHeight","setToken","setPolicy","setLogLevel","setStereo","setBwePolicy","setAllowAudioMixWithOthers","setHWCodecEnabled","setMaintainResolution","setFieldTrials","setEncoderQualityMode","setIsAEC3Enabled","setMultiStreamEnable"]),
-			...mapActions(["setAppID","setRoomID","setUserName"])
-		}
-	}
+import { mapState, mapMutations, mapActions } from 'vuex'
+export default {
+  data() {
+    return {
+      policyList: [
+        {
+          text: 'forceUDP',
+          value: 'forceUDP',
+        },
+        {
+          text: 'forceTCP',
+          value: 'forceTCP',
+        },
+        {
+          text: 'preferUDP',
+          value: 'preferUDP',
+        },
+      ],
+      logLevelList: [
+        {
+          text: 'verbose',
+          value: 'verbose',
+        },
+        {
+          text: 'info',
+          value: 'info',
+        },
+        {
+          text: 'warning',
+          value: 'warning',
+        },
+        {
+          text: 'error',
+          value: 'error',
+        },
+        {
+          text: 'none',
+          value: 'none',
+        },
+      ],
+      audioSceneList: [
+        {
+          text: '默认音频场景',
+          value: 'DEFAULT',
+        },
+        {
+          text: '清晰语聊场景',
+          value: 'VOICE_CHAT',
+        },
+        {
+          text: '音质均衡场景',
+          value: 'SOUND_EQUALIZE',
+        },
+      ],
+      list: [
+        {
+          text: '是',
+          value: 1,
+        },
+        {
+          text: '否',
+          value: 0,
+        },
+      ],
+      bwePolicyList: [
+        {
+          text: 'TCC',
+          value: 'TCC',
+        },
+        {
+          text: 'GCC',
+          value: 'GCC',
+        },
+      ],
+      defaultAudioRouteList: [
+        {
+          text: '扬声器',
+          value: 1,
+        },
+        {
+          text: '听筒',
+          value: 0,
+        },
+      ],
+      modeList: [
+        {
+          text: '通信场景',
+          value: 'RTC',
+        },
+        {
+          text: '直播场景',
+          value: 'LIVE',
+        },
+      ],
+      roleList: [
+        {
+          text: '主播角色',
+          value: 'BROADCASTER',
+        },
+        {
+          text: '观众角色',
+          value: 'AUDIENCE',
+        },
+      ],
+    }
+  },
+  computed: {
+    ...mapState([
+      'captureHeight',
+      'captureWidth',
+      'encodeWidth',
+      'encodeHeight',
+      'token',
+      'policy',
+      'logLevel',
+      'stereo',
+      'bwePolicy',
+      'allowAudioMixWithOthers',
+      'hWCodecEnabled',
+      'maintainResolution',
+      'fieldTrials',
+      'encoderQualityMode',
+      'isAEC3Enabled',
+      'appID',
+      'roomID',
+      'userName',
+      'multiStreamEnable',
+      'audioScene',
+      'defaultAudioRouteToSpeakerphone',
+      'reconnectionTimeout',
+      'clientRole',
+      'clientMode',
+    ]),
+  },
+  methods: {
+    ...mapMutations([
+      'setCaptureHeight',
+      'setCaptureWidth',
+      'setEncodeWidth',
+      'setEncodeHeight',
+      'setToken',
+      'setPolicy',
+      'setLogLevel',
+      'setStereo',
+      'setBwePolicy',
+      'setAllowAudioMixWithOthers',
+      'setHWCodecEnabled',
+      'setMaintainResolution',
+      'setFieldTrials',
+      'setEncoderQualityMode',
+      'setIsAEC3Enabled',
+      'setMultiStreamEnable',
+      'setAudioScene',
+      'setDefaultAudioRouteToSpeakerphone',
+      'setReconnectionTimeout',
+      'setClientMode',
+      'setClientRole',
+    ]),
+    ...mapActions(['setAppID', 'setRoomID', 'setUserName']),
+  },
+}
 </script>
 <style>
-	.wrap {
-		border-radius: 5px;
-		margin: 0 20px 20px;
-		padding: 10px 0;
-	}
+.wrap {
+  border-radius: 5px;
+  margin: 0 20px 20px;
+  padding: 10px 0;
+}
 </style>
-

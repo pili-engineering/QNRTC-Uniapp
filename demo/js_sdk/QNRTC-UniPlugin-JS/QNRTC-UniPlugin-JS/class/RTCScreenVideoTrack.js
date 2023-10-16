@@ -26,6 +26,12 @@ var QNScreenVideoTrack = (function (_super) {
     QNScreenVideoTrack.prototype.setScreenRecorderFrameRate = function (screenRecorderFrameRate) {
         return QNRtcTrack.setScreenRecorderFrameRate(this.identifyID, screenRecorderFrameRate);
     };
+    QNScreenVideoTrack.requestPermission = function (callback) {
+        return QNRtcTrack.requestPermission(callback);
+    };
+    QNScreenVideoTrack.isScreenCaptureSupported = function () {
+        return QNRtcTrack.isScreenCaptureSupported() === 1;
+    };
     return QNScreenVideoTrack;
 }(RTCLocalVideoTrack_1.QNLocalVideoTrack));
 exports.QNScreenVideoTrack = QNScreenVideoTrack;

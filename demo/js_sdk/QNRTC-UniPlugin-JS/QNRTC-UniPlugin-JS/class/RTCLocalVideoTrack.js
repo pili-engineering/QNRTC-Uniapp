@@ -17,7 +17,14 @@ var __extends = (this && this.__extends) || (function () {
 exports.__esModule = true;
 exports.QNLocalVideoTrack = void 0;
 var RTCLocalTrack_1 = require("./RTCLocalTrack");
+var RTCInterface_1 = require("../interface/RTCInterface");
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
+var isQNVideoEncoderConfig = function (preset) {
+    return preset.prefer !== undefined;
+};
+var isQNVideoFormatDefault = function (preset) {
+    return preset in RTCInterface_1.QNVideoFormatDefault;
+};
 var QNLocalVideoTrack = (function (_super) {
     __extends(QNLocalVideoTrack, _super);
     function QNLocalVideoTrack() {
@@ -25,6 +32,19 @@ var QNLocalVideoTrack = (function (_super) {
     }
     QNLocalVideoTrack.prototype.sendSEI = function (message, repeatCount, uuid) {
         return QNRtcTrack.sendSEI(this.identifyID, message, repeatCount, uuid);
+    };
+    QNLocalVideoTrack.prototype.setVideoEncoderConfig = function (preset, prefer) {
+        if (isQNVideoEncoderConfig(preset)) {
+            QNRtcTrack.setVideoEncoderConfig(this.identifyID, preset);
+        }
+        else if (isQNVideoFormatDefault(preset)) {
+            if (prefer === undefined) {
+                QNRtcTrack.setVideoEncoderConfigPreset(this.identifyID, preset);
+            }
+            else {
+                QNRtcTrack.setVideoEncoderConfigPreset(this.identifyID, preset, prefer);
+            }
+        }
     };
     return QNLocalVideoTrack;
 }(RTCLocalTrack_1.QNLocalTrack));

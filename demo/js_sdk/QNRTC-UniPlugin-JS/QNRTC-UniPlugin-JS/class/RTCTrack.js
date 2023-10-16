@@ -12,11 +12,13 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 exports.__esModule = true;
 exports.QNTrack = void 0;
+var RTCEnum_1 = require("../enum/RTCEnum");
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNTrack = (function () {
     function QNTrack(_a) {
         var identifyID = _a.identifyID, kind = _a.kind, tag = _a.tag, trackID = _a.trackID, raw = _a.raw, userID = _a.userID;
+        this.getMuted = this.isMuted;
         this.identifyID = identifyID;
         this.kind = kind;
         this.tag = tag;
@@ -37,7 +39,22 @@ var QNTrack = (function () {
     QNTrack.prototype.off = function (name, listener) {
         QNEvent.removeEventListener(name, listener);
     };
-    QNTrack.prototype.getMuted = function () {
+    QNTrack.prototype.getTrackID = function () {
+        return this.trackID;
+    };
+    QNTrack.prototype.getUserID = function () {
+        return this.userID;
+    };
+    QNTrack.prototype.getTag = function () {
+        return this.tag;
+    };
+    QNTrack.prototype.isAudio = function () {
+        return this.kind === RTCEnum_1.QNRTCTrackKind.audio;
+    };
+    QNTrack.prototype.isVideo = function () {
+        return this.kind === RTCEnum_1.QNRTCTrackKind.video;
+    };
+    QNTrack.prototype.isMuted = function () {
         return QNRtcTrack.getMuted(this.identifyID);
     };
     return QNTrack;
