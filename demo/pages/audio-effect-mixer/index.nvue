@@ -1,0 +1,319 @@
+<template>
+  <view class="wrap">
+    <uni-popup ref="success" type="message" background-color="#fff">
+      <uni-popup-message type="success" :message="successMessage" :duration="1000"></uni-popup-message>
+    </uni-popup>
+    <uni-popup ref="error" type="message" background-color="#fff">
+      <uni-popup-message type="error" :message="errorMessage" :duration="1000"></uni-popup-message>
+    </uni-popup>
+    <view>
+      <view class="flex-column">
+		<u--input placeholder="请输入混音音量" border="bottom" v-model="allEffectsVolume">
+			<template slot="prefix">
+				<u-tag type="primary" text="音量"></u-tag>
+			</template>
+			<template slot="suffix">
+				<u-button size="small" type="success" text="修改" @click="handleSetAllEffectsVolume"></u-button>
+			</template>
+		</u--input>
+		<u--input placeholder="请输入 effectID" border="bottom" v-model="audioEffectID">
+			<template slot="prefix">
+				<u-tag type="primary" text="音效 ID"></u-tag>
+			</template>
+		</u--input>
+		<u--input class="margin-bottom-sm" placeholder="请输入文件路径" border="bottom" v-model="audioEffectFilePath">
+			<template slot="prefix">
+				<u-tag type="primary" text="文件路径"></u-tag>
+			</template>
+		</u--input>
+		<u-button class="margin-bottom-sm"  type="success" @click="handleCreateAudioEffect" text="创建音效实例"></u-button>
+		<u-button class="margin-bottom-sm" type="error" @click="handleStopAllAudioEffect" text="停止所有音效"></u-button>
+		<u-button class="margin-bottom-sm" type="warning" @click="handlePauseAllAudioEffect" text="暂停所有音效"></u-button>
+		<u-button class="margin-bottom-sm" type="success" @click="handleResumeAllAudioEffect" text="恢复所有音效"></u-button>
+		
+		
+		<u-collapse>
+		    <u-collapse-item
+		      :title="item.effectID"
+		      :name="item.effectID"
+			  v-for="(item,index) in audioEffectList"
+		    >
+			<u--input class="margin-bottom-sm" placeholder="请输入混音音量" border="bottom" v-model="item.volume">
+				<template slot="prefix">
+					<u-tag type="primary" text="音量"></u-tag>
+				</template>
+				<template slot="suffix">
+					<u-button size="small" type="success" text="修改" @click="handleSetlEffectVolume(item)"></u-button>
+				</template>
+			</u--input>
+			<u--input class="margin-bottom-sm" placeholder="请输入初始位置" border="bottom" v-model="item.startPosition">
+				<template slot="prefix">
+					<u-tag type="primary" text="初始位置"></u-tag>
+				</template>
+				<template slot="suffix">
+					<u-button size="small" type="success" text="修改" @click="handleSetlEffectStartPosition(item)"></u-button>
+				</template>
+			</u--input>
+			<u--input class="margin-bottom-sm" placeholder="请输入循环次数" border="bottom" v-model="item.loop">
+				<template slot="prefix">
+					<u-tag type="primary" text="循环次数"></u-tag>
+				</template>
+				<template slot="suffix">
+					<u-button size="small" type="success" text="修改" @click="handleSetlEffectLoop(item)"></u-button>
+				</template>
+			</u--input>
+			<u-button class="margin-bottom-sm"  type="success" @click="handleStartAudioEffect(item)" text="开始音效"></u-button>
+			<u-button class="margin-bottom-sm"  :type="item.isPublishEnabled ? 'error' : 'success' " @click="handleSetPublishEnabled(item)" :text="item.isPublishEnabled ? '取消推送远端' : '推送远端'"></u-button>
+			<u-button class="margin-bottom-sm" type="error" @click="handleStopAudioEffect(item)" text="停止音效"></u-button>
+			<u-button class="margin-bottom-sm" type="warning" @click="handlePauseAudioEffect(item)" text="暂停音效"></u-button>
+			<u-button class="margin-bottom-sm" type="success" @click="handleResumeAudioEffect(item)" text="恢复音效"></u-button>
+			<u--text class="margin-bottom-sm" type="info" :text="`音量：${item.mVolume}`"></u--text>
+			<u--text class="margin-bottom-sm" type="info" :text="`是否推送：${item.mPublishEnabled}`"></u--text>
+			<u--text class="margin-bottom-sm" type="info" :text="`当前位置：${item.mCurrentPosition}`"></u--text>
+			<u--text class="margin-bottom-sm" type="info" :text="`ID：${item.mID}`"></u--text>
+			<u--text class="margin-bottom-sm" type="info" :text="`文件地址：${item.mFilePath}`"></u--text>
+			<u--text class="margin-bottom-sm" type="info" :text="`开始位置：${item.mStartPosition}`"></u--text>
+			<u--text class="margin-bottom-sm" type="info" :text="`循环次数：${item.mLoopCount}`"></u--text>
+		    </u-collapse-item>
+		  </u-collapse>
+    </view>
+  </view>
+</view>
+</template>
+
+<script>
+import { QNRTC } from '@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js'
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState([
+      'platform',
+      'token',
+      'policy',
+      'logLevel',
+      'stereo',
+      'bwePolicy',
+      'allowAudioMixWithOthers',
+      'hWCodecEnabled',
+      'maintainResolution',
+      'fieldTrials',
+      'encoderQualityMode',
+      'isAEC3Enabled',
+      'audioScene',
+      'defaultAudioRouteToSpeakerphone',
+      'reconnectionTimeout',
+    ]),
+  },
+  data() {
+    return {
+	  allEffectsVolume: 1,
+      audioEffectID: '',
+	  audioEffectFilePath: 'https://docs.qnsdk.com/eva_edm.mp3',
+	  audioEffectList: [],
+      remoteAudioTracks: {},
+      microphoneAudioTrack: {},
+      client: null,
+      audioEffectMixer: null,
+      successMessage: '',
+      errorMessage: '',
+	  timers: []
+    }
+  },
+  onBackPress() {
+	for (let timer of this.timers) {
+		clearInterval(timer)
+	}
+    this.client.leave()
+    QNRTC.deinit()
+  },
+  onUnload() {
+    this.client.leave()
+    QNRTC.deinit()
+  },
+  onLoad() {
+    this.handleJoinRoom()
+  },
+  methods: {
+	handleSetlEffectLoop(item) {
+		item.effect.setLoopCount(item.loop)
+	},
+	// 设置混音初始位置
+	handleSetlEffectStartPosition(item) {
+		item.effect.setStartPosition(item.startPosition)
+	},
+	// 设置混音音量
+	handleSetlEffectVolume(item) {
+		this.audioEffectMixer.setVolume(item.effectID, item.volume)
+	},
+	// 暂停音效混音
+	handlePauseAudioEffect(item) {
+		this.audioEffectMixer.pause(item.effectID)
+	},
+	// 恢复音效混音
+	handleResumeAudioEffect(item) {
+		this.audioEffectMixer.resume(item.effectID)
+	},
+	// 停止音效混音
+	handleStopAudioEffect(item) {
+		this.audioEffectMixer.stop(item.effectID)
+	},
+	// 设置是否推送远端
+	handleSetPublishEnabled(item) {
+		item.isPublishEnabled = !item.isPublishEnabled
+		this.audioEffectMixer.setPublishEnabled(item.effectID, item.isPublishEnabled)
+	},
+	// 开始音效混音
+	handleStartAudioEffect(item) {
+		this.audioEffectMixer.start(item.effectID)
+	},
+	// 恢复所有音效
+	handleResumeAllAudioEffect() {
+		this.audioEffectMixer.resumeAll()
+	},
+	// 停止所有音效
+	handleStopAllAudioEffect() {
+		this.audioEffectMixer.stopAll()
+	},
+	// 暂停所有音效
+	handlePauseAllAudioEffect() {
+		this.audioEffectMixer.pauseAll()
+	},
+	// 修改所有混音音量
+	handleSetAllEffectsVolume() {
+	  this.audioEffectMixer.setAllEffectsVolume(this.allEffectsVolume)
+	},
+	// 创建混音音效
+	handleCreateAudioEffect() {
+		const effect = this.audioEffectMixer.createAudioEffect(this.audioEffectID, this.audioEffectFilePath)
+		const insertItem = {
+			effectID: effect.getID(),
+			effect,
+			isPublishEnabled: true,
+			volume: 1,
+			startPosition: 0,
+			loop: 1,
+			mCurrentPosition: 0,
+			mPublishEnabled: false,
+			mVolume: 0,
+			mID: '',
+			mFilePath: '',
+			mStartPosition: 0,
+			mLoopCount: 0
+		}
+		const timer = setInterval(() => {
+			insertItem.mCurrentPosition = this.audioEffectMixer.getCurrentPosition(this.audioEffectID)
+			insertItem.mPublishEnabled = this.audioEffectMixer.isPublishEnabled(this.audioEffectID)
+			insertItem.mVolume = this.audioEffectMixer.getVolume(this.audioEffectID)
+			insertItem.mID = effect.getID()
+			insertItem.mFilePath = effect.getFilePath()
+			insertItem.mStartPosition = effect.getStartPosition()
+			insertItem.mLoopCount = effect.getLoopCount()
+		}, 1000)
+		
+		this.timers.push(timer)
+		this.audioEffectList.push(insertItem)
+	},
+	// 创建混音
+	handleCreateAudioEffectMixer() {
+	  this.audioEffectMixer = this.microphoneAudioTrack.createAudioEffectMixer()
+	  this.audioEffectMixer.on("onEffectFinished", (params) => {
+	    this.successMessage = `effectID：${params.effectID} is finished`
+	    this.$refs.success.open()
+	  })
+	  this.audioEffectMixer.on("onEffectError", (params) => {
+	    this.errorMessage = `effect error：${params.effectID} ${params.errorCode} ${params.errorMessage}`
+	    this.$refs.error.open()
+	  })
+	  this.audioEffectMixer.on("onError", (params) => {
+	    this.errorMessage = `error：${params.errorCode} ${params.errorCode} ${params.errorMessage}`
+	    this.$refs.error.open()
+	  })
+	},
+	// 加入房间
+    async handleJoinRoom() {
+      QNRTC.configRTC({
+        policy: this.policy,
+        logLevel: this.logLevel,
+        stereo: this.stereo === 1,
+        bwePolicy: this.bwePolicy,
+        allowAudioMixWithOthers: this.allowAudioMixWithOthers === 1,
+        hWCodecEnabled: this.hWCodecEnabled === 1,
+        maintainResolution: this.maintainResolution === 1,
+        fieldTrials: this.fieldTrials,
+        encoderQualityMode: this.encoderQualityMode === 1,
+        isAEC3Enabled: this.isAEC3Enabled === 1,
+        audioScene: this.audioScene,
+        defaultAudioRouteToSpeakerphone: this.defaultAudioRouteToSpeakerphone,
+        reconnectionTimeout: this.reconnectionTimeout,
+      })
+      this.client = QNRTC.createClient()
+      this.microphoneAudioTrack = QNRTC.createMicrophoneAudioTrack()
+      this.client.on('onConnectionStateChanged', ({ state, info }) => {
+        if (state === 'CONNECTED') {
+          this.client.publish([this.microphoneAudioTrack], (onPublished, error) => {
+            if (onPublished) {
+              uni.showModal({
+                content: '发布成功',
+              })
+            } else {
+              uni.showModal({
+                content: error.message,
+              })
+            }
+          })
+        } else if (state === 'DISCONNECTED') {
+          if (info.reason === 'KICKED_OUT') {
+            uni.showModal({
+              content: '被踢出房间',
+              success: (res) => {
+                uni.navigateBack()
+              },
+            })
+          } else if (info.reason === 'ROOM_CLOSED') {
+            uni.showModal({
+              content: '房间被关闭',
+              success: (res) => {
+                uni.navigateBack()
+              },
+            })
+          } else if (info.reason === 'ROOM_FULL') {
+            uni.showModal({
+              content: '房间人数已满',
+              success: (res) => {
+                uni.navigateBack()
+              },
+            })
+          }
+        } else if (state === 'RECONNECTING') {
+          uni.showLoading({
+            mask: true,
+            title: '重连中',
+          })
+        } else if (state === 'RECONNECTED') {
+          uni.hideLoading()
+          uni.showModal({
+            content: '重连成功',
+          })
+        }
+      })
+      this.client.on('onAudioSubscribed', (params) => {
+        for (let i of params.trackList) {
+          this.remoteAudioTracks = i
+        }
+      })
+      this.client.on('onUserUnpublished', (params) => {
+        for (let i of params.trackList) {
+          if (i.trackID === this.remoteAudioTracks.trackID) {
+            this.remoteAudioTracks = {}
+          }
+        }
+      })
+      this.client.join(this.token)
+	  this.handleCreateAudioEffectMixer()
+    },
+  },
+}
+</script>
+<style lang="scss">
+
+</style>

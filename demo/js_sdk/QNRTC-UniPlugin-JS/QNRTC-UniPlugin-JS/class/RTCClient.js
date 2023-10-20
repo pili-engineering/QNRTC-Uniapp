@@ -184,10 +184,10 @@ var QNRTCClient = (function () {
         RTCClient.setClientRole(clientRole, callback);
     };
     QNRTCClient.prototype.startMediaRelay = function (configuration, callback) {
-        RTCClient.setClientRole(configuration, callback);
+        RTCClient.startMediaRelay(configuration, callback);
     };
     QNRTCClient.prototype.updateMediaRelay = function (configuration, callback) {
-        RTCClient.setClientRole(configuration, callback);
+        RTCClient.updateMediaRelay(configuration, callback);
     };
     QNRTCClient.prototype.stopMediaRelay = function (callback) {
         RTCClient.stopMediaRelay(callback);

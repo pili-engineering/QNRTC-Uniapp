@@ -1,6 +1,8 @@
 .DS_Store 
 */.DS_Store 
 demo/hbuilderx/
+demo/uni_modules/
+demo/unpackage/
 node_modules/
 type/
 dist/

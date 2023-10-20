@@ -18,9 +18,16 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	@import "@/uni_modules/uview-ui/index.scss";
+	.wrap {
+	  border-radius: 5px!important;
+	  margin: 0 20px 20px!important;
+	  padding: 10px 0!important
+	}
+	
 	.margin-top-sm {
-		margin-top: 15px;
+		margin-top: 10px!important
 	}
 	
 	.margin-right-sm {
@@ -32,7 +39,7 @@
 	}
 
 	.margin-bottom-sm {
-		margin-bottom: 10px;
+		margin-bottom: 10px!important
 	}
 	
 	.flex-row {
@@ -82,10 +89,9 @@
 		align-items: stretch !important;
 		flex: 1;
 		flex-wrap: nowrap;
-	}
-	
-	.th .tr {
-		background: #eee;
+		&.tr{
+			background: #eee;
+		}
 	}
 	
 	.td {
@@ -106,7 +112,7 @@
 	
 	.track-item-wrap {
 		position: relative;
-		height: 300px;
+		height: 800upx;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -117,7 +123,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 300px;
+		height: 800upx;
 		width: 750upx
 	}
 	

@@ -2220,6 +2220,9 @@ export declare const QNRTCConfigurationPreset: {
     fieldTrials: string;
     encoderQualityMode: boolean;
     isAEC3Enabled: boolean;
+    audioScene: QNAudioScene;
+    defaultAudioRouteToSpeakerphone: boolean;
+    reconnectionTimeout: number;
 };
 
 /** 导出 RTC 类的事件 */

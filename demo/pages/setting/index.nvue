@@ -6,11 +6,11 @@
         class="title margin-top-sm margin-bottom-sm"
         >全局设置</view
       >
-      <view class="title margin-top-sm margin-bottom-sm">token</view>
+      <view class="title margin-top-sm margin-bottom-sm">TOKEN</view>
       <view
         ><uni-easyinput
           :value="token"
-          placeholder="请输入token"
+          placeholder="请输入 Token"
           @input="setToken"
           :maxlength="-1"
         ></uni-easyinput
@@ -37,7 +37,7 @@
       <view
         ><uni-easyinput
           :value="appID"
-          placeholder="请输入appID"
+          placeholder="请输入 AppID"
           @input="setAppID"
           :maxlength="-1"
         ></uni-easyinput
