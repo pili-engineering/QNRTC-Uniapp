@@ -1,13 +1,14 @@
 <template>
-<div class="wrap">
+<view class="wrap">
 	<uni-fab horizontal="right" :content="content" @trigger="handleChooseItem"></uni-fab>
-    <view class="margin-top-sm"><button type="primary" @click="routeGroupToGroup">多人通讯</button></view>
-    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeLiveStreamingDirect">单路转推配置</button></view>
-    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeLiveStreamingTranscoding">合流配置</button></view>
-    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeTrackSetting">track设置</button></view>
-    <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeAudioMixer">旧版混音设置</button></view>
-	 <view class="margin-top-sm"><button type="primary" class="margin-top-sm" @click="routeAudioMixer">新版混音设置</button></view>
-</div>
+    <u-button type="primary" @click="routeGroupToGroup" text="多人通讯"></u-button>
+    <u-button type="primary" class="margin-top-sm" @click="routeLiveStreamingDirect"  text="单路转推配置"></u-button>
+    <u-button type="primary" class="margin-top-sm" @click="routeLiveStreamingTranscoding" text="合流配置"></u-button>
+    <u-button type="primary" class="margin-top-sm" @click="routeTrackSetting" text="单人通讯">设置</u-button>
+    <u-button type="primary" class="margin-top-sm" @click="routeAudioMixer" text="旧版混音设置"></u-button>
+	<u-button type="primary" class="margin-top-sm" @click="routeNewAudioMusicMixer" text="新版混音音乐设置"></u-button>
+	<u-button type="primary" class="margin-top-sm" @click="routeNewAudioEffectMixer" text="新版混音音效设置"></u-button>
+</view>
 </template>
 
 <script>
@@ -53,7 +54,17 @@ export default {
         },
         routeAudioMixer() {
 			uni.navigateTo({
-				url: "/pages/new-audio-mixer/index"
+				url: "/pages/audio-mixer/index"
+			})
+		},
+		routeNewAudioMusicMixer() {
+			uni.navigateTo({
+				url: "/pages/audio-music-mixer/index"
+			})
+		},
+		routeNewAudioEffectMixer() {
+			uni.navigateTo({
+				url: "/pages/audio-effect-mixer/index"
 			})
 		},
 		handleChooseItem(event) {
@@ -98,83 +109,6 @@ export default {
         if(this.platform = "android") {
             this.requestPermission()
         }
-		uni.request({
-			url:'https://www.shadertoy.com/img/themes/classic/screenshot.png',
-			method:'GET',
-			success: (res) => {
-					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-					let ip = reg.exec(res.data);
-					console.log("GGG")
-					console.log(res);
-					console.log(ip[0]);
-					}
-		})
-		uni.request({
-			url:'http://pv.sohu.com/cityjson?ie=utf-8',
-			method:'POST',
-			success: (res) => {
-					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-					let ip = reg.exec(res.data);
-					console.log("啦啦啦德玛西亚")
-					console.log(res);
-					console.log(ip[0]);
-					}
-		})
-		uni.request({
-			url:'http://pv.sohu.com/cityjson?ie=utf-8',
-			method:'POST',
-			success: (res) => {
-					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-					let ip = reg.exec(res.data);
-					console.log("啦啦啦德玛西亚")
-					console.log(res);
-					console.log(ip[0]);
-					}
-		})
-		uni.request({
-			url:'http://pv.sohu.com/cityjson?ie=utf-8',
-			method:'POST',
-			success: (res) => {
-					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-					let ip = reg.exec(res.data);
-					console.log("啦啦啦德玛西亚")
-					console.log(res);
-					console.log(ip[0]);
-					}
-		})
-		uni.request({
-			url:'http://pv.sohu.com/cityjson?ie=utf-8',
-			method:'POST',
-			success: (res) => {
-					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-					let ip = reg.exec(res.data);
-					console.log("啦啦啦德玛西亚")
-					console.log(res);
-					console.log(ip[0]);
-					}
-		})
-		uni.request({
-			url:'http://pv.sohu.com/cityjson?ie=utf-8',
-			method:'POST',
-			success: (res) => {
-					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-					let ip = reg.exec(res.data);
-					console.log("啦啦啦德玛西亚")
-					console.log(res);
-					console.log(ip[0]);
-					}
-		})
-		uni.request({
-			url:'http://pv.sohu.com/cityjson?ie=utf-8',
-			method:'POST',
-			success: (res) => {
-					const reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;
-					let ip = reg.exec(res.data);
-					console.log("啦啦啦德玛西亚")
-					console.log(res);
-					console.log(ip[0]);
-					}
-		})
     }
 }
 </script>
@@ -183,5 +117,9 @@ export default {
 		border-radius: 5px;
 		margin: 0 20px 20px;
 		padding: 10px 0;
+	}
+	.test {
+		color: red!important;
+		font-size: 24upx;
 	}
 </style>

@@ -121,14 +121,14 @@
             "
             >质量：{{ localVideoTrackStats[item.trackID][0].profile }}</text
           >
-          <text
+         <text
             class="track-info-item"
             v-if="
               localVideoTrackStats[item.trackID] &&
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >上行RTT：{{ localVideoTrackStats[item.trackID].uplinkRTT.toFixed(5) }}</text
+            >上行RTT：{{ localVideoTrackStats[item.trackID][0].uplinkRTT.toFixed(5) }}</text
           >
 		  <text
             class="track-info-item"
@@ -137,7 +137,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >上行视频帧宽度：{{ localVideoTrackStats[item.trackID].uplinkFrameWidth }}</text
+            >上行视频帧宽度：{{ localVideoTrackStats[item.trackID][0].uplinkFrameWidth }}</text
           >
 		  <text
             class="track-info-item"
@@ -146,7 +146,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >上行视频帧高度：{{ localVideoTrackStats[item.trackID].uplinkFrameHeight }}</text
+            >上行视频帧高度：{{ localVideoTrackStats[item.trackID][0].uplinkFrameHeight }}</text
           >
 		  <text
             class="track-info-item"
@@ -155,7 +155,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >采集视频帧率：{{ localVideoTrackStats[item.trackID].captureFrameRate }}</text
+            >采集视频帧率：{{ localVideoTrackStats[item.trackID][0].captureFrameRate }}</text
           >
 		  <text
             class="track-info-item"
@@ -164,7 +164,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >采集视频帧宽度：{{ localVideoTrackStats[item.trackID].captureFrameWidth }}</text
+            >采集视频帧宽度：{{ localVideoTrackStats[item.trackID][0].captureFrameWidth }}</text
           >
 		  <text
             class="track-info-item"
@@ -173,7 +173,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >采集视频帧高度：{{ localVideoTrackStats[item.trackID].captureFrameHeight }}</text
+            >采集视频帧高度：{{ localVideoTrackStats[item.trackID][0].captureFrameHeight }}</text
           >
 		  <text
             class="track-info-item"
@@ -182,7 +182,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >期望视频帧率：{{ localVideoTrackStats[item.trackID].targetFrameRate }}</text
+            >期望视频帧率：{{ localVideoTrackStats[item.trackID][0].targetFrameRate }}</text
           >
 		  <text
             class="track-info-item"
@@ -191,7 +191,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >期望视频帧宽度：{{ localVideoTrackStats[item.trackID].targetFrameWidth }}</text
+            >期望视频帧宽度：{{ localVideoTrackStats[item.trackID][0].targetFrameWidth }}</text
           >
 		  <text
             class="track-info-item"
@@ -200,7 +200,7 @@
               item.kind === 'video' &&
               localVideoTrackStats[item.trackID][0]
             "
-            >期望视频帧高度：{{ localVideoTrackStats[item.trackID].targetFrameHeight }}</text
+            >期望视频帧高度：{{ localVideoTrackStats[item.trackID][0].targetFrameHeight }}</text
           >
           <text
             class="track-info-item"
@@ -373,7 +373,6 @@ export default {
   onLoad() {
     this.handleJoinRoom()
     setInterval(() => {
-      console.log(this.client.getConnectionState())
       if (this.client) {
         this.connectionState = this.client.getConnectionState()
         this.remoteUsers = this.client.getRemoteUsers()
@@ -398,7 +397,6 @@ export default {
             }
         }
         this.publishedTracks = this.client.getPublishedTracks()
-        console.log(this.publishedTracks)
         this.localAudioTrackStats = this.client.getLocalAudioTrackStats()
         this.localVideoTrackStats = this.client.getLocalVideoTrackStats()
       }
@@ -520,7 +518,7 @@ export default {
       } else {
         this.client.join(this.token)
       }
-      this.client.on('onConnectionStateChanged', ({ state }) => {
+      this.client.on('onConnectionStateChanged', ({ state, info }) => {
         if (state === 'CONNECTED') {
           this.client.publish(this.localTracks, (onPublished, error) => {
             if (onPublished) {

@@ -104,39 +104,821 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var uni_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("Vue.prototype.__$appStyle__ = {}\nVue.prototype.__merge_style && Vue.prototype.__merge_style(__webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=css */ 2).default,Vue.prototype.__$appStyle__)\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbbnVsbF0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0EsMkRBQTJELG1CQUFPLENBQUMsa0RBQTJDIiwiZmlsZSI6IjEuanMiLCJzb3VyY2VzQ29udGVudCI6WyJWdWUucHJvdG90eXBlLl9fJGFwcFN0eWxlX18gPSB7fVxuVnVlLnByb3RvdHlwZS5fX21lcmdlX3N0eWxlICYmIFZ1ZS5wcm90b3R5cGUuX19tZXJnZV9zdHlsZShyZXF1aXJlKFwiLi9BcHAudnVlP3Z1ZSZ0eXBlPXN0eWxlJmluZGV4PTAmbGFuZz1jc3NcIikuZGVmYXVsdCxWdWUucHJvdG90eXBlLl9fJGFwcFN0eWxlX18pXG4iXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///1\n");
+eval("Vue.prototype.__$appStyle__ = {}\nVue.prototype.__merge_style && Vue.prototype.__merge_style(__webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=scss */ 2).default,Vue.prototype.__$appStyle__)\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbbnVsbF0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0EsMkRBQTJELG1CQUFPLENBQUMsbURBQTRDIiwiZmlsZSI6IjEuanMiLCJzb3VyY2VzQ29udGVudCI6WyJWdWUucHJvdG90eXBlLl9fJGFwcFN0eWxlX18gPSB7fVxuVnVlLnByb3RvdHlwZS5fX21lcmdlX3N0eWxlICYmIFZ1ZS5wcm90b3R5cGUuX19tZXJnZV9zdHlsZShyZXF1aXJlKFwiLi9BcHAudnVlP3Z1ZSZ0eXBlPXN0eWxlJmluZGV4PTAmbGFuZz1zY3NzXCIpLmRlZmF1bHQsVnVlLnByb3RvdHlwZS5fXyRhcHBTdHlsZV9fKVxuIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///1\n");
 
 /***/ }),
 /* 2 */
-/*!****************************************************************************************!*\
-  !*** /Users/tongjie/Desktop/QNRTC-Uniapp/demo/App.vue?vue&type=style&index=0&lang=css ***!
-  \****************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** /Users/tongjie/Desktop/QNRTC-Uniapp/demo/App.vue?vue&type=style&index=0&lang=scss ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/webpack-uni-nvue-loader/lib/style.js!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--10-oneOf-0-1!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--10-oneOf-0-2!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--10-oneOf-0-3!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css */ 3);
-/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_10_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_10_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css__WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_11_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_11_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/webpack-uni-nvue-loader/lib/style.js!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--11-oneOf-0-1!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--11-oneOf-0-2!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--11-oneOf-0-3!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--11-oneOf-0-4!../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=scss */ 3);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_11_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_11_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_11_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_11_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_11_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_11_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_scss__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_11_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_11_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_scss__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_hbuilderx_packages_webpack_uni_nvue_loader_lib_style_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_11_oneOf_0_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_11_oneOf_0_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_11_oneOf_0_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_scss__WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 /* 3 */
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/webpack-uni-nvue-loader/lib/style.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--10-oneOf-0-1!./node_modules/postcss-loader/src??ref--10-oneOf-0-2!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--10-oneOf-0-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!/Users/tongjie/Desktop/QNRTC-Uniapp/demo/App.vue?vue&type=style&index=0&lang=css ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-hbuilderx/packages/webpack-uni-nvue-loader/lib/style.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--11-oneOf-0-1!./node_modules/postcss-loader/src??ref--11-oneOf-0-2!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--11-oneOf-0-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--11-oneOf-0-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!/Users/tongjie/Desktop/QNRTC-Uniapp/demo/App.vue?vue&type=style&index=0&lang=scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 module.exports = {
+  ".u-line-1": {
+    "": {
+      "lines": [
+        1,
+        0,
+        0,
+        16
+      ],
+      "textOverflow": [
+        "ellipsis",
+        0,
+        0,
+        16
+      ],
+      "overflow": [
+        "hidden",
+        0,
+        0,
+        16
+      ],
+      "flex": [
+        1,
+        0,
+        0,
+        16
+      ]
+    }
+  },
+  ".u-line-2": {
+    "": {
+      "lines": [
+        2,
+        0,
+        0,
+        17
+      ],
+      "textOverflow": [
+        "ellipsis",
+        0,
+        0,
+        17
+      ],
+      "overflow": [
+        "hidden",
+        0,
+        0,
+        17
+      ],
+      "flex": [
+        1,
+        0,
+        0,
+        17
+      ]
+    }
+  },
+  ".u-line-3": {
+    "": {
+      "lines": [
+        3,
+        0,
+        0,
+        18
+      ],
+      "textOverflow": [
+        "ellipsis",
+        0,
+        0,
+        18
+      ],
+      "overflow": [
+        "hidden",
+        0,
+        0,
+        18
+      ],
+      "flex": [
+        1,
+        0,
+        0,
+        18
+      ]
+    }
+  },
+  ".u-line-4": {
+    "": {
+      "lines": [
+        4,
+        0,
+        0,
+        19
+      ],
+      "textOverflow": [
+        "ellipsis",
+        0,
+        0,
+        19
+      ],
+      "overflow": [
+        "hidden",
+        0,
+        0,
+        19
+      ],
+      "flex": [
+        1,
+        0,
+        0,
+        19
+      ]
+    }
+  },
+  ".u-line-5": {
+    "": {
+      "lines": [
+        5,
+        0,
+        0,
+        20
+      ],
+      "textOverflow": [
+        "ellipsis",
+        0,
+        0,
+        20
+      ],
+      "overflow": [
+        "hidden",
+        0,
+        0,
+        20
+      ],
+      "flex": [
+        1,
+        0,
+        0,
+        20
+      ]
+    }
+  },
+  ".u-border": {
+    "": {
+      "borderWidth": [
+        "0.5",
+        1,
+        0,
+        21
+      ],
+      "borderColor": [
+        "#dadbde",
+        1,
+        0,
+        21
+      ],
+      "borderStyle": [
+        "solid",
+        0,
+        0,
+        21
+      ]
+    }
+  },
+  ".u-border-top": {
+    "": {
+      "borderTopWidth": [
+        "0.5",
+        1,
+        0,
+        22
+      ],
+      "borderColor": [
+        "#dadbde",
+        1,
+        0,
+        22
+      ],
+      "borderTopStyle": [
+        "solid",
+        0,
+        0,
+        22
+      ]
+    }
+  },
+  ".u-border-left": {
+    "": {
+      "borderLeftWidth": [
+        "0.5",
+        1,
+        0,
+        23
+      ],
+      "borderColor": [
+        "#dadbde",
+        1,
+        0,
+        23
+      ],
+      "borderLeftStyle": [
+        "solid",
+        0,
+        0,
+        23
+      ]
+    }
+  },
+  ".u-border-right": {
+    "": {
+      "borderRightWidth": [
+        "0.5",
+        1,
+        0,
+        24
+      ],
+      "borderColor": [
+        "#dadbde",
+        1,
+        0,
+        24
+      ],
+      "borderRightStyle": [
+        "solid",
+        0,
+        0,
+        24
+      ]
+    }
+  },
+  ".u-border-bottom": {
+    "": {
+      "borderBottomWidth": [
+        "0.5",
+        1,
+        0,
+        25
+      ],
+      "borderColor": [
+        "#dadbde",
+        1,
+        0,
+        25
+      ],
+      "borderBottomStyle": [
+        "solid",
+        0,
+        0,
+        25
+      ]
+    }
+  },
+  ".u-border-top-bottom": {
+    "": {
+      "borderTopWidth": [
+        "0.5",
+        1,
+        0,
+        26
+      ],
+      "borderBottomWidth": [
+        "0.5",
+        1,
+        0,
+        26
+      ],
+      "borderColor": [
+        "#dadbde",
+        1,
+        0,
+        26
+      ],
+      "borderTopStyle": [
+        "solid",
+        0,
+        0,
+        26
+      ],
+      "borderBottomStyle": [
+        "solid",
+        0,
+        0,
+        26
+      ]
+    }
+  },
+  ".u-reset-button": {
+    "": {
+      "paddingTop": [
+        0,
+        0,
+        0,
+        27
+      ],
+      "paddingRight": [
+        0,
+        0,
+        0,
+        27
+      ],
+      "paddingBottom": [
+        0,
+        0,
+        0,
+        27
+      ],
+      "paddingLeft": [
+        0,
+        0,
+        0,
+        27
+      ],
+      "backgroundColor": [
+        "rgba(0,0,0,0)",
+        0,
+        0,
+        27
+      ],
+      "borderWidth": [
+        0,
+        0,
+        0,
+        27
+      ]
+    }
+  },
+  ".u-hover-class": {
+    "": {
+      "opacity": [
+        0.7,
+        0,
+        0,
+        28
+      ]
+    }
+  },
+  ".u-primary-light": {
+    "": {
+      "color": [
+        "#ecf5ff",
+        0,
+        0,
+        29
+      ]
+    }
+  },
+  ".u-warning-light": {
+    "": {
+      "color": [
+        "#fdf6ec",
+        0,
+        0,
+        30
+      ]
+    }
+  },
+  ".u-success-light": {
+    "": {
+      "color": [
+        "#f5fff0",
+        0,
+        0,
+        31
+      ]
+    }
+  },
+  ".u-error-light": {
+    "": {
+      "color": [
+        "#fef0f0",
+        0,
+        0,
+        32
+      ]
+    }
+  },
+  ".u-info-light": {
+    "": {
+      "color": [
+        "#f4f4f5",
+        0,
+        0,
+        33
+      ]
+    }
+  },
+  ".u-primary-light-bg": {
+    "": {
+      "backgroundColor": [
+        "#ecf5ff",
+        0,
+        0,
+        34
+      ]
+    }
+  },
+  ".u-warning-light-bg": {
+    "": {
+      "backgroundColor": [
+        "#fdf6ec",
+        0,
+        0,
+        35
+      ]
+    }
+  },
+  ".u-success-light-bg": {
+    "": {
+      "backgroundColor": [
+        "#f5fff0",
+        0,
+        0,
+        36
+      ]
+    }
+  },
+  ".u-error-light-bg": {
+    "": {
+      "backgroundColor": [
+        "#fef0f0",
+        0,
+        0,
+        37
+      ]
+    }
+  },
+  ".u-info-light-bg": {
+    "": {
+      "backgroundColor": [
+        "#f4f4f5",
+        0,
+        0,
+        38
+      ]
+    }
+  },
+  ".u-primary-dark": {
+    "": {
+      "color": [
+        "#398ade",
+        0,
+        0,
+        39
+      ]
+    }
+  },
+  ".u-warning-dark": {
+    "": {
+      "color": [
+        "#f1a532",
+        0,
+        0,
+        40
+      ]
+    }
+  },
+  ".u-success-dark": {
+    "": {
+      "color": [
+        "#53c21d",
+        0,
+        0,
+        41
+      ]
+    }
+  },
+  ".u-error-dark": {
+    "": {
+      "color": [
+        "#e45656",
+        0,
+        0,
+        42
+      ]
+    }
+  },
+  ".u-info-dark": {
+    "": {
+      "color": [
+        "#767a82",
+        0,
+        0,
+        43
+      ]
+    }
+  },
+  ".u-primary-dark-bg": {
+    "": {
+      "backgroundColor": [
+        "#398ade",
+        0,
+        0,
+        44
+      ]
+    }
+  },
+  ".u-warning-dark-bg": {
+    "": {
+      "backgroundColor": [
+        "#f1a532",
+        0,
+        0,
+        45
+      ]
+    }
+  },
+  ".u-success-dark-bg": {
+    "": {
+      "backgroundColor": [
+        "#53c21d",
+        0,
+        0,
+        46
+      ]
+    }
+  },
+  ".u-error-dark-bg": {
+    "": {
+      "backgroundColor": [
+        "#e45656",
+        0,
+        0,
+        47
+      ]
+    }
+  },
+  ".u-info-dark-bg": {
+    "": {
+      "backgroundColor": [
+        "#767a82",
+        0,
+        0,
+        48
+      ]
+    }
+  },
+  ".u-primary-disabled": {
+    "": {
+      "color": [
+        "#9acafc",
+        0,
+        0,
+        49
+      ]
+    }
+  },
+  ".u-warning-disabled": {
+    "": {
+      "color": [
+        "#f9d39b",
+        0,
+        0,
+        50
+      ]
+    }
+  },
+  ".u-success-disabled": {
+    "": {
+      "color": [
+        "#a9e08f",
+        0,
+        0,
+        51
+      ]
+    }
+  },
+  ".u-error-disabled": {
+    "": {
+      "color": [
+        "#f7b2b2",
+        0,
+        0,
+        52
+      ]
+    }
+  },
+  ".u-info-disabled": {
+    "": {
+      "color": [
+        "#c4c6c9",
+        0,
+        0,
+        53
+      ]
+    }
+  },
+  ".u-primary": {
+    "": {
+      "color": [
+        "#3c9cff",
+        0,
+        0,
+        54
+      ]
+    }
+  },
+  ".u-warning": {
+    "": {
+      "color": [
+        "#f9ae3d",
+        0,
+        0,
+        55
+      ]
+    }
+  },
+  ".u-success": {
+    "": {
+      "color": [
+        "#5ac725",
+        0,
+        0,
+        56
+      ]
+    }
+  },
+  ".u-error": {
+    "": {
+      "color": [
+        "#f56c6c",
+        0,
+        0,
+        57
+      ]
+    }
+  },
+  ".u-info": {
+    "": {
+      "color": [
+        "#909399",
+        0,
+        0,
+        58
+      ]
+    }
+  },
+  ".u-primary-bg": {
+    "": {
+      "backgroundColor": [
+        "#3c9cff",
+        0,
+        0,
+        59
+      ]
+    }
+  },
+  ".u-warning-bg": {
+    "": {
+      "backgroundColor": [
+        "#f9ae3d",
+        0,
+        0,
+        60
+      ]
+    }
+  },
+  ".u-success-bg": {
+    "": {
+      "backgroundColor": [
+        "#5ac725",
+        0,
+        0,
+        61
+      ]
+    }
+  },
+  ".u-error-bg": {
+    "": {
+      "backgroundColor": [
+        "#f56c6c",
+        0,
+        0,
+        62
+      ]
+    }
+  },
+  ".u-info-bg": {
+    "": {
+      "backgroundColor": [
+        "#909399",
+        0,
+        0,
+        63
+      ]
+    }
+  },
+  ".u-main-color": {
+    "": {
+      "color": [
+        "#303133",
+        0,
+        0,
+        64
+      ]
+    }
+  },
+  ".u-content-color": {
+    "": {
+      "color": [
+        "#606266",
+        0,
+        0,
+        65
+      ]
+    }
+  },
+  ".u-tips-color": {
+    "": {
+      "color": [
+        "#909193",
+        0,
+        0,
+        66
+      ]
+    }
+  },
+  ".u-light-color": {
+    "": {
+      "color": [
+        "#c0c4cc",
+        0,
+        0,
+        67
+      ]
+    }
+  },
+  ".wrap": {
+    "": {
+      "borderRadius": [
+        "5",
+        1,
+        0,
+        68
+      ],
+      "marginTop": [
+        0,
+        1,
+        0,
+        68
+      ],
+      "marginRight": [
+        "20",
+        1,
+        0,
+        68
+      ],
+      "marginBottom": [
+        "20",
+        1,
+        0,
+        68
+      ],
+      "marginLeft": [
+        "20",
+        1,
+        0,
+        68
+      ],
+      "paddingTop": [
+        "10",
+        1,
+        0,
+        68
+      ],
+      "paddingRight": [
+        0,
+        1,
+        0,
+        68
+      ],
+      "paddingBottom": [
+        "10",
+        1,
+        0,
+        68
+      ],
+      "paddingLeft": [
+        0,
+        1,
+        0,
+        68
+      ]
+    }
+  },
   ".margin-top-sm": {
     "": {
       "marginTop": [
-        "15",
+        "10",
+        1,
         0,
-        0,
-        0
+        69
       ]
     }
   },
@@ -146,7 +928,7 @@ module.exports = {
         "20",
         0,
         0,
-        1
+        70
       ]
     }
   },
@@ -156,7 +938,7 @@ module.exports = {
         "20",
         0,
         0,
-        2
+        71
       ]
     }
   },
@@ -164,9 +946,9 @@ module.exports = {
     "": {
       "marginBottom": [
         "10",
+        1,
         0,
-        0,
-        3
+        72
       ]
     }
   },
@@ -176,37 +958,37 @@ module.exports = {
         1,
         0,
         0,
-        4
+        73
       ],
       "display": [
         "flex",
         0,
         0,
-        4
+        73
       ],
       "flexDirection": [
         "row",
         1,
         0,
-        4
+        73
       ],
       "justifyContent": [
         "space-between",
         0,
         0,
-        4
+        73
       ],
       "flexWrap": [
         "nowrap",
         0,
         0,
-        4
+        73
       ],
       "alignItems": [
         "center",
         1,
         0,
-        4
+        73
       ]
     }
   },
@@ -216,7 +998,7 @@ module.exports = {
         1,
         0,
         0,
-        5
+        74
       ]
     }
   },
@@ -226,37 +1008,37 @@ module.exports = {
         1,
         0,
         0,
-        6
+        75
       ],
       "position": [
         "absolute",
         0,
         0,
-        6
+        75
       ],
       "top": [
         0,
         0,
         0,
-        6
+        75
       ],
       "right": [
         0,
         0,
         0,
-        6
+        75
       ],
       "bottom": [
         0,
         0,
         0,
-        6
+        75
       ],
       "left": [
         0,
         0,
         0,
-        6
+        75
       ]
     }
   },
@@ -266,25 +1048,25 @@ module.exports = {
         "10",
         0,
         0,
-        7
+        76
       ],
       "paddingTop": [
         "10",
         0,
         0,
-        7
+        76
       ],
       "paddingBottom": [
         "10",
         0,
         0,
-        7
+        76
       ],
       "paddingRight": [
         "10",
         0,
         0,
-        7
+        76
       ]
     }
   },
@@ -294,37 +1076,37 @@ module.exports = {
         "20upx",
         0,
         0,
-        8
+        77
       ],
       "marginBottom": [
         "20upx",
         0,
         0,
-        8
+        77
       ],
       "flex": [
         1,
         0,
         0,
-        8
+        77
       ],
       "borderWidth": [
         "1",
         1,
         0,
-        8
+        77
       ],
       "borderStyle": [
         "solid",
         1,
         0,
-        8
+        77
       ],
       "borderColor": [
         "#BEBEBE",
         1,
         0,
-        8
+        77
       ]
     }
   },
@@ -334,91 +1116,45 @@ module.exports = {
         "flex",
         1,
         0,
-        9
+        78
       ],
       "flexDirection": [
         "row",
         1,
         0,
-        9
+        78
       ],
       "justifyContent": [
         "flex-start",
         1,
         0,
-        9
+        78
       ],
       "alignItems": [
         "stretch",
         1,
         0,
-        9
+        78
       ],
       "flex": [
         1,
         0,
         0,
-        9
+        78
       ],
       "flexWrap": [
         "nowrap",
         0,
         0,
-        9
+        78
       ]
-    }
-  },
-  ".tr": {
-    ".th ": {
+    },
+    ".tr": {
       "backgroundColor": [
         "#eeeeee",
         0,
         1,
-        10
-      ]
-    },
-    "": {
-      "fontSize": [
-        "24upx",
-        0,
-        0,
-        12
-      ],
-      "flex": [
-        1,
-        0,
-        0,
-        12
-      ],
-      "textAlign": [
-        "center",
-        0,
-        0,
-        12
-      ],
-      "paddingTop": [
-        "15upx",
-        0,
-        0,
-        12
-      ],
-      "paddingRight": [
-        0,
-        0,
-        0,
-        12
-      ],
-      "paddingBottom": [
-        "15upx",
-        0,
-        0,
-        12
-      ],
-      "paddingLeft": [
-        0,
-        0,
-        0,
-        12
+        79
       ]
     }
   },
@@ -428,37 +1164,83 @@ module.exports = {
         "flex",
         1,
         0,
-        11
+        80
       ],
       "flexDirection": [
         "row",
         1,
         0,
-        11
+        80
       ],
       "justifyContent": [
         "flex-start",
         1,
         0,
-        11
+        80
       ],
       "alignItems": [
         "stretch",
         1,
         0,
-        11
+        80
       ],
       "flex": [
         1,
         0,
         0,
-        11
+        80
       ],
       "flexWrap": [
         "nowrap",
         0,
         0,
-        11
+        80
+      ]
+    }
+  },
+  ".tr": {
+    "": {
+      "fontSize": [
+        "24upx",
+        0,
+        0,
+        81
+      ],
+      "flex": [
+        1,
+        0,
+        0,
+        81
+      ],
+      "textAlign": [
+        "center",
+        0,
+        0,
+        81
+      ],
+      "paddingTop": [
+        "15upx",
+        0,
+        0,
+        81
+      ],
+      "paddingRight": [
+        0,
+        0,
+        0,
+        81
+      ],
+      "paddingBottom": [
+        "15upx",
+        0,
+        0,
+        81
+      ],
+      "paddingLeft": [
+        0,
+        0,
+        0,
+        81
       ]
     }
   },
@@ -468,37 +1250,37 @@ module.exports = {
         "relative",
         0,
         0,
-        13
+        82
       ],
       "height": [
-        "300",
+        "800upx",
         0,
         0,
-        13
+        82
       ],
       "display": [
         "flex",
         0,
         0,
-        13
+        82
       ],
       "flexDirection": [
         "row",
         0,
         0,
-        13
+        82
       ],
       "justifyContent": [
         "flex-start",
         0,
         0,
-        13
+        82
       ],
       "backgroundColor": [
         "#000000",
         0,
         0,
-        13
+        82
       ]
     }
   },
@@ -508,31 +1290,31 @@ module.exports = {
         "absolute",
         0,
         0,
-        14
+        83
       ],
       "top": [
         0,
         0,
         0,
-        14
+        83
       ],
       "left": [
         0,
         0,
         0,
-        14
+        83
       ],
       "height": [
-        "300",
+        "800upx",
         0,
         0,
-        14
+        83
       ],
       "width": [
         "750upx",
         0,
         0,
-        14
+        83
       ]
     }
   },
@@ -542,43 +1324,43 @@ module.exports = {
         "absolute",
         0,
         0,
-        15
+        84
       ],
       "top": [
         0,
         0,
         0,
-        15
+        84
       ],
       "left": [
         0,
         0,
         0,
-        15
+        84
       ],
       "paddingBottom": [
         "20upx",
         0,
         0,
-        15
+        84
       ],
       "paddingLeft": [
         "20upx",
         0,
         0,
-        15
+        84
       ],
       "paddingRight": [
         "20upx",
         0,
         0,
-        15
+        84
       ],
       "width": [
         "750upx",
         0,
         0,
-        15
+        84
       ]
     }
   },
@@ -588,31 +1370,31 @@ module.exports = {
         "#007AFF",
         0,
         0,
-        16
+        85
       ],
       "fontSize": [
         "20upx",
         0,
         0,
-        16
+        85
       ],
       "paddingTop": [
         "10upx",
         0,
         0,
-        16
+        85
       ],
       "paddingBottom": [
         "10upx",
         0,
         0,
-        16
+        85
       ],
       "fontWeight": [
         "bold",
         0,
         0,
-        16
+        85
       ]
     }
   },
@@ -753,8 +1535,16 @@ var render = function () {
           [
             _c(
               "view",
+              {
+                staticClass: ["title", "margin-top-sm", "margin-bottom-sm"],
+                staticStyle: { fontSize: "40upx", paddingTop: "20upx" },
+              },
+              [_c("u-text", [_vm._v("全局设置")])]
+            ),
+            _c(
+              "view",
               { staticClass: ["title", "margin-top-sm", "margin-bottom-sm"] },
-              [_c("u-text", [_vm._v("token")])]
+              [_c("u-text", [_vm._v("TOKEN")])]
             ),
             _c(
               "view",
@@ -762,7 +1552,7 @@ var render = function () {
                 _c("uni-easyinput", {
                   attrs: {
                     value: _vm.token,
-                    placeholder: "请输入token",
+                    placeholder: "请输入 Token",
                     maxlength: -1,
                   },
                   on: { input: _vm.setToken },
@@ -819,10 +1609,37 @@ var render = function () {
                 _c("uni-easyinput", {
                   attrs: {
                     value: _vm.appID,
-                    placeholder: "请输入appID",
+                    placeholder: "请输入 AppID",
                     maxlength: -1,
                   },
                   on: { input: _vm.setAppID },
+                }),
+              ],
+              1
+            ),
+            _c(
+              "view",
+              {
+                staticClass: ["title", "margin-top-sm", "margin-bottom-sm"],
+                staticStyle: { fontSize: "40upx", paddingTop: "20upx" },
+              },
+              [_c("u-text", [_vm._v("RTC 设置")])]
+            ),
+            _c(
+              "view",
+              { staticClass: ["title", "margin-top-sm", "margin-bottom-sm"] },
+              [_c("u-text", [_vm._v("重连超时时间（单位ms）")])]
+            ),
+            _c(
+              "view",
+              [
+                _c("uni-easyinput", {
+                  attrs: {
+                    value: _vm.reconnectionTimeout,
+                    placeholder: "请输入重连时间",
+                    maxlength: -1,
+                  },
+                  on: { input: _vm.setReconnectionTimeout },
                 }),
               ],
               1
@@ -964,15 +1781,71 @@ var render = function () {
             }),
             _c(
               "view",
+              { staticClass: ["title", "margin-top-sm", "margin-bottom-sm"] },
+              [_c("u-text", [_vm._v("音频场景")])]
+            ),
+            _c("uni-data-checkbox", {
+              attrs: {
+                multiple: false,
+                value: _vm.audioScene,
+                localdata: _vm.audioSceneList,
+              },
+              on: { change: _vm.setAudioScene },
+            }),
+            _c(
+              "view",
+              { staticClass: ["title", "margin-top-sm", "margin-bottom-sm"] },
+              [_c("u-text", [_vm._v("默认音频路由")])]
+            ),
+            _c("uni-data-checkbox", {
+              attrs: {
+                multiple: false,
+                value: _vm.defaultAudioRouteToSpeakerphone,
+                localdata: _vm.defaultAudioRouteList,
+              },
+              on: { change: _vm.setDefaultAudioRouteToSpeakerphone },
+            }),
+            _c(
+              "view",
               {
                 staticClass: ["title", "margin-top-sm", "margin-bottom-sm"],
-                staticStyle: {
-                  fontSize: "40upx",
-                  borderTop: "1upx solid black",
-                  paddingTop: "20upx",
-                },
+                staticStyle: { fontSize: "40upx", paddingTop: "20upx" },
               },
-              [_c("u-text", [_vm._v("track 设置")])]
+              [_c("u-text", [_vm._v("Client 设置")])]
+            ),
+            _c(
+              "view",
+              { staticClass: ["title", "margin-top-sm", "margin-bottom-sm"] },
+              [_c("u-text", [_vm._v("使用场景")])]
+            ),
+            _c("uni-data-checkbox", {
+              attrs: {
+                multiple: false,
+                value: _vm.clientMode,
+                localdata: _vm.modeList,
+              },
+              on: { change: _vm.setClientMode },
+            }),
+            _c(
+              "view",
+              { staticClass: ["title", "margin-top-sm", "margin-bottom-sm"] },
+              [_c("u-text", [_vm._v("角色类型")])]
+            ),
+            _c("uni-data-checkbox", {
+              attrs: {
+                multiple: false,
+                value: _vm.clientRole,
+                localdata: _vm.roleList,
+              },
+              on: { change: _vm.setClientRole },
+            }),
+            _c(
+              "view",
+              {
+                staticClass: ["title", "margin-top-sm", "margin-bottom-sm"],
+                staticStyle: { fontSize: "40upx", paddingTop: "20upx" },
+              },
+              [_c("u-text", [_vm._v("Track 设置")])]
             ),
             _c(
               "view",
@@ -1047,7 +1920,7 @@ var render = function () {
             _c(
               "view",
               { staticClass: ["title", "margin-top-sm", "margin-bottom-sm"] },
-              [_c("u-text", [_vm._v("采集高度  - Android")])]
+              [_c("u-text", [_vm._v("采集高度 - Android")])]
             ),
             _c(
               "view",
@@ -11474,7 +12347,7 @@ module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, mo
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({"pages":[{"path":"pages/index/index","style":{"navigationBarTitleText":"qn-uni-rtc 功能测试"},"nvue":true},{"path":"pages/group-to-group/index","style":{"navigationBarTitleText":"多对多通讯"},"nvue":true},{"path":"pages/track-setting/index","style":{"navigationBarTitleText":"track设置"},"nvue":true},{"path":"pages/live-streaming-direct/index","style":{"navigationBarTitleText":"CDN推流"},"nvue":true},{"path":"pages/live-streaming-transcoding/index","style":{"navigationBarTitleText":"合流配置"},"nvue":true},{"path":"pages/audio-mixer/index","style":{"navigationBarTitleText":"混音配置"},"nvue":true},{"path":"pages/setting/index","style":{"navigationBarTitleText":"配置"},"nvue":true}],"globalStyle":{"navigationBarTextStyle":"black","navigationBarTitleText":"uni-app","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"},"nvue":{"pages":[{"path":"pages/setting/index.html","style":{"navigationBarTitleText":"配置"}},{"path":"pages/audio-mixer/index.html","style":{"navigationBarTitleText":"混音配置"}},{"path":"pages/live-streaming-transcoding/index.html","style":{"navigationBarTitleText":"合流配置"}},{"path":"pages/live-streaming-direct/index.html","style":{"navigationBarTitleText":"CDN推流"}},{"path":"pages/track-setting/index.html","style":{"navigationBarTitleText":"track设置"}},{"path":"pages/group-to-group/index.html","style":{"navigationBarTitleText":"多对多通讯"}},{"path":"pages/index/index.html","style":{"navigationBarTitleText":"qn-uni-rtc 功能测试"}}],"entryPagePath":"pages/index/index"}});
+/* harmony default export */ __webpack_exports__["default"] = ({"pages":[{"path":"pages/index/index","style":{"navigationBarTitleText":"QNRTC-UNIAPP-TEST-DEMO"},"nvue":true},{"path":"pages/group-to-group/index","style":{"navigationBarTitleText":"多对多通讯"},"nvue":true},{"path":"pages/track-setting/index","style":{"navigationBarTitleText":"track设置"},"nvue":true},{"path":"pages/live-streaming-direct/index","style":{"navigationBarTitleText":"CDN推流"},"nvue":true},{"path":"pages/live-streaming-transcoding/index","style":{"navigationBarTitleText":"合流配置"},"nvue":true},{"path":"pages/audio-mixer/index","style":{"navigationBarTitleText":"混音配置"},"nvue":true},{"path":"pages/audio-music-mixer/index","style":{"navigationBarTitleText":"新版混音音乐配置"},"nvue":true},{"path":"pages/audio-effect-mixer/index","style":{"navigationBarTitleText":"新版混音音效配置"},"nvue":true},{"path":"pages/setting/index","style":{"navigationBarTitleText":"配置"},"nvue":true}],"globalStyle":{"navigationBarTextStyle":"black","navigationBarTitleText":"uni-app","navigationBarBackgroundColor":"#F8F8F8","backgroundColor":"#F8F8F8"},"nvue":{"pages":[{"path":"pages/setting/index.html","style":{"navigationBarTitleText":"配置"}},{"path":"pages/audio-effect-mixer/index.html","style":{"navigationBarTitleText":"新版混音音效配置"}},{"path":"pages/audio-music-mixer/index.html","style":{"navigationBarTitleText":"新版混音音乐配置"}},{"path":"pages/audio-mixer/index.html","style":{"navigationBarTitleText":"混音配置"}},{"path":"pages/live-streaming-transcoding/index.html","style":{"navigationBarTitleText":"合流配置"}},{"path":"pages/live-streaming-direct/index.html","style":{"navigationBarTitleText":"CDN推流"}},{"path":"pages/track-setting/index.html","style":{"navigationBarTitleText":"track设置"}},{"path":"pages/group-to-group/index.html","style":{"navigationBarTitleText":"多对多通讯"}},{"path":"pages/index/index.html","style":{"navigationBarTitleText":"QNRTC-UNIAPP-TEST-DEMO"}}],"entryPagePath":"pages/index/index"}});
 
 /***/ }),
 /* 73 */
@@ -12677,7 +13550,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 16);\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 63));\nvar _vuex = __webpack_require__(/*! vuex */ 78);\nfunction ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }\nfunction _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }\nvar _default = {\n  data: function data() {\n    return {\n      policyList: [{\n        text: \"forceUDP\",\n        value: \"forceUDP\"\n      }, {\n        text: \"forceTCP\",\n        value: \"forceTCP\"\n      }, {\n        text: \"preferUDP\",\n        value: \"preferUDP\"\n      }],\n      logLevelList: [{\n        text: \"verbose\",\n        value: \"verbose\"\n      }, {\n        text: \"info\",\n        value: \"info\"\n      }, {\n        text: \"warning\",\n        value: \"warning\"\n      }, {\n        text: \"error\",\n        value: \"error\"\n      }, {\n        text: \"none\",\n        value: \"none\"\n      }],\n      list: [{\n        text: \"是\",\n        value: 1\n      }, {\n        text: \"否\",\n        value: 0\n      }],\n      bwePolicyList: [{\n        text: \"TCC\",\n        value: \"TCC\"\n      }, {\n        text: \"GCC\",\n        value: \"GCC\"\n      }]\n    };\n  },\n  computed: _objectSpread({}, (0, _vuex.mapState)([\"captureHeight\", \"captureWidth\", \"encodeWidth\", \"encodeHeight\", \"token\", \"policy\", \"logLevel\", \"stereo\", \"bwePolicy\", \"allowAudioMixWithOthers\", \"hWCodecEnabled\", \"maintainResolution\", \"fieldTrials\", \"encoderQualityMode\", \"isAEC3Enabled\", \"appID\", \"roomID\", \"userName\", \"multiStreamEnable\"])),\n  methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)([\"setCaptureHeight\", \"setCaptureWidth\", \"setEncodeWidth\", \"setEncodeHeight\", \"setToken\", \"setPolicy\", \"setLogLevel\", \"setStereo\", \"setBwePolicy\", \"setAllowAudioMixWithOthers\", \"setHWCodecEnabled\", \"setMaintainResolution\", \"setFieldTrials\", \"setEncoderQualityMode\", \"setIsAEC3Enabled\", \"setMultiStreamEnable\"])), (0, _vuex.mapActions)([\"setAppID\", \"setRoomID\", \"setUserName\"]))\n};\nexports.default = _default;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVuaS1hcHA6Ly8vcGFnZXMvc2V0dGluZy9pbmRleC5udnVlIl0sIm5hbWVzIjpbImRhdGEiLCJwb2xpY3lMaXN0IiwidGV4dCIsInZhbHVlIiwibG9nTGV2ZWxMaXN0IiwibGlzdCIsImJ3ZVBvbGljeUxpc3QiLCJjb21wdXRlZCIsIm1ldGhvZHMiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBd0RBO0FBQUE7QUFBQTtBQUFBLGVBQ0E7RUFDQUE7SUFDQTtNQUNBQyxhQUNBO1FBQ0FDO1FBQ0FDO01BQ0EsR0FDQTtRQUNBRDtRQUNBQztNQUNBLEdBQ0E7UUFDQUQ7UUFDQUM7TUFDQSxFQUNBO01BQ0FDLGVBQ0E7UUFDQUY7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0EsR0FDQTtRQUNBRDtRQUNBQztNQUNBLEdBQ0E7UUFDQUQ7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0EsRUFDQTtNQUNBRSxPQUNBO1FBQ0FIO1FBQ0FDO01BQ0EsR0FDQTtRQUNBRDtRQUNBQztNQUNBLEVBQ0E7TUFDQUcsZ0JBQ0E7UUFDQUo7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0E7SUFFQTtFQUNBO0VBQ0FJLDRCQUNBLHlUQUNBO0VBQ0FDLHlDQUNBLGdWQUNBO0FBRUE7QUFBQSIsImZpbGUiOiI3Ny5qcyIsInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cblx0PHZpZXc+XG5cdFx0PHZpZXcgY2xhc3M9XCJ3cmFwXCI+XG5cdFx0XHQ8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPnRva2VuPC92aWV3PlxuXHRcdFx0PHZpZXc+PHVuaS1lYXN5aW5wdXQgOnZhbHVlPVwidG9rZW5cIiBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpXRva2VuXCIgQGlucHV0PVwic2V0VG9rZW5cIiA6bWF4bGVuZ3RoPVwiLTFcIj48L3VuaS1lYXN5aW5wdXQ+PC92aWV3PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7nlKjmiLflkI08L3ZpZXc+XG5cdFx0XHQ8dmlldz48dW5pLWVhc3lpbnB1dCA6dmFsdWU9XCJ1c2VyTmFtZVwiIHBsYWNlaG9sZGVyPVwi6K+36L6T5YWl55So5oi35ZCNXCIgQGlucHV0PVwic2V0VXNlck5hbWVcIiA6bWF4bGVuZ3RoPVwiLTFcIj48L3VuaS1lYXN5aW5wdXQ+PC92aWV3PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7miL/pl7Tlj7c8L3ZpZXc+XG5cdFx0XHQ8dmlldz48dW5pLWVhc3lpbnB1dCA6dmFsdWU9XCJyb29tSURcIiBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpeaIv+mXtOWPt1wiIEBpbnB1dD1cInNldFJvb21JRFwiIDptYXhsZW5ndGg9XCItMVwiPjwvdW5pLWVhc3lpbnB1dD48L3ZpZXc+XG5cdFx0XHQ8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuivt+i+k+WFpWFwcElEPC92aWV3PlxuXHRcdFx0PHZpZXc+PHVuaS1lYXN5aW5wdXQgOnZhbHVlPVwiYXBwSURcIiBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpWFwcElEXCIgQGlucHV0PVwic2V0QXBwSURcIiA6bWF4bGVuZ3RoPVwiLTFcIj48L3VuaS1lYXN5aW5wdXQ+PC92aWV3PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7kvKDovpPljY/orq48L3ZpZXc+XG5cdFx0XHQ8dW5pLWRhdGEtY2hlY2tib3ggQGNoYW5nZT1cInNldFBvbGljeVwiIDptdWx0aXBsZT1cImZhbHNlXCIgOnZhbHVlPVwicG9saWN5XCIgOmxvY2FsZGF0YT1cInBvbGljeUxpc3RcIj5cblx0XHRcdDwvdW5pLWRhdGEtY2hlY2tib3g+XG5cdFx0XHQ8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuaXpeW/l+etiee6pzwvdmlldz5cblx0XHRcdDx1bmktZGF0YS1jaGVja2JveCBAY2hhbmdlPVwic2V0TG9nTGV2ZWxcIiA6bXVsdGlwbGU9XCJmYWxzZVwiIDp2YWx1ZT1cImxvZ0xldmVsXCIgOmxvY2FsZGF0YT1cImxvZ0xldmVsTGlzdFwiPlxuXHRcdFx0PC91bmktZGF0YS1jaGVja2JveD5cblx0XHRcdDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+5byA5ZCv56uL5L2T5aOwIC0gaW9zPC92aWV3PlxuXHRcdFx0PHVuaS1kYXRhLWNoZWNrYm94IEBjaGFuZ2U9XCJzZXRTdGVyZW9cIiA6bXVsdGlwbGU9XCJmYWxzZVwiIDp2YWx1ZT1cInN0ZXJlb1wiIDpsb2NhbGRhdGE9XCJsaXN0XCI+XG5cdFx0XHQ8L3VuaS1kYXRhLWNoZWNrYm94PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7luKblrr3or4TkvLDnrZbnlaUgLSBpb3M8L3ZpZXc+XG5cdFx0XHQ8dW5pLWRhdGEtY2hlY2tib3ggQGNoYW5nZT1cInNldEJ3ZVBvbGljeVwiIDptdWx0aXBsZT1cImZhbHNlXCIgOnZhbHVlPVwiYndlUG9saWN5XCIgOmxvY2FsZGF0YT1cImJ3ZVBvbGljeUxpc3RcIj5cblx0XHRcdDwvdW5pLWRhdGEtY2hlY2tib3g+XG5cdFx0XHQ8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuaYr+WQpuWFgeiuuOWSjOWFtuWug+mfs+mikeS4gOi1t+aSreaUviAtIGlvczwvdmlldz5cblx0XHRcdDx1bmktZGF0YS1jaGVja2JveCBAY2hhbmdlPVwic2V0QWxsb3dBdWRpb01peFdpdGhPdGhlcnNcIiA6bXVsdGlwbGU9XCJmYWxzZVwiIDp2YWx1ZT1cImFsbG93QXVkaW9NaXhXaXRoT3RoZXJzXCIgOmxvY2FsZGF0YT1cImxpc3RcIj5cblx0XHRcdDwvdW5pLWRhdGEtY2hlY2tib3g+XG5cdFx0XHQ8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuW8gOWQr+ehrOe8liAtIEFuZHJvaWQ8L3ZpZXc+XG5cdFx0XHQ8dW5pLWRhdGEtY2hlY2tib3ggQGNoYW5nZT1cInNldEhXQ29kZWNFbmFibGVkXCIgOm11bHRpcGxlPVwiZmFsc2VcIiA6dmFsdWU9XCJoV0NvZGVjRW5hYmxlZFwiIDpsb2NhbGRhdGE9XCJsaXN0XCI+XG5cdFx0XHQ8L3VuaS1kYXRhLWNoZWNrYm94PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7lm7rlrprliIbovqjnjocgLSBBbmRyb2lkPC92aWV3PlxuXHRcdFx0PHVuaS1kYXRhLWNoZWNrYm94IEBjaGFuZ2U9XCJzZXRNYWludGFpblJlc29sdXRpb25cIiA6bXVsdGlwbGU9XCJmYWxzZVwiIDp2YWx1ZT1cIm1haW50YWluUmVzb2x1dGlvblwiIDpsb2NhbGRhdGE9XCJsaXN0XCI+XG5cdFx0XHQ8L3VuaS1kYXRhLWNoZWNrYm94PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7mianlsZXphY3nva4gLSBBbmRyb2lkPC92aWV3PlxuXHRcdFx0PHZpZXc+PHVuaS1lYXN5aW5wdXQgQGlucHV0PVwic2V0RmllbGRUcmlhbHNcIiA6dmFsdWU9XCJmaWVsZFRyaWFsc1wiIHBsYWNlaG9sZGVyPVwi6K+36L6T5YWl5omp5bGV6YWN572uXCI+PC91bmktZWFzeWlucHV0Pjwvdmlldz5cblx0XHRcdDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+6LSo6YeP5qih5byPIC0gQW5kcm9pZDwvdmlldz5cblx0XHRcdDx1bmktZGF0YS1jaGVja2JveCBAY2hhbmdlPVwic2V0RW5jb2RlclF1YWxpdHlNb2RlXCIgOm11bHRpcGxlPVwiZmFsc2VcIiA6dmFsdWU9XCJlbmNvZGVyUXVhbGl0eU1vZGVcIiA6bG9jYWxkYXRhPVwibGlzdFwiPlxuXHRcdFx0PC91bmktZGF0YS1jaGVja2JveD5cblx0XHRcdDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+QUVDMyAtIEFuZHJvaWQ8L3ZpZXc+XG5cdFx0XHQ8dW5pLWRhdGEtY2hlY2tib3ggQGNoYW5nZT1cInNldElzQUVDM0VuYWJsZWRcIiA6bXVsdGlwbGU9XCJmYWxzZVwiIDp2YWx1ZT1cImlzQUVDM0VuYWJsZWRcIiA6bG9jYWxkYXRhPVwibGlzdFwiPlxuXHRcdFx0PC91bmktZGF0YS1jaGVja2JveD5cblx0XHRcdDx2aWV3IHN0eWxlPVwiZm9udC1zaXplOiA0MHVweDtib3JkZXItdG9wOjF1cHggc29saWQgYmxhY2s7cGFkZGluZy10b3A6IDIwdXB4O1wiIGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+dHJhY2sg6K6+572uPC92aWV3PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7op4bpopEgdHJhY2sg5piv5ZCm5byA5ZCv5aSn5bCP5rWBPC92aWV3PlxuXHRcdFx0PHVuaS1kYXRhLWNoZWNrYm94IEBjaGFuZ2U9XCJzZXRNdWx0aVN0cmVhbUVuYWJsZVwiIDptdWx0aXBsZT1cImZhbHNlXCIgOnZhbHVlPVwibXVsdGlTdHJlYW1FbmFibGVcIiA6bG9jYWxkYXRhPVwibGlzdFwiPlxuXHRcdFx0PC91bmktZGF0YS1jaGVja2JveD5cblx0XHRcdDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+57yW56CB5a695bqmPC92aWV3PlxuXHRcdFx0PHZpZXc+PHVuaS1lYXN5aW5wdXQgOnZhbHVlPVwiZW5jb2RlV2lkdGhcIiBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpee8lueggeWuveW6plwiIEBpbnB1dD1cInNldEVuY29kZVdpZHRoXCIgOm1heGxlbmd0aD1cIi0xXCI+PC91bmktZWFzeWlucHV0Pjwvdmlldz5cblx0XHRcdDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+57yW56CB6auY5bqmPC92aWV3PlxuXHRcdFx0PHZpZXc+PHVuaS1lYXN5aW5wdXQgOnZhbHVlPVwiZW5jb2RlSGVpZ2h0XCIgcGxhY2Vob2xkZXI9XCLor7fovpPlhaXnvJbnoIHpq5jluqZcIiBAaW5wdXQ9XCJzZXRFbmNvZGVIZWlnaHRcIiA6bWF4bGVuZ3RoPVwiLTFcIj48L3VuaS1lYXN5aW5wdXQ+PC92aWV3PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7ph4fpm4blrr3luqYgLSBBbmRyb2lkPC92aWV3PlxuXHRcdFx0PHZpZXc+PHVuaS1lYXN5aW5wdXQgOnZhbHVlPVwiY2FwdHVyZVdpZHRoXCIgcGxhY2Vob2xkZXI9XCLor7fovpPlhaXph4fpm4blrr3luqZcIiBAaW5wdXQ9XCJzZXRDYXB0dXJlV2lkdGhcIiA6bWF4bGVuZ3RoPVwiLTFcIj48L3VuaS1lYXN5aW5wdXQ+PC92aWV3PlxuXHRcdFx0PHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7ph4fpm4bpq5jluqYgIC0gQW5kcm9pZDwvdmlldz5cblx0XHRcdDx2aWV3Pjx1bmktZWFzeWlucHV0IDp2YWx1ZT1cImNhcHR1cmVIZWlnaHRcIiBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpemHh+mbhumrmOW6plwiIEBpbnB1dD1cInNldENhcHR1cmVIZWlnaHRcIiA6bWF4bGVuZ3RoPVwiLTFcIj48L3VuaS1lYXN5aW5wdXQ+PC92aWV3PlxuXHRcdDwvdmlldz5cblx0PC92aWV3PlxuPC90ZW1wbGF0ZT5cbjxzY3JpcHQ+XG5cdGltcG9ydCB7IG1hcFN0YXRlLG1hcE11dGF0aW9ucyxtYXBBY3Rpb25zIH0gZnJvbSBcInZ1ZXhcIlxuXHRleHBvcnQgZGVmYXVsdCB7XG5cdFx0ZGF0YSgpIHtcblx0XHRcdHJldHVybiB7XG5cdFx0XHRcdHBvbGljeUxpc3Q6IFtcblx0XHRcdFx0XHR7XG5cdFx0XHRcdFx0XHR0ZXh0OiBcImZvcmNlVURQXCIsXG5cdFx0XHRcdFx0XHR2YWx1ZTogXCJmb3JjZVVEUFwiXG5cdFx0XHRcdFx0fSxcblx0XHRcdFx0XHR7XG5cdFx0XHRcdFx0XHR0ZXh0OiBcImZvcmNlVENQXCIsXG5cdFx0XHRcdFx0XHR2YWx1ZTogXCJmb3JjZVRDUFwiXG5cdFx0XHRcdFx0fSxcblx0XHRcdFx0XHR7XG5cdFx0XHRcdFx0XHR0ZXh0OiBcInByZWZlclVEUFwiLFxuXHRcdFx0XHRcdFx0dmFsdWU6IFwicHJlZmVyVURQXCJcblx0XHRcdFx0XHR9XG5cdFx0XHRcdF0sXG5cdFx0XHRcdGxvZ0xldmVsTGlzdDogW1xuXHRcdFx0XHRcdHtcblx0XHRcdFx0XHRcdHRleHQ6IFwidmVyYm9zZVwiLFxuXHRcdFx0XHRcdFx0dmFsdWU6IFwidmVyYm9zZVwiXG5cdFx0XHRcdFx0fSxcblx0XHRcdFx0XHR7XG5cdFx0XHRcdFx0XHR0ZXh0OiBcImluZm9cIixcblx0XHRcdFx0XHRcdHZhbHVlOiBcImluZm9cIlxuXHRcdFx0XHRcdH0sXG5cdFx0XHRcdFx0e1xuXHRcdFx0XHRcdFx0dGV4dDogXCJ3YXJuaW5nXCIsXG5cdFx0XHRcdFx0XHR2YWx1ZTogXCJ3YXJuaW5nXCJcblx0XHRcdFx0XHR9LFxuXHRcdFx0XHRcdHtcblx0XHRcdFx0XHRcdHRleHQ6IFwiZXJyb3JcIixcblx0XHRcdFx0XHRcdHZhbHVlOiBcImVycm9yXCJcblx0XHRcdFx0XHR9LFxuXHRcdFx0XHRcdHtcblx0XHRcdFx0XHRcdHRleHQ6IFwibm9uZVwiLFxuXHRcdFx0XHRcdFx0dmFsdWU6IFwibm9uZVwiXG5cdFx0XHRcdFx0fVxuXHRcdFx0XHRdLFxuXHRcdFx0XHRsaXN0OiBbXG5cdFx0XHRcdFx0e1xuXHRcdFx0XHRcdFx0dGV4dDogXCLmmK9cIixcblx0XHRcdFx0XHRcdHZhbHVlOiAxXG5cdFx0XHRcdFx0fSxcblx0XHRcdFx0XHR7XG5cdFx0XHRcdFx0XHR0ZXh0OiBcIuWQplwiLFxuXHRcdFx0XHRcdFx0dmFsdWU6IDBcblx0XHRcdFx0XHR9XG5cdFx0XHRcdF0sXG5cdFx0XHRcdGJ3ZVBvbGljeUxpc3Q6IFtcblx0XHRcdFx0XHR7XG5cdFx0XHRcdFx0XHR0ZXh0OiBcIlRDQ1wiLFxuXHRcdFx0XHRcdFx0dmFsdWU6IFwiVENDXCJcblx0XHRcdFx0XHR9LFxuXHRcdFx0XHRcdHtcblx0XHRcdFx0XHRcdHRleHQ6IFwiR0NDXCIsXG5cdFx0XHRcdFx0XHR2YWx1ZTogXCJHQ0NcIlxuXHRcdFx0XHRcdH1cblx0XHRcdFx0XVxuXHRcdFx0fVxuXHRcdH0sXG5cdFx0Y29tcHV0ZWQ6e1xuXHRcdFx0Li4ubWFwU3RhdGUoW1wiY2FwdHVyZUhlaWdodFwiLFwiY2FwdHVyZVdpZHRoXCIsXCJlbmNvZGVXaWR0aFwiLFwiZW5jb2RlSGVpZ2h0XCIsXCJ0b2tlblwiLFwicG9saWN5XCIsXCJsb2dMZXZlbFwiLFwic3RlcmVvXCIsXCJid2VQb2xpY3lcIixcImFsbG93QXVkaW9NaXhXaXRoT3RoZXJzXCIsXCJoV0NvZGVjRW5hYmxlZFwiLFwibWFpbnRhaW5SZXNvbHV0aW9uXCIsXCJmaWVsZFRyaWFsc1wiLFwiZW5jb2RlclF1YWxpdHlNb2RlXCIsXCJpc0FFQzNFbmFibGVkXCIsXCJhcHBJRFwiLFwicm9vbUlEXCIsXCJ1c2VyTmFtZVwiLFwibXVsdGlTdHJlYW1FbmFibGVcIl0pXG5cdFx0fSxcblx0XHRtZXRob2RzOntcblx0XHRcdC4uLm1hcE11dGF0aW9ucyhbXCJzZXRDYXB0dXJlSGVpZ2h0XCIsXCJzZXRDYXB0dXJlV2lkdGhcIixcInNldEVuY29kZVdpZHRoXCIsXCJzZXRFbmNvZGVIZWlnaHRcIixcInNldFRva2VuXCIsXCJzZXRQb2xpY3lcIixcInNldExvZ0xldmVsXCIsXCJzZXRTdGVyZW9cIixcInNldEJ3ZVBvbGljeVwiLFwic2V0QWxsb3dBdWRpb01peFdpdGhPdGhlcnNcIixcInNldEhXQ29kZWNFbmFibGVkXCIsXCJzZXRNYWludGFpblJlc29sdXRpb25cIixcInNldEZpZWxkVHJpYWxzXCIsXCJzZXRFbmNvZGVyUXVhbGl0eU1vZGVcIixcInNldElzQUVDM0VuYWJsZWRcIixcInNldE11bHRpU3RyZWFtRW5hYmxlXCJdKSxcblx0XHRcdC4uLm1hcEFjdGlvbnMoW1wic2V0QXBwSURcIixcInNldFJvb21JRFwiLFwic2V0VXNlck5hbWVcIl0pXG5cdFx0fVxuXHR9XG48L3NjcmlwdD5cbjxzdHlsZT5cblx0LndyYXAge1xuXHRcdGJvcmRlci1yYWRpdXM6IDVweDtcblx0XHRtYXJnaW46IDAgMjBweCAyMHB4O1xuXHRcdHBhZGRpbmc6IDEwcHggMDtcblx0fVxuPC9zdHlsZT5cblxuIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///77\n");
+eval("\n\nvar _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 16);\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = void 0;\nvar _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 63));\nvar _vuex = __webpack_require__(/*! vuex */ 78);\nfunction ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }\nfunction _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }\nvar _default = {\n  data: function data() {\n    return {\n      policyList: [{\n        text: 'forceUDP',\n        value: 'forceUDP'\n      }, {\n        text: 'forceTCP',\n        value: 'forceTCP'\n      }, {\n        text: 'preferUDP',\n        value: 'preferUDP'\n      }],\n      logLevelList: [{\n        text: 'verbose',\n        value: 'verbose'\n      }, {\n        text: 'info',\n        value: 'info'\n      }, {\n        text: 'warning',\n        value: 'warning'\n      }, {\n        text: 'error',\n        value: 'error'\n      }, {\n        text: 'none',\n        value: 'none'\n      }],\n      audioSceneList: [{\n        text: '默认音频场景',\n        value: 'DEFAULT'\n      }, {\n        text: '清晰语聊场景',\n        value: 'VOICE_CHAT'\n      }, {\n        text: '音质均衡场景',\n        value: 'SOUND_EQUALIZE'\n      }],\n      list: [{\n        text: '是',\n        value: 1\n      }, {\n        text: '否',\n        value: 0\n      }],\n      bwePolicyList: [{\n        text: 'TCC',\n        value: 'TCC'\n      }, {\n        text: 'GCC',\n        value: 'GCC'\n      }],\n      defaultAudioRouteList: [{\n        text: '扬声器',\n        value: 1\n      }, {\n        text: '听筒',\n        value: 0\n      }],\n      modeList: [{\n        text: '通信场景',\n        value: 'RTC'\n      }, {\n        text: '直播场景',\n        value: 'LIVE'\n      }],\n      roleList: [{\n        text: '主播角色',\n        value: 'BROADCASTER'\n      }, {\n        text: '观众角色',\n        value: 'AUDIENCE'\n      }]\n    };\n  },\n  computed: _objectSpread({}, (0, _vuex.mapState)(['captureHeight', 'captureWidth', 'encodeWidth', 'encodeHeight', 'token', 'policy', 'logLevel', 'stereo', 'bwePolicy', 'allowAudioMixWithOthers', 'hWCodecEnabled', 'maintainResolution', 'fieldTrials', 'encoderQualityMode', 'isAEC3Enabled', 'appID', 'roomID', 'userName', 'multiStreamEnable', 'audioScene', 'defaultAudioRouteToSpeakerphone', 'reconnectionTimeout', 'clientRole', 'clientMode'])),\n  methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)(['setCaptureHeight', 'setCaptureWidth', 'setEncodeWidth', 'setEncodeHeight', 'setToken', 'setPolicy', 'setLogLevel', 'setStereo', 'setBwePolicy', 'setAllowAudioMixWithOthers', 'setHWCodecEnabled', 'setMaintainResolution', 'setFieldTrials', 'setEncoderQualityMode', 'setIsAEC3Enabled', 'setMultiStreamEnable', 'setAudioScene', 'setDefaultAudioRouteToSpeakerphone', 'setReconnectionTimeout', 'setClientMode', 'setClientRole'])), (0, _vuex.mapActions)(['setAppID', 'setRoomID', 'setUserName']))\n};\nexports.default = _default;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVuaS1hcHA6Ly8vcGFnZXMvc2V0dGluZy9pbmRleC5udnVlIl0sIm5hbWVzIjpbImRhdGEiLCJwb2xpY3lMaXN0IiwidGV4dCIsInZhbHVlIiwibG9nTGV2ZWxMaXN0IiwiYXVkaW9TY2VuZUxpc3QiLCJsaXN0IiwiYndlUG9saWN5TGlzdCIsImRlZmF1bHRBdWRpb1JvdXRlTGlzdCIsIm1vZGVMaXN0Iiwicm9sZUxpc3QiLCJjb21wdXRlZCIsIm1ldGhvZHMiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBK05BO0FBQUE7QUFBQTtBQUFBLGVBQ0E7RUFDQUE7SUFDQTtNQUNBQyxhQUNBO1FBQ0FDO1FBQ0FDO01BQ0EsR0FDQTtRQUNBRDtRQUNBQztNQUNBLEdBQ0E7UUFDQUQ7UUFDQUM7TUFDQSxFQUNBO01BQ0FDLGVBQ0E7UUFDQUY7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0EsR0FDQTtRQUNBRDtRQUNBQztNQUNBLEdBQ0E7UUFDQUQ7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0EsRUFDQTtNQUNBRSxpQkFDQTtRQUNBSDtRQUNBQztNQUNBLEdBQ0E7UUFDQUQ7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0EsRUFDQTtNQUNBRyxPQUNBO1FBQ0FKO1FBQ0FDO01BQ0EsR0FDQTtRQUNBRDtRQUNBQztNQUNBLEVBQ0E7TUFDQUksZ0JBQ0E7UUFDQUw7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0EsRUFDQTtNQUNBSyx3QkFDQTtRQUNBTjtRQUNBQztNQUNBLEdBQ0E7UUFDQUQ7UUFDQUM7TUFDQSxFQUNBO01BQ0FNLFdBQ0E7UUFDQVA7UUFDQUM7TUFDQSxHQUNBO1FBQ0FEO1FBQ0FDO01BQ0EsRUFDQTtNQUNBTyxXQUNBO1FBQ0FSO1FBQ0FDO01BQ0EsR0FDQTtRQUNBRDtRQUNBQztNQUNBO0lBRUE7RUFDQTtFQUNBUSw0QkFDQSxxQkFDQSxpQkFDQSxnQkFDQSxlQUNBLGdCQUNBLFNBQ0EsVUFDQSxZQUNBLFVBQ0EsYUFDQSwyQkFDQSxrQkFDQSxzQkFDQSxlQUNBLHNCQUNBLGlCQUNBLFNBQ0EsVUFDQSxZQUNBLHFCQUNBLGNBQ0EsbUNBQ0EsdUJBQ0EsY0FDQSxhQUNBLEVBQ0E7RUFDQUMseUNBQ0EseUJBQ0Esb0JBQ0EsbUJBQ0Esa0JBQ0EsbUJBQ0EsWUFDQSxhQUNBLGVBQ0EsYUFDQSxnQkFDQSw4QkFDQSxxQkFDQSx5QkFDQSxrQkFDQSx5QkFDQSxvQkFDQSx3QkFDQSxpQkFDQSxzQ0FDQSwwQkFDQSxpQkFDQSxnQkFDQSxJQUNBO0FBRUE7QUFBQSIsImZpbGUiOiI3Ny5qcyIsInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cbiAgPHZpZXc+XG4gICAgPHZpZXcgY2xhc3M9XCJ3cmFwXCI+XG4gICAgICA8dmlld1xuICAgICAgICBzdHlsZT1cImZvbnQtc2l6ZTogNDB1cHg7IHBhZGRpbmctdG9wOiAyMHVweFwiXG4gICAgICAgIGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCJcbiAgICAgICAgPuWFqOWxgOiuvue9rjwvdmlld1xuICAgICAgPlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj5UT0tFTjwvdmlldz5cbiAgICAgIDx2aWV3XG4gICAgICAgID48dW5pLWVhc3lpbnB1dFxuICAgICAgICAgIDp2YWx1ZT1cInRva2VuXCJcbiAgICAgICAgICBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpSBUb2tlblwiXG4gICAgICAgICAgQGlucHV0PVwic2V0VG9rZW5cIlxuICAgICAgICAgIDptYXhsZW5ndGg9XCItMVwiXG4gICAgICAgID48L3VuaS1lYXN5aW5wdXRcbiAgICAgID48L3ZpZXc+XG4gICAgICA8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPueUqOaIt+WQjTwvdmlldz5cbiAgICAgIDx2aWV3XG4gICAgICAgID48dW5pLWVhc3lpbnB1dFxuICAgICAgICAgIDp2YWx1ZT1cInVzZXJOYW1lXCJcbiAgICAgICAgICBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpeeUqOaIt+WQjVwiXG4gICAgICAgICAgQGlucHV0PVwic2V0VXNlck5hbWVcIlxuICAgICAgICAgIDptYXhsZW5ndGg9XCItMVwiXG4gICAgICAgID48L3VuaS1lYXN5aW5wdXRcbiAgICAgID48L3ZpZXc+XG4gICAgICA8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuaIv+mXtOWPtzwvdmlldz5cbiAgICAgIDx2aWV3XG4gICAgICAgID48dW5pLWVhc3lpbnB1dFxuICAgICAgICAgIDp2YWx1ZT1cInJvb21JRFwiXG4gICAgICAgICAgcGxhY2Vob2xkZXI9XCLor7fovpPlhaXmiL/pl7Tlj7dcIlxuICAgICAgICAgIEBpbnB1dD1cInNldFJvb21JRFwiXG4gICAgICAgICAgOm1heGxlbmd0aD1cIi0xXCJcbiAgICAgICAgPjwvdW5pLWVhc3lpbnB1dFxuICAgICAgPjwvdmlldz5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+6K+36L6T5YWlYXBwSUQ8L3ZpZXc+XG4gICAgICA8dmlld1xuICAgICAgICA+PHVuaS1lYXN5aW5wdXRcbiAgICAgICAgICA6dmFsdWU9XCJhcHBJRFwiXG4gICAgICAgICAgcGxhY2Vob2xkZXI9XCLor7fovpPlhaUgQXBwSURcIlxuICAgICAgICAgIEBpbnB1dD1cInNldEFwcElEXCJcbiAgICAgICAgICA6bWF4bGVuZ3RoPVwiLTFcIlxuICAgICAgICA+PC91bmktZWFzeWlucHV0XG4gICAgICA+PC92aWV3PlxuICAgICAgPHZpZXdcbiAgICAgICAgc3R5bGU9XCJmb250LXNpemU6IDQwdXB4OyBwYWRkaW5nLXRvcDogMjB1cHhcIlxuICAgICAgICBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiXG4gICAgICAgID5SVEMg6K6+572uPC92aWV3XG4gICAgICA+XG4gICAgICA8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPumHjei/nui2heaXtuaXtumXtO+8iOWNleS9jW1z77yJPC92aWV3PlxuICAgICAgPHZpZXdcbiAgICAgICAgPjx1bmktZWFzeWlucHV0XG4gICAgICAgICAgOnZhbHVlPVwicmVjb25uZWN0aW9uVGltZW91dFwiXG4gICAgICAgICAgcGxhY2Vob2xkZXI9XCLor7fovpPlhaXph43ov57ml7bpl7RcIlxuICAgICAgICAgIEBpbnB1dD1cInNldFJlY29ubmVjdGlvblRpbWVvdXRcIlxuICAgICAgICAgIDptYXhsZW5ndGg9XCItMVwiXG4gICAgICAgID48L3VuaS1lYXN5aW5wdXRcbiAgICAgID48L3ZpZXc+XG4gICAgICA8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuS8oOi+k+WNj+iurjwvdmlldz5cbiAgICAgIDx1bmktZGF0YS1jaGVja2JveFxuICAgICAgICBAY2hhbmdlPVwic2V0UG9saWN5XCJcbiAgICAgICAgOm11bHRpcGxlPVwiZmFsc2VcIlxuICAgICAgICA6dmFsdWU9XCJwb2xpY3lcIlxuICAgICAgICA6bG9jYWxkYXRhPVwicG9saWN5TGlzdFwiXG4gICAgICA+XG4gICAgICA8L3VuaS1kYXRhLWNoZWNrYm94PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7ml6Xlv5fnrYnnuqc8L3ZpZXc+XG4gICAgICA8dW5pLWRhdGEtY2hlY2tib3hcbiAgICAgICAgQGNoYW5nZT1cInNldExvZ0xldmVsXCJcbiAgICAgICAgOm11bHRpcGxlPVwiZmFsc2VcIlxuICAgICAgICA6dmFsdWU9XCJsb2dMZXZlbFwiXG4gICAgICAgIDpsb2NhbGRhdGE9XCJsb2dMZXZlbExpc3RcIlxuICAgICAgPlxuICAgICAgPC91bmktZGF0YS1jaGVja2JveD5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+5byA5ZCv56uL5L2T5aOwIC0gaW9zPC92aWV3PlxuICAgICAgPHVuaS1kYXRhLWNoZWNrYm94IEBjaGFuZ2U9XCJzZXRTdGVyZW9cIiA6bXVsdGlwbGU9XCJmYWxzZVwiIDp2YWx1ZT1cInN0ZXJlb1wiIDpsb2NhbGRhdGE9XCJsaXN0XCI+XG4gICAgICA8L3VuaS1kYXRhLWNoZWNrYm94PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7luKblrr3or4TkvLDnrZbnlaUgLSBpb3M8L3ZpZXc+XG4gICAgICA8dW5pLWRhdGEtY2hlY2tib3hcbiAgICAgICAgQGNoYW5nZT1cInNldEJ3ZVBvbGljeVwiXG4gICAgICAgIDptdWx0aXBsZT1cImZhbHNlXCJcbiAgICAgICAgOnZhbHVlPVwiYndlUG9saWN5XCJcbiAgICAgICAgOmxvY2FsZGF0YT1cImJ3ZVBvbGljeUxpc3RcIlxuICAgICAgPlxuICAgICAgPC91bmktZGF0YS1jaGVja2JveD5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+5piv5ZCm5YWB6K645ZKM5YW25a6D6Z+z6aKR5LiA6LW35pKt5pS+IC0gaW9zPC92aWV3PlxuICAgICAgPHVuaS1kYXRhLWNoZWNrYm94XG4gICAgICAgIEBjaGFuZ2U9XCJzZXRBbGxvd0F1ZGlvTWl4V2l0aE90aGVyc1wiXG4gICAgICAgIDptdWx0aXBsZT1cImZhbHNlXCJcbiAgICAgICAgOnZhbHVlPVwiYWxsb3dBdWRpb01peFdpdGhPdGhlcnNcIlxuICAgICAgICA6bG9jYWxkYXRhPVwibGlzdFwiXG4gICAgICA+XG4gICAgICA8L3VuaS1kYXRhLWNoZWNrYm94PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7lvIDlkK/noaznvJYgLSBBbmRyb2lkPC92aWV3PlxuICAgICAgPHVuaS1kYXRhLWNoZWNrYm94XG4gICAgICAgIEBjaGFuZ2U9XCJzZXRIV0NvZGVjRW5hYmxlZFwiXG4gICAgICAgIDptdWx0aXBsZT1cImZhbHNlXCJcbiAgICAgICAgOnZhbHVlPVwiaFdDb2RlY0VuYWJsZWRcIlxuICAgICAgICA6bG9jYWxkYXRhPVwibGlzdFwiXG4gICAgICA+XG4gICAgICA8L3VuaS1kYXRhLWNoZWNrYm94PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7lm7rlrprliIbovqjnjocgLSBBbmRyb2lkPC92aWV3PlxuICAgICAgPHVuaS1kYXRhLWNoZWNrYm94XG4gICAgICAgIEBjaGFuZ2U9XCJzZXRNYWludGFpblJlc29sdXRpb25cIlxuICAgICAgICA6bXVsdGlwbGU9XCJmYWxzZVwiXG4gICAgICAgIDp2YWx1ZT1cIm1haW50YWluUmVzb2x1dGlvblwiXG4gICAgICAgIDpsb2NhbGRhdGE9XCJsaXN0XCJcbiAgICAgID5cbiAgICAgIDwvdW5pLWRhdGEtY2hlY2tib3g+XG4gICAgICA8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuaJqeWxlemFjee9riAtIEFuZHJvaWQ8L3ZpZXc+XG4gICAgICA8dmlld1xuICAgICAgICA+PHVuaS1lYXN5aW5wdXRcbiAgICAgICAgICBAaW5wdXQ9XCJzZXRGaWVsZFRyaWFsc1wiXG4gICAgICAgICAgOnZhbHVlPVwiZmllbGRUcmlhbHNcIlxuICAgICAgICAgIHBsYWNlaG9sZGVyPVwi6K+36L6T5YWl5omp5bGV6YWN572uXCJcbiAgICAgICAgPjwvdW5pLWVhc3lpbnB1dFxuICAgICAgPjwvdmlldz5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+6LSo6YeP5qih5byPIC0gQW5kcm9pZDwvdmlldz5cbiAgICAgIDx1bmktZGF0YS1jaGVja2JveFxuICAgICAgICBAY2hhbmdlPVwic2V0RW5jb2RlclF1YWxpdHlNb2RlXCJcbiAgICAgICAgOm11bHRpcGxlPVwiZmFsc2VcIlxuICAgICAgICA6dmFsdWU9XCJlbmNvZGVyUXVhbGl0eU1vZGVcIlxuICAgICAgICA6bG9jYWxkYXRhPVwibGlzdFwiXG4gICAgICA+XG4gICAgICA8L3VuaS1kYXRhLWNoZWNrYm94PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj5BRUMzIC0gQW5kcm9pZDwvdmlldz5cbiAgICAgIDx1bmktZGF0YS1jaGVja2JveFxuICAgICAgICBAY2hhbmdlPVwic2V0SXNBRUMzRW5hYmxlZFwiXG4gICAgICAgIDptdWx0aXBsZT1cImZhbHNlXCJcbiAgICAgICAgOnZhbHVlPVwiaXNBRUMzRW5hYmxlZFwiXG4gICAgICAgIDpsb2NhbGRhdGE9XCJsaXN0XCJcbiAgICAgID5cbiAgICAgIDwvdW5pLWRhdGEtY2hlY2tib3g+XG4gICAgICA8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPumfs+mikeWcuuaZrzwvdmlldz5cbiAgICAgIDx1bmktZGF0YS1jaGVja2JveFxuICAgICAgICBAY2hhbmdlPVwic2V0QXVkaW9TY2VuZVwiXG4gICAgICAgIDptdWx0aXBsZT1cImZhbHNlXCJcbiAgICAgICAgOnZhbHVlPVwiYXVkaW9TY2VuZVwiXG4gICAgICAgIDpsb2NhbGRhdGE9XCJhdWRpb1NjZW5lTGlzdFwiXG4gICAgICA+XG4gICAgICA8L3VuaS1kYXRhLWNoZWNrYm94PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7pu5jorqTpn7PpopHot6/nlLE8L3ZpZXc+XG4gICAgICA8dW5pLWRhdGEtY2hlY2tib3hcbiAgICAgICAgQGNoYW5nZT1cInNldERlZmF1bHRBdWRpb1JvdXRlVG9TcGVha2VycGhvbmVcIlxuICAgICAgICA6bXVsdGlwbGU9XCJmYWxzZVwiXG4gICAgICAgIDp2YWx1ZT1cImRlZmF1bHRBdWRpb1JvdXRlVG9TcGVha2VycGhvbmVcIlxuICAgICAgICA6bG9jYWxkYXRhPVwiZGVmYXVsdEF1ZGlvUm91dGVMaXN0XCJcbiAgICAgID5cbiAgICAgIDwvdW5pLWRhdGEtY2hlY2tib3g+XG4gICAgICA8dmlld1xuICAgICAgICBzdHlsZT1cImZvbnQtc2l6ZTogNDB1cHg7IHBhZGRpbmctdG9wOiAyMHVweFwiXG4gICAgICAgIGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCJcbiAgICAgICAgPkNsaWVudCDorr7nva48L3ZpZXdcbiAgICAgID5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+5L2/55So5Zy65pmvPC92aWV3PlxuICAgICAgPHVuaS1kYXRhLWNoZWNrYm94XG4gICAgICAgIEBjaGFuZ2U9XCJzZXRDbGllbnRNb2RlXCJcbiAgICAgICAgOm11bHRpcGxlPVwiZmFsc2VcIlxuICAgICAgICA6dmFsdWU9XCJjbGllbnRNb2RlXCJcbiAgICAgICAgOmxvY2FsZGF0YT1cIm1vZGVMaXN0XCJcbiAgICAgID5cbiAgICAgIDwvdW5pLWRhdGEtY2hlY2tib3g+XG4gICAgICA8dmlldyBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiPuinkuiJsuexu+Weizwvdmlldz5cbiAgICAgIDx1bmktZGF0YS1jaGVja2JveFxuICAgICAgICBAY2hhbmdlPVwic2V0Q2xpZW50Um9sZVwiXG4gICAgICAgIDptdWx0aXBsZT1cImZhbHNlXCJcbiAgICAgICAgOnZhbHVlPVwiY2xpZW50Um9sZVwiXG4gICAgICAgIDpsb2NhbGRhdGE9XCJyb2xlTGlzdFwiXG4gICAgICA+XG4gICAgICA8L3VuaS1kYXRhLWNoZWNrYm94PlxuICAgICAgPHZpZXdcbiAgICAgICAgc3R5bGU9XCJmb250LXNpemU6IDQwdXB4OyBwYWRkaW5nLXRvcDogMjB1cHhcIlxuICAgICAgICBjbGFzcz1cInRpdGxlIG1hcmdpbi10b3Atc20gbWFyZ2luLWJvdHRvbS1zbVwiXG4gICAgICAgID5UcmFjayDorr7nva48L3ZpZXdcbiAgICAgID5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+6KeG6aKRIHRyYWNrIOaYr+WQpuW8gOWQr+Wkp+Wwj+a1gTwvdmlldz5cbiAgICAgIDx1bmktZGF0YS1jaGVja2JveFxuICAgICAgICBAY2hhbmdlPVwic2V0TXVsdGlTdHJlYW1FbmFibGVcIlxuICAgICAgICA6bXVsdGlwbGU9XCJmYWxzZVwiXG4gICAgICAgIDp2YWx1ZT1cIm11bHRpU3RyZWFtRW5hYmxlXCJcbiAgICAgICAgOmxvY2FsZGF0YT1cImxpc3RcIlxuICAgICAgPlxuICAgICAgPC91bmktZGF0YS1jaGVja2JveD5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+57yW56CB5a695bqmPC92aWV3PlxuICAgICAgPHZpZXdcbiAgICAgICAgPjx1bmktZWFzeWlucHV0XG4gICAgICAgICAgOnZhbHVlPVwiZW5jb2RlV2lkdGhcIlxuICAgICAgICAgIHBsYWNlaG9sZGVyPVwi6K+36L6T5YWl57yW56CB5a695bqmXCJcbiAgICAgICAgICBAaW5wdXQ9XCJzZXRFbmNvZGVXaWR0aFwiXG4gICAgICAgICAgOm1heGxlbmd0aD1cIi0xXCJcbiAgICAgICAgPjwvdW5pLWVhc3lpbnB1dFxuICAgICAgPjwvdmlldz5cbiAgICAgIDx2aWV3IGNsYXNzPVwidGl0bGUgbWFyZ2luLXRvcC1zbSBtYXJnaW4tYm90dG9tLXNtXCI+57yW56CB6auY5bqmPC92aWV3PlxuICAgICAgPHZpZXdcbiAgICAgICAgPjx1bmktZWFzeWlucHV0XG4gICAgICAgICAgOnZhbHVlPVwiZW5jb2RlSGVpZ2h0XCJcbiAgICAgICAgICBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpee8lueggemrmOW6plwiXG4gICAgICAgICAgQGlucHV0PVwic2V0RW5jb2RlSGVpZ2h0XCJcbiAgICAgICAgICA6bWF4bGVuZ3RoPVwiLTFcIlxuICAgICAgICA+PC91bmktZWFzeWlucHV0XG4gICAgICA+PC92aWV3PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7ph4fpm4blrr3luqYgLSBBbmRyb2lkPC92aWV3PlxuICAgICAgPHZpZXdcbiAgICAgICAgPjx1bmktZWFzeWlucHV0XG4gICAgICAgICAgOnZhbHVlPVwiY2FwdHVyZVdpZHRoXCJcbiAgICAgICAgICBwbGFjZWhvbGRlcj1cIuivt+i+k+WFpemHh+mbhuWuveW6plwiXG4gICAgICAgICAgQGlucHV0PVwic2V0Q2FwdHVyZVdpZHRoXCJcbiAgICAgICAgICA6bWF4bGVuZ3RoPVwiLTFcIlxuICAgICAgICA+PC91bmktZWFzeWlucHV0XG4gICAgICA+PC92aWV3PlxuICAgICAgPHZpZXcgY2xhc3M9XCJ0aXRsZSBtYXJnaW4tdG9wLXNtIG1hcmdpbi1ib3R0b20tc21cIj7ph4fpm4bpq5jluqYgLSBBbmRyb2lkPC92aWV3PlxuICAgICAgPHZpZXdcbiAgICAgICAgPjx1bmktZWFzeWlucHV0XG4gICAgICAgICAgOnZhbHVlPVwiY2FwdHVyZUhlaWdodFwiXG4gICAgICAgICAgcGxhY2Vob2xkZXI9XCLor7fovpPlhaXph4fpm4bpq5jluqZcIlxuICAgICAgICAgIEBpbnB1dD1cInNldENhcHR1cmVIZWlnaHRcIlxuICAgICAgICAgIDptYXhsZW5ndGg9XCItMVwiXG4gICAgICAgID48L3VuaS1lYXN5aW5wdXRcbiAgICAgID48L3ZpZXc+XG4gICAgPC92aWV3PlxuICA8L3ZpZXc+XG48L3RlbXBsYXRlPlxuPHNjcmlwdD5cbmltcG9ydCB7IG1hcFN0YXRlLCBtYXBNdXRhdGlvbnMsIG1hcEFjdGlvbnMgfSBmcm9tICd2dWV4J1xuZXhwb3J0IGRlZmF1bHQge1xuICBkYXRhKCkge1xuICAgIHJldHVybiB7XG4gICAgICBwb2xpY3lMaXN0OiBbXG4gICAgICAgIHtcbiAgICAgICAgICB0ZXh0OiAnZm9yY2VVRFAnLFxuICAgICAgICAgIHZhbHVlOiAnZm9yY2VVRFAnLFxuICAgICAgICB9LFxuICAgICAgICB7XG4gICAgICAgICAgdGV4dDogJ2ZvcmNlVENQJyxcbiAgICAgICAgICB2YWx1ZTogJ2ZvcmNlVENQJyxcbiAgICAgICAgfSxcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICdwcmVmZXJVRFAnLFxuICAgICAgICAgIHZhbHVlOiAncHJlZmVyVURQJyxcbiAgICAgICAgfSxcbiAgICAgIF0sXG4gICAgICBsb2dMZXZlbExpc3Q6IFtcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICd2ZXJib3NlJyxcbiAgICAgICAgICB2YWx1ZTogJ3ZlcmJvc2UnLFxuICAgICAgICB9LFxuICAgICAgICB7XG4gICAgICAgICAgdGV4dDogJ2luZm8nLFxuICAgICAgICAgIHZhbHVlOiAnaW5mbycsXG4gICAgICAgIH0sXG4gICAgICAgIHtcbiAgICAgICAgICB0ZXh0OiAnd2FybmluZycsXG4gICAgICAgICAgdmFsdWU6ICd3YXJuaW5nJyxcbiAgICAgICAgfSxcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICdlcnJvcicsXG4gICAgICAgICAgdmFsdWU6ICdlcnJvcicsXG4gICAgICAgIH0sXG4gICAgICAgIHtcbiAgICAgICAgICB0ZXh0OiAnbm9uZScsXG4gICAgICAgICAgdmFsdWU6ICdub25lJyxcbiAgICAgICAgfSxcbiAgICAgIF0sXG4gICAgICBhdWRpb1NjZW5lTGlzdDogW1xuICAgICAgICB7XG4gICAgICAgICAgdGV4dDogJ+m7mOiupOmfs+mikeWcuuaZrycsXG4gICAgICAgICAgdmFsdWU6ICdERUZBVUxUJyxcbiAgICAgICAgfSxcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICfmuIXmmbDor63ogYrlnLrmma8nLFxuICAgICAgICAgIHZhbHVlOiAnVk9JQ0VfQ0hBVCcsXG4gICAgICAgIH0sXG4gICAgICAgIHtcbiAgICAgICAgICB0ZXh0OiAn6Z+z6LSo5Z2H6KGh5Zy65pmvJyxcbiAgICAgICAgICB2YWx1ZTogJ1NPVU5EX0VRVUFMSVpFJyxcbiAgICAgICAgfSxcbiAgICAgIF0sXG4gICAgICBsaXN0OiBbXG4gICAgICAgIHtcbiAgICAgICAgICB0ZXh0OiAn5pivJyxcbiAgICAgICAgICB2YWx1ZTogMSxcbiAgICAgICAgfSxcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICflkKYnLFxuICAgICAgICAgIHZhbHVlOiAwLFxuICAgICAgICB9LFxuICAgICAgXSxcbiAgICAgIGJ3ZVBvbGljeUxpc3Q6IFtcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICdUQ0MnLFxuICAgICAgICAgIHZhbHVlOiAnVENDJyxcbiAgICAgICAgfSxcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICdHQ0MnLFxuICAgICAgICAgIHZhbHVlOiAnR0NDJyxcbiAgICAgICAgfSxcbiAgICAgIF0sXG4gICAgICBkZWZhdWx0QXVkaW9Sb3V0ZUxpc3Q6IFtcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICfmiazlo7DlmagnLFxuICAgICAgICAgIHZhbHVlOiAxLFxuICAgICAgICB9LFxuICAgICAgICB7XG4gICAgICAgICAgdGV4dDogJ+WQrOetkicsXG4gICAgICAgICAgdmFsdWU6IDAsXG4gICAgICAgIH0sXG4gICAgICBdLFxuICAgICAgbW9kZUxpc3Q6IFtcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICfpgJrkv6HlnLrmma8nLFxuICAgICAgICAgIHZhbHVlOiAnUlRDJyxcbiAgICAgICAgfSxcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICfnm7Tmkq3lnLrmma8nLFxuICAgICAgICAgIHZhbHVlOiAnTElWRScsXG4gICAgICAgIH0sXG4gICAgICBdLFxuICAgICAgcm9sZUxpc3Q6IFtcbiAgICAgICAge1xuICAgICAgICAgIHRleHQ6ICfkuLvmkq3op5LoibInLFxuICAgICAgICAgIHZhbHVlOiAnQlJPQURDQVNURVInLFxuICAgICAgICB9LFxuICAgICAgICB7XG4gICAgICAgICAgdGV4dDogJ+inguS8l+inkuiJsicsXG4gICAgICAgICAgdmFsdWU6ICdBVURJRU5DRScsXG4gICAgICAgIH0sXG4gICAgICBdLFxuICAgIH1cbiAgfSxcbiAgY29tcHV0ZWQ6IHtcbiAgICAuLi5tYXBTdGF0ZShbXG4gICAgICAnY2FwdHVyZUhlaWdodCcsXG4gICAgICAnY2FwdHVyZVdpZHRoJyxcbiAgICAgICdlbmNvZGVXaWR0aCcsXG4gICAgICAnZW5jb2RlSGVpZ2h0JyxcbiAgICAgICd0b2tlbicsXG4gICAgICAncG9saWN5JyxcbiAgICAgICdsb2dMZXZlbCcsXG4gICAgICAnc3RlcmVvJyxcbiAgICAgICdid2VQb2xpY3knLFxuICAgICAgJ2FsbG93QXVkaW9NaXhXaXRoT3RoZXJzJyxcbiAgICAgICdoV0NvZGVjRW5hYmxlZCcsXG4gICAgICAnbWFpbnRhaW5SZXNvbHV0aW9uJyxcbiAgICAgICdmaWVsZFRyaWFscycsXG4gICAgICAnZW5jb2RlclF1YWxpdHlNb2RlJyxcbiAgICAgICdpc0FFQzNFbmFibGVkJyxcbiAgICAgICdhcHBJRCcsXG4gICAgICAncm9vbUlEJyxcbiAgICAgICd1c2VyTmFtZScsXG4gICAgICAnbXVsdGlTdHJlYW1FbmFibGUnLFxuICAgICAgJ2F1ZGlvU2NlbmUnLFxuICAgICAgJ2RlZmF1bHRBdWRpb1JvdXRlVG9TcGVha2VycGhvbmUnLFxuICAgICAgJ3JlY29ubmVjdGlvblRpbWVvdXQnLFxuICAgICAgJ2NsaWVudFJvbGUnLFxuICAgICAgJ2NsaWVudE1vZGUnLFxuICAgIF0pLFxuICB9LFxuICBtZXRob2RzOiB7XG4gICAgLi4ubWFwTXV0YXRpb25zKFtcbiAgICAgICdzZXRDYXB0dXJlSGVpZ2h0JyxcbiAgICAgICdzZXRDYXB0dXJlV2lkdGgnLFxuICAgICAgJ3NldEVuY29kZVdpZHRoJyxcbiAgICAgICdzZXRFbmNvZGVIZWlnaHQnLFxuICAgICAgJ3NldFRva2VuJyxcbiAgICAgICdzZXRQb2xpY3knLFxuICAgICAgJ3NldExvZ0xldmVsJyxcbiAgICAgICdzZXRTdGVyZW8nLFxuICAgICAgJ3NldEJ3ZVBvbGljeScsXG4gICAgICAnc2V0QWxsb3dBdWRpb01peFdpdGhPdGhlcnMnLFxuICAgICAgJ3NldEhXQ29kZWNFbmFibGVkJyxcbiAgICAgICdzZXRNYWludGFpblJlc29sdXRpb24nLFxuICAgICAgJ3NldEZpZWxkVHJpYWxzJyxcbiAgICAgICdzZXRFbmNvZGVyUXVhbGl0eU1vZGUnLFxuICAgICAgJ3NldElzQUVDM0VuYWJsZWQnLFxuICAgICAgJ3NldE11bHRpU3RyZWFtRW5hYmxlJyxcbiAgICAgICdzZXRBdWRpb1NjZW5lJyxcbiAgICAgICdzZXREZWZhdWx0QXVkaW9Sb3V0ZVRvU3BlYWtlcnBob25lJyxcbiAgICAgICdzZXRSZWNvbm5lY3Rpb25UaW1lb3V0JyxcbiAgICAgICdzZXRDbGllbnRNb2RlJyxcbiAgICAgICdzZXRDbGllbnRSb2xlJyxcbiAgICBdKSxcbiAgICAuLi5tYXBBY3Rpb25zKFsnc2V0QXBwSUQnLCAnc2V0Um9vbUlEJywgJ3NldFVzZXJOYW1lJ10pLFxuICB9LFxufVxuPC9zY3JpcHQ+XG48c3R5bGU+XG4ud3JhcCB7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgbWFyZ2luOiAwIDIwcHggMjBweDtcbiAgcGFkZGluZzogMTBweCAwO1xufVxuPC9zdHlsZT5cbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///77\n");
 
 /***/ }),
 /* 78 */

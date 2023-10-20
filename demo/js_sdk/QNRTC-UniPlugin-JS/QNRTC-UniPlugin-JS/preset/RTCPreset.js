@@ -12,7 +12,10 @@ exports.QNRTCConfigurationPreset = {
     maintainResolution: false,
     fieldTrials: '',
     encoderQualityMode: false,
-    isAEC3Enabled: true
+    isAEC3Enabled: true,
+    audioScene: RTCEnum_1.QNAudioScene.DEFAULT,
+    defaultAudioRouteToSpeakerphone: true,
+    reconnectionTimeout: 30000
 };
 exports.QNMicrophoneAudioTrackConfigPreset = {
     tag: '',

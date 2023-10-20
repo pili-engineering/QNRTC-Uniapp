@@ -20,7 +20,7 @@ var QNAudioEffect = (function () {
         QNRtcAudioEffect.setStartPosition(this.effectID, position);
     };
     QNAudioEffect.prototype.getStartPosition = function () {
-        return QNRtcAudioEffect.getStartPosition();
+        return QNRtcAudioEffect.getStartPosition(this.effectID);
     };
     QNAudioEffect.prototype.setLoopCount = function (loopCount) {
         QNRtcAudioEffect.setLoopCount(this.effectID, loopCount);

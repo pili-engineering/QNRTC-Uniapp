@@ -1,0 +1,285 @@
+<template>
+  <view class="wrap">
+    <uni-popup ref="success" type="message" background-color="#fff">
+      <uni-popup-message type="success" :message="successMessage" :duration="1000"></uni-popup-message>
+    </uni-popup>
+    <uni-popup ref="error" type="message" background-color="#fff">
+      <uni-popup-message type="error" :message="errorMessage" :duration="1000"></uni-popup-message>
+    </uni-popup>
+    <view>
+      <view class="flex-column">
+		  <u--input placeholder="设置音乐音量" border="bottom" v-model="musicVolume">
+		  	<template slot="prefix">
+		  		<u-tag type="primary" text="音量"></u-tag>
+		  	</template>
+		  	<template slot="suffix">
+		  		<u-button size="small" type="success" text="修改" @click="handleSetMusicVolume"></u-button>
+		  	</template>
+		  </u--input>
+		  <u--input placeholder="设置起始位置" border="bottom" v-model="startPosition">
+		  	<template slot="prefix">
+		  		<u-tag type="primary" text="位置"></u-tag>
+		  	</template>
+		  	<template slot="suffix">
+		  		<u-button size="small" type="success" text="修改" @click="handleSetStartPosition"></u-button>
+		  	</template>
+		  </u--input>
+		  <u--input class="margin-bottom-sm" placeholder="设置混音地址" border="bottom" v-model="audioUrl">
+		  	<template slot="prefix">
+		  		<u-tag type="primary" text="文件路径"></u-tag>
+		  	</template>
+		  </u--input>
+		  <u--text class="margin-top-sm" type="info" :text="`视频总时长：${ duration } 秒，当前进度：${currentPosition } 秒`"></u--text>
+        <u-slider
+		  class="margin-bottom-sm"
+          block-size="12"
+          :value="currentTime"
+          @changing="handleSliderChanging"
+          @change="handleSliderChange"
+          :max="duration"
+          step="1"
+        ></u-slider>
+      </view>
+      <u-button
+	    class="margin-bottom-sm"
+        :type="isPublishEnabled ? 'error' : 'success'"
+        @click="handleSetPublishEnabled"
+		:text=" isPublishEnabled ? '关闭推送' : '开启推送' "
+      >
+      </u-button>
+      <u-button class="margin-bottom-sm" type="success" @click="handleStartAudioMixer" text="开启混音"></u-button>
+      <u-button class="margin-bottom-sm" type="error" @click="handleStoptAudioMixer" text="停止混音"></u-button>
+      <u-button class="margin-bottom-sm" type="warning" @click="handleResumeAudioMixer" text="恢复混音"></u-button>
+      <u-button class="margin-bottom-sm" type="error" @click="handlePauseAudioMixer" text="暂停混音"></u-button>
+	  <u--text class="margin-bottom-sm" type="info" :text="`起始位置：${mixerAttributes.startPosition}`"></u--text>
+	  <u--text class="margin-bottom-sm" type="info" :text="`音乐音量：${mixerAttributes.musicVolume}`"></u--text>
+	  <u--text class="margin-bottom-sm" type="info" :text="`混音位置：${mixerAttributes.currentPosition}`"></u--text>
+	  <u--text class="margin-bottom-sm" type="info" :text="`推送远端：${mixerAttributes.publishEnabled}`"></u--text>
+    </view>
+  </view>
+</template>
+
+<script>
+import { QNRTC } from '@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js'
+import { mapState } from 'vuex'
+export default {
+  computed: {
+    ...mapState([
+      'platform',
+      'token',
+      'policy',
+      'logLevel',
+      'stereo',
+      'bwePolicy',
+      'allowAudioMixWithOthers',
+      'hWCodecEnabled',
+      'maintainResolution',
+      'fieldTrials',
+      'encoderQualityMode',
+      'isAEC3Enabled',
+      'audioScene',
+      'defaultAudioRouteToSpeakerphone',
+      'reconnectionTimeout',
+    ]),
+  },
+  data() {
+    return {
+      // track 参数
+      remoteAudioTracks: {},
+      microphoneAudioTrack: {},
+      client: null,
+      currentTime: 0,
+      audioMusicMixer: null,
+      audioUrl: 'https://docs.qnsdk.com/eva_edm.mp3',
+      musicVolume: 1,
+      microphoneVolume: 100,
+      duration: 0,
+      currentPosition: 0,
+      startPosition: 0,
+      timer: null,
+      isPublishEnabled: true,
+      successMessage: '',
+      errorMessage: '',
+      mixerAttributes: {
+        publishEnabled: false,
+        currentPosition: 0,
+        musicVolume: 0,
+        startPosition: 0,
+      },
+    }
+  },
+  onBackPress() {
+    this.client.leave()
+    QNRTC.deinit()
+  },
+  onUnload() {
+    this.client.leave()
+    QNRTC.deinit()
+  },
+  onLoad() {
+    this.handleJoinRoom()
+  },
+  methods: {
+    // 开始混音
+    handleStartAudioMixer() {
+      this.audioMusicMixer.start()
+    },
+    // 停止混音
+    handleStoptAudioMixer() {
+      this.audioMusicMixer.stop()
+    },
+    // 恢复混音
+    handleResumeAudioMixer() {
+      this.audioMusicMixer.resume()
+    },
+    // 暂停混音
+    handlePauseAudioMixer() {
+      this.audioMusicMixer.pause()
+    },
+    // 创建混音
+    handleCreateAudioMixer() {
+      this.audioMusicMixer = this.microphoneAudioTrack.createAudioMusicMixer(this.audioUrl)
+      this.audioMusicMixer.on('onStateChanged', (params) => {
+        this.successMessage = params.state
+        if (params.state === 'MIXING') {
+          this.duration = ~~this.audioMusicMixer.getDuration(this.audioUrl) / 1000
+          this.timer = setInterval(() => {
+            this.mixerAttributes.publishEnabled = this.audioMusicMixer.isPublishEnabled()
+            this.mixerAttributes.currentPosition = this.audioMusicMixer.getCurrentPosition()
+            this.mixerAttributes.musicVolume = this.audioMusicMixer.getMusicVolume()
+            this.mixerAttributes.startPosition = this.audioMusicMixer.getStartPosition()
+          }, 1000)
+        }
+        this.$refs.popup.open()
+      })
+      this.audioMusicMixer.on('onMixing', (params) => {
+        this.currentPosition = ~~(params.position / 1000)
+        this.currentTime = ~~(params.position / 1000)
+      })
+      this.audioMusicMixer.on('onError', (params) => {
+        this.errorMessage = `错误信息：${params.message},错误码：${params.code}`
+        this.$refs.error.open()
+      })
+    },
+    // 修改音乐音量
+    handleSetMusicVolume(event) {
+      this.audioMusicMixer.setMusicVolume(this.musicVolume)
+    },
+    // 修改混音麦克风音量
+    handleSetMicrophone(event) {
+      this.microphoneVolume = event.detail.value
+      this.audioMusicMixer.setMixingVolume(this.microphoneVolume / 100, this.musicVolume / 100)
+    },
+    // 修改混音音乐音量
+    handleSetMusic(event) {
+      this.musicVolume = event.detail.value
+      this.audioMusicMixer.setMixingVolume(this.microphoneVolume / 100, this.musicVolume / 100)
+    },
+    // 拖动进度
+    handleSliderChanging(event) {
+      this.audioMusicMixer.pause()
+    },
+    // 设置是否推送远端音乐
+    handleSetPublishEnabled() {
+      this.audioMusicMixer.setPublishEnabled(!this.isPublishEnabled)
+      this.isPublishEnabled = !this.isPublishEnabled
+    },
+	// 设置音乐播放时间
+    handleSetStartPosition() {
+      this.audioMusicMixer.setStartPosition(this.startPosition)
+    },
+    handleSliderChange(event) {
+      this.audioMusicMixer.seekTo(event.detail.value * 1000)
+      this.audioMusicMixer.resume()
+    },
+    async handleJoinRoom() {
+      QNRTC.configRTC({
+        policy: this.policy,
+        logLevel: this.logLevel,
+        stereo: this.stereo === 1,
+        bwePolicy: this.bwePolicy,
+        allowAudioMixWithOthers: this.allowAudioMixWithOthers === 1,
+        hWCodecEnabled: this.hWCodecEnabled === 1,
+        maintainResolution: this.maintainResolution === 1,
+        fieldTrials: this.fieldTrials,
+        encoderQualityMode: this.encoderQualityMode === 1,
+        isAEC3Enabled: this.isAEC3Enabled === 1,
+        audioScene: this.audioScene,
+        defaultAudioRouteToSpeakerphone: this.defaultAudioRouteToSpeakerphone,
+        reconnectionTimeout: this.reconnectionTimeout,
+      })
+      this.client = QNRTC.createClient()
+      this.microphoneAudioTrack = QNRTC.createMicrophoneAudioTrack()
+      this.client.on('onConnectionStateChanged', ({ state, info }) => {
+        if (state === 'CONNECTED') {
+          this.client.publish([this.microphoneAudioTrack], (onPublished, error) => {
+            if (onPublished) {
+              uni.showModal({
+                content: '发布成功',
+              })
+            } else {
+              uni.showModal({
+                content: error.message,
+              })
+            }
+          })
+        } else if (state === 'DISCONNECTED') {
+          if (info.reason === 'KICKED_OUT') {
+            uni.showModal({
+              content: '被踢出房间',
+              success: (res) => {
+                uni.navigateBack()
+              },
+            })
+          } else if (info.reason === 'ROOM_CLOSED') {
+            uni.showModal({
+              content: '房间被关闭',
+              success: (res) => {
+                uni.navigateBack()
+              },
+            })
+          } else if (info.reason === 'ROOM_FULL') {
+            uni.showModal({
+              content: '房间人数已满',
+              success: (res) => {
+                uni.navigateBack()
+              },
+            })
+          }
+        } else if (state === 'RECONNECTING') {
+          uni.showLoading({
+            mask: true,
+            title: '重连中',
+          })
+        } else if (state === 'RECONNECTED') {
+          uni.hideLoading()
+          uni.showModal({
+            content: '重连成功',
+          })
+        }
+      })
+      this.client.on('onAudioSubscribed', (params) => {
+        for (let i of params.trackList) {
+          this.remoteAudioTracks = i
+        }
+      })
+      this.client.on('onUserUnpublished', (params) => {
+        for (let i of params.trackList) {
+          if (i.trackID === this.remoteAudioTracks.trackID) {
+            this.remoteAudioTracks = {}
+          }
+        }
+      })
+      this.client.join(this.token)
+	  this.handleCreateAudioMixer()
+    },
+  },
+}
+</script>
+<style>
+	.wrap {
+		border-radius: 5px;
+		margin: 0 20px 20px;
+		padding: 10px 0;
+	}
+</style>

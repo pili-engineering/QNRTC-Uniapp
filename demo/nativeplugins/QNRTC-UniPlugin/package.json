@@ -70,6 +70,21 @@
                     "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMixerModule"
                 },
+				{
+				  "type": "module",
+				  "name": "QNRTC-UniPlugin-QNRtcAudioMusicMixer",
+				  "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMusicMixerModule"
+				},
+				{
+				  "type": "module",
+				  "name": "QNRTC-UniPlugin-QNRtcAudioEffectMixer",
+				  "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioEffectMixerModule"
+				},
+				{
+				  "type": "module",
+				  "name": "QNRTC-UniPlugin-QNRtcAudioEffect",
+				  "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioEffectModule"
+				},
                 {
                     "type": "component",
                     "name": "QNRTC-UniPlugin-SurfaceView",

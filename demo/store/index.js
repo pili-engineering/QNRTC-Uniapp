@@ -43,13 +43,13 @@ const store = new Vuex.Store({
   },
   mutations: {
     setClientRole(state, payload) {
-      state.clientRole = payload
+      state.clientRole = payload.detail.value
     },
     setClientMode(state, payload) {
-      state.clientMode = payload
+      state.clientMode = payload.detail.value
     },
     setDefaultAudioRouteToSpeakerphone(state, payload) {
-      state.defaultAudioRouteToSpeakerphone = payload
+      state.defaultAudioRouteToSpeakerphone = payload.detail.value
     },
     setReconnectionTimeout(state, payload) {
       state.reconnectionTimeout = payload
@@ -70,11 +70,9 @@ const store = new Vuex.Store({
       state.token = payload
     },
     setPolicy(state, payload) {
-      console.log(payload)
       state.policy = payload.detail.value
     },
     setMultiStreamEnable(state, payload) {
-      console.log(payload)
       state.multiStreamEnable = payload.detail.value
     },
     setLogLevel(state, payload) {

@@ -174,22 +174,50 @@
             </view>
             <view class="margin-top-sm">
               <button size="mini" type="primary" @click="previewMirrorFrontFacing">
-                前置镜像切换
+                前镜像切
               </button>
             </view>
             <view class="margin-top-sm">
               <button size="mini" type="primary" @click="previewMirrorRearFacing">
-                后置镜像切换
+                后镜像切
               </button>
             </view>
             <view class="margin-top-sm">
               <button size="mini" type="primary" @click="encodeMirrorFrontFacing">
-                前置预览编码切换
+                前预览编码切
               </button>
             </view>
             <view class="margin-top-sm">
               <button size="mini" type="primary" @click="encodeMirrorRearFacing">
-                后置预览编码切换
+                后预览编码切
+              </button>
+            </view>
+            <view class="margin-top-sm">
+              <button size="mini" type="primary" @click="$refs.role.open()">设置用户角色</button>
+            </view>
+            <view class="margin-top-sm">
+              <button size="mini" type="primary" @click="$refs.speakerphone.open()">
+                静音扬声器
+              </button>
+            </view>
+            <view class="margin-top-sm">
+              <button size="mini" type="primary" @click="$refs.audioScene.open()">
+                切换音频场景
+              </button>
+            </view>
+            <view class="margin-top-sm">
+              <button size="mini" type="primary" @click="$refs.mediaRelay.open()">
+                开启跨房转发
+              </button>
+            </view>
+            <view class="margin-top-sm">
+              <button size="mini" type="primary" @click="$refs.updateMediaRelay.open()">
+                更新跨房转发
+              </button>
+            </view>
+            <view class="margin-top-sm">
+              <button size="mini" type="primary" @click="stopMediaRelay">
+                关闭跨房转发
               </button>
             </view>
           </view>
@@ -278,6 +306,39 @@
             :multiple="false"
             v-model="videoOrientation"
             :localdata="videoOrientationList"
+          >
+          </uni-data-checkbox>
+        </view>
+      </uni-popup-dialog>
+    </uni-popup>
+    <uni-popup ref="role" type="dialog">
+      <uni-popup-dialog mode="input" title="角色选择" :duration="2000" @confirm="setClientRole">
+        <view class="flex-column">
+          <uni-data-checkbox :multiple="false" v-model="mClientRole" :localdata="clientRoleList">
+          </uni-data-checkbox>
+        </view>
+      </uni-popup-dialog>
+    </uni-popup>
+    <uni-popup ref="audioScene" type="dialog">
+      <uni-popup-dialog mode="input" title="切换音频场景" :duration="2000" @confirm="setAudioScene">
+        <view class="flex-column">
+          <uni-data-checkbox :multiple="false" v-model="mAudioScene" :localdata="audioSceneList">
+          </uni-data-checkbox>
+        </view>
+      </uni-popup-dialog>
+    </uni-popup>
+    <uni-popup ref="speakerphone" type="dialog">
+      <uni-popup-dialog
+        mode="input"
+        title="静音扬声器"
+        :duration="2000"
+        @confirm="setSpeakerphoneMuted"
+      >
+        <view class="flex-column">
+          <uni-data-checkbox
+            :multiple="false"
+            v-model="speakerphoneMuted"
+            :localdata="speakerphoneMutedList"
           >
           </uni-data-checkbox>
         </view>
@@ -423,6 +484,50 @@
         </view>
       </uni-popup-dialog>
     </uni-popup>
+    <uni-popup ref="updateMediaRelay" type="dialog">
+      <uni-popup-dialog
+        mode="input"
+        title="跨房参数设置"
+        :duration="2000"
+        @confirm="updateMediaRelay"
+      >
+        <view class="flex-column">
+          <view class="margin-top-sm">
+            <uni-easyinput v-model="mediaRelayData.desRoomName" placeholder="房间名"></uni-easyinput>
+          </view>
+          <view class="margin-top-sm">
+            <uni-easyinput
+              type="number"
+              v-model="mediaRelayData.desRelayToken"
+              placeholder="房间转发 Token"
+            >
+            </uni-easyinput>
+          </view>
+        </view>
+      </uni-popup-dialog>
+    </uni-popup>
+    <uni-popup ref="mediaRelay" type="dialog">
+      <uni-popup-dialog
+        mode="input"
+        title="跨房参数设置"
+        :duration="2000"
+        @confirm="startMediaRelay"
+      >
+        <view class="flex-column">
+          <view class="margin-top-sm">
+            <uni-easyinput v-model="mediaRelayData.desRoomName" placeholder="房间名"></uni-easyinput>
+          </view>
+          <view class="margin-top-sm">
+            <uni-easyinput
+              type="number"
+              v-model="mediaRelayData.desRelayToken"
+              placeholder="房间转发 Token"
+            >
+            </uni-easyinput>
+          </view>
+        </view>
+      </uni-popup-dialog>
+    </uni-popup>
     <uni-popup ref="pushImage" type="dialog">
       <uni-popup-dialog mode="input" title="图片替换画面" :duration="2000" @confirm="pushImage">
         <view class="flex-column">
@@ -518,6 +623,7 @@ export default {
       'platform',
       'multiStreamEnable',
       'token',
+	  'roomID',
       'policy',
       'logLevel',
       'stereo',
@@ -528,11 +634,11 @@ export default {
       'fieldTrials',
       'encoderQualityMode',
       'isAEC3Enabled',
-	  'audioScene',
-	  'defaultAudioRouteToSpeakerphone',
-	  'reconnectionTimeout',
-	  'clientRole',
-	  'clientMode',
+      'audioScene',
+      'defaultAudioRouteToSpeakerphone',
+      'reconnectionTimeout',
+      'clientRole',
+      'clientMode',
     ]),
   },
   data() {
@@ -560,6 +666,8 @@ export default {
       profile: 'HIGH',
       remoteVolume: 10,
       muted: 0,
+      speakerphoneMuted: 0,
+      mAudioScene: 'DEFAULT',
       exposureCompensation: 0,
       videoOrientation: '',
       localFillMode: 'QNVideoFillModePreserveAspectRatioAndFill',
@@ -567,6 +675,31 @@ export default {
       zoom: 0,
       mirror: 0,
       previewEnabled: 1,
+	  mClientRole: '',
+      audioSceneList: [
+        {
+          text: '默认音频场景',
+          value: 'DEFAULT',
+        },
+        {
+          text: '清晰语聊场景',
+          value: 'VOICE_CHAT',
+        },
+        {
+          text: '音质均衡场景',
+          value: 'SOUND_EQUALIZE',
+        },
+      ],
+      speakerphoneMutedList: [
+        {
+          text: '是',
+          value: 1,
+        },
+        {
+          text: '否',
+          value: 0,
+        },
+      ],
       profileList: [
         {
           text: '低质量',
@@ -625,6 +758,12 @@ export default {
         viewHeight: 0,
         viewWidth: 0,
       },
+      mediaRelayData: {
+		roomName: '',
+		relayToken: '',
+        desRoomName: 'koko',
+        desRelayToken: 'QxZugR8TAhI38AiJ_cptTl3RbzLyca3t-AAiH-Hh:dOeL4K_3aVBMgq3UX7mWKwZRdqI=:eyJhcHBJZCI6ImQ4bGs3bDRlZCIsInJvb21OYW1lIjoia29rbyIsInVzZXJJZCI6ImJhZ2EiLCJleHBpcmVBdCI6MTY5Nzg3NzQyNDYxNTI3NzI3NSwicGVybWlzc2lvbiI6InVzZXIifQ==',
+      },
       pushImageData: {
         resourcePath: '',
         width: 0,
@@ -643,6 +782,16 @@ export default {
         y: 0,
         alpha: 0,
       },
+      clientRoleList: [
+        {
+          text: '主播角色',
+          value: 'BROADCASTER',
+        },
+        {
+          text: '观众角色',
+          value: 'AUDIENCE',
+        },
+      ],
       mutedList: [
         {
           text: '静音',
@@ -710,6 +859,10 @@ export default {
     this.timer = null
   },
   onLoad() {
+	this.mAudioScene = this.audioScene
+	this.mClientRole = this.clientRole
+	this.mediaRelayData.roomName = this.roomID
+	this.mediaRelayData.relayToken = this.token
     this.handleJoinRoom()
     this.getAllData()
   },
@@ -792,23 +945,23 @@ export default {
     },
     getAllData() {
       this.timer = setInterval(() => {
-        if (this.cameraVideoTrack) {
+        if (this.cameraVideoTrack && this.platform === 'ios') {
           const getVideoOrientation = this.cameraVideoTrack.getVideoOrientation()
           console.log('web:getVideoOrientation', getVideoOrientation)
         }
         if (this.remoteAudioTracks) {
           const remoteAudioTracksSubscribed = this.remoteAudioTracks.isSubscribed()
           console.log('web:remoteAudioTracksSubscribed', remoteAudioTracksSubscribed)
-          // const getRemoteVolume = this.remoteAudioTracks.getRemoteVolume()
-          // console.log("web:getRemoteVolume",getRemoteVolume)
         }
         if (this.remoteVideoTracks) {
           const remoteVideoTracksSubscribed = this.remoteVideoTracks.isSubscribed()
           console.log('web:remoteVideoTracksSubscribed', remoteVideoTracksSubscribed)
           const isMultiProfileEnabled = this.remoteVideoTracks.isMultiProfileEnabled()
           console.log('web:isMultiProfileEnabled', isMultiProfileEnabled)
-          const getProfile = this.remoteVideoTracks.getProfile()
-          console.log('web:getProfiles', getProfile)
+		  if (this.platform === 'ios') {
+			  const getProfile = this.remoteVideoTracks.getProfile()
+			  console.log('web:getProfiles', getProfile)
+		  }
         }
       }, 15000)
     },
@@ -854,20 +1007,62 @@ export default {
     setVolume() {
       this.microphoneAudioTrack && this.microphoneAudioTrack.setVolume(this.localVolume / 10)
     },
+    setAudioScene() {
+      QNRTC.setAudioScene(this.mAudioScene)
+    },
     // 音频切换至扬声器
     setAudioRouteToSpeakerphone() {
       this.audioRouteToSpeakerphone = !this.audioRouteToSpeakerphone
       QNRTC.setAudioRouteToSpeakerphone(this.audioRouteToSpeakerphone)
+    },
+    // 设置角色
+    setClientRole() {
+      this.client.setClientRole(this.mClientRole, (role) => {
+        console.log('setClientRole callback', role)
+      })
     },
     // 销毁track
     destroy() {
       this.cameraVideoTrack.destroy()
     },
 
+    startMediaRelay() {
+		console.log(this.mediaRelayData)
+      this.client.startMediaRelay({
+		  relayToken: this.mediaRelayData.relayToken,
+		  roomName: this.mediaRelayData.roomName,
+		  desRoomInfo: [{
+			  relayToken: this.mediaRelayData.desRelayToken,
+			  roomName: this.mediaRelayData.desRoomName
+		  }]
+	  }, (result, error) => {
+        console.log('startMediaRelay callback', result, error)
+      })
+    },
+    updateMediaRelay() {
+      this.client.updateMediaRelay({
+		  relayToken: this.mediaRelayData.relayToken,
+		  roomName: this.mediaRelayData.roomName,
+		  desRoomInfo: [{
+			  relayToken: this.mediaRelayData.desRelayToken,
+			  roomName: this.mediaRelayData.desRoomName
+		  }]
+	  }, (result, error) => {
+        console.log('updateMediaRelay callback', result, error)
+      })
+    },
+    stopMediaRelay() {
+      this.client.stopMediaRelay((result, error) => {
+        console.log('stopMediaRelay callback', result, error)
+      })
+    },
     // 本地音频静音
     setMutedLocalAudio() {
       this.microphoneAudioTrack && this.microphoneAudioTrack.setMuted(this.localAudioOn)
       this.localAudioOn = !this.localAudioOn
+    },
+    setSpeakerphoneMuted() {
+      QNRTC.setSpeakerphoneMuted(this.speakerphoneMuted === 1)
     },
     // 本地视频静音
     setMutedLocalVideo() {
@@ -998,7 +1193,7 @@ export default {
           y: 0,
         })
     },
-	// 加入房间
+    // 加入房间
     async handleJoinRoom() {
       QNRTC.configRTC({
         policy: this.policy,
@@ -1015,10 +1210,12 @@ export default {
         defaultAudioRouteToSpeakerphone: this.defaultAudioRouteToSpeakerphone,
         reconnectionTimeout: this.reconnectionTimeout,
       })
+	  
       this.client = QNRTC.createClient({
-		mode: this.clientMode,
-		role: this.clientRole,
-	  })
+        mode: this.clientMode,
+        role: this.clientRole,
+      })
+	  
       this.cameraVideoTrack = QNRTC.createCameraVideoTrack({
         multiStreamEnable: this.multiStreamEnable === 1,
         width: this.encodeWidth * 1,
@@ -1027,7 +1224,7 @@ export default {
         captureWidth: this.captureWidth * 1,
       })
       this.microphoneAudioTrack = QNRTC.createMicrophoneAudioTrack()
-      this.client.on('onConnectionStateChanged', ({ state }) => {
+      this.client.on('onConnectionStateChanged', ({ state, info }) => {
         if (state === 'CONNECTED') {
           this.client.publish(
             [this.microphoneAudioTrack, this.cameraVideoTrack],
@@ -1036,7 +1233,7 @@ export default {
                 this.isPublish = true
                 this.$refs.popup.open()
                 this.cameraVideoTrack.on('onLocalVideoFrame', (params) => {
-                  console.log(params, 'fffffffffffffffffffffffffffffffffffffffff')
+                  console.log(params)
                 })
               } else {
                 uni.showModal({
@@ -1091,7 +1288,7 @@ export default {
             }
           })
           this.remoteVideoTracks.on('onRemoteVideoFrame', (params) => {
-            console.log(params, '111111111111111111')
+            console.log(params)
           })
           this.remoteVideoTracks.on('onMuteStateChanged', (params) => {
             let content = ''
