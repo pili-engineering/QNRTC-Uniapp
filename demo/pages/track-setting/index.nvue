@@ -762,7 +762,7 @@ export default {
 		roomName: '',
 		relayToken: '',
         desRoomName: 'koko',
-        desRelayToken: 'QxZugR8TAhI38AiJ_cptTl3RbzLyca3t-AAiH-Hh:dOeL4K_3aVBMgq3UX7mWKwZRdqI=:eyJhcHBJZCI6ImQ4bGs3bDRlZCIsInJvb21OYW1lIjoia29rbyIsInVzZXJJZCI6ImJhZ2EiLCJleHBpcmVBdCI6MTY5Nzg3NzQyNDYxNTI3NzI3NSwicGVybWlzc2lvbiI6InVzZXIifQ==',
+        desRelayToken: 'QxZugR8TAhI38AiJ_cptTl3RbzLyca3t-AAiH-Hh:9_AtxJgUpvxdVRJZYzjF_YFBVUQ=:eyJhcHBJZCI6ImQ4bGs3bDRlZCIsInJvb21OYW1lIjoia29rbyIsInVzZXJJZCI6ImZzZnMiLCJleHBpcmVBdCI6MTcwMDAzNjU2NDYzMTAyODE5MCwicGVybWlzc2lvbiI6InVzZXIifQ==',
       },
       pushImageData: {
         resourcePath: '',
@@ -1211,6 +1211,12 @@ export default {
         reconnectionTimeout: this.reconnectionTimeout,
       })
 	  
+	 //  QNRTC.on("onAudioRouteChanged", (params) => {
+		// uni.showModal({
+		// 	content: params.device,
+		//   })
+	 //  })
+	  
       this.client = QNRTC.createClient({
         mode: this.clientMode,
         role: this.clientRole,
@@ -1340,6 +1346,9 @@ export default {
 .wrap {
   flex: 1;
   height: 100vh;
+  border-radius: 5px;
+  margin: 0 20px 20px;
+  padding: 10px 0;
 }
 
 .local {

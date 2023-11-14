@@ -112,7 +112,7 @@
 	
 	.track-item-wrap {
 		position: relative;
-		height: 800upx;
+		height: 1000upx;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -123,7 +123,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 800upx;
+		height: 1000upx;
 		width: 750upx
 	}
 	

@@ -347,18 +347,25 @@
 				const index = this.transcodingTracks.findIndex(item => item.trackID === this.trackConfig.trackID)
 				if (index >= 0) {
 					this.transcodingTracks.splice(index, 1, JSON.parse(JSON.stringify({
-						trackID: this.trackConfig.trackID
+						trackID: this.trackConfig.trackID,
+						...this.trackConfig,
+						x: this.trackConfig.x * 1,
+						y: this.trackConfig.y * 1,
+						width: this.trackConfig.width * 1,
+						height: this.trackConfig.height * 1,
+						zOrder: this.trackConfig.zOrder * 1,
+						SEIEnabled: this.trackConfig.SEIEnabled === 1
 					})))
 				} else {
 					this.transcodingTracks.push(JSON.parse(JSON.stringify({
-						trackID: this.trackConfig.trackID
-						// ...this.trackConfig,
-						// x: this.trackConfig.x * 1,
-						// y: this.trackConfig.y * 1,
-						// width: this.trackConfig.width * 1,
-						// height: this.trackConfig.height * 1,
-						// zOrder: this.trackConfig.zOrder * 1,
-						// SEIEnabled: this.trackConfig.SEIEnabled === 1
+						trackID: this.trackConfig.trackID,
+						...this.trackConfig,
+						x: this.trackConfig.x * 1,
+						y: this.trackConfig.y * 1,
+						width: this.trackConfig.width * 1,
+						height: this.trackConfig.height * 1,
+						zOrder: this.trackConfig.zOrder * 1,
+						SEIEnabled: this.trackConfig.SEIEnabled === 1
 					})))
 				}
 				console.log(this.transcodingTracks)
@@ -503,40 +510,39 @@
 				})
 				this.client.on("onUserPublished", (params) => {
 					console.log("用户发布", params.trackList)
-					// for (let i of params.trackList) {
-					// 	this.transcodingTracks.push({
-					// 		trackID: i.trackID,
-					// 		x: 100 * 1,
-					// 		y: 100 * 1,
-					// 		width: 100 * 1,
-					// 		height: 100 * 1,
-					// 		zOrder:10 * 1
-					// 	})
-					// }
-					console.log("这个我看一下", this.localTracks)
-					const videoTrack = this.localTracks.find(item => item.kind === "audio")
+					for (let i of params.trackList) {
+						this.transcodingTracks.push({
+							trackID: i.trackID,
+							x: 100 * 1,
+							y: 100 * 1,
+							width: 100 * 1,
+							height: 100 * 1,
+							zOrder:10 * 1
+						})
+					}
+					const audioTrack = this.localTracks.find(item => item.kind === "audio")
 					this.transcodingTracks.push({
-						trackID: videoTrack.trackID,
-						// x: 100 * 1,
-						// y: 100 * 1,
-						// width: 100 * 1,
-						// height: 100 * 1,
-						// zOrder: 1,
-						// renderMode: "ASPECT_FILL",
-						// SEIEnabled: 0,
+						trackID: audioTrack.trackID,
+						x: 100 * 1,
+						y: 100 * 1,
+						width: 100 * 1,
+						height: 100 * 1,
+						zOrder: 1,
+						renderMode: "ASPECT_FILL",
+						SEIEnabled: 0,
 					})
 					console.log(this.transcodingTracks)
 					this.client.setTranscodingLiveStreamingTracks(this.transcodingConfig.streamID, this.transcodingTracks)
-					// this.transcodingTracks.push(JSON.parse(JSON.stringify({
-					// 	...this.trackConfig,
-					// 	x: this.trackConfig.x * 1,
-					// 	y: this.trackConfig.y * 1,
-					// 	width: this.trackConfig.width * 1,
-					// 	height: this.trackConfig.height * 1,
-					// 	zOrder: this.trackConfig.zOrder * 1,
-					// 	SEIEnabled: this.trackConfig.SEIEnabled === 1
-					// })))
-					// this.client.subscribe(params.trackList)
+					this.transcodingTracks.push(JSON.parse(JSON.stringify({
+						...this.trackConfig,
+						x: this.trackConfig.x * 1,
+						y: this.trackConfig.y * 1,
+						width: this.trackConfig.width * 1,
+						height: this.trackConfig.height * 1,
+						zOrder: this.trackConfig.zOrder * 1,
+						SEIEnabled: this.trackConfig.SEIEnabled === 1
+					})))
+					this.client.subscribe(params.trackList)
 				})
 				// 加入房间
 				this.client.join(this.token)

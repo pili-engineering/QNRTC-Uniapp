@@ -60,9 +60,6 @@ var QNRTC = (function () {
         catch (e) { }
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
-        QNRtcAudioMixer.initDelegate();
-        QNRtcAudioMusicMixer.initDelegate();
-        QNRtcAudioEffectMixer.initDelegate();
         return QNRtcEngine.configRTC(_config);
     };
     QNRTC.deinit = function () {
