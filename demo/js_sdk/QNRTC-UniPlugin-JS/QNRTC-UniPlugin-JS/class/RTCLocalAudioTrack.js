@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.QNLocalAudioTrack = void 0;
-var RTCLocalTrack_1 = require("./RTCLocalTrack");
+import { QNLocalTrack } from './RTCLocalTrack';
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNLocalAudioTrack = (function (_super) {
     __extends(QNLocalAudioTrack, _super);
@@ -29,6 +26,12 @@ var QNLocalAudioTrack = (function (_super) {
     QNLocalAudioTrack.prototype.getVolumeLevel = function () {
         return QNRtcTrack.getVolumeLevel(this.identifyID);
     };
+    QNLocalAudioTrack.prototype.addAudioFilter = function (filter) {
+        QNRtcTrack.addAudioFilter(this.identifyID, filter.id);
+    };
+    QNLocalAudioTrack.prototype.removeAudioFilter = function (filter) {
+        QNRtcTrack.removeAudioFilter(this.identifyID, filter.id);
+    };
     return QNLocalAudioTrack;
-}(RTCLocalTrack_1.QNLocalTrack));
-exports.QNLocalAudioTrack = QNLocalAudioTrack;
+}(QNLocalTrack));
+export { QNLocalAudioTrack };

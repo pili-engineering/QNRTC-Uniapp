@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.QNScreenVideoTrack = void 0;
-var RTCLocalVideoTrack_1 = require("./RTCLocalVideoTrack");
+import { QNLocalVideoTrack } from './RTCLocalVideoTrack';
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNScreenVideoTrack = (function (_super) {
     __extends(QNScreenVideoTrack, _super);
@@ -33,5 +30,5 @@ var QNScreenVideoTrack = (function (_super) {
         return QNRtcTrack.isScreenCaptureSupported() === 1;
     };
     return QNScreenVideoTrack;
-}(RTCLocalVideoTrack_1.QNLocalVideoTrack));
-exports.QNScreenVideoTrack = QNScreenVideoTrack;
+}(QNLocalVideoTrack));
+export { QNScreenVideoTrack };

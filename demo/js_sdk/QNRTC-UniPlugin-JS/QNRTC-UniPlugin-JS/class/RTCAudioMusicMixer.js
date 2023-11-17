@@ -1,10 +1,8 @@
-"use strict";
-exports.__esModule = true;
-exports.QNAudioMusicMixer = void 0;
 var QNRtcAudioMusicMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMusicMixer');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNAudioMusicMixer = (function () {
     function QNAudioMusicMixer() {
+        this.id = "audioMusicMixer";
         this.variationList = ['onStateChanged'];
         this.eventMap = {
             onStateChanged: 'onMusicStateChanged',
@@ -76,4 +74,4 @@ var QNAudioMusicMixer = (function () {
     };
     return QNAudioMusicMixer;
 }());
-exports.QNAudioMusicMixer = QNAudioMusicMixer;
+export { QNAudioMusicMixer };

@@ -68,6 +68,8 @@ declare class QNAudioEffect {
 }
 
 declare class QNAudioEffectMixer {
+    /** @internal */
+    id: string;
     /**
      * @internal
      * 由于胶水层面 class 代理 listener，但是多个 class 共用一个 listener name，所以需要添加前缀区分不同的事件
@@ -291,6 +293,8 @@ export declare enum QNAudioMixerState {
 }
 
 declare class QNAudioMusicMixer {
+    /** @internal */
+    id: string;
     /** @internal */
     private variationList;
     /**
@@ -1114,6 +1118,19 @@ export declare class QNLocalAudioTrack extends QNLocalTrack {
      * 在安静的环境下，获取到 0.0x 大小的数值为预期现象，您可根据您的需求自行决定判断的阈值
      */
     getVolumeLevel(): number;
+    /**
+     * 增加 filter 模块
+     * @since 5.2.5
+     * @remarks 目前支持设置 QNAudioMusicMixer、QNAudioEffectMixer 等内置 Filter
+     * @param filter 模块
+     */
+    addAudioFilter(filter: QNAudioMusicMixer | QNAudioEffectMixer): void;
+    /**
+     * 移除 filter 模块
+     * @since 5.2.5
+     * @param filter 模块
+     */
+    removeAudioFilter(filter: QNAudioMusicMixer | QNAudioEffectMixer): void;
 }
 
 /**
@@ -1250,6 +1267,13 @@ export declare interface QNMediaRelayConfiguration {
     roomName: string;
     /** 房间 Token */
     relayToken: string;
+    /** 目标房间信息 */
+    desRoomInfo: Array<{
+        /** 房间名 */
+        roomName: string;
+        /** 房间 Token */
+        relayToken: string;
+    }>;
 }
 
 /**
@@ -1303,24 +1327,6 @@ export declare class QNMicrophoneAudioTrack extends QNLocalAudioTrack {
      * @returns 混音控制器对象
      */
     createAudioMixer(url: string): QNAudioMixer;
-    /**
-     * 创建背景音乐混音控制器对象
-     * @since 5.1.5
-     * @remarks 仅支持在线文件，支持的文件格式为：aac、mp3、mp4、ogg、opus、wav、m4a、flac
-     * 1.背景音乐混音仅支持同时混合一路背景音乐，若需要切换背景音乐，重新调用本接口创建 {@link QNAudioMusicMixer} 即可
-     * 2.建议使用本地文件进行混音，以避免网络环境差引起的混音异常
-     * 3.若您希望在混合背景音乐的同时添加音效，可参考音效混音相关接口({@link QNAudioEffectMixer})
-     * @param url 音频文件路径
-     * @returns 音乐混音控制器对象
-     */
-    createAudioMusicMixer(url: string): QNAudioMusicMixer;
-    /**
-     * 创建音效混音控制器对象
-     * @since 5.1.5
-     * @remarks 音效混音支持同时混合多路音效文件
-     * @returns 音效混音控制器对象
-     */
-    createAudioEffectMixer(): QNAudioEffectMixer;
 }
 
 /**
@@ -1705,6 +1711,24 @@ export declare class QNRTC {
      * @remarks 设置是否开启本地日志保存
      */
     static enableFileLogging(): void;
+    /**
+     * 创建背景音乐混音控制器对象
+     * @since 5.2.5
+     * @remarks 仅支持在线文件，支持的文件格式为：aac、mp3、mp4、ogg、opus、wav、m4a、flac
+     * 1.背景音乐混音仅支持同时混合一路背景音乐，若需要切换背景音乐，重新调用本接口创建 {@link QNAudioMusicMixer} 即可
+     * 2.建议使用本地文件进行混音，以避免网络环境差引起的混音异常
+     * 3.若您希望在混合背景音乐的同时添加音效，可参考音效混音相关接口({@link QNAudioEffectMixer})
+     * @param url 音频文件路径
+     * @returns 音乐混音控制器对象
+     */
+    static createAudioMusicMixer(url: string): QNAudioMusicMixer;
+    /**
+     * 创建音效混音控制器对象
+     * @since 5.2.5
+     * @remarks 音效混音支持同时混合多路音效文件
+     * @returns 音效混音控制器对象
+     */
+    static createAudioEffectMixer(): QNAudioEffectMixer;
     /**
      * 设置日志
      * @since 5.2.5
@@ -2144,30 +2168,33 @@ export declare interface QNRTCConfiguration {
     /**
      * 日志等级
      * @defaultValue `QNRTCLogLevel.info`
+     * @remarks 只支持安卓
      */
     logLevel: QNRTCLogLevel;
     /**
      * 是否使用立体声
      * @defaultValue false
      * @remarks 只支持ios
+     * @deprecated 该接口已废弃
      */
     stereo?: boolean;
     /**
      * 带宽评估策略
      * @defaultValue `QNRTCBwePolicy.TCC`
      * @remarks 只支持ios
+     * @deprecated 该接口已废弃
      */
     bwePolicy?: QNRTCBwePolicy;
     /**
      *  是否允许和其它音频一起播放
      * @defaultValue true
      * @remarks 只支持ios
+     * @deprecated 该接口已废弃
      */
     allowAudioMixWithOthers?: boolean;
     /**
      * 是否开启硬编
      * @defaultValue true
-     * @remarks 只支持安卓
      */
     hWCodecEnabled?: boolean;
     /**
@@ -2197,7 +2224,7 @@ export declare interface QNRTCConfiguration {
     /**
      * 设置是否配置扬声器为默认音频路由
      * @since 5.2.5
-     * @remarks true 代表默认音频路由为扬声器，false 代表默认音频路由为听筒
+     * @remarks true 代表默认音频路由为扬声器，false 代表默认音频路由为听筒，只支持安卓
      */
     defaultAudioRouteToSpeakerphone?: boolean;
     /**
@@ -2293,19 +2320,6 @@ export declare interface QNRTCTrackEvent {
      */
     onMuteStateChanged: (params: {
         isMuted: boolean;
-        trackID: string;
-    }) => void;
-    /**
-     * base 64 数据实时回调
-     */
-    onLocalVideoFrame: (params: {
-        data: string;
-    }) => void;
-    /**
-     * base 64 数据实时回调
-     */
-    onRemoteVideoFrame: (params: {
-        data: string;
         trackID: string;
     }) => void;
 }

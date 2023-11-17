@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,16 +13,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.QNLocalVideoTrack = void 0;
-var RTCLocalTrack_1 = require("./RTCLocalTrack");
-var RTCInterface_1 = require("../interface/RTCInterface");
+import { QNLocalTrack } from './RTCLocalTrack';
+import { QNVideoFormatDefault } from '../interface/RTCInterface';
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var isQNVideoEncoderConfig = function (preset) {
     return preset.prefer !== undefined;
 };
 var isQNVideoFormatDefault = function (preset) {
-    return preset in RTCInterface_1.QNVideoFormatDefault;
+    return preset in QNVideoFormatDefault;
 };
 var QNLocalVideoTrack = (function (_super) {
     __extends(QNLocalVideoTrack, _super);
@@ -47,5 +44,5 @@ var QNLocalVideoTrack = (function (_super) {
         }
     };
     return QNLocalVideoTrack;
-}(RTCLocalTrack_1.QNLocalTrack));
-exports.QNLocalVideoTrack = QNLocalVideoTrack;
+}(QNLocalTrack));
+export { QNLocalVideoTrack };

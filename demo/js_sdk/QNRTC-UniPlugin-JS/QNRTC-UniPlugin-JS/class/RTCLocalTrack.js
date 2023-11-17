@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.QNLocalTrack = void 0;
-var RTCTrack_1 = require("./RTCTrack");
+import { QNTrack } from './RTCTrack';
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNLocalTrack = (function (_super) {
     __extends(QNLocalTrack, _super);
@@ -30,5 +27,5 @@ var QNLocalTrack = (function (_super) {
         QNRtcTrack.destroy(this.identifyID);
     };
     return QNLocalTrack;
-}(RTCTrack_1.QNTrack));
-exports.QNLocalTrack = QNLocalTrack;
+}(QNTrack));
+export { QNLocalTrack };

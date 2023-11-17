@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -50,9 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-exports.QNRemoteVideoTrack = void 0;
-var RTCRemoteTrack_1 = require("./RTCRemoteTrack");
+import { QNRemoteTrack } from './RTCRemoteTrack';
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNRemoteVideoTrack = (function (_super) {
@@ -107,5 +104,5 @@ var QNRemoteVideoTrack = (function (_super) {
         return base64.replace(/\r|\n/g, '');
     };
     return QNRemoteVideoTrack;
-}(RTCRemoteTrack_1.QNRemoteTrack));
-exports.QNRemoteVideoTrack = QNRemoteVideoTrack;
+}(QNRemoteTrack));
+export { QNRemoteVideoTrack };

@@ -1,4 +1,3 @@
-"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -10,9 +9,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-exports.__esModule = true;
-exports.QNTrack = void 0;
-var RTCEnum_1 = require("../enum/RTCEnum");
+import { QNRTCTrackKind } from '../enum/RTCEnum';
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNTrack = (function () {
@@ -49,14 +46,14 @@ var QNTrack = (function () {
         return this.tag;
     };
     QNTrack.prototype.isAudio = function () {
-        return this.kind === RTCEnum_1.QNRTCTrackKind.audio;
+        return this.kind === QNRTCTrackKind.audio;
     };
     QNTrack.prototype.isVideo = function () {
-        return this.kind === RTCEnum_1.QNRTCTrackKind.video;
+        return this.kind === QNRTCTrackKind.video;
     };
     QNTrack.prototype.isMuted = function () {
         return QNRtcTrack.getMuted(this.identifyID);
     };
     return QNTrack;
 }());
-exports.QNTrack = QNTrack;
+export { QNTrack };
