@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { QNRTC } from '@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js'
+import { QNMicrophoneAudioTrack, QNRTC } from '@/js_sdk/QNRTC-UniPlugin-JS/QNRTC-UniPlugin-JS/RTCIndex.native.js'
 import { mapState } from 'vuex'
 export default {
   computed: {
@@ -90,7 +90,7 @@ export default {
       client: null,
       currentTime: 0,
       audioMusicMixer: null,
-      audioUrl: 'https://docs.qnsdk.com/eva_edm.mp3',
+      audioUrl: 'http://qyustg29v.hn-bkt.clouddn.com/music.flac',
       musicVolume: 1,
       microphoneVolume: 100,
       duration: 0,
@@ -138,7 +138,7 @@ export default {
     },
     // 创建混音
     handleCreateAudioMixer() {
-      this.audioMusicMixer = this.microphoneAudioTrack.createAudioMusicMixer(this.audioUrl)
+      this.audioMusicMixer = QNRTC.createAudioMusicMixer(this.audioUrl)
       this.audioMusicMixer.on('onStateChanged', (params) => {
         this.successMessage = params.state
         if (params.state === 'MIXING') {
@@ -150,7 +150,7 @@ export default {
             this.mixerAttributes.startPosition = this.audioMusicMixer.getStartPosition()
           }, 1000)
         }
-        this.$refs.popup.open()
+        this.$refs.success.open()
       })
       this.audioMusicMixer.on('onMixing', (params) => {
         this.currentPosition = ~~(params.position / 1000)
@@ -160,6 +160,7 @@ export default {
         this.errorMessage = `错误信息：${params.message},错误码：${params.code}`
         this.$refs.error.open()
       })
+	  this.microphoneAudioTrack.addAudioFilter(this.audioMusicMixer)
     },
     // 修改音乐音量
     handleSetMusicVolume(event) {
@@ -189,7 +190,7 @@ export default {
       this.audioMusicMixer.setStartPosition(this.startPosition)
     },
     handleSliderChange(event) {
-      this.audioMusicMixer.seekTo(event.detail.value * 1000)
+      this.audioMusicMixer.seekTo(event * 1000)
       this.audioMusicMixer.resume()
     },
     async handleJoinRoom() {

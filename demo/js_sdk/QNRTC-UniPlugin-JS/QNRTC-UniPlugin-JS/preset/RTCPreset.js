@@ -1,23 +1,20 @@
-"use strict";
-exports.__esModule = true;
-exports.QNClientConfigPreset = exports.QNCustomVideoTrackConfigPreset = exports.QNScreenVideoTrackConfigPreset = exports.QNCameraVideoTrackConfigPreset = exports.QNCustomAudioTrackConfigPreset = exports.QNMicrophoneAudioTrackConfigPreset = exports.QNRTCConfigurationPreset = void 0;
-var RTCEnum_1 = require("../enum/RTCEnum");
-exports.QNRTCConfigurationPreset = {
-    policy: RTCEnum_1.QNRTCPolicy.forceUDP,
+import { QNRTCCameraFacing, QNRTCPolicy, QNRTCBwePolicy, QNRTCLogLevel, QNSessionPresetType, QNClientRole, QNClientMode, QNAudioScene } from '../enum/RTCEnum';
+export var QNRTCConfigurationPreset = {
+    policy: QNRTCPolicy.forceUDP,
     stereo: false,
-    logLevel: RTCEnum_1.QNRTCLogLevel.info,
-    bwePolicy: RTCEnum_1.QNRTCBwePolicy.TCC,
+    logLevel: QNRTCLogLevel.info,
+    bwePolicy: QNRTCBwePolicy.TCC,
     allowAudioMixWithOthers: true,
     hWCodecEnabled: true,
     maintainResolution: false,
     fieldTrials: '',
     encoderQualityMode: false,
     isAEC3Enabled: true,
-    audioScene: RTCEnum_1.QNAudioScene.DEFAULT,
+    audioScene: QNAudioScene.DEFAULT,
     defaultAudioRouteToSpeakerphone: true,
     reconnectionTimeout: 30000
 };
-exports.QNMicrophoneAudioTrackConfigPreset = {
+export var QNMicrophoneAudioTrackConfigPreset = {
     tag: '',
     bitrate: 24,
     BitsPerSample: 16,
@@ -25,27 +22,27 @@ exports.QNMicrophoneAudioTrackConfigPreset = {
     SampleRate: 16000,
     communicationModeOn: true
 };
-exports.QNCustomAudioTrackConfigPreset = {
+export var QNCustomAudioTrackConfigPreset = {
     tag: '',
     bitrate: 24,
     BitsPerSample: 16,
     ChannelCount: 1,
     SampleRate: 16000
 };
-exports.QNCameraVideoTrackConfigPreset = {
+export var QNCameraVideoTrackConfigPreset = {
     tag: '',
     bitrate: 800,
     width: 640,
     height: 480,
     multiStreamEnable: false,
-    cameraFacing: RTCEnum_1.QNRTCCameraFacing.front,
+    cameraFacing: QNRTCCameraFacing.front,
     frameRate: 20,
     captureWidth: 640,
     captureHeight: 480,
     captureFrameRate: 20,
-    sessionPreset: RTCEnum_1.QNSessionPresetType.AVCaptureSessionPreset640x480
+    sessionPreset: QNSessionPresetType.AVCaptureSessionPreset640x480
 };
-exports.QNScreenVideoTrackConfigPreset = {
+export var QNScreenVideoTrackConfigPreset = {
     tag: '',
     bitrate: 800,
     width: 640,
@@ -53,7 +50,7 @@ exports.QNScreenVideoTrackConfigPreset = {
     multiStreamEnable: false,
     frameRate: 20
 };
-exports.QNCustomVideoTrackConfigPreset = {
+export var QNCustomVideoTrackConfigPreset = {
     tag: '',
     bitrate: 800,
     width: 640,
@@ -61,7 +58,7 @@ exports.QNCustomVideoTrackConfigPreset = {
     multiStreamEnable: false,
     frameRate: 20
 };
-exports.QNClientConfigPreset = {
-    mode: RTCEnum_1.QNClientMode.RTC,
-    role: RTCEnum_1.QNClientRole.BROADCASTER
+export var QNClientConfigPreset = {
+    mode: QNClientMode.RTC,
+    role: QNClientRole.BROADCASTER
 };

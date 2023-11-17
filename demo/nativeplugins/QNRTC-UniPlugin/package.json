@@ -22,11 +22,11 @@
                     "name": "QNRTC-UniPlugin-QNRtcTrack",
                     "class": "QNRtcTrack"
                 },
-                {
-                    "type": "module",
-                    "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
-                    "class": "QNRtcAudioMixer"
-                },
+				{
+				    "type": "module",
+				    "name": "QNRTC-UniPlugin-QNRtcAudioMusicMixer",
+				    "class": "QNRtcAudioMusicMixer"
+				},
                 {
                     "type": "component",
                     "name": "QNRTC-UniPlugin-SurfaceView",

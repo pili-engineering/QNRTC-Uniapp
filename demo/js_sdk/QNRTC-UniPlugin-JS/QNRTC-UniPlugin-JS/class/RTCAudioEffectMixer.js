@@ -1,11 +1,9 @@
-"use strict";
-exports.__esModule = true;
-exports.QNAudioEffectMixer = void 0;
-var RTCAudioEffect_1 = require("./RTCAudioEffect");
+import { QNAudioEffect } from './RTCAudioEffect';
 var QNRtcAudioEffectMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioEffectMixer');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNAudioEffectMixer = (function () {
     function QNAudioEffectMixer() {
+        this.id = "audioEffectMixer";
         this.eventMap = {
             onEffectFinished: 'onEffectFinished',
             onEffectError: 'onEffectEffectError',
@@ -20,7 +18,7 @@ var QNAudioEffectMixer = (function () {
     };
     QNAudioEffectMixer.prototype.createAudioEffect = function (effectID, filePath) {
         QNRtcAudioEffectMixer.createAudioEffect(effectID, filePath);
-        return new RTCAudioEffect_1.QNAudioEffect(effectID, filePath);
+        return new QNAudioEffect(effectID, filePath);
     };
     QNAudioEffectMixer.prototype.start = function (effectID) {
         QNRtcAudioEffectMixer.start(effectID);
@@ -63,4 +61,4 @@ var QNAudioEffectMixer = (function () {
     };
     return QNAudioEffectMixer;
 }());
-exports.QNAudioEffectMixer = QNAudioEffectMixer;
+export { QNAudioEffectMixer };

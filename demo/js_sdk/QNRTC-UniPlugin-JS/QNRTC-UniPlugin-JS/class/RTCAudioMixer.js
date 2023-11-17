@@ -1,6 +1,3 @@
-"use strict";
-exports.__esModule = true;
-exports.QNAudioMixer = void 0;
 var QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNAudioMixer = (function () {
@@ -63,4 +60,4 @@ var QNAudioMixer = (function () {
     };
     return QNAudioMixer;
 }());
-exports.QNAudioMixer = QNAudioMixer;
+export { QNAudioMixer };

@@ -1,6 +1,3 @@
-"use strict";
-exports.__esModule = true;
-exports.QNAudioEffect = void 0;
 var QNRtcAudioEffect = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioEffect');
 var QNAudioEffect = (function () {
     function QNAudioEffect(effectID, filePath) {
@@ -30,4 +27,4 @@ var QNAudioEffect = (function () {
     };
     return QNAudioEffect;
 }());
-exports.QNAudioEffect = QNAudioEffect;
+export { QNAudioEffect };

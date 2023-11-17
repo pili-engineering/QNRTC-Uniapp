@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -10,13 +9,13 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-exports.__esModule = true;
-exports.QNRTC = void 0;
-var RTCPreset_1 = require("../preset/RTCPreset");
-var RTCClient_1 = require("./RTCClient");
-var RTCCameraVideoTrack_1 = require("./RTCCameraVideoTrack");
-var RTCMicrophoneAudioTrack_1 = require("./RTCMicrophoneAudioTrack");
-var RTCScreenVideoTrack_1 = require("./RTCScreenVideoTrack");
+import { QNRTCConfigurationPreset, QNMicrophoneAudioTrackConfigPreset, QNCameraVideoTrackConfigPreset, QNScreenVideoTrackConfigPreset, QNClientConfigPreset, } from '../preset/RTCPreset';
+import { QNRTCClient } from './RTCClient';
+import { QNCameraVideoTrack } from './RTCCameraVideoTrack';
+import { QNMicrophoneAudioTrack } from './RTCMicrophoneAudioTrack';
+import { QNScreenVideoTrack } from './RTCScreenVideoTrack';
+import { QNAudioMusicMixer } from './RTCAudioMusicMixer';
+import { QNAudioEffectMixer } from './RTCAudioEffectMixer';
 var QNRtcEngine = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcEngine');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
@@ -40,50 +39,49 @@ var QNRTC = (function () {
         return QNRtcTrack.isScreenCaptureSupported();
     };
     QNRTC.init = function (config) {
-        var _config = __assign(__assign({}, RTCPreset_1.QNRTCConfigurationPreset), config);
+        var _config = __assign(__assign({}, QNRTCConfigurationPreset), config);
         try {
             QNRtcEngine.initDelegate();
         }
         catch (e) { }
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
-        QNRtcAudioMixer.initDelegate();
         QNRtcAudioMusicMixer.initDelegate();
-        QNRtcAudioEffectMixer.initDelegate();
         return QNRtcEngine.configRTC(_config);
     };
     QNRTC.configRTC = function (config) {
-        var _config = __assign(__assign({}, RTCPreset_1.QNRTCConfigurationPreset), config);
+        var _config = __assign(__assign({}, QNRTCConfigurationPreset), config);
         try {
             QNRtcEngine.initDelegate();
         }
         catch (e) { }
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
+        QNRtcAudioMusicMixer.initDelegate();
         return QNRtcEngine.configRTC(_config);
     };
     QNRTC.deinit = function () {
         return QNRtcEngine.deinit();
     };
     QNRTC.createClient = function (config) {
-        var _config = __assign(__assign({}, RTCPreset_1.QNClientConfigPreset), config);
+        var _config = __assign(__assign({}, QNClientConfigPreset), config);
         QNRtcEngine.createClient(_config);
-        return new RTCClient_1.QNRTCClient();
+        return new QNRTCClient();
     };
     QNRTC.createMicrophoneAudioTrack = function (config) {
-        var _config = __assign(__assign({}, RTCPreset_1.QNMicrophoneAudioTrackConfigPreset), config);
+        var _config = __assign(__assign({}, QNMicrophoneAudioTrackConfigPreset), config);
         var result = QNRtcEngine.createMicrophoneAudioTrack(_config);
-        return new RTCMicrophoneAudioTrack_1.QNMicrophoneAudioTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new QNMicrophoneAudioTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
     QNRTC.createCameraVideoTrack = function (config) {
-        var _config = __assign(__assign({}, RTCPreset_1.QNCameraVideoTrackConfigPreset), config);
+        var _config = __assign(__assign({}, QNCameraVideoTrackConfigPreset), config);
         var result = QNRtcEngine.createCameraVideoTrack(_config);
-        return new RTCCameraVideoTrack_1.QNCameraVideoTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new QNCameraVideoTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
     QNRTC.createScreenVideoTrack = function (config) {
-        var _config = __assign(__assign({}, RTCPreset_1.QNScreenVideoTrackConfigPreset), config);
+        var _config = __assign(__assign({}, QNScreenVideoTrackConfigPreset), config);
         var result = QNRtcEngine.createScreenVideoTrack(_config);
-        return new RTCScreenVideoTrack_1.QNScreenVideoTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
+        return new QNScreenVideoTrack(__assign({ trackID: '', raw: result, userID: '' }, result));
     };
     QNRTC.setAudioScene = function (audioScene) {
         return QNRtcEngine.setAudioScene(audioScene);
@@ -97,8 +95,16 @@ var QNRTC = (function () {
     QNRTC.enableFileLogging = function () {
         return QNRtcEngine.enableFileLogging();
     };
+    QNRTC.createAudioMusicMixer = function (url) {
+        QNRtcEngine.createAudioMusicMixer(url);
+        return new QNAudioMusicMixer();
+    };
+    QNRTC.createAudioEffectMixer = function () {
+        QNRtcEngine.createAudioEffectMixer();
+        return new QNAudioEffectMixer();
+    };
     QNRTC.setLogConfig = function () { };
     QNRTC.uploadLog = function () { };
     return QNRTC;
 }());
-exports.QNRTC = QNRTC;
+export { QNRTC };

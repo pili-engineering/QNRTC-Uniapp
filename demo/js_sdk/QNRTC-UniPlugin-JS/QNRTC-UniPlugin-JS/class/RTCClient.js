@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -10,12 +9,10 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-exports.__esModule = true;
-exports.QNRTCClient = void 0;
-var RTCEnum_1 = require("../enum/RTCEnum");
-var RTCRemoteVideoTrack_1 = require("./RTCRemoteVideoTrack");
-var RTCRemoteAudioTrack_1 = require("./RTCRemoteAudioTrack");
-var RTCLocalTrack_1 = require("./RTCLocalTrack");
+import { QNRTCTrackKind } from '../enum/RTCEnum';
+import { QNRemoteVideoTrack } from './RTCRemoteVideoTrack';
+import { QNRemoteAudioTrack } from './RTCRemoteAudioTrack';
+import { QNLocalTrack } from './RTCLocalTrack';
 var RTCClient = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNRTCClient = (function () {
@@ -32,11 +29,11 @@ var QNRTCClient = (function () {
         for (var _i = 0, trackList_1 = trackList; _i < trackList_1.length; _i++) {
             var i = trackList_1[_i];
             var config = __assign({ identifyID: i.trackID, raw: i }, i);
-            if (i.kind === RTCEnum_1.QNRTCTrackKind.audio) {
-                result.push(new RTCRemoteAudioTrack_1.QNRemoteAudioTrack(config));
+            if (i.kind === QNRTCTrackKind.audio) {
+                result.push(new QNRemoteAudioTrack(config));
             }
             else {
-                result.push(new RTCRemoteVideoTrack_1.QNRemoteVideoTrack(config));
+                result.push(new QNRemoteVideoTrack(config));
             }
         }
         return result;
@@ -46,11 +43,11 @@ var QNRTCClient = (function () {
         for (var _i = 0, trackList_2 = trackList; _i < trackList_2.length; _i++) {
             var i = trackList_2[_i];
             var config = __assign({ identifyID: i.trackID, userID: '', raw: i }, i);
-            if (i.kind === RTCEnum_1.QNRTCTrackKind.audio) {
-                result.push(new RTCLocalTrack_1.QNLocalTrack(config));
+            if (i.kind === QNRTCTrackKind.audio) {
+                result.push(new QNLocalTrack(config));
             }
             else {
-                result.push(new RTCLocalTrack_1.QNLocalTrack(config));
+                result.push(new QNLocalTrack(config));
             }
         }
         return result;
@@ -194,4 +191,4 @@ var QNRTCClient = (function () {
     };
     return QNRTCClient;
 }());
-exports.QNRTCClient = QNRTCClient;
+export { QNRTCClient };
