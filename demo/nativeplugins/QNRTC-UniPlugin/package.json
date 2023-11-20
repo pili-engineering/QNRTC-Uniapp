@@ -27,6 +27,16 @@
 				    "name": "QNRTC-UniPlugin-QNRtcAudioMusicMixer",
 				    "class": "QNRtcAudioMusicMixer"
 				},
+				{
+				    "type": "module",
+				    "name": "QNRTC-UniPlugin-QNRtcAudioEffectMixer",
+				    "class": "QNRtcAudioEffectMixer"
+				},
+				{
+				    "type": "module",
+				    "name": "QNRTC-UniPlugin-QNRtcAudioEffect",
+				    "class": "QNRtcAudioEffect"
+				},
                 {
                     "type": "component",
                     "name": "QNRTC-UniPlugin-SurfaceView",

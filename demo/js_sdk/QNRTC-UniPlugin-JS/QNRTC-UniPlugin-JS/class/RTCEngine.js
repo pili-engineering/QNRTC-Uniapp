@@ -47,6 +47,7 @@ var QNRTC = (function () {
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
         QNRtcAudioMusicMixer.initDelegate();
+		QNRtcAudioEffectMixer.initDelegate()
         return QNRtcEngine.configRTC(_config);
     };
     QNRTC.configRTC = function (config) {
@@ -58,6 +59,7 @@ var QNRTC = (function () {
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
         QNRtcAudioMusicMixer.initDelegate();
+		QNRtcAudioEffectMixer.initDelegate()
         return QNRtcEngine.configRTC(_config);
     };
     QNRTC.deinit = function () {
