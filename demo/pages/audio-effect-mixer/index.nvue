@@ -108,7 +108,7 @@ export default {
     return {
 	  allEffectsVolume: 1,
       audioEffectID: '',
-	  audioEffectFilePath: 'https://docs.qnsdk.com/eva_edm.mp3',
+	  audioEffectFilePath: 'http://qyustg29v.hn-bkt.clouddn.com/music.flac',
 	  audioEffectList: [],
       remoteAudioTracks: {},
       microphoneAudioTrack: {},
@@ -212,10 +212,11 @@ export default {
 		
 		this.timers.push(timer)
 		this.audioEffectList.push(insertItem)
+		this.microphoneAudioTrack.addAudioFilter(this.audioEffectMixer)
 	},
 	// 创建混音
 	handleCreateAudioEffectMixer() {
-	  this.audioEffectMixer = this.microphoneAudioTrack.createAudioEffectMixer()
+	  this.audioEffectMixer = QNRTC.createAudioEffectMixer()
 	  this.audioEffectMixer.on("onEffectFinished", (params) => {
 	    this.successMessage = `effectID：${params.effectID} is finished`
 	    this.$refs.success.open()
