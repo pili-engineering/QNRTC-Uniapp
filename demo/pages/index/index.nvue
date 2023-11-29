@@ -4,10 +4,9 @@
     <u-button type="primary" @click="routeGroupToGroup" text="多人通讯"></u-button>
     <u-button type="primary" class="margin-top-sm" @click="routeLiveStreamingDirect"  text="单路转推配置"></u-button>
     <u-button type="primary" class="margin-top-sm" @click="routeLiveStreamingTranscoding" text="合流配置"></u-button>
-    <u-button type="primary" class="margin-top-sm" @click="routeTrackSetting" text="单人通讯">设置</u-button>
-    <u-button type="primary" class="margin-top-sm" @click="routeAudioMixer" text="旧版混音设置"></u-button>
-	<u-button type="primary" class="margin-top-sm" @click="routeNewAudioMusicMixer" text="新版混音音乐设置"></u-button>
-	<u-button type="primary" class="margin-top-sm" @click="routeNewAudioEffectMixer" text="新版混音音效设置"></u-button>
+    <u-button type="primary" class="margin-top-sm" @click="routeTrackSetting" text="单人通讯">单人通讯</u-button>
+	<u-button type="primary" class="margin-top-sm" @click="routeNewAudioMusicMixer" text="混音音乐设置"></u-button>
+	<u-button type="primary" class="margin-top-sm" @click="routeNewAudioEffectMixer" text="混音音效设置"></u-button>
 </view>
 </template>
 
@@ -52,11 +51,6 @@ export default {
                 url: "/pages/track-setting/index"
             })
         },
-        routeAudioMixer() {
-			uni.navigateTo({
-				url: "/pages/audio-mixer/index"
-			})
-		},
 		routeNewAudioMusicMixer() {
 			uni.navigateTo({
 				url: "/pages/audio-music-mixer/index"

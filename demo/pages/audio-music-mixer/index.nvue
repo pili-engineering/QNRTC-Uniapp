@@ -40,6 +40,7 @@
           step="1"
         ></u-slider>
       </view>
+	  <u-button class="margin-bottom-sm" type="success" @click="handleCreateAudioMixer" text="创建混音"></u-button>
       <u-button
 	    class="margin-bottom-sm"
         :type="isPublishEnabled ? 'error' : 'success'"
@@ -106,6 +107,7 @@ export default {
         musicVolume: 0,
         startPosition: 0,
       },
+	  isStart: false
     }
   },
   onBackPress() {
@@ -123,17 +125,21 @@ export default {
     // 开始混音
     handleStartAudioMixer() {
       this.audioMusicMixer.start()
+	  this.isStart = true
     },
     // 停止混音
     handleStoptAudioMixer() {
       this.audioMusicMixer.stop()
+	  this.isStart = false
     },
     // 恢复混音
     handleResumeAudioMixer() {
+	  if (!this.isStart) return
       this.audioMusicMixer.resume()
     },
     // 暂停混音
     handlePauseAudioMixer() {
+	  if (!this.isStart) return
       this.audioMusicMixer.pause()
     },
     // 创建混音
@@ -272,7 +278,6 @@ export default {
         }
       })
       this.client.join(this.token)
-	  this.handleCreateAudioMixer()
     },
   },
 }

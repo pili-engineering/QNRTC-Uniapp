@@ -20,9 +20,8 @@ var QNRtcEngine = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcEngine');
 var QNEvent = uni.requireNativePlugin('globalEvent');
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRTCClientPlugin = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
-var QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer');
 var QNRtcAudioMusicMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMusicMixer');
-var QNRtcAudioEffectMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMusicMixer');
+var QNRtcAudioEffectMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioEffectMixer');
 var QNRTC = (function () {
     function QNRTC() {
     }
@@ -47,7 +46,7 @@ var QNRTC = (function () {
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
         QNRtcAudioMusicMixer.initDelegate();
-		QNRtcAudioEffectMixer.initDelegate()
+        QNRtcAudioEffectMixer.initDelegate();
         return QNRtcEngine.configRTC(_config);
     };
     QNRTC.configRTC = function (config) {
@@ -59,7 +58,7 @@ var QNRTC = (function () {
         QNRtcTrack.initDelegate();
         QNRTCClientPlugin.initDelegate();
         QNRtcAudioMusicMixer.initDelegate();
-		QNRtcAudioEffectMixer.initDelegate()
+        QNRtcAudioEffectMixer.initDelegate();
         return QNRtcEngine.configRTC(_config);
     };
     QNRTC.deinit = function () {

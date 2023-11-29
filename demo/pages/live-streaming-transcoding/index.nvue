@@ -1,16 +1,12 @@
 <template>
 	<view>
 		<view class="wrap">
-			<view class="setting">
-				<view>
-					<text @click="handleShowDrawer" style="margin-right:5px;">合流设置</text>
-					<uni-icons type="settings" size="20" @click="handleShowDrawer"></uni-icons>
-				</view>
-				<view>
-					<text @click="handleShowTrackDrawer" style="margin-right:5px;margin-left:15px">布局设置</text>
-					<uni-icons type="settings" size="20" @click="handleShowTrackDrawer"></uni-icons>
-				</view>
-			</view>
+			<uni-popup ref="success" type="message" background-color="#fff">
+				<uni-popup-message type="success" :message="successMessage" :duration="1000"></uni-popup-message>
+			</uni-popup>
+			<uni-popup ref="error" type="message" background-color="#fff">
+				<uni-popup-message type="error" :message="errorMessage" :duration="1000"></uni-popup-message>
+			</uni-popup>
 			<uni-drawer ref="showRight" mode="right" :mask-click="true">
 				<view class="scroll-view">
 					<scroll-view class="scroll-view-box" scroll-y="true">
@@ -114,10 +110,16 @@
 				</view>
 			</uni-drawer>
 			<view class="margin-top-sm">
-				<button type="primary" @click="handleStart">开始合流</button>
+				<u-button type="primary" @click="handleShowDrawer" plain text="合流设置"></u-button>
 			</view>
 			<view class="margin-top-sm">
-				<button type="warn" @click="handleEnd">停止合流</button>
+				<u-button type="primary" @click="handleShowTrackDrawer"  plain text="布局设置"></u-button>
+			</view>
+			<view class="margin-top-sm">
+				<u-button type="primary" @click="handleStart" text="开始合流"></u-button>
+			</view>
+			<view class="margin-top-sm">
+				<u-button type="error" @click="handleEnd" text="停止合流"></u-button>
 			</view>
 			<uni-drawer ref="showTrackLeft" mode="left" :mask-click="true">
 				<view class="scroll-view">
@@ -159,34 +161,30 @@
 								:localdata="SEIEnabled">
 							</uni-data-checkbox>
 							<view class="margin-top-sm">
-								<button type="primary" @click="handleSetTrack">添加/替换合流布局</button>
+								<u-button type="primary" @click="handleSetTrack" text="添加/替换合流布局"></u-button>
 							</view>
 							<view class="margin-top-sm">
-								<button type="warn" @click="handleDeleteTrack">删除布局布局</button>
+								<u-button type="error" @click="handleDeleteTrack" text="删除布局布局"></u-button>
 							</view>
 						</view>
 					</scroll-view>
 				</view>
 			</uni-drawer>
 		</view>
-		<view class="margin-top:20px;">
-			<div class="track-item-wrap" v-for="(item,index) in localTracks" :key="index">
-				<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="0"
+		<view class="track-wrap">
+			<div class="track-item-wrap" v-for="(item,index) in localTracks" :key="index" v-if="item.kind === 'video'">
+				<QNRTC-UniPlugin-SurfaceView class="track-video"  :local="0"
 					:identifyID="item.identifyID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 				<view class="track-info-wrap">
-					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
-					<text class="track-info-item">用户ID：自己</text>
-					<text class="track-info-item">类型：{{item.kind}}</text>
+					<text class="track-info-item">{{item.trackID}}</text>
 				</view>
 			</div>
-			<div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID">
-				<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="1"
+			<div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID" v-if="item.kind === 'video'">
+				<QNRTC-UniPlugin-SurfaceView class="track-video"  :local="1"
 					:identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID">
 				</QNRTC-UniPlugin-SurfaceView>
 				<view class="track-info-wrap">
-					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
-					<text class="track-info-item">用户ID：{{item.userID}}</text>
-					<text class="track-info-item">类型：{{item.kind}}</text>
+					<text class="track-info-item">{{item.trackID}}</text>
 				</view>
 			</div>
 		</view>
@@ -205,6 +203,8 @@
 	export default {
 		data() {
 			return {
+				successMessage: "",
+				errorMessage: "",
 				selectedTrackList: [],
 				remoteTracks: [],
 				localTracks: [],
@@ -418,38 +418,33 @@
 						// 发布 track
 						this.client.publish(localTracks, (onPublished, error) => {
 							if (onPublished) {
-								uni.showModal({
-									content: "发布成功"
-								})
+								this.successMessage = "发布成功"
+								this.$refs.success.open()
 							} else {
-								uni.showModal({
-									content: error.message
-								})
+								this.errorMessage = error.message
+								this.$refs.error.open()
 							}
 							this.localTracks = localTracks
 						})
 					} else if (state === "DISCONNECTED") {
 						if (info.reason === "KICKED_OUT") {
-							uni.showModal({
-								content: "被踢出房间",
-								success: (res) => {
-									uni.navigateBack()
-								}
-							})
+							this.errorMessage = "被踢出房间"
+							this.$refs.error.open()
+							setTimeout(() => {
+								uni.navigateBack()
+							}, 1000)
 						} else if (info.reason === "ROOM_CLOSED") {
-							uni.showModal({
-								content: "房间被关闭",
-								success: (res) => {
-									uni.navigateBack()
-								}
-							})
+							this.errorMessage = "房间被关闭"
+							this.$refs.error.open()
+							setTimeout(() => {
+								uni.navigateBack()
+							}, 1000)
 						} else if (info.reason === "ROOM_FULL") {
-							uni.showModal({
-								content: "房间人数已满",
-								success: (res) => {
-									uni.navigateBack()
-								}
-							})
+							this.errorMessage = "房间人数已满"
+							this.$refs.error.open()
+							setTimeout(() => {
+								uni.navigateBack()
+							}, 1000)
 						}
 					} else if (state === "RECONNECTING") {
 						uni.showLoading({
@@ -458,9 +453,8 @@
 						})
 					} else if (state === "RECONNECTED") {
 						uni.hideLoading()
-						uni.showModal({
-							content: "重连成功"
-						})
+						this.successMessage = "重连成功"
+						this.$refs.success.open()
 					}
 				})
 				// 监听订阅成功
@@ -486,62 +480,26 @@
 				})
 				// 转推任务成功创建时触发此回调
 				this.client.on("onStartLiveStreaming", (params) => {
-					uni.showModal({
-						content: `转推任务${params.streamID}创建成功`
-					})
+					this.successMessage = `转推任务${params.streamID}创建成功`
+					this.$refs.success.open()
 				})
 				// 转推任务成功停止时触发此回调
 				this.client.on("onStoppedLiveStreaming", (params) => {
-					uni.showModal({
-						content: `转推任务${params.streamID}已停止`
-					})
+					this.successMessage =  `转推任务${params.streamID}已停止`
+					this.$refs.success.open()
 				})
 				// 转推任务出错时触发此回调
 				this.client.on("onErrorLiveStreaming", (params) => {
-					uni.showModal({
-						content: `转推任务${params.streamID}${params.info.message}`
-					})
+					this.errorMessage = `转推任务${params.streamID}${params.info.message}`
+					this.$refs.error.open()
 				})
 				// 合流布局更改回调
 				this.client.on("onUpdatedLiveStreaming", (params) => {
-					uni.showModal({
-						content: `转推任务${params.streamID}布局已更改`
-					})
+					this.successMessage =  `转推任务${params.streamID}布局已更改`
+					this.$refs.success.open()
 				})
 				this.client.on("onUserPublished", (params) => {
 					console.log("用户发布", params.trackList)
-					for (let i of params.trackList) {
-						this.transcodingTracks.push({
-							trackID: i.trackID,
-							x: 100 * 1,
-							y: 100 * 1,
-							width: 100 * 1,
-							height: 100 * 1,
-							zOrder:10 * 1
-						})
-					}
-					const audioTrack = this.localTracks.find(item => item.kind === "audio")
-					this.transcodingTracks.push({
-						trackID: audioTrack.trackID,
-						x: 100 * 1,
-						y: 100 * 1,
-						width: 100 * 1,
-						height: 100 * 1,
-						zOrder: 1,
-						renderMode: "ASPECT_FILL",
-						SEIEnabled: 0,
-					})
-					console.log(this.transcodingTracks)
-					this.client.setTranscodingLiveStreamingTracks(this.transcodingConfig.streamID, this.transcodingTracks)
-					this.transcodingTracks.push(JSON.parse(JSON.stringify({
-						...this.trackConfig,
-						x: this.trackConfig.x * 1,
-						y: this.trackConfig.y * 1,
-						width: this.trackConfig.width * 1,
-						height: this.trackConfig.height * 1,
-						zOrder: this.trackConfig.zOrder * 1,
-						SEIEnabled: this.trackConfig.SEIEnabled === 1
-					})))
 					this.client.subscribe(params.trackList)
 				})
 				// 加入房间
@@ -563,5 +521,24 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
+	}
+	
+	.track-wrap {
+		margin: 0 30upx;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	
+	.track-item-wrap {
+		height: 375upx;
+		width: 335upx;
+		margin-bottom: 20upx;
+	}
+	
+	.track-video {
+		height: 375upx;
+		width: 335upx;
 	}
 </style>

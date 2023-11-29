@@ -1758,15 +1758,15 @@ export declare interface QNRTCAudioEffectMixerEvent {
      */
     onEffectError: (parmas: {
         effectID: number;
-        errorCode: number;
-        errorMessage: string;
+        code: number;
+        message: string;
     }) => void;
     /**
      * 音效混音发生错误时会触发此回调
      */
     onError: (params: {
-        errorCode: number;
-        errorMessage: string;
+        code: number;
+        errorMemessagessage: string;
     }) => void;
 }
 

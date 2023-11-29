@@ -372,35 +372,35 @@ export default {
   },
   onLoad() {
     this.handleJoinRoom()
-    setInterval(() => {
-      if (this.client) {
-        this.connectionState = this.client.getConnectionState()
-        this.remoteUsers = this.client.getRemoteUsers()
-        this.subscribedTracks = []
-        for (let i of this.remoteUsers) {
-          this.subscribedTracks.push(...this.client.getSubscribedTracks(i.userID))
-          const networkQuality = this.client.getUserNetworkQuality(i.userID)
-          this.$set(i, 'networkQuality', networkQuality)
-        }
-        this.remoteVideoTrackStats = this.client.getRemoteVideoTrackStats()
-        for (let i of this.remoteTracks) {
-          for (let key in this.remoteVideoTrackStats)
-            if (i.trackID === key) {
-              i.stats = this.remoteVideoTrackStats[key]
-            }
-        }
-        this.remoteAudioTrackStats = this.client.getRemoteAudioTrackStats()
-        for (let i of this.remoteTracks) {
-          for (let key in this.remoteAudioTrackStats)
-            if (i.trackID === key) {
-              i.stats = this.remoteAudioTrackStats[key]
-            }
-        }
-        this.publishedTracks = this.client.getPublishedTracks()
-        this.localAudioTrackStats = this.client.getLocalAudioTrackStats()
-        this.localVideoTrackStats = this.client.getLocalVideoTrackStats()
-      }
-    }, 1000)
+    // setInterval(() => {
+    //   if (this.client) {
+    //     this.connectionState = this.client.getConnectionState()
+    //     this.remoteUsers = this.client.getRemoteUsers()
+    //     this.subscribedTracks = []
+    //     for (let i of this.remoteUsers) {
+    //       this.subscribedTracks.push(...this.client.getSubscribedTracks(i.userID))
+    //       const networkQuality = this.client.getUserNetworkQuality(i.userID)
+    //       this.$set(i, 'networkQuality', networkQuality)
+    //     }
+    //     this.remoteVideoTrackStats = this.client.getRemoteVideoTrackStats()
+    //     for (let i of this.remoteTracks) {
+    //       for (let key in this.remoteVideoTrackStats)
+    //         if (i.trackID === key) {
+    //           i.stats = this.remoteVideoTrackStats[key]
+    //         }
+    //     }
+    //     this.remoteAudioTrackStats = this.client.getRemoteAudioTrackStats()
+    //     for (let i of this.remoteTracks) {
+    //       for (let key in this.remoteAudioTrackStats)
+    //         if (i.trackID === key) {
+    //           i.stats = this.remoteAudioTrackStats[key]
+    //         }
+    //     }
+    //     this.publishedTracks = this.client.getPublishedTracks()
+    //     this.localAudioTrackStats = this.client.getLocalAudioTrackStats()
+    //     this.localVideoTrackStats = this.client.getLocalVideoTrackStats()
+    //   }
+    // }, 1000)
   },
   methods: {
     saveBaseImgFile(base64) {
