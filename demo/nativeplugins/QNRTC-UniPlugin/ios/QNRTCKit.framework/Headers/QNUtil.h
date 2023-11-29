@@ -10,6 +10,7 @@
 #import <CoreVideo/CoreVideo.h>
 #import <UIKit/UIKit.h>
 #import <CoreAudioTypes/CoreAudioTypes.h>
+#import <CoreMedia/CoreMedia.h>
 
 @interface QNUtil : NSObject
 
@@ -21,10 +22,16 @@
 + (UIImage *)convertFrame:(CVPixelBufferRef)pixelBuffer;
 
 /*!
- * @abstract 根据最大最小范围调控音频数据音量
+ * @abstract 开始 dump 音频数据到本地
  *
- * @since v4.0.0
+ * @since v5.2.1
  */
-+ (void)scaleWithSat:(AudioBuffer *)audioBuffer scale:(double)scale max:(float)max min:(float) min;
++ (BOOL)startAecDump:(NSString *)path durationMs:(int)durationMs;
 
+/*!
+ * @abstract 停止 dump 音频数据
+ *
+ * @since v5.2.1
+ */
++ (void)stopAecDump;
 @end

@@ -31,21 +31,15 @@
 			}
 		},
 		{
-			"path": "pages/audio-mixer/index",
-			"style": {
-				"navigationBarTitleText": "混音配置"
-			}
-		},
-		{
 			"path": "pages/audio-music-mixer/index",
 			"style": {
-				"navigationBarTitleText": "新版混音音乐配置"
+				"navigationBarTitleText": "混音音乐配置"
 			}
 		},
 		{
 			"path": "pages/audio-effect-mixer/index",
 			"style": {
-				"navigationBarTitleText": "新版混音音效配置"
+				"navigationBarTitleText": "混音音效配置"
 			}
 		},
 		{

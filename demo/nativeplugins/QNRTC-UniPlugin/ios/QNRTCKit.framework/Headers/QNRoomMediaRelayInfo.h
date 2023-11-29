@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (copy, nonatomic) NSString *roomName;
 
+
 /*!
  * @abstract 初始化方法。
  *

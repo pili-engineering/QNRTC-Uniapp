@@ -108,7 +108,7 @@ export default {
     return {
 	  allEffectsVolume: 1,
       audioEffectID: '',
-	  audioEffectFilePath: 'http://qyustg29v.hn-bkt.clouddn.com/music.flac',
+	  audioEffectFilePath: 'https://demo-qnrtc-files.qnsdk.com/6005752BZMF.mp3',
 	  audioEffectList: [],
       remoteAudioTracks: {},
       microphoneAudioTrack: {},
@@ -222,11 +222,11 @@ export default {
 	    this.$refs.success.open()
 	  })
 	  this.audioEffectMixer.on("onEffectError", (params) => {
-	    this.errorMessage = `effect error：${params.effectID} ${params.errorCode} ${params.errorMessage}`
+	    this.errorMessage = `effect error：${params.effectID} ${params.code} ${params.message}`
 	    this.$refs.error.open()
 	  })
 	  this.audioEffectMixer.on("onError", (params) => {
-	    this.errorMessage = `error：${params.errorCode} ${params.errorCode} ${params.errorMessage}`
+	    this.errorMessage = `error：${params.errorCode} ${params.code} ${params.message}`
 	    this.$refs.error.open()
 	  })
 	},

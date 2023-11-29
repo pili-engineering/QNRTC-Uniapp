@@ -31,7 +31,7 @@ const store = new Vuex.Store({
     isAEC3Enabled: 1,
     multiStreamEnable: 0,
     audioScene: 'DEFAULT',
-    defaultAudioRouteToSpeakerphone: 1,
+    defaultAudioRouteToSpeakerphone: 0,
     reconnectionTimeout: 30000,
     platform: '',
     encodeWidth: 640,
@@ -124,7 +124,6 @@ const store = new Vuex.Store({
         uni.request({
           url: requestURL,
           success(res) {
-            console.log(res.data)
             state.token = res.data
           },
           fail(err) {

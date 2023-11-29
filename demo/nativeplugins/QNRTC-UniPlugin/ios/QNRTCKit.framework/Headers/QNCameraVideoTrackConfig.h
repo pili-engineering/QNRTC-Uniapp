@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
+#import "QNVideoEncoderConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,20 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString * tag;
 
 /*!
- * @abstract Track 的 bitrate (单位 kbps)，默认码率为 600kbps
- *
- * @since v4.0.0
- */
-@property (nonatomic, assign, readonly) NSUInteger bitrate;
-
-/*!
- * @abstract Track 编码画面大小
- *
- * @since v4.0.0
- */
-@property (nonatomic, assign, readonly) CGSize videoEncodeSize;
-
-/*!
  * @abstract Track 是否开启大小流
  *
  * @since v4.0.0
@@ -42,58 +30,64 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL multiStreamEnable;
 
 /*!
- * @abstract 初始化默认 Track。
+ * @abstract 摄像头的位置，默认为 AVCaptureDevicePositionFront。
  *
- * @discussion 默认码率为 600kbps。
- *
- * @since v4.0.0
+ * @since v5.0.0
  */
-- (instancetype)defaultCameraVideoTrackConfig;
+@property (nonatomic, assign) AVCaptureDevicePosition captureDevicePosition;
 
 /*!
- * @abstract 初始化指定 tag 参数的 Track。
+ * @abstract 视频编码配置。
  *
- * @discussion 默认码率为 600kbps。
+ * @since v5.0.0
+ */
+@property (nonatomic, strong, readonly) QNVideoEncoderConfig *config;
+
+/*!
+ * @abstract 初始化默认 Track 配置。
+ *
+ * @discussion 默认 tag 为 ""、码率为 600kbps、编码尺寸 480x640、24 帧、前置、关闭大小流
+ *
+ * @since v5.0.0
+ */
++ (instancetype)defaultCameraVideoTrackConfig;
+
+/*!
+ * @abstract 初始化指定 tag 参数的 Track 配置。
+ *
+ * @discussion 默认码率为 600kbps、编码尺寸 480x640、24 帧、前置、关闭大小流
+ *
+ * @param tag Track 的标识
  *
  * @since v4.0.0
  */
 - (instancetype)initWithSourceTag:(nullable NSString *)tag;
 
 /*!
- * @abstract 初始化指定 tag、bitrate (单位 kbps) 参数的 Track。
+ * @abstract 初始化指定 tag、config 参数的 Track 配置。
  *
- * @since v4.0.0
+ * @param tag Track 的标识
+ *
+ * @param config 视频编码配置 QNVideoEncoderConfig 实例
+ *
+ * @since v5.0.0
  */
 - (instancetype)initWithSourceTag:(nullable NSString *)tag
-                          bitrate:(NSUInteger)bitrate;
+                           config:(QNVideoEncoderConfig *)config;
 
 /*!
- * @abstract 初始化指定 tag、videoEncodeSize 参数的 Track。
+ * @abstract 初始化指定 tag、config、multiStreamEnable 参数的 Track 配置。
  *
- * @since v4.0.0
+ * @param tag Track 的标识
+ *
+ * @param config 视频编码配置 QNVideoEncoderConfig 实例
+ *
+ * @param multiStreamEnable 是否开启大小流
+ *
+ * @since v5.0.0
  */
 - (instancetype)initWithSourceTag:(nullable NSString *)tag
-                  videoEncodeSize:(CGSize)videoEncodeSize;
-
-/*!
- * @abstract 初始化指定 tag、bitrate (单位 kbps)、videoEncodeSize 参数的 Track。
- *
- * @since v4.0.0
- */
-- (instancetype)initWithSourceTag:(nullable NSString *)tag
-                          bitrate:(NSUInteger)bitrate
-                  videoEncodeSize:(CGSize)videoEncodeSize;
-
-/*!
- * @abstract 初始化指定 tag、bitrate (单位 kbps)、videoEncodeSize、 multiStreamEnable 参数的 Track。
- *
- * @since v4.0.0
- */
-- (instancetype)initWithSourceTag:(nullable NSString *)tag
-                          bitrate:(NSUInteger)bitrate
-                  videoEncodeSize:(CGSize)videoEncodeSize
+                           config:(QNVideoEncoderConfig *)config
                 multiStreamEnable:(BOOL)multiStreamEnable;
-
 @end
-
 NS_ASSUME_NONNULL_END

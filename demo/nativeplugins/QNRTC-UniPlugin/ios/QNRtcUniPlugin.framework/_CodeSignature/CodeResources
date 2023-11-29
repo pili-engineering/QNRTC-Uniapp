@@ -4,13 +4,104 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Frameworks/HappyDNS.framework/HappyDNS</key>
+		<data>
+		HGQkVw1wRdvHUitxeH6p8mEZkyk=
+		</data>
+		<key>Frameworks/HappyDNS.framework/Info.plist</key>
+		<data>
+		ekAktSXOybN6jXTmG3HbBKQtrtI=
+		</data>
+		<key>Frameworks/HappyDNS.framework/_CodeSignature/CodeResources</key>
+		<data>
+		o0a9kPKuS+5BQnwK5ZkhgWGUrRc=
+		</data>
+		<key>Frameworks/QNRTCKit.framework/Info.plist</key>
+		<data>
+		rpeN2c0MHLr3P9LejVB9t9CEE+0=
+		</data>
+		<key>Frameworks/QNRTCKit.framework/QNRTCKit</key>
+		<data>
+		fjc2Yd89T/QCtDcaFY0xG4+7of0=
+		</data>
+		<key>Frameworks/QNRTCKit.framework/_CodeSignature/CodeResources</key>
+		<data>
+		QrvpEZlkWypst9H0lSuf4jI/09A=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		1dqF+pEUecCyOYhBCjFYt18x+y8=
+		wECo4r7MwJgY8Y6ruR09IB5hg3Y=
 		</data>
 	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Frameworks/HappyDNS.framework/HappyDNS</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HGQkVw1wRdvHUitxeH6p8mEZkyk=
+			</data>
+			<key>hash2</key>
+			<data>
+			W6jEUH3GCJOl1OerAbk086KJyM8Z94WHDJzoEw/sJIc=
+			</data>
+		</dict>
+		<key>Frameworks/HappyDNS.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ekAktSXOybN6jXTmG3HbBKQtrtI=
+			</data>
+			<key>hash2</key>
+			<data>
+			cOOI3Ou9FxoY6XRKiK/hCkx4EoeuyZJ9SNHAVeEEKKU=
+			</data>
+		</dict>
+		<key>Frameworks/HappyDNS.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			o0a9kPKuS+5BQnwK5ZkhgWGUrRc=
+			</data>
+			<key>hash2</key>
+			<data>
+			GmSsAmtmVzxEZFyATDqw6QmLAmffHhlhEoWlLiNvvzE=
+			</data>
+		</dict>
+		<key>Frameworks/QNRTCKit.framework/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			rpeN2c0MHLr3P9LejVB9t9CEE+0=
+			</data>
+			<key>hash2</key>
+			<data>
+			9WnlNuD5LpdNDCt3kcvpC26BGF3o3WhZz9VOuiKPah4=
+			</data>
+		</dict>
+		<key>Frameworks/QNRTCKit.framework/QNRTCKit</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fjc2Yd89T/QCtDcaFY0xG4+7of0=
+			</data>
+			<key>hash2</key>
+			<data>
+			6QnoPH6QhMkFx7NplUegyMFbTUxZeDRicjoQU9WMQa8=
+			</data>
+		</dict>
+		<key>Frameworks/QNRTCKit.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			QrvpEZlkWypst9H0lSuf4jI/09A=
+			</data>
+			<key>hash2</key>
+			<data>
+			2TampS2g7NBHKcfgPgALkKW+EpUdhXCDi3Yw7hs/Gwo=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^.*</key>
