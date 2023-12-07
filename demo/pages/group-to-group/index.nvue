@@ -244,7 +244,7 @@
 		onBackPress() {
 			this.client.leave()
 			QNRTC.deinit()
-			console.log('执行onUnload')
+
 		},
 		onUnload() {
 			this.client.leave()
@@ -514,10 +514,6 @@
 		height: 375upx;
 		width: 335upx;
 		margin-bottom: 20upx;
-		backface-visibility: hidden;
-		transform: translate3d(0, 0, 0);
-		-webkit-backface-visibility: hidden;
-		-webkit-transform: translate3d(0, 0, 0);
 	}
 
 	.track-info-wrap {
@@ -529,7 +525,6 @@
 		padding-right: 20upx;
 		width: 750upx;
 		height: 300upx;
-		overflow: scroll
 	}
 
 	.track-video {

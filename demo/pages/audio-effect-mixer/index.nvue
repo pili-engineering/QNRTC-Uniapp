@@ -37,6 +37,7 @@
 		      :title="item.effectID"
 		      :name="item.effectID"
 			  v-for="(item,index) in audioEffectList"
+			  :key="index"
 		    >
 			<u--input class="margin-bottom-sm" placeholder="请输入混音音量" border="bottom" v-model="item.volume">
 				<template slot="prefix">
