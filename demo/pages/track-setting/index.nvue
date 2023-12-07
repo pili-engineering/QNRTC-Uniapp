@@ -1,149 +1,154 @@
 <template>
-	<u-popup class="btn-wrap" :overlay="false" :duration="0"  mode="right" :show="show">
-		<view class="btn-wrap">
-			<view class="scroll-view">
-				<scroll-view class="scroll-view-box" scroll-y="true">
-					<view class="scroll-view-wrap">
-						<view class="margin-top-sm">
-							<u-button size="mini" :type="isPublish ? 'error' : 'primary'" @click="publish"
-								:text=" isPublish ? '取消发布' : '发布' ">
-							</u-button>
+	<view class="setting-wrap">
+		<u-popup class="btn-wrap" :overlay="false" :duration="0" mode="right" :show="show">
+			<view class="btn-wrap">
+				<view class="scroll-view">
+					<scroll-view class="scroll-view-box" scroll-y="true">
+						<view class="scroll-view-wrap">
+							<view class="margin-top-sm">
+								<u-button size="mini" :type="isPublish ? 'error' : 'primary'" @click="publish"
+									:text=" isPublish ? '取消发布' : '发布' ">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.sei.open()" text="发送 SEI"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="startCapture" text="开启摄像头采集"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="stopCapture" text="关闭摄像头采集"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="switchCamera" text="切换摄像头"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="turnLightOn" text="打开闪光灯"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="turnLightOff" text="关闭闪光灯"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.manualFocus.open()"
+									text="手动聚焦"></u-button>
+							</view>
+							<view class="margin-top-sm" v-if="platform === 'ios'">
+								<u-button size="mini" type="primary" @click="$refs.videoOrientation.open()"
+									text="设置旋转方向">
+								</u-button>
+							</view>
+							<view class="margin-top-sm" v-if="platform === 'ios'">
+								<u-button size="mini" type="primary" @click="$refs.localFillMode.open()"
+									text="设置本地渲染模式">
+								</u-button>
+							</view>
+							<view class="margin-top-sm" v-if="platform === 'ios'">
+								<u-button size="mini" type="primary" @click="$refs.remoteFillMode.open()"
+									text="设置远端渲染模式">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="handleZoomOpen" text="设置缩放大小"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.beauty.open()"
+									text="设置美颜"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.pushImage.open()" text="图片替代画面">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="closePushImage" text="关闭替代画面"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.waterMark.open()"
+									text="设置水印"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="clearWaterMark" text="清除水印"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.volume.open()"
+									text="设置本地音量"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.remoteVolume.open()" text="设置远程音量">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.profile.open()"
+									text="设置远程质量"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="previewMirrorFrontFacing" text="前镜像切">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="previewMirrorRearFacing" text="后镜像切">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="encodeMirrorFrontFacing" text="前预览编码切">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="encodeMirrorRearFacing" text="后预览编码切">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.role.open()"
+									text="设置用户角色"></u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.speakerphone.open()" text="静音扬声器">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.audioScene.open()" text="切换音频场景">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.mediaRelay.open()" text="开启跨房转发">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="$refs.updateMediaRelay.open()"
+									text="更新跨房转发">
+								</u-button>
+							</view>
+							<view class="margin-top-sm">
+								<u-button size="mini" type="primary" @click="stopMediaRelay" text="关闭跨房转发">
+								</u-button>
+							</view>
 						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.sei.open()" text="发送 SEI"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="startCapture" text="开启摄像头采集"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="stopCapture" text="关闭摄像头采集"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="switchCamera" text="切换摄像头"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="turnLightOn" text="打开闪光灯"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="turnLightOff" text="关闭闪光灯"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.manualFocus.open()"
-								text="手动聚焦"></u-button>
-						</view>
-						<view class="margin-top-sm" v-if="platform === 'ios'">
-							<u-button size="mini" type="primary" @click="$refs.videoOrientation.open()" text="设置旋转方向">
-							</u-button>
-						</view>
-						<view class="margin-top-sm" v-if="platform === 'ios'">
-							<u-button size="mini" type="primary" @click="$refs.localFillMode.open()" text="设置本地渲染模式">
-							</u-button>
-						</view>
-						<view class="margin-top-sm" v-if="platform === 'ios'">
-							<u-button size="mini" type="primary" @click="$refs.remoteFillMode.open()" text="设置远端渲染模式">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="handleZoomOpen" text="设置缩放大小"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.beauty.open()" text="设置美颜"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.pushImage.open()" text="图片替代画面">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="closePushImage" text="关闭替代画面"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.waterMark.open()" text="设置水印"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="clearWaterMark" text="清除水印"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.volume.open()" text="设置本地音量"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.remoteVolume.open()" text="设置远程音量">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.profile.open()" text="设置远程质量"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="previewMirrorFrontFacing" text="前镜像切">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="previewMirrorRearFacing" text="后镜像切">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="encodeMirrorFrontFacing" text="前预览编码切">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="encodeMirrorRearFacing" text="后预览编码切">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.role.open()" text="设置用户角色"></u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.speakerphone.open()" text="静音扬声器">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.audioScene.open()" text="切换音频场景">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.mediaRelay.open()" text="开启跨房转发">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="$refs.updateMediaRelay.open()" text="更新跨房转发">
-							</u-button>
-						</view>
-						<view class="margin-top-sm">
-							<u-button size="mini" type="primary" @click="stopMediaRelay" text="关闭跨房转发">
-							</u-button>
-						</view>
-					</view>
-				</scroll-view>
+					</scroll-view>
+				</view>
+			</view>
+		</u-popup>
+		<view class="flex-top" v-if="platform === 'ios'">
+			<view class="margin-left-sm margin-right-sm" style="width: 100upx">
+				<u-button style="margin-top: 40upx" @click="handleCapture('AVCaptureSessionPreset352x288')" size="mini"
+					:type="capture === 'AVCaptureSessionPreset352x288' ? 'primary' : 'default'" text="288p">
+				</u-button>
+				<u-button style="margin-top: 40upx" @click="handleCapture('AVCaptureSessionPreset640x480')" size="mini"
+					:type="capture === 'AVCaptureSessionPreset640x480' ? 'primary' : 'default'" text="480p">
+				</u-button>
+				<u-button style="margin-top: 40upx" @click="handleCapture('AVCaptureSessionPreset1280x720')" size="mini"
+					:type="capture === 'AVCaptureSessionPreset1280x720' ? 'primary' : 'default'" text="720p">
+				</u-button>
+				<u-button style="margin-top: 40upx" @click="handleCapture('AVCaptureSessionPreset1920x1080')"
+					size="mini" :type="capture === 'AVCaptureSessionPreset1920x1080' ? 'primary' : 'default'"
+					text="1080p">
+				</u-button>
 			</view>
 		</view>
-	</u-popup>
-	<view class="setting-wrap">
 		<uni-popup ref="success" type="message" background-color="#fff">
 			<uni-popup-message type="success" :message="successMessage" :duration="1000"></uni-popup-message>
 		</uni-popup>
 		<uni-popup ref="error" type="message" background-color="#fff">
 			<uni-popup-message type="error" :message="errorMessage" :duration="1000"></uni-popup-message>
 		</uni-popup>
-		<view class="flex-top" v-if="platform === 'ios'">
-			<view class="flex-row margin-left-sm margin-right-sm" style="margin-top: 10upx">
-				<text>采集</text>
-				<button @click="handleCapture('AVCaptureSessionPreset352x288')" size="mini"
-					:type="capture === 'AVCaptureSessionPreset352x288' ? 'primary' : 'default'">
-					288p
-				</button>
-				<button @click="handleCapture('AVCaptureSessionPreset640x480')" size="mini"
-					:type="capture === 'AVCaptureSessionPreset640x480' ? 'primary' : 'default'">
-					480p
-				</button>
-				<button @click="handleCapture('AVCaptureSessionPreset1280x720')" size="mini"
-					:type="capture === 'AVCaptureSessionPreset1280x720' ? 'primary' : 'default'">
-					720p
-				</button>
-				<button @click="handleCapture('AVCaptureSessionPreset1920x1080')" size="mini"
-					:type="capture === 'AVCaptureSessionPreset1920x1080' ? 'primary' : 'default'">
-					1080p
-				</button>
-			</view>
-		</view>
 		<QNRTC-UniPlugin-SurfaceView :fillMode="localFillMode" :local="0"
 			:class="remoteVideoTracks ? 'local' : 'local2'" v-if="cameraVideoTrack" ref="local"
 			:identifyID="cameraVideoTrack.identifyID" :trackID="cameraVideoTrack.trackID"></QNRTC-UniPlugin-SurfaceView>
@@ -153,21 +158,24 @@
 			:trackID="remoteVideoTracks.trackID"></QNRTC-UniPlugin-SurfaceView>
 		<view class="main-btn-wrap">
 			<view class="main-btn-item">
-				<u-icon v-if="localAudioOn" color="white" name="mic" size="40" @click="setMutedLocalAudio"></u-icon>
-				<u-icon v-if="!localAudioOn" name="mic-off" size="40" @click="setMutedLocalAudio"></u-icon>
+				<u-icon v-if="localAudioOn" color="white" name="mic" size="30" @click="setMutedLocalAudio"></u-icon>
+				<u-icon v-if="!localAudioOn" name="mic-off" size="30" @click="setMutedLocalAudio"></u-icon>
 			</view>
 			<view class="main-btn-item">
-				<u-icon v-if="audioRouteToSpeakerphone" color="white" name="server-fill" size="40" @click="setAudioRouteToSpeakerphone"></u-icon>
-				<u-icon v-if="!audioRouteToSpeakerphone" name="phone-fill" size="40" @click="setAudioRouteToSpeakerphone">
+				<u-icon v-if="audioRouteToSpeakerphone" color="white" name="server-fill" size="30"
+					@click="setAudioRouteToSpeakerphone"></u-icon>
+				<u-icon v-if="!audioRouteToSpeakerphone" name="phone-fill" size="30"
+					@click="setAudioRouteToSpeakerphone">
 				</u-icon>
 			</view>
 			<view class="main-btn-item">
-				<u-icon v-if="localVideoOn" color="white" name="camera-fill" size="40" @click="setMutedLocalVideo"></u-icon>
-				<u-icon v-if="!localVideoOn" name="camera" size="40" @click="setMutedLocalVideo"></u-icon>
+				<u-icon v-if="localVideoOn" color="white" name="camera-fill" size="30"
+					@click="setMutedLocalVideo"></u-icon>
+				<u-icon v-if="!localVideoOn" name="camera" size="30" @click="setMutedLocalVideo"></u-icon>
 			</view>
 			<view class="main-btn-item">
-				<u-icon v-if="show" color="white" name="setting" size="40" @click="show=false"></u-icon>
-				<u-icon v-if="!show" name="setting-fill" size="40" @click="show=true"></u-icon>
+				<u-icon v-if="show" color="white" name="setting" size="30" @click="show=false"></u-icon>
+				<u-icon v-if="!show" name="setting-fill" size="30" @click="show=true"></u-icon>
 			</view>
 		</view>
 		<uni-popup ref="muted" type="dialog">
@@ -1018,6 +1026,7 @@
 					role: this.clientRole,
 				})
 
+
 				this.cameraVideoTrack = QNRTC.createCameraVideoTrack({
 					multiStreamEnable: this.multiStreamEnable === 1,
 					width: this.encodeWidth * 1,
@@ -1119,6 +1128,7 @@
 						})
 					}
 				})
+
 				this.client.on('onUserUnpublished', (params) => {
 					for (let i of params.trackList) {
 						if (this.remoteAudioTracks && i.trackID === this.remoteAudioTracks.trackID) {
@@ -1167,17 +1177,17 @@
 		width: 750upx;
 		position: fixed;
 		left: 0;
-		bottom: 20upx;
-		display:flex;
+		bottom: 40upx;
+		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	.main-btn-item {
 		background: red;
-		height: 120upx;
-		width: 120upx;
+		height: 100upx;
+		width: 100upx;
 		border-radius: 50%;
 		background-color: #3c9cff;
 		margin: 0 20upx;
@@ -1205,7 +1215,7 @@
 
 	.flex-top {
 		position: fixed;
-		top: 80upx;
+		top: 0;
 		left: 0;
 		width: 750upx;
 		height: 100upx;

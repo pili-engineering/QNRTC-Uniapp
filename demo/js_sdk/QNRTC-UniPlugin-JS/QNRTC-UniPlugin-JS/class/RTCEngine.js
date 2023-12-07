@@ -22,6 +22,7 @@ var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNRTCClientPlugin = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
 var QNRtcAudioMusicMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMusicMixer');
 var QNRtcAudioEffectMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioEffectMixer');
+var RTCClient = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcClient');
 var QNRTC = (function () {
     function QNRTC() {
     }
@@ -67,7 +68,10 @@ var QNRTC = (function () {
     QNRTC.createClient = function (config) {
         var _config = __assign(__assign({}, QNClientConfigPreset), config);
         QNRtcEngine.createClient(_config);
-        return new QNRTCClient();
+        var client = new QNRTCClient();
+        RTCClient.setAutoSubscribe(false);
+        client.setAutoSubscribe(true);
+        return client;
     };
     QNRTC.createMicrophoneAudioTrack = function (config) {
         var _config = __assign(__assign({}, QNMicrophoneAudioTrackConfigPreset), config);

@@ -14,7 +14,6 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import { QNLocalAudioTrack } from './RTCLocalAudioTrack';
-import { QNAudioMixer } from '../class/RTCAudioMixer';
 var QNRtcTrack = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcTrack');
 var QNMicrophoneAudioTrack = (function (_super) {
     __extends(QNMicrophoneAudioTrack, _super);
@@ -22,8 +21,6 @@ var QNMicrophoneAudioTrack = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     QNMicrophoneAudioTrack.prototype.createAudioMixer = function (url) {
-        QNRtcTrack.createAudioMixer(url);
-        return new QNAudioMixer(this.identifyID, url);
     };
     return QNMicrophoneAudioTrack;
 }(QNLocalAudioTrack));

@@ -75,11 +75,6 @@
                     "name": "QNRTC-UniPlugin-QNRtcTrack",
                     "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCTrackModule"
                 },
-                {
-                    "type": "module",
-                    "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
-                    "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMixerModule"
-                },
 				{
 				  "type": "module",
 				  "name": "QNRTC-UniPlugin-QNRtcAudioMusicMixer",
