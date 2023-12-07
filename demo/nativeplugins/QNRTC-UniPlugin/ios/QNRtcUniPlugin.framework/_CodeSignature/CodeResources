@@ -6,7 +6,7 @@
 	<dict>
 		<key>Frameworks/HappyDNS.framework/HappyDNS</key>
 		<data>
-		HGQkVw1wRdvHUitxeH6p8mEZkyk=
+		OH1sgEuKWuDM9+fIUOO0hxX/G8I=
 		</data>
 		<key>Frameworks/HappyDNS.framework/Info.plist</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Frameworks/QNRTCKit.framework/QNRTCKit</key>
 		<data>
-		fjc2Yd89T/QCtDcaFY0xG4+7of0=
+		WsPAKdhQC67sV35LPz47Q/6C1Kc=
 		</data>
 		<key>Frameworks/QNRTCKit.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -39,11 +39,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HGQkVw1wRdvHUitxeH6p8mEZkyk=
+			OH1sgEuKWuDM9+fIUOO0hxX/G8I=
 			</data>
 			<key>hash2</key>
 			<data>
-			W6jEUH3GCJOl1OerAbk086KJyM8Z94WHDJzoEw/sJIc=
+			/iJdU8hWBDy/46hiptf3gTs9zROvYfrOoxKeFC4lank=
 			</data>
 		</dict>
 		<key>Frameworks/HappyDNS.framework/Info.plist</key>
@@ -83,11 +83,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fjc2Yd89T/QCtDcaFY0xG4+7of0=
+			WsPAKdhQC67sV35LPz47Q/6C1Kc=
 			</data>
 			<key>hash2</key>
 			<data>
-			6QnoPH6QhMkFx7NplUegyMFbTUxZeDRicjoQU9WMQa8=
+			N0MDxN11AGiCNQT9imLFqrC4p8+UE7ZvqoiHJ8DMYmA=
 			</data>
 		</dict>
 		<key>Frameworks/QNRTCKit.framework/_CodeSignature/CodeResources</key>

@@ -286,7 +286,6 @@
 		onUnload() {
 			this.client.leave()
 			QNRTC.deinit()
-			this.timer = null
 		},
 		onLoad() {
 			this.handleJoinRoom()

@@ -15,3 +15,6 @@ export * from './class/RTCScreenVideoTrack';
 export * from './class/RTCTrack';
 export * from './class/RTCAudioMixer';
 export * from './preset/RTCPreset';
+export * from './class/RTCAudioEffectMixer';
+export * from './class/RTCAudioMusicMixer';
+export * from './class/RTCAudioEffect';

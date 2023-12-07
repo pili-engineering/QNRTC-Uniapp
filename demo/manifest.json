@@ -57,6 +57,9 @@
                 "push" : {},
                 "share" : {},
                 "ad" : {}
+            },
+            "splashscreen" : {
+                "iosStyle" : "common"
             }
         },
         "nativePlugins" : {

@@ -39,7 +39,7 @@
 	}
 
 	.margin-bottom-sm {
-		margin-bottom: 10px!important
+		margin-bottom: 20upx!important
 	}
 	
 	.flex-row {
@@ -76,10 +76,11 @@
 	}
 
 	.table {
-		margin-top: 20upx;
-		margin-bottom: 20upx;
+		margin-top: 10upx;
+		margin-bottom: 40upx;
 		flex: 1;
-		border: 1px solid #BEBEBE !important;
+		background-color: #eee;
+		border-radius: 10upx;
 	}
 
 	.th {
@@ -104,7 +105,7 @@
 	}
 
 	.tr {
-		font-size: 24upx;
+		font-size: 20upx;
 		flex:1;
 		text-align: center;
 		padding: 15upx 0;

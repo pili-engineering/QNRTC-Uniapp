@@ -23,6 +23,7 @@ var QNRTCClient = (function () {
             'onVideoSubscribed',
             'onAudioSubscribed',
         ];
+        this.autoSubscribeListenr = function () { };
     }
     QNRTCClient.prototype.transformRemoteRTCTrack = function (trackList) {
         var result = [];
@@ -155,7 +156,16 @@ var QNRTCClient = (function () {
         return RTCClient.getConnectionState();
     };
     QNRTCClient.prototype.setAutoSubscribe = function (autoSubscribe) {
-        RTCClient.setAutoSubscribe(autoSubscribe);
+        var _this = this;
+        if (autoSubscribe) {
+            this.autoSubscribeListenr = function (params) {
+                _this.subscribe(params.trackList);
+            };
+            this.on("onUserPublished", this.autoSubscribeListenr);
+        }
+        else {
+            this.off("onUserPublished", this.autoSubscribeListenr);
+        }
     };
     QNRTCClient.prototype.startLiveStreamingWithDirect = function (config) {
         RTCClient.startLiveStreamingWithDirect(config);

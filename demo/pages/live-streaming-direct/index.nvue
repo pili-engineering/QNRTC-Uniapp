@@ -1,40 +1,46 @@
 <template>
 	<view>
+		<uni-popup ref="success" type="message" background-color="#fff">
+			<uni-popup-message type="success" :message="successMessage" :duration="1000"></uni-popup-message>
+		</uni-popup>
+		<uni-popup ref="error" type="message" background-color="#fff">
+			<uni-popup-message type="error" :message="errorMessage" :duration="1000"></uni-popup-message>
+		</uni-popup>
 		<view class="wrap">
-			<view class="title">设置项：</view>
-			<uni-easyinput class="margin-top-sm" v-model="CDNConfig.streamID" placeholder="请输入streamID"></uni-easyinput>
-			<uni-easyinput class="margin-top-sm" v-model="CDNConfig.url" placeholder="请输入内容"></uni-easyinput>
-			<uni-data-picker class="margin-top-sm" placeholder="请选择videoTrack" :map="{text:'trackID',value:'trackID'}"
-				:localdata="allPcVideoTrack" popup-title="请选择videoTrack" v-model="CDNConfig.videoTracks">
-			</uni-data-picker>
-			<uni-data-picker class="margin-top-sm" placeholder="请选择audioTrack" :map="{text:'trackID',value:'trackID'}"
-				:localdata="allPcAudioTrack" popup-title="请选择audioTrack" v-model="CDNConfig.audioTracks">
-			</uni-data-picker>
+			<u--input v-model="CDNConfig.streamID" placeholder="请输入streamID"></u--input>
+			<u--input class="margin-top-sm" v-model="CDNConfig.url" placeholder="请输入内容"></u--input>
+			<u--input class="margin-top-sm" readonly :value="CDNConfig.videoTracks" placeholder="视频轨"></u--input>
+			<u--input class="margin-top-sm" readonly :value="CDNConfig.audioTracks" placeholder="音频轨"></u--input>
+			<u-picker :show="videoTrackShow" :columns="allPcVideoTrack" keyName="trackID" closeOnClickOverlay
+				@cancel="videoTrackShow=false" @close="videoTrackShow=false"
+				@confirm="handleConfirmVideoTrack($event)"></u-picker>
+			<u-picker :show="audioTrackShow" :columns="allPcAudioTrack" keyName="trackID" closeOnClickOverlay
+				@cancel="audioTrackShow=false" @close="audioTrackShow=false"
+				@confirm="handleConfirmAudioTrack($event)"></u-picker>
+			<u-button class="margin-top-sm" @click="videoTrackShow = true" text="选择视频轨" plain type="primary"></u-button>
+			<u-button class="margin-top-sm" @click="audioTrackShow = true" text="选择音频轨" plain type="primary"></u-button>
 			<view class="margin-top-sm">
-				<button type="primary" @click="handleStart">开始推流</button>
+				<u-button type="primary" @click="handleStartLiveStreamingWithDirect" text="开始推流"></u-button>
 			</view>
 			<view class="margin-top-sm">
-				<button type="warn" @click="handleEnd">停止推流</button>
+				<u-button type="error" @click="handleStopLiveStreamingWithDirect" text="停止推流"></u-button>
 			</view>
 		</view>
-		<view class="margin-top:20px;">
-			<div class="track-item-wrap" v-for="(item,index) in localTracks" :key="index">
-				<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="0"
-					:identifyID="item.identifyID" :trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
+		<view class="track-wrap">
+			<div class="track-item-wrap" v-for="(item,index) in localTracks" :key="index" v-if="item.kind === 'video'">
+				<QNRTC-UniPlugin-SurfaceView class="track-video" :local="0" :identifyID="item.identifyID"
+					:trackID="item.trackID"></QNRTC-UniPlugin-SurfaceView>
 				<view class="track-info-wrap">
-					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
-					<text class="track-info-item">用户ID：自己</text>
-					<text class="track-info-item">类型：{{item.kind}}</text>
+					<text class="track-info-item">{{item.trackID}}</text>
 				</view>
 			</div>
-			<div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID">
-				<QNRTC-UniPlugin-SurfaceView class="track-video" v-if="item.kind === 'video'" :local="1"
-					:identifyID="item.identifyID" :userID="item.userID" :trackID="item.trackID">
+			<div class="track-item-wrap" v-for="(item,index) in remoteTracks" :key="item.trackID"
+				v-if="item.kind === 'video'">
+				<QNRTC-UniPlugin-SurfaceView class="track-video" :local="1" :identifyID="item.identifyID"
+					:userID="item.userID" :trackID="item.trackID">
 				</QNRTC-UniPlugin-SurfaceView>
 				<view class="track-info-wrap">
-					<text class="track-info-item">轨道ID：{{item.trackID}}</text>
-					<text class="track-info-item">用户ID：{{item.userID}}</text>
-					<text class="track-info-item">类型：{{item.kind}}</text>
+					<text class="track-info-item">{{item.trackID}}</text>
 				</view>
 			</div>
 		</view>
@@ -53,9 +59,11 @@
 	export default {
 		data() {
 			return {
-				// 所有已订阅的轨
+				successMessage: "",
+				errorMessage: "",
+				videoTrackShow: false,
+				audioTrackShow: false,
 				remoteTracks: [],
-				// 本地轨
 				localTracks: [],
 				client: null,
 				CDNConfig: {
@@ -96,7 +104,7 @@
 						video.push(i)
 					}
 				}
-				return video
+				return [video]
 			},
 			allPcAudioTrack() {
 				const audio = []
@@ -112,15 +120,24 @@
 						audio.push(i)
 					}
 				}
-				return audio
+				return [audio]
 			}
 		},
 		methods: {
-			handleStart() {
+			handleStartLiveStreamingWithDirect() {
+				console.log(this.CDNConfig)
 				this.client.startLiveStreamingWithDirect(this.CDNConfig)
 			},
-			handleEnd() {
+			handleStopLiveStreamingWithDirect() {
 				this.client.stopLiveStreamingWithDirect(this.CDNConfig)
+			},
+			handleConfirmVideoTrack(event) {
+				this.$set(this.CDNConfig, "videoTracks", event.value[0].trackID)
+				this.videoTrackShow = false
+			},
+			handleConfirmAudioTrack(event) {
+				this.$set(this.CDNConfig, "audioTracks", event.value[0].trackID)
+				this.audioTrackShow = false
 			},
 			async handleJoinRoom() {
 				QNRTC.configRTC({
@@ -152,22 +169,20 @@
 					if (state === "CONNECTED") {
 						this.client.publish(this.localTracks, (onPublished, error) => {
 							if (onPublished) {
-								uni.showModal({
-									content: "发布成功"
-								})
+								this.successMessage = "发布成功"
+								this.$refs.success.open()
 							} else {
-								uni.showModal({
-									content: error.message
-								})
+								this.errorMessage = error.message
+								this.$refs.error.open()
 							}
 						})
 					} else if (state === "DISCONNECTED") {
 						if (info.reason === "KICKED_OUT") {
 							uni.showModal({
-								content: "被踢出房间",
+								content: '被踢出房间',
 								success: (res) => {
 									uni.navigateBack()
-								}
+								},
 							})
 						} else if (info.reason === "ROOM_CLOSED") {
 							uni.showModal({
@@ -191,9 +206,8 @@
 						})
 					} else if (state === "RECONNECTED") {
 						uni.hideLoading()
-						uni.showModal({
-							content: "重连成功"
-						})
+						this.successMessage = "重连成功"
+						this.$refs.success.open()
 					}
 				})
 				this.client.on("onVideoSubscribed", (params) => {
@@ -216,19 +230,16 @@
 					}
 				})
 				this.client.on("onStartLiveStreaming", (params) => {
-					uni.showModal({
-						content: `转推任务${params.streamID}创建成功`
-					})
+					this.successMessage = `转推任务${params.streamID}创建成功`
+					this.$refs.success.open()
 				})
 				this.client.on("onStoppedLiveStreaming", (params) => {
-					uni.showModal({
-						content: `转推任务${params.streamID}已停止`
-					})
+					this.successMessage = `转推任务${params.streamID}已停止`
+					this.$refs.success.open()
 				})
 				this.client.on("onErrorLiveStreaming", (params) => {
-					uni.showModal({
-						content: `转推任务${params.streamID}${params.info.message}`
-					})
+					this.errorMessage = `转推任务${params.streamID}${params.info.message}`
+					this.$refs.error.open()
 				})
 				this.client.join(this.token)
 			}
@@ -243,25 +254,22 @@
 		padding: 10px 0;
 	}
 
-	.title {
-		font-size: 28upx;
-		font-weight: bold;
-	}
-
-	.flex {
+	.track-wrap {
+		margin: 0 30upx;
 		display: flex;
 		flex-direction: row;
-		justify-content: flex-start;
-		align-items: center;
+		flex-wrap: wrap;
+		justify-content: space-between;
 	}
-
 
 	.track-item-wrap {
-		position: relative;
-		height: 300px;
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		background-color: black;
+		height: 375upx;
+		width: 335upx;
+		margin-bottom: 20upx;
+	}
+
+	.track-video {
+		height: 375upx;
+		width: 335upx;
 	}
 </style>

@@ -115,7 +115,7 @@ export default {
     QNRTC.deinit()
   },
   onUnload() {
-    this.client.leave()
+    this.client.leave() 
     QNRTC.deinit()
   },
   onLoad() {
@@ -221,13 +221,11 @@ export default {
         if (state === 'CONNECTED') {
           this.client.publish([this.microphoneAudioTrack], (onPublished, error) => {
             if (onPublished) {
-              uni.showModal({
-                content: '发布成功',
-              })
+			  this.successMessage = "发布成功"
+			  this.$refs.success.open()
             } else {
-              uni.showModal({
-                content: error.message,
-              })
+              this.errorMessage = error.message
+              this.$refs.error.open()
             }
           })
         } else if (state === 'DISCONNECTED') {

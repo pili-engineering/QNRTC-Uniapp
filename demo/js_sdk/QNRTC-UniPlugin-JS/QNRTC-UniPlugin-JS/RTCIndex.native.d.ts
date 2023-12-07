@@ -24,7 +24,7 @@ export declare enum QNAudioDevice {
     NONE = "NONE"
 }
 
-declare class QNAudioEffect {
+export declare class QNAudioEffect {
     private effectID;
     private filePath;
     constructor(effectID: number, filePath: string);
@@ -67,7 +67,7 @@ declare class QNAudioEffect {
     getLoopCount(): number;
 }
 
-declare class QNAudioEffectMixer {
+export declare class QNAudioEffectMixer {
     /** @internal */
     id: string;
     /**
@@ -292,7 +292,7 @@ export declare enum QNAudioMixerState {
     COMPLETED = "COMPLETED"
 }
 
-declare class QNAudioMusicMixer {
+export declare class QNAudioMusicMixer {
     /** @internal */
     id: string;
     /** @internal */
@@ -1322,11 +1322,11 @@ export declare class QNMicrophoneAudioTrack extends QNLocalAudioTrack {
     /**
      * 创建混音控制器对象
      * @remarks 创建混音控制器对象，当前仅支持同一时间混一路音频，重复对不同的 QNAudioMixer 执行 start 操作，后面的会覆盖前面的，即以后执行 start 的音频混音控制器为准进行混音
-     * @deprecated 该接口已废弃，请使用 {@link QNMicrophoneAudioTrack.createAudioMusicMixer} 或者 {@link QNMicrophoneAudioTrack.createAudioEffectMixer}
+     * @deprecated 该接口已废弃，请使用 {@link QNRTC.createAudioMusicMixer} 或者 {@link QNRTC.createAudioEffectMixer}
      * @param url 音频文件路径
      * @returns 混音控制器对象
      */
-    createAudioMixer(url: string): QNAudioMixer;
+    createAudioMixer(url: string): void;
 }
 
 /**
@@ -1851,6 +1851,10 @@ export declare class QNRTCClient {
      * @internal
      */
     private variationList;
+    /**
+     * @internal
+     */
+    private autoSubscribeListenr;
     /**
      * remote Track 类型转换
      * @internal
@@ -2490,6 +2494,7 @@ export declare class QNTrack {
     userID: string;
     /** @internal */
     raw: QNUNILocalTrack | QNUNIRemoteTrack;
+    /** @internal */
     constructor({ identifyID, kind, tag, trackID, raw, userID }: QNTrackParams);
     /**
      * 监听对应的事件
@@ -2543,6 +2548,9 @@ export declare class QNTrack {
     getMuted: () => boolean;
 }
 
+/**
+ * @internal
+ */
 export declare interface QNTrackParams {
     identifyID: string;
     kind: QNRTCTrackKind;
