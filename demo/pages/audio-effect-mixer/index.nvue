@@ -109,7 +109,7 @@ export default {
     return {
 	  allEffectsVolume: 1,
       audioEffectID: '',
-	  audioEffectFilePath: 'https://demo-qnrtc-files.qnsdk.com/6005752BZMF.mp3',
+	  audioEffectFilePath: 'http://qyustg29v.hn-bkt.clouddn.com/music.flac',
 	  audioEffectList: [],
       remoteAudioTracks: {},
       microphoneAudioTrack: {},
