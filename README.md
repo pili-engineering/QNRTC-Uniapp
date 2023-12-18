@@ -56,6 +56,14 @@
         </dict>
         <dict>
             <key>class</key>
+            <string>QNRtcAudioMixer</string>
+            <key>name</key>
+            <string>QNRTC-UniPlugin-QNRtcAudioMixer</string>
+            <key>type</key>
+            <string>module</string>
+        </dict>
+        <dict>
+            <key>class</key>
             <string>QNRtcTrack</string>
             <key>name</key>
             <string>QNRTC-UniPlugin-QNRtcTrack</string>
@@ -104,63 +112,106 @@
 5. 配置插件信息
 ```json
     {
-        "nativePlugins": [
+    "nativePlugins": [
+        {
+        "plugins": [
             {
-            "plugins": [
-                {
-                "type": "module",
-                "name": "QNRTC-UniPlugin-QNRtcEngine",
-                "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCModule"
-                }
-            ]
-            },
-            {
-            "plugins": [
-                {
-                "type": "module",
-                "name": "QNRTC-UniPlugin-QNRtcClient",
-                "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCClientModule"
-                }
-            ]
-            },
-            {
-            "plugins": [
-                {
-                "type": "module",
-                "name": "QNRTC-UniPlugin-QNRtcTrack",
-                "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCTrackModule"
-                }
-            ]
-            },
-            {
-            "plugins": [
-                {
-                "type": "module",
-                "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
-                "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMixerModule"
-                }
-            ]
-            },
-            {
-            "plugins": [
-                {
-                "type": "component",
-                "name": "QNRTC-UniPlugin-SurfaceView",
-                "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCSurfaceView"
-                }
-            ]
-            },
-            {
-            "plugins": [
-                {
-                "type": "component",
-                "name": "QNRTC-UniPlugin-TextureView",
-                "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCTextureView"
-                }
-            ]
+            "type": "module",
+            "name": "QNRTC-UniPlugin-QNRtcEngine",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCModule"
             }
         ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "module",
+            "name": "QNRTC-UniPlugin-QNRtcClient",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCClientModule"
+            }
+        ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "module",
+            "name": "QNRTC-UniPlugin-QNRtcTrack",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCTrackModule"
+            }
+        ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "module",
+            "name": "QNRTC-UniPlugin-QNRtcAudioMixer",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMixerModule"
+            }
+        ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "module",
+            "name": "QNRTC-UniPlugin-QNRtcAudioMusicMixer",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioMusicMixerModule"
+            }
+        ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "module",
+            "name": "QNRTC-UniPlugin-QNRtcAudioEffectMixer",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioEffectMixerModule"
+            }
+        ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "module",
+            "name": "QNRTC-UniPlugin-QNRtcAudioEffect",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.module.QNRTCAudioEffectModule"
+            }
+        ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "component",
+            "name": "QNRTC-UniPlugin-SurfaceView",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCSurfaceView"
+            }
+        ]
+        },
+        {
+        "plugins": [
+            {
+            "type": "component",
+            "name": "QNRTC-UniPlugin-TextureView",
+            "class": "uni.qiniu.droid.uniplugin_rtc.uni.component.QNRTCTextureView"
+            }
+        ]
+        }
+    ]
     }
+```
+6. 配置 proguard-rules.pro
+4.x
+```
+-keep class org.webrtc.** {*;}
+-dontwarn org.webrtc.**
+-keep class com.qiniu.droid.rtc.**{*;}
+-keep interface com.qiniu.droid.rtc.**{*;}
+```
+
+5.x
+```
+-keep class org.qnwebrtc.** {*;}
+-dontwarn org.qnwebrtc.**
+-keep class com.qiniu.droid.rtc.**{*;}
+-keep interface com.qiniu.droid.rtc.**{*;}
 ```
 
 > 编译原生插件，请见 **uniapp** [官方文档](https://nativesupport.dcloud.net.cn/NativePlugin/course/android)  
@@ -179,7 +230,7 @@
 
 ```typescript
 // 初始化
-QNRTC.configRTC()
+QNRTC.init()
 // 创建视频轨
 this.cameraVideoTrack = QNRTC.createCameraVideoTrack()
 // 创建核心类
@@ -199,7 +250,7 @@ client.publish(this.cameraVideoTrack, (onPublished, error) => {)
 
 ```typescript
 // 初始化
-QNRTC.configRTC()
+QNRTC.init()
 // 创建核心类
 const client = QNRTC.createClient()
 // 监听音频轨订阅事件
@@ -222,22 +273,8 @@ client.join(RoomToken)
 * 如果您还不知道如何生成 RoomToken，请先阅读 [RoomToken 签发服务](https://developer.qiniu.com/rtc/8813/roomToken)。
 * 具体使用方法可参考[官方文档](https://developer.qiniu.com/rtc/11847/an-overview-of-the-uniapp-sdk)。
 * 具体示例 demo 可参考[QNRTC-Uniapp-Demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/demo)。
-* 牛会议 demo 可参考[QNRTC-Uniapp-multiple-track-demo](https://github.com/pili-engineering/QNRTC-Uniapp/tree/main/multiple-track-demo)。
 
-> 牛会议 demo 未集成 js 与 原生插件，需要自行应用商店下载。
 ## FAQ
-
-#### 如何体验 Demo？
-
-您可以通过扫描下面的二维码，安装我们的 demo 应用『牛会议』，体验通话效果：
-
-iOS :
-
-![](http://pk0jd2tt5.bkt.clouddn.com/uniapp-ios.png)
-
-Android :
-
-![](http://pk0jd2tt5.bkt.clouddn.com/uniapp-android.png)
 
 #### 实时通话功能是否收费？
 

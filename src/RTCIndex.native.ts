@@ -1,10 +1,8 @@
 
-import QNRTC from './class/RTCEngine'
-export default QNRTC
-
+export * from './class/RTCEngine'
 export * from './enum/RTCEnum'
 export * from './interface/RTCInterface'
-export * from './RTCEvent'
+export * from './event/RTCEvent'
 export * from './class/RTCClient'
 export * from './class/RTCCameraVideoTrack'
 export * from './class/RTCLocalAudioTrack'
@@ -17,4 +15,7 @@ export * from './class/RTCRemoteVideoTrack'
 export * from './class/RTCScreenVideoTrack'
 export * from './class/RTCTrack'
 export * from './class/RTCAudioMixer'
-export { QNPublishResultCallback, QNScreenPermissionResultCallback} from './RTCPreset'
+export * from './preset/RTCPreset'
+export * from './class/RTCAudioEffectMixer'
+export * from './class/RTCAudioMusicMixer'
+export * from './class/RTCAudioEffect'

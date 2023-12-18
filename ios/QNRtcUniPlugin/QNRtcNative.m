@@ -2,7 +2,8 @@
 //  QNRtcNative.m
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/10/29.
+//  Created by 童捷 on 2021/10/8.
+//  Copyright © 2020 DCloud. All rights reserved.
 //
 
 #import "QNRtcNative.h"
@@ -16,13 +17,19 @@ typedef enum : NSUInteger {
     QNRtcTrackTypeRemote = 1 << 1
 } QNRtcTrackType;
 
-@interface QNRtcNative () <QNRTCDelegate, QNRTCClientDelegate, QNRemoteTrackDelegate, QNRemoteTrackVideoDataDelegate, QNCameraTrackVideoDataDelegate, QNAudioMixerDelegate>
+@interface QNRtcNative () <QNRTCDelegate, QNRTCClientDelegate, QNRemoteVideoTrackDelegate, QNRemoteAudioTrackDelegate, QNAudioMusicMixerDelegate, QNAudioEffectMixerDelegate>
 
 @property (nonatomic, strong) QNRTCClient *client;
+
+@property (nonatomic, strong) QNAudioMusicMixer *audioMusicMixer;
+
+@property (nonatomic, strong) QNAudioEffectMixer *audioEffectMixer;
 
 @property (atomic, strong) NSMutableArray<QNRtcLocalTrack *> *localTracks;
 
 @property (atomic, strong) NSMutableDictionary *localRenderViews;
+
+@property (atomic, strong) NSMutableDictionary *audioEffects;
 
 @property (atomic, strong) NSMutableDictionary *remoteRenderViews;
 
@@ -34,7 +41,9 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, weak) id<QNRtcTrackDelegate> rtcTrackDelegate;
 
-@property (nonatomic, weak) id<QNRtcAudioMixDelegate> rtcAudioMixDelegate;
+@property (nonatomic, weak) id<QNRtcAudioMusicMixerDelegate> rtcAudioMusicMixerDelegate;
+
+@property (nonatomic, weak) id<QNRtcAudioEffectMixerDelegate> rtcAudioEffectMixerDelegate;
 
 @end
 
@@ -48,6 +57,7 @@ typedef enum : NSUInteger {
         sharedInstance.localRenderViews = [NSMutableDictionary dictionary];
         sharedInstance.remoteRenderViews = [NSMutableDictionary dictionary];
         sharedInstance.snapshotList = [NSMutableDictionary dictionary];
+        sharedInstance.audioEffects = [NSMutableDictionary dictionary];
     });
     return sharedInstance;
 }
@@ -59,8 +69,8 @@ typedef enum : NSUInteger {
 
 - (void)configRTC:(NSDictionary *)configParam {
     QNRTCConfiguration *configuration = [QNRtcUniAdapter getNativeConfig:configParam];
-    [QNRTC configRTC:configuration];
-    [QNRTC setAudioRouteDelegate:self];
+    [QNRTC initRTC:configuration];
+    [QNRTC setRTCDelegate:self];
 }
 
 - (void)deinit {
@@ -76,13 +86,13 @@ typedef enum : NSUInteger {
         // 释放本地渲染图层
         for (NSInteger i = 0; i < self.localRenderViews.allKeys.count; i++) {
             NSString *key = self.localRenderViews.allKeys[i];
-            QNGLKView *localPreview = self.localRenderViews[key];
+            QNVideoGLView *localPreview = self.localRenderViews[key];
             [localPreview removeFromSuperview];
         }
         // 释放远端渲染图层
         for (NSInteger i = 0; i < self.remoteRenderViews.allKeys.count; i++) {
             NSString *key = self.remoteRenderViews.allKeys[i];
-            QNVideoView *remotePreview = self.remoteRenderViews[key];
+            QNVideoGLView *remotePreview = self.remoteRenderViews[key];
             [remotePreview removeFromSuperview];
         }
         
@@ -99,18 +109,21 @@ typedef enum : NSUInteger {
         // 离开房间   清空 client 和 delegate
         [self.client leave];
         self.client = nil;
+        self.audioMusicMixer = nil;
+        self.audioEffectMixer = nil;
         self.rtcEngineDelegate = nil;
         self.rtcClientDelegate = nil;
         self.rtcTrackDelegate = nil;
-        self.rtcAudioMixDelegate = nil;
-        
+        self.rtcAudioMusicMixerDelegate = nil;
+        self.rtcAudioEffectMixerDelegate = nil;
+        [self.audioEffects removeAllObjects];
         // 清理配置
         [QNRTC deinit];
     }];
 }
 
-- (void)createRTCClient {
-    self.client = [QNRTC createRTCClient];
+- (void)createRTCClient:(NSDictionary *)config {
+    self.client = [QNRTC createRTCClient:[QNRtcUniAdapter getNativeClientConfig:config]];
     self.client.delegate = self;
 }
 
@@ -122,7 +135,6 @@ typedef enum : NSUInteger {
     } else {
         microphoneAudioTrack = [QNRTC createMicrophoneAudioTrack];
     }
-    microphoneAudioTrack.audioMixer.delegate = self;
     QNRtcLocalTrack *localTrack = [QNRtcLocalTrack instanceWithIdentifyID:LOCAL_MIC_AUDIO_IDENTIFY_ID nativeTrack:microphoneAudioTrack];
     [self.localTracks addObject:localTrack];
     return [QNRtcUniAdapter getUniLocalTrack:localTrack];
@@ -151,16 +163,14 @@ typedef enum : NSUInteger {
     } else {
         cameraVideoTrack = [QNRTC createCameraVideoTrack];
     }
-    cameraVideoTrack.videoDelegate = self;
+    //    cameraVideoTrack.videoDelegate = self;
     
     // 解析 QNCameraVideoTrack 属性方法配置
     QNCameraVideoTrackSetting *cameraVideoTrackSetting = [QNRtcUniAdapter getNativeCameraVideoTrackSetting:trackConfig];
-    cameraVideoTrack.captureDevicePosition = cameraVideoTrackSetting.captureDevicePosition;
-    cameraVideoTrack.sessionPreset = cameraVideoTrackSetting.sessionPreset;
     if (cameraVideoTrack.videoFrameRate) cameraVideoTrack.videoFrameRate = cameraVideoTrackSetting.videoFrameRate.unsignedIntegerValue;
     
     [QNRtcTools dispatchSyncMainThreadSafe:^{
-        QNGLKView *cameraPreview = [[QNGLKView alloc] init];
+        QNVideoGLView *cameraPreview = [[QNVideoGLView alloc] init];
         [cameraVideoTrack play:cameraPreview];
         [self.localRenderViews setObject:cameraPreview forKey:LOCAL_CAMERA_VIDEO_IDENTIFY_ID];
     }];
@@ -180,10 +190,9 @@ typedef enum : NSUInteger {
     } else {
         screenVideoTrack = [QNRTC createScreenVideoTrack];
     }
-
+    
     // 解析 QNScreenVideoTrack 属性方法配置
     QNScreenVideoTrackSetting *screenVideoTrackSetting = [QNRtcUniAdapter getNativeScreenVideoTrackSetting:trackConfig];
-    if (screenVideoTrackSetting.screenRecorderFrameRate) [screenVideoTrack setScreenRecorderFrameRate:screenVideoTrackSetting.screenRecorderFrameRate.unsignedIntegerValue];
     
     QNRtcLocalTrack *localTrack = [QNRtcLocalTrack instanceWithIdentifyID:LOCAL_SCREEN_VIDEO_IDENTIFY_ID nativeTrack:screenVideoTrack];
     [self.localTracks addObject:localTrack];
@@ -211,6 +220,22 @@ typedef enum : NSUInteger {
     [QNRTC enableFileLogging];
 }
 
+- (void)setAudioScene:(NSString *) profile {
+    [QNRTC setAudioScene:[QNRtcUniAdapter getNativeAudioScene:profile]];
+}
+
+- (void)setSpeakerphoneMuted:(BOOL)muted {
+    [QNRTC setSpeakerphoneMuted:muted];
+}
+
+- (void)createAudioMusicMixer:(NSString *)musicPath {
+    self.audioMusicMixer = [QNRTC createAudioMusicMixer:musicPath musicMixerDelegate:self];
+}
+
+- (void)createAudioEffectMixer {
+    self.audioEffectMixer = [QNRTC createAudioEffectMixer:self];
+}
+
 #pragma mark - QNRtcClient
 - (void)setClientDelegate:(id<QNRtcClientDelegate>)delegate {
     self.rtcClientDelegate = delegate;
@@ -232,7 +257,7 @@ typedef enum : NSUInteger {
 
 - (NSString *)getConnectionState {
     if (!self.client) return @"";
-    return [QNRtcUniAdapter getUniConnectionState:self.client.roomState];
+    return [QNRtcUniAdapter getUniConnectionState:self.client.connectionState];
 }
 
 - (NSArray<NSDictionary *> *)getRemoteUsers {
@@ -268,7 +293,7 @@ typedef enum : NSUInteger {
 
 - (void)subscribe:(NSArray<NSDictionary *> *)tracks {
     if (!self.client) return;
-    NSArray<QNRemoteTrack *> *remoteTracks = [QNRtcUniAdapter getNativeSubscribeRemoteTracks:tracks];
+    NSArray<QNRemoteTrack *> *remoteTracks = [QNRtcUniAdapter getNativeSubscribeRemoteTracks:tracks client: self.client];
     [self.client subscribe:remoteTracks];
 }
 
@@ -285,12 +310,36 @@ typedef enum : NSUInteger {
 
 - (NSArray<NSDictionary *> *)getSubscribedTracks:(NSString *)userID {
     if (!self.client) return @[];
-    return [QNRtcUniAdapter getUniSubscribedTracks:[self.client getSubscribedTracks:userID] userID:userID];
+    NSMutableArray<QNTrack *> *result = [NSMutableArray array];
+    NSArray<QNRemoteUser *> *remoteUserList = self.client.remoteUserList;
+    for (QNRemoteUser *remoteUser in remoteUserList) {
+        if ([remoteUser.userID isEqualToString:userID]) {
+            NSArray <QNRemoteAudioTrack *> *audioTracks = remoteUser.audioTrack;
+            NSArray <QNRemoteVideoTrack *> *videoTracks = remoteUser.videoTrack;
+            for (QNRemoteAudioTrack *audioTrack in audioTracks) {
+                if ([audioTrack isSubscribed]) {
+                    [result addObject:audioTrack];
+                }
+            }
+            for (QNRemoteAudioTrack *videoTrack in videoTracks) {
+                if ([videoTrack isSubscribed]) {
+                    [result addObject:videoTrack];
+                }
+            }
+        }
+    }
+    return [QNRtcUniAdapter getUniSubscribedTracks:result userID:userID];
 }
 
 - (NSDictionary *)getUserNetworkQuality:(NSString *)userID {
     if (!self.client) return @{};
-    return [QNRtcUniAdapter getUniUserNetworkQuality:[self.client getUserNetworkQuality:userID]];
+    NSDictionary<NSString*, QNNetworkQuality*> *quality = [self.client getUserNetworkQuality];
+    NSArray *allKeys = [quality allKeys];
+    for (NSString *key in allKeys) {
+        QNNetworkQuality *value = [quality objectForKey:key];
+        return [QNRtcUniAdapter getUniUserNetworkQuality:value];
+    }
+    return @{};
 }
 
 - (NSDictionary *)getLocalAudioTrackStats {
@@ -315,7 +364,7 @@ typedef enum : NSUInteger {
 
 - (void)startLiveStreamingWithDirect:(NSDictionary *)config {
     if (!self.client) return;
-    QNDirectLiveStreamingConfig *directLiveStreamingConfig = [QNRtcUniAdapter getNativeDirectLiveStreamingConfig:config];
+    QNDirectLiveStreamingConfig *directLiveStreamingConfig = [QNRtcUniAdapter getNativeDirectLiveStreamingConfig:config tracks: self.localTracks];
     [self.client startLiveStreamingWithDirect:directLiveStreamingConfig];
 }
 
@@ -327,7 +376,7 @@ typedef enum : NSUInteger {
 
 - (void)stopLiveStreamingWithDirect:(NSDictionary *)config {
     if (!self.client) return;
-    QNDirectLiveStreamingConfig *directLiveStreamingConfig = [QNRtcUniAdapter getNativeDirectLiveStreamingConfig:config];
+    QNDirectLiveStreamingConfig *directLiveStreamingConfig = [QNRtcUniAdapter getNativeDirectLiveStreamingConfig:config tracks: self.localTracks];
     [self.client stopLiveStreamingWithDirect:directLiveStreamingConfig];
 }
 
@@ -354,35 +403,83 @@ typedef enum : NSUInteger {
     [self.client sendMessage:message toUsers:users messageId:messageId];
 }
 
+- (void)startRoomMediaRelay:(NSDictionary *)config callback:(void(^)(id result))callback {
+    if (!self.client) return;
+    [self.client startRoomMediaRelay:[QNRtcUniAdapter getNativeRoomMediaRelayConfig:config] completeCallback:^(NSDictionary *state, NSError *error) {
+        callback([QNRtcUniAdapter getUniRoomMediaRelayCallBack:state error:error]);
+    }];
+}
+
+- (void)updateRoomMediaRelay:(NSDictionary *)config callback:(void(^)(id result))callback {
+    if (!self.client) return;
+    [self.client updateRoomMediaRelay:[QNRtcUniAdapter getNativeRoomMediaRelayConfig:config] completeCallback:^(NSDictionary *state, NSError *error) {
+        callback([QNRtcUniAdapter getUniRoomMediaRelayCallBack:state error:error]);
+    }];
+}
+
+- (void)stopRoomMediaRelay:(void(^)(id result))callback {
+    if (!self.client) return;
+    [self.client stopRoomMediaRelay:^(NSDictionary *state, NSError *error) {
+        callback([QNRtcUniAdapter getUniRoomMediaRelayCallBack:state error:error]);
+    }];
+}
+
+- (void)setClientRole:(NSString *)role callback:(void(^)(id result))callback {
+    if (!self.client) return;
+    [self.client setClientRole:[QNRtcUniAdapter getNativeClientRole:role] completeCallback:^(QNClientRole newRole, NSError *error) {
+        callback([QNRtcUniAdapter getUniClientRoleCallBack:newRole error:error]);
+    }];
+}
+
 #pragma mark - QNRtcSurfaceView
-- (void)play:(UIView *)renderView local:(BOOL)local userID:(NSString *)userID identityID:(NSString *)identifyID trackID:(NSString *)trackID {
+- (void)play:(UIView *)renderView local:(BOOL)local userID:(NSString *)userID identityID:(NSString *)identifyID trackID:(NSString *)trackID fillMode:(NSString *)fillMode {
     if (local == 0) {
         for(QNRtcLocalTrack *localTrack in self.localTracks) {
             if ([localTrack.identifyID isEqualToString:identifyID]) {
                 if (self.localRenderViews && self.localRenderViews[identifyID]) {
                     for (UIView *subview in renderView.subviews) {
-                        if ([subview isKindOfClass:[QNGLKView class]]) {
+                        if ([subview isKindOfClass:[QNVideoGLView class]]) {
                             [subview removeFromSuperview];
                         }
                     }
-                    QNGLKView *localPreview = self.localRenderViews[identifyID];
+                    QNVideoGLView *localPreview = self.localRenderViews[identifyID];
+                    localPreview.fillMode = [QNRtcUniAdapter getNativeFillMode:fillMode];
                     localPreview.frame = renderView.bounds;
                     [renderView addSubview:localPreview];
                 }
             }
         }
     } else {
-        NSArray <QNTrack *> *subscribedTracks = [self.client getSubscribedTracks:userID];
+        NSMutableArray<QNTrack *> *subscribedTracks = [NSMutableArray array];
+        NSArray<QNRemoteUser *> *remoteUserList = self.client.remoteUserList;
+        for (QNRemoteUser *remoteUser in remoteUserList) {
+            if ([remoteUser.userID isEqualToString:userID]) {
+                NSArray <QNRemoteAudioTrack *> *audioTracks = remoteUser.audioTrack;
+                NSArray <QNRemoteVideoTrack *> *videoTracks = remoteUser.videoTrack;
+                for (QNRemoteAudioTrack *audioTrack in audioTracks) {
+                    if ([audioTrack isSubscribed]) {
+                        [subscribedTracks addObject:audioTrack];
+                    }
+                }
+                for (QNRemoteAudioTrack *videoTrack in videoTracks) {
+                    if ([videoTrack isSubscribed]) {
+                        [subscribedTracks addObject:videoTrack];
+                    }
+                }
+            }
+        }
         for (QNTrack *track in subscribedTracks) {
+            
             if(track.kind == QNTrackKindVideo && [track.trackID isEqual:trackID]) {
                 if (self.remoteRenderViews && self.remoteRenderViews[trackID]) {
                     for (UIView *subview in renderView.subviews) {
-                        if ([subview isKindOfClass:[QNVideoView class]]) {
+                        if ([subview isKindOfClass:[QNVideoGLView class]]) {
                             [subview removeFromSuperview];
                         }
                     }
-                    QNVideoView *remotePreview = self.remoteRenderViews[trackID];
+                    QNVideoGLView *remotePreview = self.remoteRenderViews[trackID];
                     remotePreview.frame = renderView.bounds;
+                    remotePreview.fillMode = [QNRtcUniAdapter getNativeFillMode:fillMode];
                     [renderView addSubview:remotePreview];
                 }
             }
@@ -412,11 +509,11 @@ typedef enum : NSUInteger {
     return targetTrack ? @(targetTrack.isSubscribed) : @NO;
 }
 
-- (void)sendSEI:(NSString *)identifyID message:(NSString *)message repeatCount:(NSNumber *)repeatCount {
+- (void)sendSEI:(NSString *)identifyID message:(NSString *)message repeatCount:(NSNumber *)repeatCount uuid:(NSString *)uuid {
     QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
     if (targetTrack && [targetTrack isKindOfClass:[QNLocalVideoTrack class]]) {
         QNLocalVideoTrack *localVideoTrack = (QNLocalVideoTrack *)targetTrack;
-        [localVideoTrack sendSEI:message repeatNmuber:repeatCount];
+        [localVideoTrack sendSEIWithData:[message dataUsingEncoding:NSUTF8StringEncoding] uuid:[uuid dataUsingEncoding:NSUTF8StringEncoding] repeatCount:repeatCount];
     }
 }
 
@@ -558,7 +655,7 @@ typedef enum : NSUInteger {
         QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
         if (targetTrack && [targetTrack isKindOfClass:[QNCameraVideoTrack class]]) {
             QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;
-            [cameraVideoTrack setFocusPointOfInterest:CGPointMake(x.floatValue, y.floatValue)];
+            cameraVideoTrack.manualFocus = CGPointMake(x.floatValue, y.floatValue);
         }
     }];
 }
@@ -582,31 +679,12 @@ typedef enum : NSUInteger {
     return @"";
 }
 
-- (void)setFillMode:(NSString *)identifyID fillMode:(NSString *)fillMode {
-    [QNRtcTools dispatchSyncMainThreadSafe:^{
-        QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
-        if (targetTrack && [targetTrack isKindOfClass:[QNCameraVideoTrack class]]) {
-            QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;
-            [cameraVideoTrack setFillMode:[QNRtcUniAdapter getNativeFillMode:fillMode]];
-        }
-    }];
-}
-
-- (NSString *)getFillMode:(NSString *)identifyID {
-    QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
-    if (targetTrack && [targetTrack isKindOfClass:[QNCameraVideoTrack class]]) {
-        QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;
-        return [QNRtcUniAdapter getUniFillMode:cameraVideoTrack.fillMode];
-    }
-    return @"";
-}
-
 - (void)setSessionPreset:(NSString *)identifyID sessionPreset:(NSString *)sessionPreset {
     [QNRtcTools dispatchSyncMainThreadSafe:^{
         QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
         if (targetTrack && [targetTrack isKindOfClass:[QNCameraVideoTrack class]]) {
             QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;
-            [cameraVideoTrack setSessionPreset:[QNRtcUniAdapter getNativeSessionPreset:sessionPreset]];
+            cameraVideoTrack.videoFormat = [QNRtcUniAdapter getNativeSessionPreset:sessionPreset];
         }
     }];
 }
@@ -637,7 +715,7 @@ typedef enum : NSUInteger {
             QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;
             QNBeautySetting *nativeBeautySetting = [QNRtcUniAdapter getNativeBeautySetting:beautySetting];
             if (nativeBeautySetting.enabled) [cameraVideoTrack setBeautifyModeOn:nativeBeautySetting.enabled.boolValue];
-            if (nativeBeautySetting.smoothLevel) [cameraVideoTrack setBeautify:nativeBeautySetting.smoothLevel.floatValue];
+            if (nativeBeautySetting.smoothLevel) [cameraVideoTrack setSmoothLevel:nativeBeautySetting.smoothLevel.floatValue];
             if (nativeBeautySetting.whiten) [cameraVideoTrack setWhiten:nativeBeautySetting.whiten.floatValue];
             if (nativeBeautySetting.redden) [cameraVideoTrack setRedden:nativeBeautySetting.redden.floatValue];
         }
@@ -650,7 +728,7 @@ typedef enum : NSUInteger {
         if (targetTrack && [targetTrack isKindOfClass:[QNCameraVideoTrack class]]) {
             QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;
             QNPushImageSetting *pushImageSetting = [QNRtcUniAdapter getNativePushImageSetting:image];
-            [cameraVideoTrack pushCameraTrackWithImage:pushImageSetting.image];
+            [cameraVideoTrack pushImage:pushImageSetting.image];
         }
     }];
 }
@@ -659,14 +737,8 @@ typedef enum : NSUInteger {
     [QNRtcTools dispatchSyncMainThreadSafe:^{
         QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
         if (targetTrack && [targetTrack isKindOfClass:[QNCameraVideoTrack class]]) {
-            QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;
-
-            // 获取当前预览分辨率
-            AVCaptureInputPort *port = [cameraVideoTrack.videoCaptureDeviceInput.ports objectAtIndex:0];
-            CMFormatDescriptionRef formatDescription = port.formatDescription;
-            CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(formatDescription);
-            
-            QNWaterMarkSetting *waterMarkSetting = [QNRtcUniAdapter getNativeWaterMarkSetting:waterMark nativeSessionPresetDimensions:dimensions];
+            QNCameraVideoTrack *cameraVideoTrack = (QNCameraVideoTrack *)targetTrack;     
+            QNWaterMarkSetting *waterMarkSetting = [QNRtcUniAdapter getNativeWaterMarkSetting:waterMark];
             if (waterMarkSetting.image) {
                 [cameraVideoTrack setWaterMarkWithImage:waterMarkSetting.image
                                                position:CGPointMake(waterMarkSetting.x ? waterMarkSetting.x.intValue : 0, waterMarkSetting.y ? waterMarkSetting.y.intValue : 0)];
@@ -714,16 +786,6 @@ typedef enum : NSUInteger {
     return @(isAvailable);
 }
 
-- (void)setScreenRecorderFrameRate:(NSString *)identifyID screenRecorderFrameRate:(NSNumber *)screenRecorderFrameRate {
-    [QNRtcTools dispatchSyncMainThreadSafe:^{
-        QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
-        if (targetTrack && [targetTrack isKindOfClass:[QNScreenVideoTrack class]]) {
-            QNScreenVideoTrack *screenVideoTrack = (QNScreenVideoTrack *)targetTrack;
-            [screenVideoTrack setScreenRecorderFrameRate:screenRecorderFrameRate.unsignedIntegerValue];
-        }
-    }];
-}
-
 - (void)setVolume:(NSString *)identifyID volume:(NSNumber *)volume {
     QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
     if (targetTrack && [targetTrack isKindOfClass:[QNMicrophoneAudioTrack class]]) {
@@ -732,107 +794,228 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)createAudioMixer:(NSString *)identifyID url:(NSString *)url {
+- (void)addAudioFilter:(NSString *)identifyID filter:(NSString *)filter {
     QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
-    if (targetTrack && [targetTrack isKindOfClass:[QNMicrophoneAudioTrack class]]) {
-        QNMicrophoneAudioTrack *microphoneAudioTrack = (QNMicrophoneAudioTrack *)targetTrack;
-        microphoneAudioTrack.audioMixer.audioURL = [NSURL URLWithString:url];
-        microphoneAudioTrack.audioMixer.rateInterval = 1;
+    if (targetTrack && [targetTrack isKindOfClass:[QNLocalAudioTrack class]]) {
+        QNLocalAudioTrack *localAudioTrack = (QNLocalAudioTrack *)targetTrack;
+        if ([filter isEqualToString:@"audioMusicMixer"] && self.audioMusicMixer) {
+            [localAudioTrack addAudioFilter:self.audioMusicMixer];
+        }
+        if ([filter isEqualToString:@"audioEffectMixer"] && self.audioEffectMixer) {
+            [localAudioTrack addAudioFilter:self.audioEffectMixer];
+        }
     }
 }
 
-#pragma mark - QNRtcAudioMixer
-- (void)setAudioMixDelegate:(id<QNRtcAudioMixDelegate>)delegate {
-    self.rtcAudioMixDelegate = delegate;
-}
-
-- (void)setAudioURL:(NSString *)identifyID url:(NSString *)url {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        audioMixer.audioURL = [NSURL URLWithString:url];
-    }
-}
-
-- (void)start:(NSString *)identifyID loopTimes:(NSNumber *)loopTimes {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer start:loopTimes.integerValue];
-    }
-}
-
-- (void)stop:(NSString *)identifyID {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer stop];
-    }
-}
-
-- (void)resume:(NSString *)identifyID {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer resume];
-    }
-}
-
-- (void)pause:(NSString *)identifyID {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer pause];
-    }
-}
-
-- (void)seekTo:(NSString *)identifyID timeUs:(NSNumber *)timeUs {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer seekTo:CMTimeMake(timeUs.doubleValue, 1e6)];
-    }
-}
-
-- (void)setMixingVolume:(NSString *)identifyID microphoneVolume:(NSNumber *)microphoneVolume musicVolume:(NSNumber *)musicVolume {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer setMicrophoneInputVolume:microphoneVolume.floatValue];
-        [audioMixer setMusicInputVolume:musicVolume.floatValue];
-    }
-}
-
-- (void)setPlayingVolume:(NSString *)identifyID volume:(NSNumber *)volume {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer setMusicOutputVolume:volume.floatValue];
-    }
-}
-
-- (void)setPlayBack:(NSString *)identifyID playBack:(BOOL)playBack {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        [audioMixer setPlayBack:playBack];
-    }
-}
-
-- (NSNumber *)getDuration:(NSString *)identifyID {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        return @(audioMixer.duration * 1000000);
-    }
-    return @0;
-}
-
-- (NSNumber *)getCurrentPosition:(NSString *)identifyID {
-    QNAudioMixer *audioMixer = [self getAudioMixerWithIdentifyID:identifyID];
-    if (audioMixer) {
-        return @(audioMixer.currentTime * 1000000);
-    }
-    return @0;
-}
-
-- (QNAudioMixer *)getAudioMixerWithIdentifyID:(NSString *)identifyID {
+- (void)removeAudioFilter:(NSString *)identifyID filter:(NSString *)filter; {
     QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
-    if (targetTrack && [targetTrack isKindOfClass:[QNMicrophoneAudioTrack class]]) {
-        QNMicrophoneAudioTrack *microphoneAudioTrack = (QNMicrophoneAudioTrack *)targetTrack;
-        return microphoneAudioTrack.audioMixer;
+    if (targetTrack && [targetTrack isKindOfClass:[QNLocalAudioTrack class]]) {
+        QNLocalAudioTrack *localAudioTrack = (QNLocalAudioTrack *)targetTrack;
+        if ([filter isEqualToString:@"audioMusicMixer"] && self.audioMusicMixer) {
+            [localAudioTrack removeAudioFilter:self.audioMusicMixer];
+        }
+        if ([filter isEqualToString:@"audioEffectMixer"] && self.audioEffectMixer) {
+            [localAudioTrack removeAudioFilter:self.audioEffectMixer];
+        }
     }
-    return nil;
+}
+
+#pragma mark - QNRtcAudioMusicMixer
+- (NSNumber *)audioMusicMixerGetDuration:(NSString *)filePath {
+    if (!self.audioMusicMixer) return @0;
+    return @([QNAudioMusicMixer getDuration:filePath]);
+}
+
+- (void)audioMusicMixerStart:(int)loopCount {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer start:loopCount];
+    }
+}
+
+- (void)audioMusicMixerStop {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer stop];
+    }
+}
+
+- (void)audioMusicMixerPause {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer pause];
+    }
+}
+
+- (void)audioMusicMixerResume {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer resume];
+    }
+}
+
+- (void)audioMusicMixerSeekTo:(int64_t)position {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer seekTo:position];
+    }
+}
+
+- (void)audioMusicMixerSetPublishEnabled:(BOOL)publishEnabled {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer setPublishEnabled:publishEnabled];
+    }
+}
+
+- (BOOL)audioMusicMixerIsPublishEnabled {
+    if (!self.audioMusicMixer) return NO;
+    return [self.audioMusicMixer isPublishEnabled];
+}
+
+- (NSNumber *)audioMusicMixerGetCurrentPosition {
+    if (!self.audioMusicMixer) return @0;
+    return @([self.audioMusicMixer getCurrentPosition]);
+}
+
+- (void)audioMusicMixerSetMusicVolume:(float)volume {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer setMusicVolume:volume];
+    }
+}
+
+- (NSNumber *)audioMusicMixerGetMusicVolume {
+    if (!self.audioMusicMixer) return @0;
+    return @([self.audioMusicMixer getMusicVolume]);
+}
+
+- (void)audioMusicMixerSetStartPosition:(int64_t)position {
+    if (self.audioMusicMixer) {
+        [self.audioMusicMixer setStartPosition:position];
+    }
+}
+
+- (NSNumber *)audioMusicMixerGetStartPosition {
+    if (!self.audioMusicMixer) return @0;
+    return @([self.audioMusicMixer getStartPosition]);
+}
+
+#pragma mark - QNRtcAudioEffectMixer
+- (void)createAudioEffect:(int)effectID filePath:(NSString *)filePath {
+    if (!self.audioEffectMixer) return;
+    if ([self.audioEffects objectForKey: @(effectID)]) return;
+    QNAudioEffect* audioEffect = [self.audioEffectMixer createAudioEffectWithEffectID:effectID filePath:filePath];
+    [self.audioEffects setObject:audioEffect forKey: @(effectID)];
+}
+
+- (void)setPublishEnabled:(BOOL)publishEnabled effectID:(int)effectID {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer setPublishEnabled:publishEnabled effectID:effectID];
+}
+
+- (BOOL)isPublishEnabled:(int)effectID {
+    if (!self.audioEffectMixer) return NO;
+    return [self.audioEffectMixer isPublishEnabled:effectID];
+}
+
+- (void)start:(int)effectID {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer start: effectID];
+}
+
+- (void)stop:(int)effectID {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer stop: effectID];
+}
+
+- (void)pause:(int)effectID {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer pause: effectID];
+}
+
+- (void)resume:(int)effectID {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer resume: effectID];
+}
+
+- (int64_t)getCurrentPosition:(int)effectID {
+    if (!self.audioEffectMixer) return 0;
+    return [self.audioEffectMixer getCurrentPosition:effectID];
+}
+
+- (void)setVolume:(float)volume effectID:(int)effectID {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer setVolume: volume effectID:effectID];
+}
+
+- (float)getVolume:(int)effectID {
+    if (!self.audioEffectMixer) return 0.0;
+    return [self.audioEffectMixer getVolume:effectID];
+}
+
+- (void)setAllEffectsVolume:(float)volume {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer setAllEffectsVolume:volume];
+}
+
+- (void)stopAll {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer stopAll];
+}
+
+- (void)pauseAll {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer stopAll];
+}
+
+- (void)resumeAll {
+    if (!self.audioEffectMixer) return;
+    [self.audioEffectMixer stopAll];
+}
+
+#pragma mark - QNRtcAudioEffect
+- (int64_t)getDuration:(NSString *)filePath {
+    return [QNAudioEffect getDuration:filePath];
+}
+
+- (int)getID:(int)effectID {
+    if (self.audioEffects && [self.audioEffects objectForKey: @(effectID)]) {
+        QNAudioEffect* audioEffect = [self.audioEffects objectForKey: @(effectID)];
+        return [audioEffect getID];
+    }
+    return 0;
+}
+
+- (NSString *)getFilePath: (int)effectID {
+    if (self.audioEffects && [self.audioEffects objectForKey: @(effectID)]) {
+        QNAudioEffect* audioEffect = [self.audioEffects objectForKey: @(effectID)];
+        return [audioEffect getFilePath];
+    }
+    return @"";
+}
+
+- (void)setStartPosition:(int)effectID position:(int64_t)position {
+    if (self.audioEffects && [self.audioEffects objectForKey: @(effectID)]) {
+        QNAudioEffect* audioEffect = [self.audioEffects objectForKey: @(effectID)];
+        [audioEffect setStartPosition:position];
+    }
+}
+
+- (int64_t)getStartPosition:(int)effectID {
+    if (self.audioEffects && [self.audioEffects objectForKey: @(effectID)]) {
+        QNAudioEffect* audioEffect = [self.audioEffects objectForKey: @(effectID)];
+        return [audioEffect getStartPosition];
+    }
+    return 0;
+}
+
+- (void)setLoopCount:(int)effectID loopCount:(int)loopCount {
+    if (self.audioEffects && [self.audioEffects objectForKey: @(effectID)]) {
+        QNAudioEffect* audioEffect = [self.audioEffects objectForKey: @(effectID)];
+        [audioEffect setLoopCount:loopCount];
+    }
+}
+
+- (int)getLoopCount:(int)effectID {
+    if (self.audioEffects && [self.audioEffects objectForKey: @(effectID)]) {
+        QNAudioEffect* audioEffect = [self.audioEffects objectForKey: @(effectID)];
+        return [audioEffect getLoopCount];
+    }
+    return 0;
 }
 
 #pragma mark - QNRtcNativeExtension
@@ -842,8 +1025,20 @@ typedef enum : NSUInteger {
 - (NSArray<QNRemoteTrack *> *)getSubscribedTracks {
     NSMutableArray<QNRemoteTrack *> *subscribedTrack = [NSMutableArray array];
     for (QNRemoteUser *remoteUser in self.client.remoteUserList) {
-        NSArray<QNRemoteTrack *> *remoteTracks = (NSArray<QNRemoteTrack *> *)[self.client getSubscribedTracks:remoteUser.userID];
-        [subscribedTrack addObjectsFromArray:remoteTracks];
+        NSArray <QNRemoteAudioTrack *> *audioTracks = remoteUser.audioTrack;
+        NSArray <QNRemoteVideoTrack *> *videoTracks = remoteUser.videoTrack;
+        NSMutableArray<QNRemoteTrack *> *result = [NSMutableArray array];
+        for (QNRemoteAudioTrack *audioTrack in audioTracks) {
+            if ([audioTrack isSubscribed]) {
+                [result addObject:audioTrack];
+            }
+        }
+        for (QNRemoteAudioTrack *videoTrack in videoTracks) {
+            if ([videoTrack isSubscribed]) {
+                [result addObject:videoTrack];
+            }
+        }
+        [subscribedTrack addObjectsFromArray:result];
     }
     return subscribedTrack;
 }
@@ -884,7 +1079,7 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - QNRTCDelegate
-- (void)QNRTCDidChangeRTCAudioOutputToDevice:(QNAudioDeviceType)deviceType {
+- (void)RTCDidAudioRouteChanged:(QNAudioDeviceType)deviceType {
     if (self.rtcEngineDelegate && [self.rtcEngineDelegate respondsToSelector:@selector(rtcNative:onAudioRouteChanged:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcEngineDelegate rtcNative:self onAudioRouteChanged:[QNRtcUniAdapter getUniAudioDeviceChangedCallBackWithDeviceType:deviceType]];
@@ -909,26 +1104,24 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)RTCClient:(QNRTCClient *)client didReconnectingOfUserID:(NSString *)userID {
-    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onUserReconnecting:)]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcClientDelegate rtcNative:self onUserReconnecting:[QNRtcUniAdapter getUniUserReconnectingCallBackWithUserID:userID]];
-        });
-    }
-}
-
-- (void)RTCClient:(QNRTCClient *)client didReconnectedOfUserID:(NSString *)userID {
-    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onUserReconnected:)]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcClientDelegate rtcNative:self onUserReconnected:[QNRtcUniAdapter getUniUserReconnectedCallBackWithUserID:userID]];
-        });
-    }
-}
-
 - (void)RTCClient:(QNRTCClient *)client didLeaveOfUserID:(NSString *)userID {
     if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onUserLeft:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcClientDelegate rtcNative:self onUserLeft:[QNRtcUniAdapter getUniUserLeftCallBackWithUserID:userID]];
+        });
+    }
+}
+
+- (void)RTCClient:(QNRTCClient *)client didSubscribedRemoteVideoTracks:(NSArray<QNRemoteVideoTrack *> *)videoTracks audioTracks:(NSArray<QNRemoteAudioTrack *> *)audioTracks ofUserID:(NSString *)userID {
+    for (QNRemoteVideoTrack *remoteVideoTrack in videoTracks) {
+        remoteVideoTrack.delegate = self;
+    }
+    for (QNRemoteAudioTrack *remoteAudioTrack in audioTracks) {
+        remoteAudioTrack.delegate = self;
+    }
+    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onAudioSubscribed:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rtcClientDelegate rtcNative:self onAudioSubscribed:[QNRtcUniAdapter getUniAudioSubscribedCallBackWithAudioTracks:audioTracks userID:userID]];
         });
     }
 }
@@ -949,24 +1142,33 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)RTCClient:(QNRTCClient *)client didSubscribedRemoteVideoTracks:(NSArray<QNRemoteVideoTrack *> *)videoTracks audioTracks:(NSArray<QNRemoteAudioTrack *> *)audioTracks ofUserID:(NSString *)userID {
-    for (QNRemoteVideoTrack *remoteVideoTrack in videoTracks) {
-        remoteVideoTrack.videoDelegate = self;
-        remoteVideoTrack.remoteDelegate = self;
-    }
-    for (QNRemoteAudioTrack *remoteAudioTrack in audioTracks) {
-        remoteAudioTrack.remoteDelegate = self;
-    }
-    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onAudioSubscribed:)]) {
+- (void)RTCClient:(QNRTCClient *)client didReconnectingOfUserID:(NSString *)userID {
+    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onUserReconnecting:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcClientDelegate rtcNative:self onAudioSubscribed:[QNRtcUniAdapter getUniAudioSubscribedCallBackWithAudioTracks:audioTracks userID:userID]];
+            [self.rtcClientDelegate rtcNative:self onUserReconnecting:[QNRtcUniAdapter getUniUserReconnectingCallBackWithUserID:userID]];
+        });
+    }
+}
+
+- (void)RTCClient:(QNRTCClient *)client didReconnectedOfUserID:(NSString *)userID {
+    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onUserReconnected:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rtcClientDelegate rtcNative:self onUserReconnected:[QNRtcUniAdapter getUniUserReconnectedCallBackWithUserID:userID]];
+        });
+    }
+}
+
+- (void)RTCClient:(QNRTCClient *)client didReceiveMessage:(QNMessageInfo *)message {
+    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onMessageReceived:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rtcClientDelegate rtcNative:self onMessageReceived:[QNRtcUniAdapter getUniMessageReceivedCallBackWithMessage:message]];
         });
     }
 }
 
 - (void)RTCClient:(QNRTCClient *)client firstVideoDidDecodeOfTrack:(QNRemoteVideoTrack *)videoTrack remoteUserID:(NSString *)userID {
     // 创建远端渲染图层
-    QNVideoView *remotePreview = [[QNVideoView alloc] init];
+    QNVideoGLView *remotePreview = [[QNVideoGLView alloc] init];
     [videoTrack play:remotePreview];
     [self.remoteRenderViews setObject:remotePreview forKey:videoTrack.trackID];
     
@@ -986,7 +1188,7 @@ typedef enum : NSUInteger {
     for (NSInteger i = 0; i < self.remoteRenderViews.allKeys.count; i++) {
         NSString *currentKey = self.remoteRenderViews.allKeys[i];
         if ([currentKey isEqualToString:videoTrack.trackID]) {
-            QNVideoView *remotePreview = self.remoteRenderViews[currentKey];
+            QNVideoGLView *remotePreview = self.remoteRenderViews[currentKey];
             [self.remoteRenderViews removeObjectForKey:currentKey];
             [remotePreview removeFromSuperview];
             remotePreview = nil;
@@ -995,15 +1197,7 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)RTCClient:(QNRTCClient *)client didReceiveMessage:(QNMessageInfo *)message {
-    if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onMessageReceived:)]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcClientDelegate rtcNative:self onMessageReceived:[QNRtcUniAdapter getUniMessageReceivedCallBackWithMessage:message]];
-        });
-    }
-}
-
-- (void)RTCClient:(QNRTCClient *)client didStartLiveStreamingWith:(NSString *)streamID {
+- (void)RTCClient:(QNRTCClient *)client didStartLiveStreaming:(NSString *)streamID {
     if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onStartLiveStreaming:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcClientDelegate rtcNative:self onStartLiveStreaming:[QNRtcUniAdapter getUniStartLiveStreamingCallBackWithStreamID:streamID]];
@@ -1011,7 +1205,7 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)RTCClient:(QNRTCClient *)client didStopLiveStreamingWith:(NSString *)streamID {
+- (void)RTCClient:(QNRTCClient *)client didStopLiveStreaming:(NSString *)streamID {
     if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onStoppedLiveStreaming:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcClientDelegate rtcNative:self onStoppedLiveStreaming:[QNRtcUniAdapter getUniStoppedLiveStreamingCallBackWithStreamID:streamID]];
@@ -1019,7 +1213,7 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)RTCClient:(QNRTCClient *)client didTranscodingTracksUpdated:(BOOL)success withStreamID:(NSString *)streamID {
+- (void)RTCClient:(QNRTCClient *)client didTranscodingTracksUpdated:(NSString *)streamID {
     if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onUpdatedLiveStreaming:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcClientDelegate rtcNative:self onUpdatedLiveStreaming:[QNRtcUniAdapter getUniUpdatedLiveStreamingCallBackWithStreamID:streamID]];
@@ -1027,7 +1221,7 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)RTCClient:(QNRTCClient *)client didErrorLiveStreamingWith:(NSString *)streamID errorInfo:(QNLiveStreamingErrorInfo *)errorInfo {
+- (void)RTCClient:(QNRTCClient *)client didErrorLiveStreaming:(NSString *)streamID errorInfo:(QNLiveStreamingErrorInfo *)errorInfo {
     if (self.rtcClientDelegate && [self.rtcClientDelegate respondsToSelector:@selector(rtcNative:onErrorLiveStreaming:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcClientDelegate rtcNative:self onErrorLiveStreaming:[QNRtcUniAdapter getUniErrorLiveStreamingCallBackWithStreamID:streamID errorInfo:errorInfo]];
@@ -1036,15 +1230,24 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - QNTrackDelegate
-- (void)remoteTrack:(QNRemoteTrack *)remoteTrack didMutedByRemoteUserID:(NSString *)userID {
-    if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onMuteStateChanged:)]) {
+- (void)remoteVideoTrack:(QNRemoteVideoTrack *)remoteVideoTrack didMuteStateChanged:(BOOL)isMuted {
+    if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onVideoMuteStateChanged:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcTrackDelegate rtcNative:self onMuteStateChanged:[QNRtcUniAdapter getUniMuteStateChangedCallBackWithTrackID:remoteTrack.trackID   isMuted:remoteTrack.muted]];
+            [self.rtcTrackDelegate rtcNative:self onVideoMuteStateChanged:[QNRtcUniAdapter getUniMuteStateChangedCallBackWithTrackID:remoteVideoTrack.trackID   isMuted:remoteVideoTrack.muted]];
         });
     }
 }
 
-- (void)remoteVideoTrack:(QNRemoteVideoTrack *)remoteVideoTrack didSubscribeProfileChanged:(QNTrackProfile)profile {
+- (void)remoteAudioTrack:(QNRemoteAudioTrack *)remoteAudioTrack didMuteStateChanged:(BOOL)isMuted {
+    if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onAudioMuteStateChanged:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rtcTrackDelegate rtcNative:self onAudioMuteStateChanged:[QNRtcUniAdapter getUniMuteStateChangedCallBackWithTrackID:remoteAudioTrack.trackID   isMuted:remoteAudioTrack.muted]];
+        });
+    }
+}
+    
+
+- (void)remoteVideoTrack:(QNRemoteVideoTrack *)remoteVideoTrack didVideoProfileChanged:(QNTrackProfile)profile {
     if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onVideoProfileChanged:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.rtcTrackDelegate rtcNative:self onVideoProfileChanged:[QNRtcUniAdapter getUniVideoProfileChangedCallBackWithTrackID:remoteVideoTrack.trackID profile:profile]];
@@ -1052,54 +1255,63 @@ typedef enum : NSUInteger {
     }
 }
 
-// 远端视频 Track 根据 TrackID 获取 key
-- (void)remoteVideoTrack:(QNRemoteVideoTrack *)remoteVideoTrack didGetPixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onRemoteVideoFrame:trackID:)]) {
-            if([self.snapshotList[remoteVideoTrack.trackID]  isEqual: @YES]) {
-                [self.rtcTrackDelegate rtcNative:self onRemoteVideoFrame:pixelBuffer trackID:remoteVideoTrack.trackID];
-                [self.snapshotList setObject:@NO forKey:remoteVideoTrack.trackID];
-            }
-    }
+#pragma mark - QNAudioMusicMixerDelegate
+- (void)setAudioMusicMixerDelegate:(id<QNRtcAudioMusicMixerDelegate>)delegate {
+    self.rtcAudioMusicMixerDelegate = delegate;
 }
 
-// 本地视频 Track 根据 identifyID 获取 key
-- (void)cameraVideoTrack:(QNCameraVideoTrack *)cameraVideoTrack didGetSampleBuffer:(CMSampleBufferRef)sampleBuffer {
-    if (self.rtcTrackDelegate && [self.rtcTrackDelegate respondsToSelector:@selector(rtcNative:onLocalVideoFrame:)]) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            for (QNRtcLocalTrack *localTrack in self.localTracks) {
-                if(localTrack.nativeTrack == cameraVideoTrack) {
-                    if([self.snapshotList[localTrack.identifyID]  isEqual: @YES]) {
-                        [self.rtcTrackDelegate rtcNative:self onLocalVideoFrame:sampleBuffer];
-                        [self.snapshotList setObject:@NO forKey:localTrack.identifyID];
-                    }
-                    break;
-                }
-            }
-//        });
-    }
-}
-
-#pragma mark - QNAudioMixerDelegate
-- (void)audioMixer:(QNAudioMixer *)audioMixer playStateDidChange:(QNAudioPlayState)playState {
-    if (self.rtcAudioMixDelegate && [self.rtcAudioMixDelegate respondsToSelector:@selector(rtcNative:onAudioMixStateChanged:)]) {
+- (void)audioMusicMixer:(QNAudioMusicMixer *)audioMusicMixer didFailWithError:(NSError *)error {
+    if (self.rtcAudioMusicMixerDelegate && [self.rtcAudioMusicMixerDelegate respondsToSelector:@selector(rtcNative:onAudioMusicMixerError:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcAudioMixDelegate rtcNative:self onAudioMixStateChanged:[QNRtcUniAdapter getUniAudioMixStateChangedCallBackWithPlayState:playState]];
+            [self.rtcAudioMusicMixerDelegate rtcNative:self onAudioMusicMixerError:@{
+                @"code": error ? @(error.code) : @0,
+                @"message": error.localizedDescription ? error.localizedDescription : @""
+            }];
         });
     }
 }
 
-- (void)audioMixer:(QNAudioMixer *)audioMixer didMixing:(NSTimeInterval)currentTime {
-    if (self.rtcAudioMixDelegate && [self.rtcAudioMixDelegate respondsToSelector:@selector(rtcNative:onMixing:)]) {
+- (void)audioMusicMixer:(QNAudioMusicMixer *)audioMusicMixer didStateChanged:(QNAudioMusicMixerState)musicMixerState {
+    if (self.rtcAudioMusicMixerDelegate && [self.rtcAudioMusicMixerDelegate respondsToSelector:@selector(rtcNative:onAudioMusicMixerStateChanged:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcAudioMixDelegate rtcNative:self onMixing:[QNRtcUniAdapter getUniMixingCallBackWithCurrentTime:currentTime]];
+            [self.rtcAudioMusicMixerDelegate rtcNative:self onAudioMusicMixerStateChanged:[QNRtcUniAdapter getUniAudioMusicMixerState:musicMixerState]];
         });
     }
 }
 
-- (void)audioMixer:(QNAudioMixer *)audioMixer didFailWithError:(NSError *)error {
-    if (self.rtcAudioMixDelegate && [self.rtcAudioMixDelegate respondsToSelector:@selector(rtcNative:onAudioMixError:)]) {
+- (void)audioMusicMixer:(QNAudioMusicMixer*)audioMusicMixer didMixing:(int64_t)currentPosition {
+    if (self.rtcAudioMusicMixerDelegate && [self.rtcAudioMusicMixerDelegate respondsToSelector:@selector(rtcNative:onAudioMusicMixerMixing:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.rtcAudioMixDelegate rtcNative:self onAudioMixError:[QNRtcUniAdapter getUniAudioMixErrorCallBackWithError:error]];
+            [self.rtcAudioMusicMixerDelegate rtcNative:self onAudioMusicMixerMixing:@{
+                @"position": @(currentPosition)
+            }];
+        });
+    }
+}
+
+#pragma mark - QNAudioEffectMixerDelegate
+- (void)setAudioEffectMixerDelegate:(id<QNRtcAudioEffectMixerDelegate>)delegate {
+    self.rtcAudioEffectMixerDelegate = delegate;
+}
+
+- (void)audioEffect:(QNAudioEffect *)audioEffect didFailed:(int)effectID error:(NSError *)error {
+    if (self.rtcAudioEffectMixerDelegate && [self.rtcAudioEffectMixerDelegate respondsToSelector:@selector(rtcNative:onAudioEffectMixerError:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rtcAudioEffectMixerDelegate rtcNative:self onAudioEffectMixerError:@{
+                @"effectID": @(effectID),
+                @"code": error ? @(error.code) : @0,
+                @"message": error.localizedDescription ? error.localizedDescription : @""
+            }];
+        });
+    }
+}
+
+- (void)audioEffect:(QNAudioEffect *)audioEffect didFinished:(int)effectID {
+    if (self.rtcAudioEffectMixerDelegate && [self.rtcAudioEffectMixerDelegate respondsToSelector:@selector(rtcNative:onAudioEffectMixerFinished:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rtcAudioEffectMixerDelegate rtcNative:self onAudioEffectMixerFinished:@{
+                @"effectID": @(effectID)
+            }];
         });
     }
 }

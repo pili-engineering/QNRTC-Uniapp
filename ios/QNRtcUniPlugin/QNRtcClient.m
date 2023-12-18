@@ -2,8 +2,8 @@
 //  QNRtcClient.m
 //  QNRtcUniPlugin
 //
-//  Created by tongjie on 2021/10/8.
-//  Copyright © 2021 DCloud. All rights reserved.
+//  Created by 童捷 on 2023/10/8.
+//  Copyright © 2023 DCloud. All rights reserved.
 //
 
 #import "QNRtcClient.h"
@@ -162,6 +162,30 @@ WX_EXPORT_METHOD_SYNC(@selector(removeTranscodingLiveStreamingTracks:transcoding
 // 移除合流布局
 - (void)removeTranscodingLiveStreamingTracks:(NSString *)streamID transcodingTracks:(NSArray<NSDictionary *> *)transcodingTracks {
     [RtcNativePlugin removeTranscodingLiveStreamingTracks:streamID transcodingTracks:transcodingTracks];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(startMediaRelay:callback:))
+// 开启跨房媒体转发
+- (void)startMediaRelay:(NSDictionary *)config callback:(WXModuleCallback)callback {
+    [RtcNativePlugin startRoomMediaRelay:config callback:callback];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(updateMediaRelay:callback:))
+// 更新跨房媒体转发
+- (void)updateMediaRelay:(NSDictionary *)config callback:(WXModuleCallback)callback {
+    [RtcNativePlugin updateRoomMediaRelay:config callback:callback];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(stopMediaRelay:))
+// 停止跨房媒体转发
+- (void)stopMediaRelay:(WXModuleCallback)callback {
+    [RtcNativePlugin stopRoomMediaRelay: callback];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(setClientRole:callback:))
+// 设置用户角色
+- (void)setClientRole:(NSString *)role callback:(WXModuleCallback)callback {
+    [RtcNativePlugin setClientRole:role callback:callback];
 }
 
 #pragma mark - QNRtcNativeClientDelegate

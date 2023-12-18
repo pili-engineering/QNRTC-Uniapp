@@ -2,7 +2,8 @@
 //  QNRtcLocalTrack.m
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/10/29.
+//  Created by 童捷 on 2023/10/8.
+//  Copyright © 2023 DCloud. All rights reserved.
 //
 
 #import "QNRtcLocalTrack.h"

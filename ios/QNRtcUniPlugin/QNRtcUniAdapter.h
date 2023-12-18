@@ -2,7 +2,8 @@
 //  QNRtcUniAdapter.h
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/10/29.
+//  Created by 童捷 on 2021/10/8.
+//  Copyright © 2020 DCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -98,6 +99,15 @@
 /*!
  * @abstract Uni-App配置 转换 Native配置
  *
+ * @param uniClientConfig Uni client 配置信息
+ *
+ * @return Native client 配置信息
+ */
++ (QNClientConfig *)getNativeClientConfig:(NSDictionary *)uniClientConfig;
+
+/*!
+ * @abstract Uni-App配置 转换 Native配置
+ *
  * @param nativePublishLocalTracks Native 待发布的 Local Tracks
  * @param nativePublishRtcLocalTracks Native 待发布的 Rtc Local Tracks
  * @param uniPublishLocalTracks Uni 待发布的 Local Tracks 信息
@@ -125,7 +135,7 @@
  *
  * @return Native 待订阅的 Remote Tracks
  */
-+ (NSArray<QNRemoteTrack *> *)getNativeSubscribeRemoteTracks:(NSArray<NSDictionary *> *)uniSubscribeRemoteTracks;
++ (NSArray<QNRemoteTrack *> *)getNativeSubscribeRemoteTracks:(NSArray<NSDictionary *> *)uniSubscribeRemoteTracks client: (QNRTCClient*) client;
 
 /*!
  * @abstract Uni-App配置 转换 Native配置
@@ -144,7 +154,7 @@
  *
  * @return Native 单人转推配置信息
  */
-+ (QNDirectLiveStreamingConfig *)getNativeDirectLiveStreamingConfig:(NSDictionary *)uniDirectLiveStreamingConfig;
++ (QNDirectLiveStreamingConfig *)getNativeDirectLiveStreamingConfig:(NSDictionary *)uniDirectLiveStreamingConfig tracks: (NSMutableArray<QNRtcLocalTrack *> *)tracks;
 
 /*!
  * @abstract Uni-App配置 转换 Native配置
@@ -203,6 +213,15 @@
 /*!
  * @abstract Uni-App配置 转换 Native配置
  *
+ * @param uniFillMode Uni 音频模式
+ *
+ * @return Native 音频模式
+ */
++ (QNAudioScene)getNativeAudioScene:(NSString *)uniAudioScene;
+
+/*!
+ * @abstract Uni-App配置 转换 Native配置
+ *
  * @param uniBeautySetting Uni 美颜配置信息
  *
  * @return Native 美颜配置信息
@@ -222,11 +241,29 @@
  * @abstract Uni-App配置 转换 Native配置
  *
  * @param uniWaterMarkSetting Uni 水印配置信息
- * @param nativeSessionPresetDimensions 预览分辨率宽高
  *
  * @return Native 水印配置信息
  */
-+ (QNWaterMarkSetting *)getNativeWaterMarkSetting:(NSDictionary *)uniWaterMarkSetting nativeSessionPresetDimensions:(CMVideoDimensions)nativeSessionPresetDimensions;
++ (QNWaterMarkSetting *)getNativeWaterMarkSetting:(NSDictionary *)uniWaterMarkSetting;
+
+
+/*!
+ * @abstract Uni-App配置 转换 Native配置
+ *
+ * @param uniRoomMediaRelayConfig Uni 跨房配置
+ *
+ * @return Native 跨房配置
+ */
++ (QNRoomMediaRelayConfiguration *)getNativeRoomMediaRelayConfig:(NSDictionary *)uniRoomMediaRelayConfig;
+
+/*!
+ * @abstract Uni-App配置 转换 Native配置
+ *
+ * @param uniRole Uni 角色
+ *
+ * @return Native 角色
+ */
++ (QNClientRole)getNativeClientRole:(NSString *)uniRole;
 
 @end
 
@@ -333,6 +370,26 @@
  * @return Uni 本地 Track 的发布情况
  */
 + (NSDictionary *)getUniPublishCallBackWithNativePublishingLocalTracks:(NSArray<QNRtcLocalTrack *> *)nativePublishingLocalTracks onPublished:(BOOL)onPublished error:(NSError *)error;
+
+/*!
+ * @abstract Native配置 转换 Uni-App配置
+ *
+ * @param state Native 跨房发布状态
+ * @param error 报错信息
+ *
+ * @return Uni 跨房连麦发布情况
+ */
++ (NSDictionary *)getUniRoomMediaRelayCallBack:(NSDictionary *)state error:(NSError *)error;
+
+/*!
+ * @abstract Native配置 转换 Uni-App配置
+ *
+ * @param role Native 角色信息
+ * @param error 报错信息
+ *
+ * @return Uni 角色回调
+ */
++ (NSDictionary *)getUniClientRoleCallBack:(QNClientRole)role error:(NSError *)error;
 
 /*!
  * @abstract Native配置 转换 Uni-App配置
@@ -497,33 +554,6 @@
 + (NSDictionary *)getUniVideoProfileChangedCallBackWithTrackID:(NSString *)trackID profile:(QNTrackProfile)profile;
 
 /*!
- * @abstract Native回调信息 转换 Uni-App回调信息
- *
- * @param playState Native 混音状态
- *
- * @return Uni 混音状态
- */
-+ (NSDictionary *)getUniAudioMixStateChangedCallBackWithPlayState:(QNAudioPlayState)playState;
-
-/*!
- * @abstract Native回调信息 转换 Uni-App回调信息
- *
- * @param currentTime Native 混音当前进度
- *
- * @return Uni 混音当前进度
- */
-+ (NSDictionary *)getUniMixingCallBackWithCurrentTime:(NSTimeInterval)currentTime;
-
-/*!
- * @abstract Native回调信息 转换 Uni-App回调信息
- *
- * @param error Native 混音报错信息
- *
- * @return Uni 混音报错信息
- */
-+ (NSDictionary *)getUniAudioMixErrorCallBackWithError:(NSError *)error;
-
-/*!
  * @abstract Native配置 转换 Uni-App配置
  *
  * @param nativeVideoMaxZoomFactor Native 最大缩放比例
@@ -559,6 +589,15 @@
  * @return Uni 已订阅该用户的 Track 列表
  */
 + (NSArray<NSDictionary *> *)getUniSubscribedTracks:(NSArray<QNTrack *> *)nativeSubscribedTracks userID:(NSString *)userID;
+
+/*!
+ * @abstract Native配置 转换 Uni-App配置
+ *
+ * @param audioMusicMixerState Native 音乐混音状态
+ *
+ * @return Uni 音乐混音状态
+ */
++ (NSDictionary *)getUniAudioMusicMixerState:(QNAudioMusicMixerState) audioMusicMixerState;
 
 @end
 

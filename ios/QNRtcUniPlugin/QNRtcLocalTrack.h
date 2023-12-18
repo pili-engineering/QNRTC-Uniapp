@@ -2,7 +2,9 @@
 //  QNRtcLocalTrack.h
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/10/29.
+//  Created by 童捷 on 2023/10/8.
+//  Copyright © 2023 DCloud. All rights reserved.
+//
 //  Local Track 发布前没有 trackId，所以将 QNLocalTrack 封装一层，增加 Track 标识。
 
 #import <Foundation/Foundation.h>

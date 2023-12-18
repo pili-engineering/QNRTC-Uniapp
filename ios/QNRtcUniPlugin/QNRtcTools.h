@@ -2,7 +2,8 @@
 //  QNRtcTools.h
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/11/10.
+//  Created by 童捷 on 2021/10/8.
+//  Copyright © 2020 DCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

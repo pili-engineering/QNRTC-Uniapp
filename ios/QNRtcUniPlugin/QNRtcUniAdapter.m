@@ -2,11 +2,14 @@
 //  QNRtcUniAdapter.m
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/10/29.
+//  Created by 童捷 on 2021/10/8.
+//  Copyright © 2020 DCloud. All rights reserved.
 //
+
 
 #import "QNRtcUniAdapter.h"
 #import "QNRtcTools.h"
+#import "QNRtcLocalTrack.h"
 
 @implementation QNRtcUniAdapter
 
@@ -15,9 +18,14 @@
     
     if (uniConfig.count > 0) {
         QNRTCPolicy policy = QNRTCPolicyForceUDP;
-        BOOL isStereo = NO;
-        QNRTCBWEPolicy bwePolicy = QNRTCBWEPolicyTCC;
-        BOOL allowAudioMixWithOthers = NO;
+        QNAudioScene audioScene = QNAudioSceneDefault;
+        NSNumber *reconnectionTimeout = @30000;
+        QNVideoEncoderType encoderType = QNVideoEncoderToolboxH264;
+
+        NSNumber *allowAudioMixWithOthersNum = [QNRtcTools getObject:@"hWCodecEnabled" fromDic:uniConfig objClass:[NSNumber class]];
+        if (allowAudioMixWithOthersNum.boolValue == NO) {
+            encoderType = QNVideoEncoderOpenH264;
+        }
         
         NSString *policyStr = [QNRtcTools getObject:@"policy" fromDic:uniConfig objClass:[NSString class]];
         if (policyStr) {
@@ -31,28 +39,25 @@
                 policy = QNRTCPolicyForceUDP;
             }
         }
-        
-        NSNumber *stereoNum = [QNRtcTools getObject:@"stereo" fromDic:uniConfig objClass:[NSNumber class]];
-        if (stereoNum) isStereo = stereoNum.boolValue;
-        
-        NSString *bwePolicyStr = [QNRtcTools getObject:@"bwePolicy" fromDic:uniConfig objClass:[NSString class]];
-        if (bwePolicyStr) {
-            if ([bwePolicyStr isEqualToString:@"TCC"]) {
-                bwePolicy = QNRTCBWEPolicyTCC;
-            } else if ([bwePolicyStr isEqualToString:@"GCC"]) {
-                bwePolicy = QNRTCBWEPolicyGCC;
-            } else {
-                bwePolicy = QNRTCBWEPolicyTCC;
+
+        NSString *audioSceneStr = [QNRtcTools getObject:@"audioScene" fromDic:uniConfig objClass:[NSString class]];
+        if (audioSceneStr) {
+            if ([audioSceneStr isEqualToString:@"DEFAULT"]) {
+                audioScene = QNAudioSceneDefault;
+            } else if ([policyStr isEqualToString:@"VOICE_CHAT"]) {
+                audioScene = QNAudioSceneVoiceChat;
+            } else if ([policyStr isEqualToString:@"SOUND_EQUALIZE"]) {
+                audioScene = QNAudioSceneSoundEqualize;
             }
         }
-        
-        NSNumber *allowAudioMixWithOthersNum = [QNRtcTools getObject:@"allowAudioMixWithOthers" fromDic:uniConfig objClass:[NSNumber class]];
-        if (allowAudioMixWithOthersNum) allowAudioMixWithOthers = allowAudioMixWithOthersNum.boolValue;
+
+        NSNumber *reconnectionTimeoutNum = [QNRtcTools getObject:@"reconnectionTimeout" fromDic:uniConfig objClass:[NSNumber class]];
+        if (reconnectionTimeoutNum) reconnectionTimeout = reconnectionTimeoutNum;
         
         nativeConfig = [[QNRTCConfiguration alloc] initWithPolicy:policy
-                                                            stereo:isStereo
-                                                         bwePolicy:bwePolicy
-                                           allowAudioMixWithOthers:allowAudioMixWithOthers];
+                                                            audioScene:audioScene
+                                                         reconnectionTimeout:reconnectionTimeout
+                                           encoderType:encoderType];
     } else {
         nativeConfig = [QNRTCConfiguration defaultConfiguration];
     }
@@ -65,8 +70,35 @@
         NSString *tag = [QNRtcTools getObject:@"tag" fromDic:uniMicrophoneAudioTrackConfig objClass:[NSString class]];
         NSNumber *bitrate = [QNRtcTools getObject:@"bitrate" fromDic:uniMicrophoneAudioTrackConfig objClass:[NSNumber class]];
         
-        QNMicrophoneAudioTrackConfig *nativeMicrophoneAudioTrackConfig = [[QNMicrophoneAudioTrackConfig alloc] initWithTag:tag ? tag : @"" bitrate:(bitrate && (bitrate.unsignedIntegerValue > 64)) ? bitrate.unsignedIntegerValue : 64];
+        QNAudioQuality *audioQuality = [[QNAudioQuality alloc] initWithBitrate: (bitrate && (bitrate.unsignedIntegerValue > 64))];
+        
+        QNMicrophoneAudioTrackConfig *nativeMicrophoneAudioTrackConfig = [[QNMicrophoneAudioTrackConfig alloc] initWithTag:tag ? tag : @"" audioQuality: audioQuality];
         return nativeMicrophoneAudioTrackConfig;
+    }
+    return nil;
+}
+
++ (QNClientConfig *)getNativeClientConfig:(NSDictionary *)uniClientConfig {
+    if ([uniClientConfig count] > 0) {
+        QNClientMode nativeMode = QNClientModeRTC;
+        QNClientRole nativeRole = QNClientRoleBroadcaster;
+
+        NSString *uniMode = [QNRtcTools getObject:@"mode" fromDic:uniClientConfig objClass:[NSString class]];
+        if ([uniMode isEqualToString:@"RTC"]) {
+            nativeMode = QNClientModeRTC;
+        } else if ([uniMode isEqualToString:@"LIVE"]) {
+            nativeMode = QNClientModeLive;
+        }
+
+        NSString *uniRole = [QNRtcTools getObject:@"role" fromDic:uniClientConfig objClass:[NSNumber class]];
+        if ([uniRole isEqualToString:@"BROADCASTER"]) {
+            nativeRole = QNClientRoleBroadcaster;
+        } else if ([uniRole isEqualToString:@"AUDIENCE"]) {
+            nativeRole = QNClientRoleAudience;
+        }
+
+        QNClientConfig *clientConfig = [[QNClientConfig alloc] initWithMode:nativeMode role:nativeRole];
+        return clientConfig;
     }
     return nil;
 }
@@ -76,7 +108,9 @@
         NSString *tag = [QNRtcTools getObject:@"tag" fromDic:uniCustomAudioTrackConfig objClass:[NSString class]];
         NSNumber *bitrate = [QNRtcTools getObject:@"bitrate" fromDic:uniCustomAudioTrackConfig objClass:[NSNumber class]];
         
-        QNCustomAudioTrackConfig *nativeCustomAudioTrackConfig = [[QNCustomAudioTrackConfig alloc] initWithTag:tag ? tag : @"" bitrate:(bitrate && (bitrate.unsignedIntegerValue > 64)) ? bitrate.unsignedIntegerValue : 64];
+        QNAudioQuality *audioQuality = [[QNAudioQuality alloc] initWithBitrate: (bitrate && (bitrate.unsignedIntegerValue > 64)) ? bitrate.unsignedIntegerValue : 64];
+        
+        QNCustomAudioTrackConfig *nativeCustomAudioTrackConfig = [[QNCustomAudioTrackConfig alloc] initWithTag:tag ? tag : @"" audioQuality:audioQuality];
         return nativeCustomAudioTrackConfig;
     }
     return nil;
@@ -90,10 +124,8 @@
         NSNumber *height = [QNRtcTools getObject:@"height" fromDic:uniCameraVideoTrackConfig objClass:[NSNumber class]];
         NSNumber *multiStreamEnable = [QNRtcTools getObject:@"multiStreamEnable" fromDic:uniCameraVideoTrackConfig objClass:[NSNumber class]];
         
-        QNCameraVideoTrackConfig *cameraVideoTrackConfig = [[QNCameraVideoTrackConfig alloc] initWithSourceTag:tag ? tag : @""
-                                                                                                       bitrate:bitrate ? bitrate.unsignedIntegerValue : 800
-                                                                                               videoEncodeSize:width && height ? CGSizeMake(width.intValue, height.intValue) : CGSizeMake(640, 480)
-                                                                                             multiStreamEnable:multiStreamEnable ? multiStreamEnable.boolValue : NO];
+        QNVideoEncoderConfig  *videoEncoderConfig = [[QNVideoEncoderConfig alloc] initWithBitrate: bitrate ? bitrate.unsignedIntegerValue : 800 videoEncodeSize: width && height ? CGSizeMake(width.intValue, height.intValue) : CGSizeMake(640, 480)];
+        QNCameraVideoTrackConfig *cameraVideoTrackConfig = [[QNCameraVideoTrackConfig alloc] initWithSourceTag:tag ? tag : @"" config: videoEncoderConfig multiStreamEnable:multiStreamEnable ? multiStreamEnable.boolValue : NO];
         return cameraVideoTrackConfig;
     }
     return nil;
@@ -128,11 +160,9 @@
         NSNumber *width = [QNRtcTools getObject:@"width" fromDic:uniScreenVideoTrackConfig objClass:[NSNumber class]];
         NSNumber *height = [QNRtcTools getObject:@"height" fromDic:uniScreenVideoTrackConfig objClass:[NSNumber class]];
         NSNumber *multiStreamEnable = [QNRtcTools getObject:@"multiStreamEnable" fromDic:uniScreenVideoTrackConfig objClass:[NSNumber class]];
-
-        QNScreenVideoTrackConfig *screenVideoTrackConfig = [[QNScreenVideoTrackConfig alloc] initWithSourceTag:tag ? tag : @""
-                                                                                                       bitrate:bitrate ? bitrate.unsignedIntegerValue : 800
-                                                                                               videoEncodeSize:width && height ? CGSizeMake(width.intValue, height.intValue) : CGSizeMake(640, 480)
-                                                                                             multiStreamEnable:multiStreamEnable ? multiStreamEnable.boolValue : NO];
+        
+        QNVideoEncoderConfig  *videoEncoderConfig = [[QNVideoEncoderConfig alloc] initWithBitrate: bitrate ? bitrate.unsignedIntegerValue : 800 videoEncodeSize: width && height ? CGSizeMake(width.intValue, height.intValue) : CGSizeMake(640, 480)];
+        QNScreenVideoTrackConfig *screenVideoTrackConfig = [[QNScreenVideoTrackConfig alloc] initWithSourceTag:tag ? tag : @"" config: videoEncoderConfig multiStreamEnable:multiStreamEnable ? multiStreamEnable.boolValue : NO];
         return screenVideoTrackConfig;
     }
     return nil;
@@ -152,31 +182,34 @@
         NSNumber *height = [QNRtcTools getObject:@"height" fromDic:uniCustomVideoTrackConfig objClass:[NSNumber class]];
         NSNumber *multiStreamEnable = [QNRtcTools getObject:@"multiStreamEnable" fromDic:uniCustomVideoTrackConfig objClass:[NSNumber class]];
         
-        QNCustomVideoTrackConfig *customVideoTrackConfig = [[QNCustomVideoTrackConfig alloc] initWithSourceTag:tag ? tag : @""
-                                                                                                       bitrate:bitrate ? bitrate.unsignedIntegerValue : 800
-                                                                                               videoEncodeSize:width && height ? CGSizeMake(width.intValue, height.intValue) : CGSizeMake(640, 480)
-                                                                                             multiStreamEnable:multiStreamEnable ? multiStreamEnable.boolValue : NO];
+        QNVideoEncoderConfig  *videoEncoderConfig = [[QNVideoEncoderConfig alloc] initWithBitrate: bitrate ? bitrate.unsignedIntegerValue : 800 videoEncodeSize: width && height ? CGSizeMake(width.intValue, height.intValue) : CGSizeMake(640, 480)];
+        
+        QNCustomVideoTrackConfig *customVideoTrackConfig = [[QNCustomVideoTrackConfig alloc] initWithSourceTag:tag ? tag : @"" config: videoEncoderConfig multiStreamEnable:multiStreamEnable ? multiStreamEnable.boolValue : NO];
         return customVideoTrackConfig;
     }
     return nil;
 }
 
-+ (QNDirectLiveStreamingConfig *)getNativeDirectLiveStreamingConfig:(NSDictionary *)uniDirectLiveStreamingConfig {
++ (QNDirectLiveStreamingConfig *)getNativeDirectLiveStreamingConfig:(NSDictionary *)uniDirectLiveStreamingConfig tracks: (NSMutableArray<QNRtcLocalTrack *> *)tracks {
     if ([uniDirectLiveStreamingConfig count] > 0) {
         QNDirectLiveStreamingConfig *directLiveStreamingConfig = [[QNDirectLiveStreamingConfig alloc] init];
         
         NSString *videoTrackID = [QNRtcTools getObject:@"videoTracks" fromDic:uniDirectLiveStreamingConfig objClass:[NSString class]];
         if (videoTrackID) {
-            QNTrack *videoTrack = [[QNTrack alloc] init];
-            videoTrack.trackID = videoTrackID;
-            directLiveStreamingConfig.videoTrack = videoTrack;
+            for(QNRtcLocalTrack *localTrack in tracks) {
+                if ([localTrack.nativeTrack.trackID isEqualToString:videoTrackID]) {
+                    directLiveStreamingConfig.videoTrack = localTrack.nativeTrack;
+                }
+            }
         }
         
         NSString *audioTrackID = [QNRtcTools getObject:@"audioTracks" fromDic:uniDirectLiveStreamingConfig objClass:[NSString class]];
         if (audioTrackID) {
-            QNTrack *audioTrack = [[QNTrack alloc] init];
-            audioTrack.trackID = audioTrackID;
-            directLiveStreamingConfig.audioTrack = audioTrack;
+            for(QNRtcLocalTrack *localTrack in tracks) {
+                if ([localTrack.nativeTrack.trackID isEqualToString:audioTrackID]) {
+                    directLiveStreamingConfig.audioTrack = localTrack.nativeTrack;
+                }
+            }
         }
         
         NSString *publishUrl = [QNRtcTools getObject:@"url" fromDic:uniDirectLiveStreamingConfig objClass:[NSString class]];
@@ -270,9 +303,6 @@
             transcodingLiveStreamingConfig.background = transcodingLiveStreamingImage;
         }
         
-        NSNumber *holdLastFrame = [QNRtcTools getObject:@"holdLastFrame" fromDic:uniTranscodingLiveStreamingConfig objClass:[NSNumber class]];
-        if (holdLastFrame) transcodingLiveStreamingConfig.holdLastFrame = holdLastFrame.boolValue;
-        
         return transcodingLiveStreamingConfig;
     }
     return nil;
@@ -285,7 +315,7 @@
             QNTranscodingLiveStreamingTrack *nativeTranscodingLiveStreamingTrack = [[QNTranscodingLiveStreamingTrack alloc] init];
             
             NSString *trackID = [QNRtcTools getObject:@"trackID" fromDic:uniTranscodingLiveStreamingTrack objClass:[NSString class]];
-            if (trackID) nativeTranscodingLiveStreamingTrack.trackId = trackID;
+            if (trackID) nativeTranscodingLiveStreamingTrack.trackID = trackID;
             
             NSNumber *x = [QNRtcTools getObject:@"x" fromDic:uniTranscodingLiveStreamingTrack objClass:[NSNumber class]];
             NSNumber *y = [QNRtcTools getObject:@"y" fromDic:uniTranscodingLiveStreamingTrack objClass:[NSNumber class]];
@@ -294,7 +324,7 @@
             nativeTranscodingLiveStreamingTrack.frame = CGRectMake(x ? x.intValue : 0, y ? y.intValue : 0, width ? width.intValue : 0, height ? height.intValue : 0);
             
             NSNumber *zOrder = [QNRtcTools getObject:@"zOrder" fromDic:uniTranscodingLiveStreamingTrack objClass:[NSNumber class]];
-            if (zOrder) nativeTranscodingLiveStreamingTrack.zIndex = zOrder.unsignedIntegerValue;
+            if (zOrder) nativeTranscodingLiveStreamingTrack.zOrder = zOrder.unsignedIntegerValue;
             
             NSString *renderMode = [QNRtcTools getObject:@"renderMode" fromDic:uniTranscodingLiveStreamingTrack objClass:[NSString class]];
             if (renderMode) {
@@ -379,6 +409,17 @@
     }
 }
 
++ (QNAudioScene)getNativeAudioScene:(NSString *)uniAudioScene {
+    if ([uniAudioScene isEqualToString:@"DEFAULT"]) {
+        return QNAudioSceneDefault;
+    } else if ([uniAudioScene isEqualToString:@"VOICE_CHAT"]) {
+        return QNAudioSceneVoiceChat;
+    } else if ([uniAudioScene isEqualToString:@"SOUND_EQUALIZE"]) {
+        return QNAudioSceneSoundEqualize;
+    }
+    return QNAudioSceneDefault;
+}
+
 + (void)getNativePublishLocalTracks:(NSMutableArray<QNLocalTrack *> **)nativePublishLocalTracks
               nativePublishRtcLocalTracks:(NSMutableArray<QNRtcLocalTrack *> **)nativePublishRtcLocalTracks
           fromUniPublishLocalTracks:(NSArray<NSDictionary *> *)uniPublishLocalTracks
@@ -410,14 +451,26 @@
     return nativeUnPublishLocalTracks;
 }
 
-+ (NSArray<QNRemoteTrack *> *)getNativeSubscribeRemoteTracks:(NSArray<NSDictionary *> *)uniSubscribeRemoteTracks {
++ (NSArray<QNRemoteTrack *> *)getNativeSubscribeRemoteTracks:(NSArray<NSDictionary *> *)uniSubscribeRemoteTracks client: (QNRTCClient*) client {
     NSMutableArray<QNRemoteTrack *> *nativeSubcribeRemoteTracks = [NSMutableArray arrayWithCapacity:uniSubscribeRemoteTracks.count];
+    NSMutableDictionary *remoteTracks = [NSMutableDictionary dictionary];
+    for (QNRemoteUser *remoteUser in client.remoteUserList) {
+        NSArray <QNRemoteAudioTrack *> *audioTracks = remoteUser.audioTrack;
+        NSArray <QNRemoteVideoTrack *> *videoTracks = remoteUser.videoTrack;
+        for (QNRemoteAudioTrack *audioTrack in audioTracks) {
+            [remoteTracks setValue:audioTrack forKey:audioTrack.trackID];
+        }
+        for (QNRemoteAudioTrack *videoTrack in videoTracks) {
+            [remoteTracks setValue:videoTrack forKey:videoTrack.trackID];
+        }
+    }
+    
     for (NSDictionary *uniSubscribeRemoteTrack in uniSubscribeRemoteTracks) {
         NSString *trackID = [QNRtcTools getObject:@"trackID" fromDic:uniSubscribeRemoteTrack objClass:[NSString class]];
         if (trackID) {
-            QNRemoteTrack *nativeSubscribeRemoteTrack = [[QNRemoteTrack alloc] init];
-            nativeSubscribeRemoteTrack.trackID = trackID;
-            [nativeSubcribeRemoteTracks addObject:nativeSubscribeRemoteTrack];
+            if ([remoteTracks valueForKey:trackID] != nil){
+                [nativeSubcribeRemoteTracks addObject:[remoteTracks valueForKey:trackID]];
+            }
         }
     }
     return nativeSubcribeRemoteTracks;
@@ -460,18 +513,50 @@
     return nativePushImageSetting;
 }
 
-+ (QNWaterMarkSetting *)getNativeWaterMarkSetting:(NSDictionary *)uniWaterMarkSetting nativeSessionPresetDimensions:(CMVideoDimensions)nativeSessionPresetDimensions {
++ (QNWaterMarkSetting *)getNativeWaterMarkSetting:(NSDictionary *)uniWaterMarkSetting {
     QNWaterMarkSetting *nativeWaterMarkSetting = [[QNWaterMarkSetting alloc] init];
     double x = [[QNRtcTools getObject:@"x" fromDic:uniWaterMarkSetting objClass:[NSNumber class]] doubleValue];
     double y = [[QNRtcTools getObject:@"y" fromDic:uniWaterMarkSetting objClass:[NSNumber class]] doubleValue];
-    nativeWaterMarkSetting.x = @((int)(x * nativeSessionPresetDimensions.width));
-    nativeWaterMarkSetting.y = @((int)(y * nativeSessionPresetDimensions.height));
+    nativeWaterMarkSetting.x = @((int)(x));
+    nativeWaterMarkSetting.y = @((int)(y));
     NSString *resourcePath = [QNRtcTools getObject:@"resourcePath" fromDic:uniWaterMarkSetting objClass:[NSString class]];
     if (resourcePath) {
         NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:resourcePath]];
         nativeWaterMarkSetting.image = [UIImage imageWithData:imageData];
     }
     return nativeWaterMarkSetting;
+}
+
++ (QNRoomMediaRelayConfiguration *)getNativeRoomMediaRelayConfig:(NSDictionary *)uniRoomMediaRelayConfig {
+    QNRoomMediaRelayConfiguration *nativeRoomMediaRelayConfig = [[QNRoomMediaRelayConfiguration alloc] init];
+    NSString *roomName = [QNRtcTools getObject:@"roomName" fromDic:uniRoomMediaRelayConfig objClass:[NSString class]];
+    NSString *relayToken = [QNRtcTools getObject:@"relayToken" fromDic:uniRoomMediaRelayConfig objClass:[NSString class]];
+    if (roomName && relayToken) {
+        QNRoomMediaRelayInfo *nativeRoomMediaRelayInfo = [[QNRoomMediaRelayInfo alloc] initWithToken:relayToken];
+        nativeRoomMediaRelayInfo.roomName = roomName;
+        nativeRoomMediaRelayConfig.srcRoomInfo = nativeRoomMediaRelayInfo;
+        NSArray *uniDesRoomInfo = [QNRtcTools getObject:@"desRoomInfo" fromDic:uniRoomMediaRelayConfig objClass:[NSArray class]];
+        if ([uniDesRoomInfo count] > 0) {
+            for (NSDictionary *info in uniDesRoomInfo) {
+                NSString *desRoomName = [QNRtcTools getObject:@"roomName" fromDic:info objClass:[NSString class]];
+                NSString *desRelayToken = [QNRtcTools getObject:@"relayToken" fromDic:info objClass:[NSString class]];
+                QNRoomMediaRelayInfo *nativeDesRoomMediaRelayInfo = [[QNRoomMediaRelayInfo alloc] initWithToken:desRelayToken];
+                nativeDesRoomMediaRelayInfo.roomName = desRoomName;
+                [nativeRoomMediaRelayConfig setDestRoomInfo:nativeDesRoomMediaRelayInfo forRoomName:desRoomName];
+            }
+        }
+    }
+
+    return nativeRoomMediaRelayConfig;
+}
+
++ (QNClientRole)getNativeClientRole:(NSString *)uniRole {
+    if ([uniRole isEqualToString:@"BROADCASTER"]) {
+        return QNClientRoleBroadcaster;
+    } else if ([uniRole isEqualToString:@"AUDIENCE"]) {
+        return QNClientRoleAudience;
+    }
+    return QNClientRoleBroadcaster;
 }
 
 + (NSDictionary *)getUniLocalTrack:(QNRtcLocalTrack *)nativeRtcLocalTrack {
@@ -499,10 +584,60 @@
     };
 }
 
++ (NSDictionary *)getUniRoomMediaRelayCallBack:(NSDictionary *)state error:(NSError *)error {
+    if (state == nil) {
+        return @{
+            @"state": @{},
+            @"error": @{
+                @"code": error ? @(error.code) : @0,
+                @"message": error.localizedDescription ? error.localizedDescription : @""
+            }
+        };
+    } else {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        for (NSString *trackId in state.allKeys) {
+            switch ([state[trackId] intValue]) {
+                case 0: [dict setObject:@"SUCCESS" forKey:trackId]; break;
+                case 1: [dict setObject:@"STOPPED" forKey:trackId]; break;
+                case 2: [dict setObject:@"INVALID_TOKEN" forKey:trackId]; break;
+                case 3: [dict setObject:@"NO_ROOM" forKey:trackId]; break;
+                case 4: [dict setObject:@"ROOM_CLOSED" forKey:trackId]; break;
+                case 5: [dict setObject:@"PLAYER_EXISTED" forKey:trackId]; break;
+                case 0XFF: [dict setObject:@"UNKNOWN" forKey:trackId]; break;
+                default: break;
+            }
+        }
+        return @{
+            @"state": dict,
+            @"error": @{
+                @"code": error ? @(error.code) : @0,
+                @"message": error.localizedDescription ? error.localizedDescription : @""
+            }
+        };
+    }
+}
+
+
++ (NSDictionary *)getUniClientRoleCallBack:(QNClientRole)role error:(NSError *)error {
+    NSString *uniRole = @"";
+    switch (role) {
+        case QNClientRoleBroadcaster: uniRole = @"BROADCASTER"; break;
+        case QNClientRoleAudience: uniRole = @"AUDIENCE"; break;
+        default: break;
+    }
+    return @{
+        @"role": uniRole,
+        @"error": @{
+            @"code": error ? @(error.code) : @0,
+            @"message": error.localizedDescription ? error.localizedDescription : @""
+        }
+    };
+}
+
 + (NSString *)getUniConnectionState:(QNConnectionState)nativeConnectionState {
     NSString *uniConnectionState = @"";
     switch (nativeConnectionState) {
-        case QNConnectionStateIdle: uniConnectionState = @"DISCONNECTED"; break;
+        case QNConnectionStateDisconnected: uniConnectionState = @"DISCONNECTED"; break;
         case QNConnectionStateConnecting: uniConnectionState = @"CONNECTING"; break;
         case QNConnectionStateConnected: uniConnectionState = @"CONNECTED"; break;
         case QNConnectionStateReconnecting: uniConnectionState = @"RECONNECTING"; break;
@@ -622,26 +757,34 @@
 + (NSDictionary *)getUniLocalVideoTrackStats:(NSDictionary *)nativeLocalVideoTrackStats {
     NSMutableDictionary *uniLocalVideoTrackStats = [NSMutableDictionary dictionaryWithCapacity:nativeLocalVideoTrackStats.count];
     for (NSString *trackId in nativeLocalVideoTrackStats.allKeys) {
-        // iOS 4.0.0版本该接口返回只包含一路 profile 的统计信息，Uni-App接口需要返回统计信息数组
         NSMutableArray *uniLocalVideoTrackStatList = [NSMutableArray array];
-        QNLocalVideoTrackStats *nativeLocalVideoTrackStat = [QNRtcTools getObject:trackId fromDic:nativeLocalVideoTrackStats objClass:[QNLocalVideoTrackStats class]];
-        if (nativeLocalVideoTrackStat) {
-            NSMutableDictionary *uniLocalVideoTrackStat = [NSMutableDictionary dictionary];
-            NSString *profile = @"";
-            switch (nativeLocalVideoTrackStat.profile) {
-                case QNTrackProfileLow: profile = @"LOW"; break;
-                case QNTrackProfileMedium: profile = @"MEDIUM"; break;
-                case QNTrackProfileHigh: profile = @"HIGH"; break;
+        for (QNLocalVideoTrackStats *nativeLocalVideoTrackStat in nativeLocalVideoTrackStats[trackId]) {
+            if (nativeLocalVideoTrackStat) {
+                NSMutableDictionary *uniLocalVideoTrackStat = [NSMutableDictionary dictionary];
+                NSString *profile = @"";
+                switch (nativeLocalVideoTrackStat.profile) {
+                    case QNTrackProfileLow: profile = @"LOW"; break;
+                    case QNTrackProfileMedium: profile = @"MEDIUM"; break;
+                    case QNTrackProfileHigh: profile = @"HIGH"; break;
+                }
+                [uniLocalVideoTrackStat setObject:profile forKey:@"profile"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkFrameRate) forKey:@"uplinkFrameRate"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkBitrate) forKey:@"uplinkBitrate"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkRTT) forKey:@"uplinkRTT"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkLostRate) forKey:@"uplinkLostRate"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkFrameWidth) forKey:@"uplinkFrameWidth"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkFrameHeight) forKey:@"uplinkFrameHeight"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.captureFrameRate) forKey:@"captureFrameRate"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.captureFrameWidth) forKey:@"captureFrameWidth"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.captureFrameHeight) forKey:@"captureFrameHeight"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.targetFrameRate) forKey:@"targetFrameRate"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.targetFrameWidth) forKey:@"targetFrameWidth"];
+                [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.targetFrameHeight) forKey:@"targetFrameHeight"];
+                
+                [uniLocalVideoTrackStatList addObject:uniLocalVideoTrackStat];
             }
-            [uniLocalVideoTrackStat setObject:profile forKey:@"profile"];
-            [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkFrameRate) forKey:@"uplinkFrameRate"];
-            [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkBitrate) forKey:@"uplinkBitrate"];
-            [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkRTT) forKey:@"uplinkRTT"];
-            [uniLocalVideoTrackStat setObject:@(nativeLocalVideoTrackStat.uplinkLostRate) forKey:@"uplinkLostRate"];
-            
-            [uniLocalVideoTrackStatList addObject:uniLocalVideoTrackStat];
-            [uniLocalVideoTrackStats setObject:uniLocalVideoTrackStatList forKey:trackId];
         }
+        [uniLocalVideoTrackStats setObject:uniLocalVideoTrackStatList forKey:trackId];
     }
     return uniLocalVideoTrackStats;
 }
@@ -682,6 +825,8 @@
             [uniRemoteVideoTrackStat setObject:@(nativeRemoteVideoTrackStat.downlinkLostRate) forKey:@"downlinkLostRate"];
             [uniRemoteVideoTrackStat setObject:@(nativeRemoteVideoTrackStat.uplinkRTT) forKey:@"uplinkRTT"];
             [uniRemoteVideoTrackStat setObject:@(nativeRemoteVideoTrackStat.uplinkLostRate) forKey:@"uplinkLostRate"];
+            [uniRemoteVideoTrackStat setObject:@(nativeRemoteVideoTrackStat.uplinkFrameWidth) forKey:@"uplinkFrameWidth"];
+            [uniRemoteVideoTrackStat setObject:@(nativeRemoteVideoTrackStat.uplinkFrameHeight) forKey:@"uplinkFrameHeight"];
             
             [uniRemoteVideoTrackStats setObject:uniRemoteVideoTrackStat forKey:trackId];
         }
@@ -744,7 +889,7 @@
     switch (state) {
         case QNConnectionStateConnected: connectState = @"CONNECTED"; break;
         case QNConnectionStateConnecting: connectState = @"CONNECTING"; break;
-        case QNConnectionStateIdle: connectState = @"DISCONNECTED"; break;
+        case QNConnectionStateDisconnected: connectState = @"DISCONNECTED"; break;
         case QNConnectionStateReconnecting: connectState = @"RECONNECTING"; break;
         case QNConnectionStateReconnected: connectState = @"RECONNECTED"; break;
         default: break;
@@ -862,7 +1007,7 @@
 + (NSDictionary *)getUniMessageReceivedCallBackWithMessage:(QNMessageInfo *)message {
     return @{
         @"id": message.identifier ? message.identifier : @"",
-        @"userId": message.userId ? message.userId : @"",
+        @"userId": message.userID ? message.userID : @"",
         @"content": message.content ? message.content : @"",
         @"timestamp": message.timestamp ? message.timestamp : @0
     };
@@ -927,35 +1072,23 @@
     };
 }
 
-+ (NSDictionary *)getUniAudioMixStateChangedCallBackWithPlayState:(QNAudioPlayState)playState {
++ (NSArray<NSNumber *> *)getUniZooms:(CGFloat)nativeVideoMaxZoomFactor {
+    return @[@1.0, @(nativeVideoMaxZoomFactor)];
+}
+
++ (NSDictionary *)getUniAudioMusicMixerState:(QNAudioMusicMixerState) audioMusicMixerState {
     NSString *state = @"";
-    switch (playState) {
-        case QNAudioPlayStatePlaying: state = @"MIXING"; break;
-        case QNAudioPlayStatePaused: state = @"PAUSED"; break;
-        case QNAudioPlayStateStoped: state = @"STOPPED"; break;
-        case QNAudioPlayStateCompleted: state = @"COMPLETED"; break;
+    switch (audioMusicMixerState) {
+        case QNAudioMusicMixerStateIdle: state = @"IDLE"; break;
+        case QNAudioMusicMixerStateMixing: state = @"MIXING"; break;
+        case QNAudioMusicMixerStatePaused: state = @"PAUSED"; break;
+        case QNAudioMusicMixerStateStopped: state = @"STOPPED"; break;
+        case QNAudioMusicMixerStateCompleted: state = @"COMPLETED"; break;
         default: break;
     }
     return @{
         @"state": state
     };
-}
-
-+ (NSDictionary *)getUniMixingCallBackWithCurrentTime:(NSTimeInterval)currentTime {
-    return @{
-        @"currentTimeUs": @(currentTime * 1e6)
-    };
-}
-
-+ (NSDictionary *)getUniAudioMixErrorCallBackWithError:(NSError *)error {
-    return @{
-        @"code": @(error.code),
-        @"message": error.localizedDescription ? error.localizedDescription : @"Unknown Error"
-    };
-}
-
-+ (NSArray<NSNumber *> *)getUniZooms:(CGFloat)nativeVideoMaxZoomFactor {
-    return @[@1.0, @(nativeVideoMaxZoomFactor)];
 }
 
 @end
