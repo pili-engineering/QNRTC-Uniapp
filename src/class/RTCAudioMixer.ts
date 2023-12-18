@@ -1,10 +1,6 @@
-import { QNRTCAudioMixerEvent } from '../RTCEvent'
+import { QNRTCAudioMixerEvent } from '../event/RTCEvent'
 import { QNAudioMixerState } from '../interface/RTCInterface'
-// @ts-ignore
-// eslint-disable-next-line no-undef
 const QNRtcAudioMixer = uni.requireNativePlugin('QNRTC-UniPlugin-QNRtcAudioMixer')
-// @ts-ignore
-// eslint-disable-next-line no-undef
 const QNEvent = uni.requireNativePlugin('globalEvent')
 export class QNAudioMixer {
   /**
@@ -18,8 +14,8 @@ export class QNAudioMixer {
   /**
    * @internal
    */
-  private variationList = ["onStateChanged"]
-  constructor (identifyID: string, url: string) {
+  private variationList = ['onStateChanged']
+  constructor(identifyID: string, url: string) {
     this.identifyID = identifyID
     this.url = url
   }
@@ -31,10 +27,13 @@ export class QNAudioMixer {
    * @param listener 包装前的 callback
    * @returns 包装后的 callback
    */
-   private createAudioMixerCallback<event extends keyof QNRTCAudioMixerEvent > (name: string, listener:QNRTCAudioMixerEvent[event]) {
-    if(name === "onStateChanged") {
-      const variationCallback = (params: { state: QNAudioMixerState}) => {
-        if(params.state) {
+  private createAudioMixerCallback<event extends keyof QNRTCAudioMixerEvent>(
+    name: string,
+    listener: QNRTCAudioMixerEvent[event]
+  ) {
+    if (name === 'onStateChanged') {
+      const variationCallback = (params: { state: QNAudioMixerState }) => {
+        if (params.state) {
           // @ts-ignore
           listener(params)
         }
@@ -49,8 +48,11 @@ export class QNAudioMixer {
    * @param name 事件名
    * @param listener 事件句柄
    */
-  on<event extends keyof QNRTCAudioMixerEvent> (name: event, listener: QNRTCAudioMixerEvent[event]): void {
-    if (this.variationList.some(item => item === name)) {
+  on<event extends keyof QNRTCAudioMixerEvent>(
+    name: event,
+    listener: QNRTCAudioMixerEvent[event]
+  ): void {
+    if (this.variationList.some((item) => item === name)) {
       const callback = this.createAudioMixerCallback(name, listener)
       QNEvent.addEventListener(name, callback)
     } else {
@@ -64,7 +66,10 @@ export class QNAudioMixer {
    * @param name 事件名
    * @param listener 事件句柄
    */
-  off<event extends keyof QNRTCAudioMixerEvent> (name: event, listener: QNRTCAudioMixerEvent[event]): void {
+  off<event extends keyof QNRTCAudioMixerEvent>(
+    name: event,
+    listener: QNRTCAudioMixerEvent[event]
+  ): void {
     QNEvent.removeEventListener(name, listener)
   }
 
@@ -73,28 +78,28 @@ export class QNAudioMixer {
    * @remarks 开始指定次数的混音并播放
    * @param loopTimes 循环次数
    */
-  start (loopTimes: number): void {
+  start(loopTimes: number): void {
     QNRtcAudioMixer.start(this.identifyID, loopTimes)
   }
 
   /**
    * 停止混音操作
    */
-  stop (): void {
+  stop(): void {
     QNRtcAudioMixer.stop(this.identifyID)
   }
 
   /**
    * 混音恢复操作
    */
-  resume (): void {
+  resume(): void {
     QNRtcAudioMixer.resume(this.identifyID)
   }
 
   /**
    * 暂停混音操作
    */
-  pause (): void {
+  pause(): void {
     QNRtcAudioMixer.pause(this.identifyID)
   }
 
@@ -102,7 +107,7 @@ export class QNAudioMixer {
    * 跳到指定位置混音
    * @param timeUs 指定位置的时间戳，单位: us
    */
-  seekTo (timeUs: number): void {
+  seekTo(timeUs: number): void {
     QNRtcAudioMixer.seekTo(this.identifyID, timeUs)
   }
 
@@ -111,7 +116,7 @@ export class QNAudioMixer {
    * @param microphoneVolume 麦克风混音音量 [0,1]
    * @param musicVolume 音乐混音音量 [0,1]
    */
-  setMixingVolume (microphoneVolume: number, musicVolume: number): void {
+  setMixingVolume(microphoneVolume: number, musicVolume: number): void {
     QNRtcAudioMixer.setMixingVolume(this.identifyID, microphoneVolume, musicVolume)
   }
 
@@ -120,7 +125,7 @@ export class QNAudioMixer {
    * @description 如果不希望本地播放混音的音乐，可以通过该方法将 volume 设置为 0
    * @param volume 混音音乐本地播放音量 [0,1]
    */
-  setPlayingVolume (volume: number): void {
+  setPlayingVolume(volume: number): void {
     QNRtcAudioMixer.setPlayingVolume(this.identifyID, volume)
   }
 
@@ -129,7 +134,7 @@ export class QNAudioMixer {
    * @remarks 单位: us
    * @returns 播放时长
    */
-  getDuration (): number {
+  getDuration(): number {
     return QNRtcAudioMixer.getDuration(this.identifyID)
   }
 
@@ -138,7 +143,7 @@ export class QNAudioMixer {
    * @remarks 单位: us
    * @returns 当前播放位置
    */
-  getCurrentPosition (): number {
+  getCurrentPosition(): number {
     return QNRtcAudioMixer.getCurrentPosition(this.identifyID)
   }
 
@@ -147,7 +152,7 @@ export class QNAudioMixer {
    * @remarks 只支持ios
    * @param playBack 是否开启耳返
    */
-  setPlayBack (playBack: boolean): void {
+  setPlayBack(playBack: boolean): void {
     QNRtcAudioMixer.setPlayBack(this.identifyID, playBack)
   }
 }

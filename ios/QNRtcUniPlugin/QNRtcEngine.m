@@ -2,8 +2,8 @@
 //  QNRtcEngine.m
 //  QNRtcUniPlugin
 //
-//  Created by 童捷 on 2021/10/8.
-//  Copyright © 2020 DCloud. All rights reserved.
+//  Created by 童捷 on 2023/10/8.
+//  Copyright © 2023 DCloud. All rights reserved.
 //
 
 #import "QNRtcEngine.h"
@@ -38,10 +38,10 @@ WX_EXPORT_METHOD_SYNC(@selector(deinit))
     [RtcNativePlugin deinit];
 }
 
-WX_EXPORT_METHOD_SYNC(@selector(createRTCClient))
+WX_EXPORT_METHOD_SYNC(@selector(createClient:))
 // 创建 QNRTCClient 对象，且全局只可存在一个
-- (void)createRTCClient {
-    [RtcNativePlugin createRTCClient];
+- (void)createClient:(NSDictionary *)configParam {
+    [RtcNativePlugin createRTCClient:configParam];
 }
 
 WX_EXPORT_METHOD_SYNC(@selector(createMicrophoneAudioTrack:))
@@ -84,6 +84,30 @@ WX_EXPORT_METHOD_SYNC(@selector(enableFileLogging))
 // 开启日志
 - (void)enableFileLogging {
     [RtcNativePlugin enableFileLogging];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(setAudioScene:))
+// 设置音频场景
+- (void)setAudioScene:(NSString *)audioScene {
+    [RtcNativePlugin setAudioScene:audioScene];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(setSpeakerphoneMuted:))
+// 设置是否静音扬声器
+- (void)setSpeakerphoneMuted:(BOOL)muted {
+    [RtcNativePlugin setSpeakerphoneMuted:muted];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(createAudioMusicMixer:))
+//  创建音乐混音
+- (void)createAudioMusicMixer:(NSString *)musicPath {
+    [RtcNativePlugin createAudioMusicMixer:musicPath];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(createAudioEffectMixer))
+//  创建音乐混音
+- (void)createAudioEffectMixer {
+    [RtcNativePlugin createAudioEffectMixer];
 }
 
 #pragma mark - QNRtcNativeDelegate

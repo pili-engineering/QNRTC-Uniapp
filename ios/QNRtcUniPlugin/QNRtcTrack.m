@@ -2,7 +2,8 @@
 //  QNRtcTrack.m
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/10/25.
+//  Created by 童捷 on 2021/10/8.
+//  Copyright © 2020 DCloud. All rights reserved.
 //
 
 #import "QNRtcTrack.h"
@@ -48,11 +49,24 @@ WX_EXPORT_METHOD_SYNC(@selector(isSubscribed:))
     return [RtcNativePlugin isSubscribed:identifyID];
 }
 
+#pragma mark - QNLocalAudioTrack
+WX_EXPORT_METHOD_SYNC(@selector(addAudioFilter:filter:))
+// 增加 filter 模块。目前支持设置 QNAudioMusicMixer、QNAudioEffectMixer、QNAudioSourceMixer 等内置 Filter
+- (void)addAudioFilter:(NSString *)identifyID filter:(NSString *)filter {
+    return [RtcNativePlugin addAudioFilter:identifyID filter:filter];
+}
+
+WX_EXPORT_METHOD_SYNC(@selector(removeAudioFilter:filter:))
+// 移除 filter 模块
+- (void)removeAudioFilter:(NSString *)identifyID filter:(NSString *)filter {
+    return [RtcNativePlugin removeAudioFilter:identifyID filter:filter];
+}
+
 #pragma mark - QNLocalVideoTrack
-WX_EXPORT_METHOD_SYNC(@selector(sendSEI:message:repeatCount:))
+WX_EXPORT_METHOD_SYNC(@selector(sendSEI:message:repeatCount:uuid:))
 // 发送 SEI
-- (void)sendSEI:(NSString *)identifyID message:(NSString *)message repeatCount:(NSNumber *)repeatCount {
-    return [RtcNativePlugin sendSEI:identifyID message:message repeatCount:repeatCount];
+- (void)sendSEI:(NSString *)identifyID message:(NSString *)message repeatCount:(NSNumber *)repeatCount uuid:(NSString *)uuid {
+    return [RtcNativePlugin sendSEI:identifyID message:message repeatCount:repeatCount uuid:uuid];
 }
 
 #pragma mark - QNRemoteVideoTrack
@@ -135,6 +149,7 @@ WX_EXPORT_METHOD_SYNC(@selector(switchCamera:))
 WX_EXPORT_METHOD_SYNC(@selector(turnLightOn:))
 // 打开闪光灯
 - (void)turnLightOn:(NSString *)identifyID {
+    [RtcNativePlugin turnLightOff:identifyID];
     [RtcNativePlugin turnLightOn:identifyID];
 }
 
@@ -234,23 +249,11 @@ WX_EXPORT_METHOD_SYNC(@selector(isScreenCaptureSupported:))
     return [RtcNativePlugin isScreenCaptureSupported];
 }
 
-WX_EXPORT_METHOD_SYNC(@selector(setScreenRecorderFrameRate:screenRecorderFrameRate:))
-// 设置录屏采集帧率
-- (void)setScreenRecorderFrameRate:(NSString *)identifyID screenRecorderFrameRate:(NSNumber *)screenRecorderFrameRate {
-    [RtcNativePlugin setScreenRecorderFrameRate:identifyID screenRecorderFrameRate:screenRecorderFrameRate];
-}
-
 #pragma mark - QNMicrophoneAudioTrack
 WX_EXPORT_METHOD_SYNC(@selector(setVolume:volume:))
 // 设置本地麦克风音频 Track 的采集音量
 - (void)setVolume:(NSString *)identifyID volume:(NSNumber *)volume {
     [RtcNativePlugin setVolume:identifyID volume:volume];
-}
-
-WX_EXPORT_METHOD_SYNC(@selector(createAudioMixer:url:))
-// 创建 Audio Mixer
-- (void)createAudioMixer:(NSString *)identifyID url:(NSString *)url {
-    [RtcNativePlugin createAudioMixer:identifyID url:url];
 }
 
 #pragma mark - QNRtcTrackDelegate
@@ -259,8 +262,13 @@ WX_EXPORT_METHOD_SYNC(@selector(createAudioMixer:url:))
     [self.weexInstance fireGlobalEvent:@"onVideoProfileChanged" params:params];
 }
 
-// 订阅的远端 Track 开关静默时的回调
-- (void)rtcNative:(QNRtcNative *)rtcNative onMuteStateChanged:(NSDictionary *)params {
+// 订阅的远端视频 Track 开关静默时的回调
+- (void)rtcNative:(QNRtcNative *)rtcNative onVideoMuteStateChanged:(NSDictionary *)params {
+    [self.weexInstance fireGlobalEvent:@"onMuteStateChanged" params:params];
+}
+
+// 订阅的远端音频 Track 开关静默时的回调
+- (void)rtcNative:(QNRtcNative *)rtcNative onAudioMuteStateChanged:(NSDictionary *)params {
     [self.weexInstance fireGlobalEvent:@"onMuteStateChanged" params:params];
 }
 

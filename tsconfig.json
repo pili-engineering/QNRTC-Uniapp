@@ -5,12 +5,16 @@
 	  "declaration": false,
 	  "declarationMap": false,
 	  "diagnostics": true,
-	  "module": "commonjs",
+	  "module": "ES2015",
+	  "lib": ["ES2015", "DOM"],
 	  "noImplicitAny": true,
 	  "removeComments": false,
 	  "preserveConstEnums": true,
 	  "sourceMap": false,
 	  "outDir": "types",
 	  "rootDir": "src"
-	}
+	},
+	"exclude": [
+		"demo"
+	  ]
   }

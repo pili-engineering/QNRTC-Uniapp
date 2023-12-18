@@ -20,6 +20,8 @@
 
 @property (nonatomic, copy) NSString *userID;
 
+@property (nonatomic, copy) NSString *fillMode;
+
 @end
 
 @implementation QNRtcSurfaceView
@@ -38,6 +40,9 @@
         if (attributes[@"trackID"]) {
             _trackID = [WXConvert NSString: attributes[@"trackID"]];
         }
+        if (attributes[@"fillMode"]) {
+            _fillMode = [WXConvert NSString: attributes[@"fillMode"]];
+        }
     }
     return self;
 }
@@ -52,6 +57,9 @@
     }
     if (attributes[@"userID"]) {
         _userID = [WXConvert NSString: attributes[@"userID"]];
+    }
+    if (attributes[@"fillMode"]) {
+        _fillMode = [WXConvert NSString: attributes[@"fillMode"]];
     }
     if (attributes[@"trackID"]) {
         _trackID = [WXConvert NSString: attributes[@"trackID"]];
@@ -73,7 +81,7 @@
 
 // 创建渲染视图
 - (void)setupPreviewView {
-    [RtcNativePlugin play:self.view local:self.local userID:self.userID identityID:self.identifyID trackID:self.trackID];
+    [RtcNativePlugin play:self.view local:self.local userID:self.userID identityID:self.identifyID trackID:self.trackID fillMode: self.fillMode];
 }
 
 

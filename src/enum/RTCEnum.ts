@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /**
  * 摄像头类型
  */
@@ -10,7 +9,7 @@ export enum QNRTCCameraFacing {
   /**
    * 前置摄像头
    */
-  front = 'front'
+  front = 'front',
 }
 
 /**
@@ -28,7 +27,7 @@ export enum QNRTCPolicy {
   /**
    * 优先 UDP，不通的话自动改为 TCP
    */
-  preferUDP = 'preferUDP'
+  preferUDP = 'preferUDP',
 }
 
 /**
@@ -42,7 +41,7 @@ export enum QNRTCBwePolicy {
   /**
    * 使用 GCC
    */
-  GCC = 'GCC'
+  GCC = 'GCC',
 }
 
 /**
@@ -56,7 +55,7 @@ export enum QNRTCTrackKind {
   /**
    * 视频
    */
-  video = 'video'
+  video = 'video',
 }
 
 /**
@@ -82,7 +81,7 @@ export enum QNRTCLogLevel {
   /**
    * None 不输出日志
    */
-  none = 'none'
+  none = 'none',
 }
 
 /**
@@ -108,7 +107,7 @@ export enum QNConnectionState {
   /**
    * 已重连
    */
-  RECONNECTED = 'RECONNECTED'
+  RECONNECTED = 'RECONNECTED',
 }
 
 /**
@@ -126,7 +125,7 @@ export enum QNRenderMode {
   /**
    * 在保持长宽比的前提下，缩放图片，使得图片在容器内完整显示出来
    */
-  ASPECT_FIT = 'ASPECT_FIT'
+  ASPECT_FIT = 'ASPECT_FIT',
 }
 
 /**
@@ -144,7 +143,7 @@ export enum QNTrackProfile {
   /**
    * 高分辨率
    */
-  HIGH = 'HIGH'
+  HIGH = 'HIGH',
 }
 
 /**
@@ -170,7 +169,7 @@ export enum QNNetworkGrade {
   /**
    * 网络差
    */
-  POOR = 'POOR'
+  POOR = 'POOR',
 }
 
 /**
@@ -196,7 +195,7 @@ export enum QNConnectionDisconnectedReason {
   /**
    * 发生错误异常断开
    */
-  ERROR = 'ERROR'
+  ERROR = 'ERROR',
 }
 
 /**
@@ -214,7 +213,7 @@ export enum QNLiveStreamingErrorInfoType {
   /**
    * 更改合流布局配置操作异常，请检查房间状态、合流布局配置等信息
    */
-  UPDATE = 'UPDATE'
+  UPDATE = 'UPDATE',
 }
 
 /**
@@ -240,7 +239,7 @@ export enum QNLiveStreamingErrorInfoCode {
   /**
    * 服务端错误，请重新尝试操作
    */
-  SERVER_ERROR = 'SERVER_ERROR'
+  SERVER_ERROR = 'SERVER_ERROR',
 }
 
 /**
@@ -266,7 +265,7 @@ export enum QNAudioDevice {
   /**
    * 无
    */
-  NONE = 'NONE'
+  NONE = 'NONE',
 }
 
 /**
@@ -284,7 +283,7 @@ export enum QNVideoWaterMarkSize {
   /**
    * 水印尺寸小
    */
-  SMALL = 'SMALL'
+  SMALL = 'SMALL',
 }
 
 /**
@@ -302,7 +301,7 @@ export enum QNAVCaptureVideoOrientation {
   /**
    * 视频水平定向，顶部位于手机左部
    */
-  AVCaptureVideoOrientationLandscapeLeft = 'AVCaptureVideoOrientationLandscapeLeft'
+  AVCaptureVideoOrientationLandscapeLeft = 'AVCaptureVideoOrientationLandscapeLeft',
 }
 
 /**
@@ -324,7 +323,7 @@ export enum QNVideoFillModeType {
   /**
    * 在保持长宽比的前提下，缩放图片，使图片充满容器
    */
-  QNVideoFillModePreserveAspectRatioAndFill = 'QNVideoFillModePreserveAspectRatioAndFill'
+  QNVideoFillModePreserveAspectRatioAndFill = 'QNVideoFillModePreserveAspectRatioAndFill',
 }
 
 /**
@@ -380,7 +379,33 @@ export enum QNAudioMixerState {
   /**
    * 混音操作完成时的状态
    */
-  COMPLETED = 'COMPLETED'
+  COMPLETED = 'COMPLETED',
+}
+
+/**
+ * 音乐混音状态
+ */
+export enum QNAudioMusicMixerState {
+  /**
+   * 混音控制器的初始状态
+   */
+  IDLE = 'IDLE',
+  /**
+   * 混音操作进行中的状态
+   */
+  MIXING = 'MIXING',
+  /**
+   * 混音操作暂停时的状态
+   */
+  PAUSED = 'PAUSED',
+  /**
+   * 混音操作停止时的状态
+   */
+  STOPPED = 'STOPPED',
+  /**
+   * 混音操作完成时的状态
+   */
+  COMPLETED = 'COMPLETED',
 }
 
 /**
@@ -399,5 +424,157 @@ export enum QNVideoFrameType {
   /**
    * TEXTURE OES RGB 数据类型量
    */
-  TEXTURE_OES = 'TEXTURE_OES'
+  TEXTURE_OES = 'TEXTURE_OES',
+}
+
+/**
+ * 音频场景
+ * @since 5.2.5
+ * @remarks 音频场景。可通过 @see {@link QNRTCConfiguration} 在初始化时指定，也可通过 @see {@link QNRTC.setAudioScene} 接口动态切换
+ * @privateRemarks
+ * 1. 不同的使用场景，最佳音频处理模式不一样，可根据使用场景及不同音频场景的定义选择最佳的音频场景
+ * 2. 不同的音频场景，系统使用的音量类型是不一样的，详情可参考具体音频场景的定义
+ * 3. 佩戴蓝牙耳机的场景，将恒定使用通话模式，在蓝牙通话过程中修改的音频场景将会在蓝牙连接断开后生效
+ * 4. 佩戴有线耳机的场景，将恒定使用媒体模式，在通话过程中修改的音频场景将会在耳机拔出后生效
+ *
+ */
+export enum QNAudioScene {
+  /**
+   * 默认音频场景
+   * @remarks 该场景会根据发布和订阅的情况自动切换音频模式，仅发布或仅订阅时，SDK 使用媒体模式；同时发布和订阅时，SDK 将自动切换到通话模式
+   */
+  DEFAULT = 'DEFAULT',
+  /**
+   * 清晰语聊场景
+   * @remarks 该场景恒定使用通话模式，调节的音量类型为通话音量，为了人声清晰，环境音和音乐声会有一定抑制
+   */
+  VOICE_CHAT = 'VOICE_CHAT',
+  /**
+   * 音质均衡场景
+   * @remarks 该场景恒定使用媒体模式，调节的音量类型为媒体音量，对环境音和音乐声的还原性更优
+   */
+  SOUND_EQUALIZE = 'SOUND_EQUALIZE',
+}
+
+/**
+ * 角色类型
+ * @since 5.2.5
+ * @remarks 仅在互动直播场景生效
+ */
+export enum QNClientRole {
+  /**
+   * 主播角色
+   * @remarks 拥有发布和订阅媒体流的权限，仅适用于互动直播场景
+   */
+  BROADCASTER = 'BROADCASTER',
+  /**
+   * 观众角色
+   * @remarks 仅有订阅媒体流的权限，仅适用于互动直播场景
+   */
+  AUDIENCE = 'AUDIENCE',
+}
+
+/**
+ * 直播场景
+ * @since 5.2.5
+ */
+export enum QNClientMode {
+  /**
+   * 通信场景
+   * @remarks 用于常见的一对一通话或群聊，该场景中，所有用户均可以发布和订阅音视频轨道
+   */
+  RTC = 'RTC',
+  /**
+   * 直播场景
+   * @remarks 有主播和观众两种用户角色，可以通过 @see {@link QNRTCClient.setClientRole} 方法设置用户角色为主播或观众。主播可以发布和订阅音视频轨道，而观众只能订阅音视频轨道，无法发布
+   * @privateRemarks 直播场景中的用户角色默认为观众。如需发布音视频，必须将角色修改为主播
+   */
+  LIVE = 'LIVE',
+}
+
+/**
+ * 跨房媒体转发状态
+ * @since 5.2.5
+ */
+export enum QNMediaRelayState {
+  /** 状态未知 */
+  UNKNOWN = 'UNKNOWN',
+  /** 成功 */
+  SUCCESS = 'SUCCESS',
+  /** 停止 */
+  STOPPED = 'STOPPED',
+  /** Token 失败 */
+  INVALID_TOKEN = 'INVALID_TOKEN',
+  /** 目标房间不存在 */
+  NO_ROOM = 'NO_ROOM',
+  /** 目标房间已关闭 */
+  ROOM_CLOSED = 'ROOM_CLOSED',
+  /** 目标房间存在相同用户名 */
+  PLAYER_EXISTED = 'PLAYER_EXISTED',
+}
+
+/**
+ * 视频质量降级模式
+ * @since 5.2.5
+ */
+export enum QNDegradationPreference {
+  /**
+   * 默认模式
+   * @remarks 默认模式会根据 {@link QNClientMode} 设置的场景智能选择最优的视频降级模式。若场景为 RTC，则使用 BALANCED 模式；若场景为 LIVE，则使用 MAINTAIN_RESOLUTION 模式
+   * 若您同时有通过 {@link QNRTCConfiguration} maintainResolution 接口开启固定分辨率，则 DEFAULT 模式将会失效
+   */
+  DEFAULT = 'DEFAULT',
+  /**
+   * 保持帧率
+   * @remarks 保持帧率, 降低分辨率和适当的码率
+   */
+  MAINTAIN_FRAMERATE = 'MAINTAIN_FRAMERATE',
+  /**
+   * 保持分辨率
+   * @remarks 保持分辨率, 降低帧率和适当的码率
+   */
+  MAINTAIN_RESOLUTION = 'MAINTAIN_RESOLUTION',
+  /**
+   * 平衡调节分辨率和帧率
+   * @remarks 平衡模式, 降低帧率，分辨率和适当的码率
+   */
+  BALANCED = 'BALANCED',
+  /**
+   * 保持分辨率和帧率，适当调整码率
+   * 仅控制码率, 保持帧率和分辨率
+   */
+  ADAPT_BITRATE_ONLY = 'ADAPT_BITRATE_ONLY',
+}
+
+/**
+ * 视频编码预设值
+ * @since 5.2.5
+ * @remarks 在使用编码预设值的情况下，SDK 会区分通话和直播场景，使用更适合该场景的码率。场景可通过 {@link QNRTC.createClient} 进行设置
+ * 在使用编码预设值时，需保证采集分辨率的宽高比和预设相同，否则可能会出现编码分辨率与设置不符的情况
+ */
+export enum QNVideoFormatDefault {
+  /** 分辨率 320x180，帧率 15fps */
+  VIDEO_320x180_15 = 'VIDEO_320x180_15',
+  /** 分辨率 320x240，帧率 15fps */
+  VIDEO_320x240_15 = 'VIDEO_320x240_15',
+  /** 分辨率 640x360，帧率 15fps */
+  VIDEO_640x360_15 = 'VIDEO_640x360_15',
+  /** 分辨率 640x360，帧率 30fps */
+  VIDEO_640x360_30 = 'VIDEO_640x360_30',
+  /** 分辨率 640x480，帧率 15fps */
+  VIDEO_640x480_15 = 'VIDEO_640x480_15',
+  /** 分辨率 640x480，帧率 30fps */
+  VIDEO_640x480_30 = 'VIDEO_640x480_30',
+  /** 分辨率 960x540，帧率 15fps */
+  VIDEO_960x540_15 = 'VIDEO_960x540_15',
+  /** 分辨率 960x540，帧率 30fps */
+  VIDEO_960x540_30 = 'VIDEO_960x540_30',
+  /** 分辨率 960x720，帧率 15fps */
+  VIDEO_960x720_15 = 'VIDEO_960x720_15',
+  /** 分辨率 960x720，帧率 30fps */
+  VIDEO_960x720_30 = 'VIDEO_960x720_30',
+  /** 分辨率 1280x720，帧率 15fps */
+  VIDEO_1280x720_15 = 'VIDEO_1280x720_15',
+  /** 分辨率 1280x720，帧率 30fps */
+  VIDEO_1280x720_30 = 'VIDEO_1280x720_30',
 }

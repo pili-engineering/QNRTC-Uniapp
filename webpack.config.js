@@ -5,7 +5,7 @@ module.exports = {
   entry: './src/RTCIndex.native.ts',
   output: {
     // eslint-disable-next-line node/no-path-concat
-    path: __dirname + '/dist',
+    path: __dirname + '/lib',
     filename: '[name].bundle.js',
     libraryTarget: 'umd',
     library: 'easy',

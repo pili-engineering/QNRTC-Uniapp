@@ -2,7 +2,8 @@
 //  QNRtcEvent.h
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/11/8.
+//  Created by 童捷 on 2023/10/8.
+//  Copyright © 2023 DCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -21,6 +22,28 @@
 - (void)rtcNative:(QNRtcNative *)rtcNative onAudioRouteChanged:(NSDictionary *)params;
 
 @end
+
+
+@protocol QNRtcAudioMusicMixerDelegate <NSObject>
+
+@optional
+
+- (void)rtcNative:(QNRtcNative *)rtcNative onAudioMusicMixerStateChanged:(NSDictionary *)params;
+- (void)rtcNative:(QNRtcNative *)rtcNative onAudioMusicMixerMixing:(NSDictionary *)params;
+- (void)rtcNative:(QNRtcNative *)rtcNative onAudioMusicMixerError:(NSDictionary *)params;
+
+@end
+
+@protocol QNRtcAudioEffectMixerDelegate <NSObject>
+
+@optional
+
+- (void)rtcNative:(QNRtcNative *)rtcNative onAudioEffectMixerFinished:(NSDictionary *)params;
+- (void)rtcNative:(QNRtcNative *)rtcNative onAudioEffectMixerError:(NSDictionary *)params;
+
+@end
+
+
 
 @protocol QNRtcClientDelegate <NSObject>
 
@@ -145,11 +168,18 @@
 - (void)rtcNative:(QNRtcNative *)rtcNative onVideoProfileChanged:(NSDictionary *)params;
 
 /*!
- * @abstract 订阅的远端 Track 开关静默时的回调
+ * @abstract 订阅的远端视频 Track 开关静默时的回调
  *
  * @param params 静默信息
  */
-- (void)rtcNative:(QNRtcNative *)rtcNative onMuteStateChanged:(NSDictionary *)params;
+- (void)rtcNative:(QNRtcNative *)rtcNative onVideoMuteStateChanged:(NSDictionary *)params;
+
+/*!
+ * @abstract 订阅的远端音频 Track 开关静默时的回调
+ *
+ * @param params 静默信息
+ */
+- (void)rtcNative:(QNRtcNative *)rtcNative onAudioMuteStateChanged:(NSDictionary *)params;
 
 /*!
  * @abstract CVPixelBuffer 回调

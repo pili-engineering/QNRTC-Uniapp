@@ -2,7 +2,8 @@
 //  QNRtcNative.h
 //  QNRtcUniPlugin
 //
-//  Created by WorkSpace_Sun on 2021/10/29.
+//  Created by 童捷 on 2021/10/8.
+//  Copyright © 2020 DCloud. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -46,7 +47,7 @@
 /*!
  * @abstract 创建 RTC Client
  */
-- (void)createRTCClient;
+- (void)createRTCClient:(NSDictionary *)config;
 
 /*!
  * @abstract 创建一路以麦克风采集为数据源的音频 Track
@@ -107,6 +108,19 @@
  * 注意：文件日志功能主要用于排查问题，打开文件日志功能会对性能有一定影响，上线前请记得关闭文件日志功能！
 */
 - (void)enableFileLogging;
+
+/*!
+ * @abstract 设置音频场景
+ *
+ * @param profile 场景
+ */
+- (void)setAudioScene:(NSString *) profile;
+
+- (void)setSpeakerphoneMuted:(BOOL)muted;
+
+- (void)createAudioMusicMixer:(NSString *)musicPath;
+
+- (void)createAudioEffectMixer;
 
 @end
 
@@ -288,6 +302,37 @@
  */
 - (void)sendMessage:(NSString *)message users:(NSArray<NSString *> *)users messageId:(NSString *)messageId;
 
+/*!
+ * @abstract 开始跨房连麦
+ *
+ * @param config 连麦设置
+ * @param callback 回调函数
+ */
+- (void)startRoomMediaRelay:(NSDictionary *)config callback:(void(^)(id result))callback;
+
+/*!
+ * @abstract 更新跨房连麦
+ *
+ * @param config 连麦设置
+ * @param callback 回调函数
+ */
+- (void)updateRoomMediaRelay:(NSDictionary *)config callback:(void(^)(id result))callback;
+
+/*!
+ * @abstract 停止跨房连麦
+ *
+ * @param callback 回调函数
+ */
+- (void)stopRoomMediaRelay:(void(^)(id result))callback;
+
+/*!
+ * @abstract 设置角色
+ *
+ * @param role 角色
+ * @param callback 回调函数
+ */
+- (void)setClientRole:(NSString *)role callback:(void(^)(id result))callback;
+
 @end
 
 @interface QNRtcNative (QNRtcSurfaceView)
@@ -305,7 +350,8 @@
        local:(BOOL)local
       userID:(NSString *)userID
   identityID:(NSString *)identifyID
-     trackID:(NSString *)trackID;
+     trackID:(NSString *)trackID
+    fillMode:(NSString *)fillMode;
 
 @end
 
@@ -355,10 +401,11 @@
  * @param identifyID Track 标识
  * @param message 消息内容
  * @param repeatCount 重复发送次数，-1 为永久发送
+ * @param uuid 设备 UUID
  *
  * @discussion QNLocalVideoTrack 属性方法
  */
-- (void)sendSEI:(NSString *)identifyID message:(NSString *)message repeatCount:(NSNumber *)repeatCount;
+- (void)sendSEI:(NSString *)identifyID message:(NSString *)message repeatCount:(NSNumber *)repeatCount uuid:(NSString *)uuid;
 
 /*!
  * @abstract 获取远端视频 Track 是否支持大小流
@@ -635,15 +682,6 @@
  */
 - (NSNumber *)isScreenCaptureSupported;
 
-/*!
- * @abstract 设置录屏帧率
- *
- * @param identifyID Track 标识
- * @param screenRecorderFrameRate 帧率
- *
- * @discussion QNScreenVideoTrack 属性方法
- */
-- (void)setScreenRecorderFrameRate:(NSString *)identifyID screenRecorderFrameRate:(NSNumber *)screenRecorderFrameRate;
 
 /*!
  * @abstract 设置本地 Track 的音量大小
@@ -656,15 +694,6 @@
 - (void)setVolume:(NSString *)identifyID volume:(NSNumber *)volume;
 
 /*!
- * @abstract 创建 Audio Mixer
- *
- * @param identifyID Track 标识
- * @param url 混音资源路径
- *
- * @discussion QNMicrophoneAudioTrack 属性方法
- */
-- (void)createAudioMixer:(NSString *)identifyID url:(NSString *)url;
-/*!
  * @abstract 截图
  *
  * @param identifyID Track 标识
@@ -672,104 +701,67 @@
  * @discussion QNLocalVideoTrack 与 QNRemoteVideoTrack 属性方法
  */
 - (void)takeVideoSnapshot:(NSString *)identifyID;
+- (void)addAudioFilter:(NSString *)identifyID filter:(NSString *)filter;
+- (void)removeAudioFilter:(NSString *)identifyID filter:(NSString *)filter;
 
 @end
 
-@interface QNRtcNative (QNRtcAudioMixer)
+
+@interface QNRtcNative (QNRtcAudioMusicMixer)
 
 /*!
- * @abstract 设置 QNRtcAudioMixDelegate 代理
+ * @abstract 设置 QNRtcAudioMusicMixDelegate 代理
  *
- * @param delegate QNRtcAudioMixDelegate 协议代理
+ * @param delegate QNRtcAudioMusicMixDelegate 协议代理
  */
-- (void)setAudioMixDelegate:(id<QNRtcAudioMixDelegate>)delegate;
+- (void)setAudioMusicMixerDelegate:(id<QNRtcAudioMusicMixerDelegate>)delegate;
+
+- (NSNumber *)audioMusicMixerGetDuration:(NSString *)filePath;
+- (void)audioMusicMixerStart:(int)loopCount;
+- (void)audioMusicMixerStop;
+- (void)audioMusicMixerPause;
+- (void)audioMusicMixerResume;
+- (void)audioMusicMixerSeekTo:(int64_t)position;
+- (void)audioMusicMixerSetPublishEnabled:(BOOL)publishEnabled;
+- (BOOL)audioMusicMixerIsPublishEnabled;
+- (NSNumber *)audioMusicMixerGetCurrentPosition;
+- (void)audioMusicMixerSetMusicVolume:(float)volume;
+- (NSNumber *)audioMusicMixerGetMusicVolume;
+- (void)audioMusicMixerSetStartPosition:(int64_t)position;
+- (NSNumber *)audioMusicMixerGetStartPosition;
+@end
+
+@interface QNRtcNative (QNRtcAudioEffectMixer)
 
 /*!
- * @abstract 设置混音资源路径
+ * @abstract 设置 QNRtcAudioEffectMixDelegate 代理
  *
- * @param identifyID Track 标识
- * @param url 资源路径
+ * @param delegate QNRtcAudioEffectMixDelegate 协议代理
  */
-- (void)setAudioURL:(NSString *)identifyID url:(NSString *)url;
+- (void)setAudioEffectMixerDelegate:(id<QNRtcAudioEffectMixerDelegate>)delegate;
 
-/*!
- * @abstract 开始混音
- *
- * @param identifyID Track 标识
- * @param loopTimes 重复播放次数
- */
-- (void)start:(NSString *)identifyID loopTimes:(NSNumber *)loopTimes;
+- (void)createAudioEffect:(int)effectID filePath:(NSString *)filePath;
+- (void)setPublishEnabled:(BOOL)publishEnabled effectID:(int)effectID;
+- (BOOL)isPublishEnabled:(int)effectID;
+- (void)start:(int)effectID;
+- (void)stop:(int)effectID;
+- (void)pause:(int)effectID;
+- (void)resume:(int)effectID;
+- (int64_t)getCurrentPosition:(int)effectID;
+- (void)setVolume:(float)volume effectID:(int)effectID;
+- (float)getVolume:(int)effectID;
+- (void)setAllEffectsVolume:(float)volume;
+- (void)stopAll;
+- (void)pauseAll;
+- (void)resumeAll;
+@end
 
-/*!
- * @abstract 结束混音
- *
- * @param identifyID Track 标识
- */
-- (void)stop:(NSString *)identifyID;
-
-/*!
- * @abstract 恢复混音
- *
- * @param identifyID Track 标识
- */
-- (void)resume:(NSString *)identifyID;
-
-/*!
- * @abstract 暂停混音
- *
- * @param identifyID Track 标识
- */
-- (void)pause:(NSString *)identifyID;
-
-/*!
- * @abstract 跳转到指定时间点播放
- *
- * @param identifyID Track 标识
- * @param timeUs 时间点 单位us
- */
-- (void)seekTo:(NSString *)identifyID timeUs:(NSNumber *)timeUs;
-
-/*!
- * @abstract 设置混音音量
- *
- * @param identifyID Track 标识
- * @param microphoneVolume 麦克风输入音量
- * @param musicVolume 音乐输入音量
- */
-- (void)setMixingVolume:(NSString *)identifyID microphoneVolume:(NSNumber *)microphoneVolume musicVolume:(NSNumber *)musicVolume;
-
-/*!
- * @abstract 设置本地播放音量
- *
- * @param identifyID Track 标识
- * @param volume 音量大小
- */
-- (void)setPlayingVolume:(NSString *)identifyID volume:(NSNumber *)volume;
-
-/*!
- * @abstract 设置返听
- *
- * @param identifyID Track 标识
- * @param playBack 是否开启
- */
-- (void)setPlayBack:(NSString *)identifyID playBack:(BOOL)playBack;
-
-/*!
- * @abstract 获取资源总时长
- *
- * @param identifyID Track 标识
- *
- * @return 资源总时长
- */
-- (NSNumber *)getDuration:(NSString *)identifyID;
-
-/*!
- * @abstract 获取当前播放时间
- *
- * @param identifyID Track 标识
- *
- * @return 当前播放时间
- */
-- (NSNumber *)getCurrentPosition:(NSString *)identifyID;
-
+@interface QNRtcNative (QNRtcAudioEffect)
+- (int64_t)getDuration:(NSString *)filePath;
+- (int)getID:(int)effectID;
+- (NSString *)getFilePath: (int)effectID;
+- (void)setStartPosition:(int)effectID position:(int64_t)position;
+- (int64_t)getStartPosition:(int)effectID;
+- (void)setLoopCount:(int)effectID loopCount:(int)loopCount;
+- (int)getLoopCount:(int)effectID;
 @end
