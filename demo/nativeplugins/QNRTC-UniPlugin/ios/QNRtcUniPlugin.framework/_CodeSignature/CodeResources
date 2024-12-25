@@ -4,9 +4,17 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>.DS_Store</key>
+		<data>
+		BlNhvPXRvZGtFa5JICBkpYZhq8Y=
+		</data>
+		<key>Frameworks/.DS_Store</key>
+		<data>
+		2Vjq09ZTwMYR0WNopOYtCTrNKMQ=
+		</data>
 		<key>Frameworks/HappyDNS.framework/HappyDNS</key>
 		<data>
-		GaFfuga98pKOKqi/pISf2vATb3A=
+		5CuPnA+uYG10y8vlNa4CIq7ileE=
 		</data>
 		<key>Frameworks/HappyDNS.framework/Info.plist</key>
 		<data>
@@ -22,7 +30,7 @@
 		</data>
 		<key>Frameworks/QNRTCKit.framework/QNRTCKit</key>
 		<data>
-		QNEDJicdfOEMwTzDV7u9j4yfrLg=
+		CtWTyjXDvjtV4P/xktUHa8isVBo=
 		</data>
 		<key>Frameworks/QNRTCKit.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -30,7 +38,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		wECo4r7MwJgY8Y6ruR09IB5hg3Y=
+		Wv/is5NegOQHY/I089MQWhuXDpY=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -39,11 +47,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GaFfuga98pKOKqi/pISf2vATb3A=
+			5CuPnA+uYG10y8vlNa4CIq7ileE=
 			</data>
 			<key>hash2</key>
 			<data>
-			BRiPtzu0EnP2y3hoDDlgCZd8PapgPU+ja445LeBuOh0=
+			lyOwZnFYNaDX+kXtbyGQysW9uxh7KdMV6cEdOOyUa5c=
 			</data>
 		</dict>
 		<key>Frameworks/HappyDNS.framework/Info.plist</key>
@@ -83,11 +91,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QNEDJicdfOEMwTzDV7u9j4yfrLg=
+			CtWTyjXDvjtV4P/xktUHa8isVBo=
 			</data>
 			<key>hash2</key>
 			<data>
-			pY7unPEci8/cCNw7t0btRcBWpNgGczeBc5olGtzbe9E=
+			JaT76rQCcWuCDJDE7hvCTPOZcoQIgBbigj6R0DBFY+8=
 			</data>
 		</dict>
 		<key>Frameworks/QNRTCKit.framework/_CodeSignature/CodeResources</key>

@@ -694,6 +694,15 @@
 - (void)setVolume:(NSString *)identifyID volume:(NSNumber *)volume;
 
 /*!
+ * @abstract 获取本地 Track 的音量大小
+ *
+ * @param identifyID Track 标识
+ *
+ * @discussion QNMicrophoneAudioTrack 属性方法
+ */
+- (NSNumber *)getVolumeLevel:(NSString *)identifyID;
+
+/*!
  * @abstract 截图
  *
  * @param identifyID Track 标识

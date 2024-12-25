@@ -290,6 +290,15 @@ public class QNRTCTrackModule extends UniModule implements QNRTCGlobalListener {
     }
 
     @UniJSMethod(uiThread = false)
+    public float getVolumeLevel(String trackID) {
+        QNLocalTrack localTrack = getManager().getLocalTrack(trackID);
+        if (localTrack instanceof QNLocalAudioTrack) {
+            return ((QNLocalAudioTrack) localTrack).getVolumeLevel();
+        }
+        return 0;
+    }
+
+    @UniJSMethod(uiThread = false)
     public int isSubscribed(String trackID) {
         QNRemoteTrack remoteTrack = getManager().getRemoteTrack(trackID);
         if (remoteTrack != null) {
