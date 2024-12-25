@@ -1,6 +1,6 @@
 {
   "name": "qnrtc-uniapp-sdk",
-  "version": "5.2.7",
+  "version": "5.2.8",
   "description": "qnrtc sdk for uniapp",
   "main": "dist/RTCIndex.native.js",
   "types": "type/RTCIndex.native.d.ts",

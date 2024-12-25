@@ -794,6 +794,14 @@ typedef enum : NSUInteger {
     }
 }
 
+- (NSNumber *)getVolumeLevel:(NSString *)identifyID {
+    QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
+    if (targetTrack && [targetTrack isKindOfClass:[QNMicrophoneAudioTrack class]]) {
+        QNMicrophoneAudioTrack *microphoneAudioTrack = (QNMicrophoneAudioTrack *)targetTrack;
+        return [NSNumber numberWithFloat: [microphoneAudioTrack getVolumeLevel]];
+    }
+}
+
 - (void)addAudioFilter:(NSString *)identifyID filter:(NSString *)filter {
     QNTrack *targetTrack = [self getTrackWithIdentifyID:identifyID type:QNRtcTrackTypeLocal];
     if (targetTrack && [targetTrack isKindOfClass:[QNLocalAudioTrack class]]) {

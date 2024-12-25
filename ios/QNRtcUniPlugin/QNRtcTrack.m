@@ -256,6 +256,12 @@ WX_EXPORT_METHOD_SYNC(@selector(setVolume:volume:))
     [RtcNativePlugin setVolume:identifyID volume:volume];
 }
 
+WX_EXPORT_METHOD_SYNC(@selector(getVolumeLevel:))
+// 获取本地麦克风音频 Track 的采集音量
+- (NSNumber *)getVolumeLevel:(NSString *)identifyID {
+    return [RtcNativePlugin getVolumeLevel:identifyID];
+}
+
 #pragma mark - QNRtcTrackDelegate
 // 订阅的远端视频 profile 发生变化时的回调
 - (void)rtcNative:(QNRtcNative *)rtcNative onVideoProfileChanged:(NSDictionary *)params {
